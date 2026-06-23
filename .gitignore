@@ -38,3 +38,9 @@ __pycache__/
 # Local development
 .env
 .env.local
+
+# Remediation bundle — local-only, not part of the published repo
+/CLAUDE.md
+/TASKS.md
+/HOW_TO_RUN_IN_CLAUDE_CODE.md
+/harness/
