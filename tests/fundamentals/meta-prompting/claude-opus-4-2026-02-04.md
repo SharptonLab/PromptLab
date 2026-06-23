@@ -139,7 +139,10 @@ This revised prompt:
 - **Deviations:** None. Provided numbered critique sections followed by revised prompt.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The meta-prompting approach worked effectively. The critique correctly identified that "important" is undefined—the central ambiguity in the original prompt. The revised prompt demonstrates excellent prompt engineering: specific statistical criteria (padj < 0.05, |log2FC| > 1), clear output format (table with defined columns), biological context (hepatic steatosis), scope constraints (top 10-15 genes), and explicit instructions to acknowledge uncertainty and avoid overinterpretation. The revised prompt follows all principles from the structured-prompt-template.
 
 ## Verification Steps Tested

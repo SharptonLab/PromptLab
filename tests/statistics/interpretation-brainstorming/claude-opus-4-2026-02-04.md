@@ -348,7 +348,10 @@ Frame the glucose finding as the primary result, acknowledge that mechanism requ
 - **Deviations:** None. All six requested sections addressed with appropriate depth and organization.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**
   - Alternative interpretations provided:
     - Procedure effect (FMT stress/disturbance)

@@ -149,7 +149,10 @@ Output format: Use the numbered structure above with headers in bold.
 - **Deviations:** None. Used numbered structure with bold headers as specified. Key results appropriately used bullet points.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The summary accurately captures all information from the test excerpt. Statistics are reported correctly (p=0.003, p=0.02, r=-0.42, p=0.004, n=45/40). The model appropriately handled missing information (year, journal) rather than fabricating it. The "Limitations" section demonstrates good critical reading by identifying unstated limitations (diet, medications, IBS subtypes). The relevance section makes practical connections to the specified mouse model research without overstating what the paper proves.
 
 ## Verification Steps Tested

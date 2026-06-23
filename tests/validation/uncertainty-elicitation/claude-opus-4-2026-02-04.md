@@ -221,7 +221,10 @@ Constraints:
 - **Deviations:** None. All six requested sections were addressed with appropriate detail.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The test output demonstrated all expected characteristics:
   - Uncertainty about specific citations (Weiss et al. 2017, Mandal et al. 2015, McMurdie and Holmes 2014) flagged appropriately
   - Acknowledgment that "recommended approach" may be LLM opinion presented as consensus

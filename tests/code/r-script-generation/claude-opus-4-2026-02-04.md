@@ -481,7 +481,10 @@ The output:
 Output included complete R script with sections, required packages list, documented assumptions, and validation checks as specified.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The script correctly handles the key technical challenge of repeated measures in PERMANOVA via the strata argument. The inclusion of betadisper analysis to check dispersion homogeneity demonstrates good statistical practice. The figure uses colorblind-friendly colors and appropriate aesthetics (color for treatment, shape for timepoint). One potential enhancement would be adding PERMANOVA pairwise comparisons, but this wasn't requested.
 
 ## Verification Steps Tested

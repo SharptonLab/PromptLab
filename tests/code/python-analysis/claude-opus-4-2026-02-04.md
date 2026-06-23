@@ -678,7 +678,10 @@ The output:
 Output included complete script, requirements list, documented assumptions, and validation checks as specified.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The script demonstrates proper handling of longitudinal microbiome data. The mixed model specification (random intercept for subject) is appropriate for the described data structure. The visualization uses colorblind-friendly colors and includes proper uncertainty representation. One potential enhancement would be to add a random slope term if individual trajectories are suspected to vary, but the current approach is a reasonable default.
 
 ## Verification Steps Tested

@@ -89,7 +89,10 @@ We did not remove any results from the manuscript, as we believe transparency ab
 - **Deviations:** None. The response is formatted appropriately for a point-by-point response document, with clear structure addressing each concern and quoted manuscript changes.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The output demonstrates the prompt working as intended for reviewer responses. The response successfully:
    - Acknowledges the reviewer's valid concern
    - Provides specific numbers matching the input exactly (847 tests, 77 taxa, 11 metabolites, q < 0.05)

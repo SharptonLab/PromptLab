@@ -480,7 +480,10 @@ print(perm_results)
 - **Deviations:** None. Output followed the requested structure with assumptions ranked, detailed guidance per assumption, code examples, and decision summary.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**
   - Output correctly identifies dispersion homogeneity as the key assumption for PERMANOVA
   - betadisper() code provided and properly explained

@@ -147,7 +147,10 @@ Key features affecting analysis choice:
 - **Deviations:** None. All five steps addressed with explicit reasoning, followed by clear recommendations.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** Excellent demonstration of chain-of-thought prompting for a complex statistical decision. The model correctly identified all key data structure features (repeated measures, compositional data, cage effects, small sample size). The nuanced discussion of cage effects—noting both that they create non-independence AND that the small number of cages limits ability to model them—shows sophisticated statistical reasoning. The questions for the statistician are specific and actionable.
 
 ## Verification Steps Tested

@@ -93,7 +93,10 @@ We investigated how the gut microbiome shapes host immune responses. Using flow 
 - **Deviations:** None. Output includes revised text followed by detailed notes on stylistic changes made, organized by the six dimensions specified in the prompt.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The output demonstrates the prompt working effectively for style matching. Key observations:
    - Sentence length reduced appropriately (~30 words to ~15-20 words)
    - Passive/formal constructions replaced with active voice

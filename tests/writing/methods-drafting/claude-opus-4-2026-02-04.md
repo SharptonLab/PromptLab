@@ -149,7 +149,10 @@ The V4 region of the 16S rRNA gene was amplified using the 515F/806R primer pair
 - **Deviations:** None. Output follows the requested structure with subsection headers and uses appropriate scientific prose style.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The output demonstrates the prompt working as intended. All provided details were incorporated accurately, and critical gaps (IRB approval, statistical analysis, technical parameters) were appropriately flagged rather than fabricated. The prose style is appropriate for a clinical microbiology journal. The [MISSING] flags provide a useful checklist for the researcher to address before finalizing the Methods section.
 
 ## Verification Steps Tested

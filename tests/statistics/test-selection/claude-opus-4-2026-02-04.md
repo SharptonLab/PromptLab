@@ -288,7 +288,10 @@ This is a clinical study with potential treatment implications. Statistical sign
 - **Deviations:** Minor enhancement—output included summary table and implementation code beyond the minimum requested format, which improves utility
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**
   - Output correctly identified PERMANOVA as appropriate for distance matrix comparison
   - Small sample size limitations appropriately acknowledged throughout

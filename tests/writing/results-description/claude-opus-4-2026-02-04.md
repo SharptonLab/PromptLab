@@ -81,7 +81,10 @@ One-way ANOVA revealed a significant overall effect of treatment on intestinal p
 - **Deviations:** None. Output is two paragraphs with figure reference in parentheses as specified.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The output demonstrates the prompt working correctly. All numbers match the input exactly (2.1, 0.3, 8.7, 1.2, 4.3, 0.6, F(2,21)=18.4, all p-values, n=8). The output correctly interprets the direction of the effect (higher fluorescence = worse barrier function, so probiotic reduced barrier dysfunction). The prose appropriately describes what is shown without extending to mechanisms or implications. The "approximately 4-fold increase" and "approximately 50% reduction" are accurate calculations from the provided data.
 
 ## Verification Steps Tested

@@ -452,7 +452,10 @@ The output:
 Output followed the requested structure: Test cases, Test code, Validation checks, and Red flags, each with appropriate detail and code examples.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The test strategy effectively covers the mathematical properties of CLR (row means = 0, uniform inputs produce zeros). The cross-check with an alternative formula (Test 7) is particularly valuable as it verifies the implementation against a mathematically equivalent but independently coded approach. The red flags section provides practical guidance for identifying common bugs. The known-answer test (Test 1) values can be verified by hand calculation.
 
 ## Verification Steps Tested

@@ -119,7 +119,10 @@ We acknowledge the use of large language models (GPT-4, OpenAI; Claude 3 Opus, A
 - **Deviations:** None. Two versions provided as requested, with clear labels distinguishing them.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The generated disclosure is appropriately specific, transparent, and accurately reflects the input provided. The language appropriately uses "assisted with" rather than overstating LLM contributions. The model correctly noted that data analysis and interpretation were not LLM-assisted. The offer to provide prompts and logs upon request is a good addition that supports reproducibility without requiring extensive supplementary materials.
 
 ## Verification Steps Tested

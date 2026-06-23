@@ -287,7 +287,10 @@ The output:
 Output followed the requested numbered sections: Overview, Step-by-step walkthrough, Key concepts, Inputs and outputs, and Potential issues. Code snippets were included where helpful.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The explanation accurately addresses all stated points of confusion. The distinction between lfcThreshold affecting the hypothesis test versus the final filtering applying to point estimates is correctly explained and is often misunderstood. The explanation of design formulas is appropriate for someone new to DESeq2. One minor enhancement could be to include links to DESeq2 documentation, but this wasn't requested.
 
 ## Verification Steps Tested

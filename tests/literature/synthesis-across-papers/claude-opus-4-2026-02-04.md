@@ -182,7 +182,10 @@ Based on these papers, there is currently no evidence for interventions that acc
 - **Deviations:** None. Used numbered sections with bold headers, bullet points for agreement/disagreement sections, and a properly formatted comparison table.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The synthesis effectively integrates information across the three papers while maintaining clear attribution. The methodological comparison table appropriately marks missing information rather than fabricating it. The identification of the recovery timeline variability as a point of "tension" with possible explanations (different antibiotics, populations, outcome definitions) demonstrates appropriate critical thinking without overreaching. The synthesis statement directly addresses the user's research question with an honest assessment that no effective interventions are supported by these papers.
 
 ## Verification Steps Tested

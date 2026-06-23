@@ -221,7 +221,10 @@ Based on your stated capabilities (mouse colitis models including DSS and IL-10 
 - **Deviations:** None. Used numbered structure with bold headers, bullet points within sections, and clear paper attributions.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The gap identification output demonstrates strong analytical reasoning while staying grounded in the provided sources. The identification of the "efficacy without engraftment paradox" as a central contradiction is insightful and directly relevant to the user's probiotic development focus. The prioritized opportunities are highly tractable given the stated capabilities and would genuinely advance understanding. The inclusion of the uncertainty caveat about broader literature is appropriate and demonstrates good epistemic hygiene. The output provides a clear roadmap for research that addresses genuine gaps without overreaching beyond what the sources support.
 
 ## Verification Steps Tested

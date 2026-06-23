@@ -79,7 +79,10 @@ Output:
 - **Deviations:** None. The output exactly matches the demonstrated format with the same fields in the same order.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The few-shot learning prompt successfully guided metadata extraction with perfect format adherence. The model correctly identified study type as "Randomized controlled trial" (matching the pattern of Example 3 in the training examples but adapted appropriately), captured the clinical nature of the study, and included both primary outcome (cure rate) and secondary findings (engraftment, bile acid metabolism) in the key finding.
 
 ## Verification Steps Tested

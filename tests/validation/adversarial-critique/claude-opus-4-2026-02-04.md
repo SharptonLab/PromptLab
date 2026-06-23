@@ -223,7 +223,10 @@ This Methods paragraph, as written, would likely result in a "Major Revision" or
 - **Deviations:** None. The output followed the structured critique format with numbered sections matching the prompt's requested categories.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The test output demonstrated all expected qualities:
   - Critique of vague "standard protocols" (undefined)
   - Concern about "immediately frozen" without timing specifics

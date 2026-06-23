@@ -109,7 +109,10 @@ Our preliminary data support feasibility. In a pilot study of 25 adenoma patient
 - **Deviations:** None. Output follows conventional Specific Aims structure with clear headers, bold aim statements, and integration/impact summary.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The output demonstrates the prompt working correctly for grant writing assistance. Key strengths:
    - Appropriate R21 framing (exploratory, proof-of-concept, high-risk/high-reward language)
    - Two aims appropriately scoped for R21 mechanism (not overambitious)

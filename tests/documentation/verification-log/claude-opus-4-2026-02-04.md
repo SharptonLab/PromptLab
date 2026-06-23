@@ -277,7 +277,10 @@ Senior author: _______________ Date: ______
 - **Deviations:** None. Output includes both the criteria tables and the complete log template as requested.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:** The generated output demonstrates strong understanding of systematic review methodology and produces a genuinely useful verification tracking system. Key strengths include:
 
   - **Domain appropriateness:** References to Cochrane risk of bias domains, PRISMA flow requirements, and double-extraction practices demonstrate familiarity with systematic review standards

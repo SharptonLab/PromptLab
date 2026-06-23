@@ -343,7 +343,10 @@ This design addresses an interesting and timely question with clinical relevance
 - **Deviations:** None. All seven requested sections addressed with clear organization and appropriate detail.
 
 ## Overall Assessment
-- **Recommendation:** Pass
+
+*This assessment was auto-drafted by Claude Code on 2026-02-04 and demoted to PENDING during the 2026-06-23 audit (T2). No human verification is on record. The detailed analysis below is preserved as a machine-suggested (UNCONFIRMED) starting point for T4 review — an author must independently read the raw output above and set the real Recommendation.*
+
+- **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**
   - Critical issues correctly identified:
     - Cage confounding as severe limitation (effective n=2)
