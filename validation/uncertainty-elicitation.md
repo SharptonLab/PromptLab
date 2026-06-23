@@ -244,6 +244,6 @@ Notes: [To be completed]
 ## Cross-References
 
 - For adversarial critique, see `validation/adversarial-critique.md`
-- For verification checklist, see `validation/verification-checklist.md`
-- For citation-specific verification, see `literature/citation-warning.md`
-- For cross-model validation, see `validation/cross-model-protocols.md`
+- For verification checklist, see `guides/verification-checklist-extended.md`
+- For citation-specific verification, see `guides/citation-warning.md`
+- For cross-model validation, see `guides/cross-model-protocols.md`

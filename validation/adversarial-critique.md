@@ -263,7 +263,7 @@ Notes: [To be completed]
 
 ## Cross-References
 
-- For using multiple models for validation, see `validation/cross-model-protocols.md`
+- For using multiple models for validation, see `guides/cross-model-protocols.md`
 - For interpretation brainstorming, see `statistics/interpretation-brainstorming.md`
-- For citation verification, see `literature/citation-warning.md`
+- For citation verification, see `guides/citation-warning.md`
 - For experimental design review, see `statistics/design-review.md`

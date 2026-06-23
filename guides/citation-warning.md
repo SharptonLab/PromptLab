@@ -157,7 +157,7 @@ When using prompts from this repository for literature work:
 For any publishable work involving LLM-generated text:
 
 1. Run the citation verification protocol above
-2. Complete the verification checklist from `validation/verification-checklist.md`
+2. Complete the verification checklist from `guides/verification-checklist-extended.md`
 3. Document both in your research notes
 
 ## Summary
@@ -181,4 +181,4 @@ This file is a workflow document, not a prompt to be used with an LLM.
 
 - For summarizing papers safely, see `literature/paper-summary.md`
 - For synthesis with citation controls, see `literature/synthesis-across-papers.md`
-- For comprehensive output verification, see `validation/verification-checklist.md`
+- For comprehensive output verification, see `guides/verification-checklist-extended.md`

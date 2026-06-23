@@ -10,7 +10,7 @@ This case study demonstrates a complete code generation workflow using LLM assis
 - `code/r-script-generation.md`
 - `code/debugging.md`
 - `code/code-explanation.md`
-- `validation/verification-checklist.md`
+- `guides/verification-checklist-extended.md`
 
 ---
 
@@ -317,7 +317,7 @@ Keep it concise (3-4 sentences suitable for Methods).
 
 ## Step 6: Final Verification Checklist
 
-**Using:** `validation/verification-checklist.md`
+**Using:** `guides/verification-checklist-extended.md`
 
 | Check | Status | Notes |
 |-------|--------|-------|
@@ -451,4 +451,4 @@ plot_alpha_diversity <- function(alpha_results, group_var = "treatment") {
 | 1 | `code/r-script-generation.md` | Initial script generation |
 | 3 | `code/debugging.md` | Fix dependency error |
 | 5 | `code/code-explanation.md` | Generate Methods text |
-| 6 | `validation/verification-checklist.md` | Final verification |
+| 6 | `guides/verification-checklist-extended.md` | Final verification |

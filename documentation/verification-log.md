@@ -346,4 +346,4 @@ Notes: [To be completed]
 - For logging individual interactions: `documentation/interaction-log-template.md`
 - For generating Methods disclosures: `documentation/methods-disclosure-template.md`
 - For adversarial critique of outputs: `validation/adversarial-critique.md`
-- For verification checklists by output type: `validation/verification-checklist.md`
+- For verification checklists by output type: `guides/verification-checklist-extended.md`

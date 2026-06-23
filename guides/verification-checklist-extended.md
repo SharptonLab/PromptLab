@@ -237,7 +237,7 @@ See `documentation/methods-disclosure-template.md` for Methods section language.
 
 ## Cross-References
 
-- For citation-specific verification, see `literature/citation-warning.md`
+- For citation-specific verification, see `guides/citation-warning.md`
 - For adversarial critique before verification, see `validation/adversarial-critique.md`
 - For uncertainty assessment, see `validation/uncertainty-elicitation.md`
-- For cross-model validation, see `validation/cross-model-protocols.md`
+- For cross-model validation, see `guides/cross-model-protocols.md`

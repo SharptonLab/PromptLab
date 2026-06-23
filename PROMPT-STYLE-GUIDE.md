@@ -250,7 +250,7 @@ Before considering a prompt file complete:
 
 Prompts should reference related prompts where appropriate:
 
-- "For verifying citations in synthesis outputs, see `validation/verification-checklist.md`"
+- "For verifying citations in synthesis outputs, see `guides/verification-checklist-extended.md`"
 - "For brainstorming statistical approaches, see `statistics/test-selection.md`"
 - "For critiquing outputs from this prompt, see `validation/adversarial-critique.md`"
 

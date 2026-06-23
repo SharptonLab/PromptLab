@@ -310,6 +310,6 @@ Cross-model validation performed:
 
 - For adversarial critique within one model, see `validation/adversarial-critique.md`
 - For uncertainty elicitation, see `validation/uncertainty-elicitation.md`
-- For verification checklist, see `validation/verification-checklist.md`
-- For citation-specific concerns, see `literature/citation-warning.md`
+- For verification checklist, see `guides/verification-checklist-extended.md`
+- For citation-specific concerns, see `guides/citation-warning.md`
 - For cross-model validation as prompting strategy, see `fundamentals/cross-model-validation.md`

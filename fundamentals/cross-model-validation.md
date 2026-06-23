@@ -339,4 +339,4 @@ Notes: [To be completed]
 - For the prompts you're validating: see `structured-prompt-template.md`
 - For developing better prompts: see `meta-prompting.md`
 - For complex reasoning that benefits from validation: see `chain-of-thought.md`
-- For systematic validation workflows: see `validation/verification-checklist.md`
+- For systematic validation workflows: see `guides/verification-checklist-extended.md`

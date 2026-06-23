@@ -218,5 +218,5 @@ Notes: [To be completed]
 
 - For summarizing individual papers before synthesis, see `literature/paper-summary.md`
 - For identifying gaps to pursue, see `literature/gap-identification.md`
-- For verifying citations in the synthesis, see `literature/citation-warning.md`
+- For verifying citations in the synthesis, see `guides/citation-warning.md`
 - For having another model critique the synthesis, see `validation/adversarial-critique.md`

@@ -56,7 +56,7 @@ Each prompt includes:
 
 ## Testing
 
-All 27 prompts have been tested with standardized inputs. Test results are in `tests/[category]/[prompt-name]/`. See `docs/TESTING-GUIDE.md` for the testing methodology.
+The repository contains 24 runnable prompts plus reference guides and templates in `guides/`. Test results are in `tests/[category]/[prompt-name]/`. See `docs/TESTING-GUIDE.md` for the testing methodology and `tests/SUMMARY.md` for the cross-model coverage matrix.
 
 ## Contributing
 

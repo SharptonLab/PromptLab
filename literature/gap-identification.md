@@ -239,5 +239,5 @@ Notes: [To be completed]
 
 - For summarizing papers before gap analysis, see `literature/paper-summary.md`
 - For broader synthesis across papers, see `literature/synthesis-across-papers.md`
-- For citation verification, see `literature/citation-warning.md`
+- For citation verification, see `guides/citation-warning.md`
 - For critiquing the gap analysis, see `validation/adversarial-critique.md`

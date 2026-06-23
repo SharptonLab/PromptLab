@@ -189,5 +189,5 @@ Notes: [To be completed]
 
 - For synthesizing multiple paper summaries, see `literature/synthesis-across-papers.md`
 - For identifying gaps across papers, see `literature/gap-identification.md`
-- For verifying any citations in outputs, see `literature/citation-warning.md`
+- For verifying any citations in outputs, see `guides/citation-warning.md`
 - For critiquing the summary output, see `validation/adversarial-critique.md`
