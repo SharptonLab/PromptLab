@@ -44,3 +44,6 @@ __pycache__/
 /TASKS.md
 /HOW_TO_RUN_IN_CLAUDE_CODE.md
 /harness/
+
+# Harness run logs (any directory)
+*.log
