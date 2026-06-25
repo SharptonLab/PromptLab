@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PromptLab T4 Review</title>
+<style>
+  :root { --bg:#f7f7f8; --fg:#1f2328; --muted:#6e7681; --line:#d0d7de;
+          --pass:#1a7f37; --notes:#9a6700; --fail:#cf222e; --skip:#6e7681;
+          --q:#bf8700; --accent:#0969da; }
+  * { box-sizing: border-box; }
+  body { font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+         margin:0; background:var(--bg); color:var(--fg); }
+  header { position:sticky; top:0; z-index:10; background:#fff; padding:8px 16px;
+           border-bottom:1px solid var(--line);
+           display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .progress { color:var(--muted); }
+  .saved { color:var(--muted); font-size:12px; }
+  .saved.recent { color:var(--pass); }
+  .saved.warn { color:var(--fail); font-weight:600; }
+  button { font:inherit; padding:6px 12px; border:1px solid var(--line);
+           background:#fff; border-radius:6px; cursor:pointer; }
+  button:hover { background:#f0f0f0; }
+  button.primary { background:#0969da; color:#fff; border-color:#0969da; }
+  button.pass { background:#1a7f37; color:#fff; border-color:#1a7f37; }
+  button.notes { background:#9a6700; color:#fff; border-color:#9a6700; }
+  button.fail { background:#cf222e; color:#fff; border-color:#cf222e; }
+  button.q    { background:#bf8700; color:#fff; border-color:#bf8700; }
+  .key { display:inline-block; min-width:14px; text-align:center;
+         font-family:ui-monospace,monospace; font-size:11px;
+         background:rgba(0,0,0,.18); padding:0 4px; border-radius:3px;
+         margin-left:6px; }
+  main { padding:14px 16px; max-width:1200px; margin:0 auto; }
+  .cellnav { display:flex; gap:10px; align-items:baseline; margin-bottom:8px; }
+  .cellnav h2 { margin:0; font-size:18px; }
+  .cellnav .pos { color:var(--muted); font-size:13px; }
+  .panel { border:1px solid var(--line); border-radius:8px;
+           background:#fff; margin-bottom:14px; }
+  details.panel > summary { padding:8px 12px; cursor:pointer; font-weight:600;
+                     color:var(--fg); user-select:none; list-style:none; }
+  details.panel > summary::before { content:"▶ "; color:var(--muted); }
+  details.panel[open] > summary::before { content:"▼ "; }
+  .panel .body { padding:0 12px 12px; }
+  pre { white-space:pre-wrap; word-wrap:break-word; font:13px/1.45 ui-monospace,
+        SFMono-Regular,Menlo,Monaco,Consolas,monospace; background:#f6f8fa;
+        padding:10px; border-radius:6px; overflow-x:auto; margin:0; }
+  pre.large { max-height:60vh; overflow-y:auto; }
+  textarea { width:100%; min-height:60px; font:inherit; padding:8px;
+             border:1px solid var(--line); border-radius:6px; resize:vertical; }
+  .verdict-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .verdict-row .current { margin-left:8px; color:var(--muted); }
+  .matrix { display:grid; gap:2px; font-size:11px;
+            grid-template-columns: 240px repeat(7, 1fr); }
+  .matrix .mh { font-weight:600; padding:3px 4px; background:#fff;
+                border:1px solid var(--line); white-space:nowrap;
+                overflow:hidden; text-overflow:ellipsis; }
+  .matrix .ph { font-weight:600; padding:3px 6px; background:#fff;
+                border:1px solid var(--line); cursor:pointer;
+                white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .matrix .ph:hover { background:#eaf3ff; }
+  .matrix .c { padding:3px 4px; text-align:center; cursor:pointer;
+               border:1px solid var(--line); background:#fff;
+               font-family:ui-monospace,monospace; }
+  .matrix .c.empty { color:#aaa; }
+  .matrix .c.P  { background:#daf3df; color:#0a4222; }
+  .matrix .c.PN { background:#fff1cc; color:#5a3f00; }
+  .matrix .c.N  { background:#ffd7d7; color:#73000c; }
+  .matrix .c.Q  { background:#ffe7bf; color:#683b00; }
+  .matrix .c.S  { background:#eee; color:#666; text-decoration:line-through; }
+  .matrix .c.current { outline:2px solid var(--accent); }
+  .matrix .c:hover { filter:brightness(0.95); }
+  .matrix .na { background:#f5f5f5; color:#bbb; cursor:default; }
+  .legend { color:var(--muted); font-size:12px; margin-top:6px; }
+  .triage { background:#fff8e0; border-left:4px solid #f0c850;
+            padding:10px 12px; border-radius:0 6px 6px 0; margin:0;
+            white-space:pre-wrap; font-size:13px; line-height:1.5; }
+  .modelbar { display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+              margin-bottom:8px; }
+  .modelbar .pill { padding:3px 8px; border-radius:4px; cursor:pointer;
+                    border:1px solid var(--line); font-size:12px;
+                    font-family:ui-monospace,monospace; }
+  .modelbar .pill.current { background:var(--accent); color:#fff;
+                            border-color:var(--accent); }
+  .modelbar .pill.P  { background:#daf3df; }
+  .modelbar .pill.PN { background:#fff1cc; }
+  .modelbar .pill.N  { background:#ffd7d7; }
+  .modelbar .pill.Q  { background:#ffe7bf; }
+  .modelbar .pill.S  { background:#eee; }
+  .small { font-size:12px; color:var(--muted); }
+  .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,.55);
+                    display:flex; align-items:center; justify-content:center;
+                    z-index:50; }
+  .modal { background:#fff; padding:24px; border-radius:10px; max-width:560px;
+           width:90%; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+  .modal h2 { margin-top:0; }
+  .modal p { color:var(--muted); }
+  .modal label { display:block; margin:14px 0 4px; font-weight:600; }
+  .modal input { width:100%; padding:8px; font:inherit;
+                 border:1px solid var(--line); border-radius:6px; }
+  .modal .buttons { display:flex; gap:10px; margin-top:18px; }
+  .banner { background:#fff8e0; border:1px solid #f0c850;
+            padding:10px 14px; border-radius:8px; margin-bottom:14px; }
+  .banner.error { background:#ffe5e5; border-color:#cf222e; color:#73000c; }
+</style>
+</head>
+<body>
+
+<!-- ONBOARDING MODAL -->
+<div class="modal-backdrop" id="onboarding" style="display:none;">
+  <div class="modal">
+    <h2>PromptLab T4 Review</h2>
+    <p>You're about to review LLM outputs across the 6-model PromptLab panel. Your verdicts will be saved continuously to a file on your local disk; nothing is uploaded anywhere unless you choose to share the file when done.</p>
+
+    <label>Your name (used to tag your verdicts):</label>
+    <input id="onboardingName" placeholder="e.g. Tom Sharpton or 'tom-sharpton'" autocomplete="off">
+
+    <p style="margin-top:14px;">After this you'll be asked to pick (or create) a verdicts file on your computer. In Chrome / Edge / Opera, every click saves directly to that file. In Firefox / Safari, your work is saved to browser storage and you'll need to download periodic backups.</p>
+
+    <div class="buttons">
+      <button class="primary" id="onboardingNext">Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- ERROR MODAL -->
+<div class="modal-backdrop" id="errorModal" style="display:none;">
+  <div class="modal">
+    <h2 style="color:var(--fail);">Something's wrong</h2>
+    <p id="errorBody" style="white-space:pre-wrap;"></p>
+    <div class="buttons">
+      <button class="primary" onclick="document.getElementById('errorModal').style.display='none'">OK</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <strong>T4 Review</strong>
+  <span class="progress" id="progress">…</span>
+  <span class="saved" id="saved">no saves yet</span>
+  <span class="small" id="reviewerLabel" style="margin-left:8px;"></span>
+  <span class="small" id="modeLabel"></span>
+  <span style="flex:1"></span>
+  <button id="btnPrev" title="Previous cell (←)">← Prev</button>
+  <button id="btnNext" title="Next cell (→)">Next →</button>
+  <button id="btnPrevUngraded" title="Previous ungraded (Shift+←)">⏮ Prev ungraded</button>
+  <button id="btnNextUngraded" title="Next ungraded (Shift+→)">Next ungraded ⏭</button>
+  <button id="btnMatrix" title="Toggle matrix (M)">Matrix</button>
+  <button id="btnExport" title="Download a backup of your verdicts">Export backup</button>
+</header>
+
+<main>
+
+  <div id="modeBanner"></div>
+
+  <details class="panel" id="matrixPanel">
+    <summary>Verdict matrix (click a cell to jump)</summary>
+    <div class="body">
+      <div class="matrix" id="matrix"></div>
+      <div class="legend">
+        P = Pass · PN = Pass with notes · N = Needs revision · ? = Cannot judge · S = Skip · blank = ungraded ·
+        N/A = no result file for this (prompt, model) pair
+      </div>
+    </div>
+  </details>
+
+  <div class="cellnav">
+    <h2 id="cellTitle">Loading…</h2>
+    <span class="pos" id="cellPos"></span>
+  </div>
+
+  <div class="modelbar" id="modelbar"></div>
+
+  <div class="panel" style="padding:10px 12px;">
+    <div class="verdict-row">
+      <button class="pass"  id="bP"  data-v="P"  title="Pass (P)">Pass<span class="key">P</span></button>
+      <button class="notes" id="bPN" data-v="PN" title="Pass with notes (B)">Pass w/ notes<span class="key">B</span></button>
+      <button class="fail"  id="bN"  data-v="N"  title="Needs revision (N)">Needs revision<span class="key">N</span></button>
+      <button class="q"     id="bQ"  data-v="?"  title="Cannot judge (Q)">?<span class="key">Q</span></button>
+      <button             id="bS"  data-v="S"  title="Skip (X)">Skip<span class="key">X</span></button>
+      <span class="current" id="currentVerdict"></span>
+    </div>
+    <div class="small" style="margin-top:6px;">
+      Click sets the verdict + advances to next ungraded cell. Notes save on blur or with the Save notes button.
+      <br>Keys: <code>←</code>/<code>→</code> = prev/next, <code>Shift+←</code>/<code>Shift+→</code> = prev/next ungraded, <code>M</code> = matrix, <code>F</code> = focus notes
+    </div>
+  </div>
+
+  <details class="panel" id="srcPanel">
+    <summary>Source prompt (The Prompt + Test Input)</summary>
+    <div class="body">
+      <p class="small" id="srcMeta"></p>
+      <h3 style="margin:8px 0 4px; font-size:13px;">## The Prompt</h3>
+      <pre id="srcPrompt"></pre>
+      <h3 style="margin:14px 0 4px; font-size:13px;">## Test Input</h3>
+      <pre id="srcTest"></pre>
+    </div>
+  </details>
+
+  <details class="panel" id="filledPanel">
+    <summary>Filled prompt actually sent to the model</summary>
+    <div class="body"><pre id="filledPrompt"></pre></div>
+  </details>
+
+  <details class="panel" open id="outputPanel">
+    <summary>Model output</summary>
+    <div class="body"><pre class="large" id="modelOutput"></pre></div>
+  </details>
+
+  <details class="panel" open id="triagePanel">
+    <summary>Machine triage (UNCONFIRMED — pre-draft)</summary>
+    <div class="body"><div class="triage" id="assessment"></div></div>
+  </details>
+
+  <div class="panel" style="padding:10px 12px;">
+    <label style="display:block; font-weight:600; margin-bottom:6px;">
+      Reviewer notes <span class="small">(saved on blur or with the button)</span>
+    </label>
+    <textarea id="notes" placeholder="Optional — anything you want to record for this (prompt, model) cell."></textarea>
+    <div style="margin-top:8px;">
+      <button id="btnSaveNotes" title="Save notes (Ctrl/Cmd-S)">Save notes</button>
+      <span class="small" id="notesSaved"></span>
+    </div>
+  </div>
+
+  <div class="panel" style="padding:10px 14px;">
+    <strong>Done reviewing?</strong> Two ways to send your verdicts back:
+    <ul style="margin:8px 0;">
+      <li><strong>Email-back:</strong> click <em>Export backup</em> in the header, attach the downloaded file to an email to the PI.</li>
+      <li><strong>Pull request:</strong> open the <a id="repoLink" href="#" target="_blank" rel="noopener">repo on GitHub</a>, navigate to <code>verdicts/</code>, click <em>Add file → Upload files</em>, drop in the file you just downloaded, and submit a PR. The agreement-report Action will run automatically.</li>
+    </ul>
+    <div class="small">You can also click <em>Export backup</em> any time as a snapshot, regardless of which save mode you're using.</div>
+  </div>
+
+</main>
+
+<script>
+"use strict";
+
+// ----------------------------------------------------------------------------
+// Configuration: where to fetch result files from. Pages must be configured
+// to serve from the repo root (Settings → Pages → Source: main / (root)),
+// not from /docs. With root-serving, this SPA at <site>/docs/ can fetch
+// ../tests/...md as same-origin — no CORS gymnastics required.
+// (raw.githubusercontent.com does NOT set Access-Control-Allow-Origin, so
+// fetching from there cross-origin would be blocked by the browser.)
+// ----------------------------------------------------------------------------
+
+// IMPORTANT: update this if you fork/rename the repo. Used only for the
+// "open repo / open verdicts/ on GitHub" link in the footer.
+const REPO = "SharptonLab/PromptLab";
+const BRANCH = "main";
+
+// All file fetches are relative to the SPA's location. Works identically in
+// local dev (python -m http.server from repo root → <host>/docs/) and on
+// GitHub Pages (when served from root → <user>.github.io/<repo>/docs/).
+const FILE_BASE = "../";
+
+// ----------------------------------------------------------------------------
+// Persistent state: file handle (FSA) or fallback (localStorage)
+// ----------------------------------------------------------------------------
+
+const SCHEMA = "promptlab-t4-verdicts/v1";
+const LS_KEY = "promptlab-t4-verdicts";
+const LS_REVIEWER_KEY = "promptlab-t4-reviewer";
+const LS_HANDLE_FLAG = "promptlab-t4-has-fsa";
+
+const fsaSupported = (typeof window.showSaveFilePicker === "function");
+
+const state = {
+  reviewer: "",
+  fileHandle: null,        // FileSystemFileHandle if FSA mode
+  fallbackMode: false,     // true when using localStorage
+  verdicts: {},            // { cellKey: { verdict, notes, ts } }
+  manifest: null,
+  cells: [],
+  byKey: new Map(),
+  byPrompt: new Map(),
+  promptOrder: [],
+  currentIdx: 0,
+  lastSaveTs: 0,
+  pendingWrite: false,
+  startedAt: "",
+};
+
+function $(id) { return document.getElementById(id); }
+
+function showError(msg) {
+  $("errorBody").textContent = msg;
+  $("errorModal").style.display = "flex";
+}
+
+// ----------------------------------------------------------------------------
+// Onboarding flow: ask for reviewer name, then ask to pick a verdicts file
+// ----------------------------------------------------------------------------
+
+function bootstrap() {
+  const existing = localStorage.getItem(LS_REVIEWER_KEY);
+  if (existing) {
+    state.reviewer = existing;
+    pickVerdictsFile();
+  } else {
+    $("onboarding").style.display = "flex";
+    $("onboardingName").focus();
+  }
+}
+
+$("onboardingNext").onclick = () => {
+  const name = $("onboardingName").value.trim();
+  if (!name) { $("onboardingName").focus(); return; }
+  state.reviewer = name;
+  localStorage.setItem(LS_REVIEWER_KEY, name);
+  $("onboarding").style.display = "none";
+  pickVerdictsFile();
+};
+
+$("onboardingName").addEventListener("keydown", e => {
+  if (e.key === "Enter") $("onboardingNext").click();
+});
+
+async function pickVerdictsFile() {
+  // Try FSA mode first; fall back to localStorage if not supported or denied.
+  if (!fsaSupported) {
+    enterFallbackMode();
+    return;
+  }
+  // Show a small prompt asking whether to pick an existing or create new.
+  const choice = confirm(
+    "Pick a verdicts file to save your work to.\n\n" +
+    "OK  → Create a NEW file (recommended for a fresh review)\n" +
+    "Cancel → Open an EXISTING verdicts file (resume previous work)"
+  );
+  try {
+    if (choice) {
+      const suggested = `${slugify(state.reviewer)}-verdicts.json`;
+      state.fileHandle = await window.showSaveFilePicker({
+        suggestedName: suggested,
+        types: [{ description: "PromptLab verdicts", accept: { "application/json": [".json"] } }],
+      });
+      // Initialize the empty file
+      await writeVerdictsFile(emptyVerdicts());
+    } else {
+      const [handle] = await window.showOpenFilePicker({
+        types: [{ description: "PromptLab verdicts", accept: { "application/json": [".json"] } }],
+        multiple: false,
+      });
+      state.fileHandle = handle;
+      // Read existing contents
+      const file = await handle.getFile();
+      const text = await file.text();
+      try {
+        const parsed = JSON.parse(text);
+        if (parsed.schema !== SCHEMA) {
+          console.warn("loading verdicts file with unexpected schema:", parsed.schema);
+        }
+        state.verdicts = parsed.verdicts || {};
+        if (parsed.reviewer && parsed.reviewer !== state.reviewer) {
+          if (!confirm(`This file was started by "${parsed.reviewer}", but you said your name is "${state.reviewer}". Continue and overwrite the reviewer name on save? (Cancel to abort.)`)) {
+            location.reload();
+            return;
+          }
+        }
+        state.startedAt = parsed.started || nowISO();
+      } catch (e) {
+        showError(`Could not parse that file as a verdicts JSON: ${e.message}`);
+        location.reload();
+        return;
+      }
+    }
+    localStorage.setItem(LS_HANDLE_FLAG, "1");
+    onSaveTargetReady();
+  } catch (e) {
+    if (e.name === "AbortError") {
+      // user cancelled — fall back
+      if (confirm("No file selected. Use browser storage as a fallback? (Your work will live in this browser only; click Export periodically to back it up.)")) {
+        enterFallbackMode();
+      } else {
+        bootstrap();  // try again
+      }
+    } else {
+      console.error(e);
+      showError(`Could not open file: ${e.message}\n\nFalling back to browser storage.`);
+      enterFallbackMode();
+    }
+  }
+}
+
+function enterFallbackMode() {
+  state.fallbackMode = true;
+  // Try to load existing localStorage verdicts
+  const ls = localStorage.getItem(LS_KEY);
+  if (ls) {
+    try {
+      const parsed = JSON.parse(ls);
+      state.verdicts = parsed.verdicts || {};
+      state.startedAt = parsed.started || nowISO();
+    } catch (e) {
+      state.verdicts = {};
+      state.startedAt = nowISO();
+    }
+  } else {
+    state.verdicts = {};
+    state.startedAt = nowISO();
+  }
+  onSaveTargetReady();
+}
+
+function onSaveTargetReady() {
+  if (!state.startedAt) state.startedAt = nowISO();
+  // Surface the mode prominently so reviewer knows safety profile
+  if (state.fallbackMode) {
+    $("modeLabel").innerHTML = `· mode: <strong style="color:#cf222e">browser-storage</strong>`;
+    $("modeBanner").innerHTML = `<div class="banner">
+      You're in <strong>browser-storage mode</strong> (your browser doesn't support direct file writes).
+      Your verdicts are kept in this browser's local storage. <strong>Clearing your browser cache will wipe them.</strong>
+      Click <em>Export backup</em> in the header at least every few cells to download a snapshot.
+    </div>`;
+  } else {
+    $("modeLabel").innerHTML = `· mode: <strong style="color:#1a7f37">file</strong>`;
+    $("modeBanner").innerHTML = "";
+  }
+  $("reviewerLabel").textContent = `· reviewer: ${state.reviewer}`;
+  $("repoLink").href = `https://github.com/${REPO}/tree/${BRANCH}/verdicts`;
+  loadManifestAndStart();
+}
+
+// ----------------------------------------------------------------------------
+// Manifest + cell loading
+// ----------------------------------------------------------------------------
+
+async function loadManifestAndStart() {
+  try {
+    const r = await fetch("cells-manifest.json");
+    if (!r.ok) throw new Error(`manifest fetch failed: HTTP ${r.status}`);
+    state.manifest = await r.json();
+  } catch (e) {
+    showError(`Could not load cells-manifest.json: ${e.message}\n\nIf you're running this locally make sure you started a server in the repo root.`);
+    return;
+  }
+  state.cells = state.manifest.cells;
+  state.byKey = new Map(state.cells.map(c => [c.key, c]));
+  state.byPrompt = new Map();
+  state.promptOrder = [];
+  for (const c of state.cells) {
+    const p = c.category + "/" + c.slug;
+    if (!state.byPrompt.has(p)) {
+      state.byPrompt.set(p, []);
+      state.promptOrder.push(p);
+    }
+    state.byPrompt.get(p).push(c);
+  }
+  renderMatrix();
+  renderProgress();
+
+  // start at first ungraded
+  const firstUngraded = state.cells.findIndex(c => !verdictFor(c.key));
+  state.currentIdx = firstUngraded >= 0 ? firstUngraded : 0;
+  loadCurrent();
+}
+
+function verdictFor(key) {
+  const v = state.verdicts[key];
+  return v ? v.verdict : "";
+}
+
+function notesFor(key) {
+  const v = state.verdicts[key];
+  return v ? (v.notes || "") : "";
+}
+
+// ----------------------------------------------------------------------------
+// UI rendering
+// ----------------------------------------------------------------------------
+
+function renderProgress() {
+  const total = state.cells.length;
+  let graded = 0;
+  for (const c of state.cells) if (verdictFor(c.key)) graded++;
+  $("progress").textContent = `${graded} / ${total} graded (${Math.round(100 * graded / total)}%)`;
+}
+
+function renderMatrix() {
+  if (!state.manifest) return;
+  const m = $("matrix");
+  m.innerHTML = "";
+  const order = state.manifest.models_display_order;
+  m.appendChild(headerCell(""));
+  for (const md of order) m.appendChild(headerCell(md.replace(" (2026-02-04 legacy)", " (legacy)")));
+  for (const promptKey of state.promptOrder) {
+    const ph = document.createElement("div");
+    ph.className = "ph";
+    ph.textContent = promptKey;
+    ph.title = promptKey;
+    ph.onclick = () => jumpToPrompt(promptKey);
+    m.appendChild(ph);
+    const list = state.byPrompt.get(promptKey) || [];
+    const byDisplay = new Map(list.map(c => [c.model_display, c]));
+    for (const md of order) {
+      const cell = byDisplay.get(md);
+      const div = document.createElement("div");
+      if (!cell) {
+        div.className = "c na";
+        div.textContent = "N/A";
+      } else {
+        const v = verdictFor(cell.key);
+        div.className = "c " + (v ? (v === "?" ? "Q" : v) : "empty");
+        div.textContent = v || "·";
+        div.title = cell.key + (v ? "  →  " + v : "");
+        div.onclick = () => jumpToKey(cell.key);
+        if (state.cells[state.currentIdx] && state.cells[state.currentIdx].key === cell.key) {
+          div.classList.add("current");
+        }
+      }
+      m.appendChild(div);
+    }
+  }
+}
+
+function headerCell(text) {
+  const d = document.createElement("div");
+  d.className = "mh";
+  d.textContent = text;
+  return d;
+}
+
+function jumpToPrompt(promptKey) {
+  const list = state.byPrompt.get(promptKey) || [];
+  if (!list.length) return;
+  const first = list.find(c => !verdictFor(c.key)) || list[0];
+  jumpToKey(first.key);
+}
+
+function jumpToKey(key) {
+  const idx = state.cells.findIndex(c => c.key === key);
+  if (idx < 0) return;
+  state.currentIdx = idx;
+  loadCurrent();
+}
+
+function nextCell() {
+  if (state.currentIdx < state.cells.length - 1) {
+    state.currentIdx++;
+    loadCurrent();
+  }
+}
+
+function prevCell() {
+  if (state.currentIdx > 0) {
+    state.currentIdx--;
+    loadCurrent();
+  }
+}
+
+function nextUngraded() {
+  for (let i = state.currentIdx + 1; i < state.cells.length; i++) {
+    if (!verdictFor(state.cells[i].key)) { state.currentIdx = i; loadCurrent(); return; }
+  }
+  for (let i = 0; i < state.currentIdx; i++) {
+    if (!verdictFor(state.cells[i].key)) { state.currentIdx = i; loadCurrent(); return; }
+  }
+  alert("All cells graded.");
+}
+
+function prevUngraded() {
+  for (let i = state.currentIdx - 1; i >= 0; i--) {
+    if (!verdictFor(state.cells[i].key)) { state.currentIdx = i; loadCurrent(); return; }
+  }
+  for (let i = state.cells.length - 1; i > state.currentIdx; i--) {
+    if (!verdictFor(state.cells[i].key)) { state.currentIdx = i; loadCurrent(); return; }
+  }
+  alert("No earlier ungraded cells.");
+}
+
+// ----------------------------------------------------------------------------
+// Cell content fetch + parse (replicates the local server's parse logic in JS)
+// ----------------------------------------------------------------------------
+
+const RESULT_SECTIONS = new Set([
+  "Test Metadata", "Test Input Used", "Filled Prompt", "Model Output",
+  "Assessment", "Overall Assessment", "Verification Steps Tested",
+]);
+const SOURCE_SECTIONS = new Set([
+  "Task Description", "When to Use", "When NOT to Use", "The Prompt",
+  "Example Input", "Example Output", "Test Input", "Failure Modes",
+  "Verification Requirements", "Model Notes",
+]);
+
+function splitSections(text, whitelist) {
+  const out = {};
+  let lastKey = null;
+  let buf = [];
+  let inFence = false;
+  for (const line of text.split("\n")) {
+    const stripped = line.replace(/^\s+/, "");
+    if (stripped.startsWith("```")) {
+      inFence = !inFence;
+      if (lastKey !== null) buf.push(line);
+      continue;
+    }
+    let m = null;
+    if (!inFence) m = /^##\s+(.+?)\s*$/.exec(line);
+    if (m && whitelist.has(m[1].trim())) {
+      if (lastKey !== null) out[lastKey] = buf.join("\n").trim();
+      lastKey = m[1].trim();
+      buf = [];
+    } else if (lastKey !== null) {
+      buf.push(line);
+    }
+  }
+  if (lastKey !== null) out[lastKey] = buf.join("\n").trim();
+  return out;
+}
+
+function stripOuterFence(body) {
+  if (!body) return "";
+  const m = /^```[^\n]*\n([\s\S]*)\n```\s*$/.exec(body);
+  return m ? m[1] : body;
+}
+
+let cellAbort = null;
+
+async function loadCurrent() {
+  const cell = state.cells[state.currentIdx];
+  if (!cell) return;
+  $("cellTitle").textContent = cell.category + "/" + cell.slug + "  ×  " + cell.model_display;
+  $("cellPos").textContent = `cell ${state.currentIdx + 1} of ${state.cells.length}`;
+  const v = verdictFor(cell.key);
+  $("currentVerdict").textContent = v ? `current: ${v}` : "ungraded";
+  renderModelBar(cell);
+  $("notes").value = notesFor(cell.key);
+
+  $("modelOutput").textContent = "loading…";
+  $("assessment").textContent = "";
+  $("filledPrompt").textContent = "";
+  $("srcPrompt").textContent = "";
+  $("srcTest").textContent = "";
+  $("srcMeta").textContent = "";
+
+  if (cellAbort) cellAbort.abort();
+  cellAbort = new AbortController();
+
+  try {
+    const resultUrl = FILE_BASE + cell.result_url;
+    const r = await fetch(resultUrl, { signal: cellAbort.signal });
+    if (!r.ok) throw new Error(`fetch ${resultUrl} → ${r.status}`);
+    const resultText = await r.text();
+    const sec = splitSections(resultText, RESULT_SECTIONS);
+    $("modelOutput").textContent = stripOuterFence(sec["Model Output"] || "") || "(empty)";
+    $("assessment").textContent = sec["Assessment"] || "(no machine triage)";
+    $("filledPrompt").textContent = stripOuterFence(sec["Filled Prompt"] || "") || "(no filled prompt section)";
+
+    if (cell.prompt_url) {
+      const pr = await fetch(FILE_BASE + cell.prompt_url, { signal: cellAbort.signal });
+      if (pr.ok) {
+        const srcText = await pr.text();
+        const ss = splitSections(srcText, SOURCE_SECTIONS);
+        $("srcMeta").textContent = `Source: ${cell.prompt_url}`;
+        $("srcPrompt").textContent = stripOuterFence(ss["The Prompt"] || "") || "(no The Prompt section)";
+        $("srcTest").textContent = stripOuterFence(ss["Test Input"] || "") || "(no Test Input section)";
+      }
+    } else {
+      $("srcMeta").textContent = `(no source prompt — this is a ${cell.category} template)`;
+    }
+  } catch (e) {
+    if (e.name !== "AbortError") {
+      $("modelOutput").textContent = `(error loading cell: ${e.message})`;
+    }
+  }
+
+  renderMatrix();
+}
+
+function renderModelBar(currentCell) {
+  const bar = $("modelbar");
+  bar.innerHTML = "";
+  const promptKey = currentCell.category + "/" + currentCell.slug;
+  const list = state.byPrompt.get(promptKey) || [];
+  for (const c of list) {
+    const span = document.createElement("span");
+    const v = verdictFor(c.key);
+    let cls = "pill " + (v ? (v === "?" ? "Q" : v) : "");
+    if (c.key === currentCell.key) cls += " current";
+    span.className = cls;
+    span.textContent = c.model_display + (v ? " · " + v : "");
+    span.title = c.key;
+    span.onclick = () => jumpToKey(c.key);
+    bar.appendChild(span);
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Verdict save (file or localStorage)
+// ----------------------------------------------------------------------------
+
+function emptyVerdicts() {
+  return {
+    schema: SCHEMA,
+    reviewer: state.reviewer,
+    started: state.startedAt || nowISO(),
+    verdicts: state.verdicts,
+  };
+}
+
+function nowISO() { return new Date().toISOString(); }
+
+function slugify(s) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+async function writeVerdictsFile(payload) {
+  if (!state.fileHandle) return false;
+  // Re-request permission if needed (browsers may revoke after some time)
+  const opts = { mode: "readwrite" };
+  if (state.fileHandle.queryPermission && (await state.fileHandle.queryPermission(opts)) !== "granted") {
+    if (await state.fileHandle.requestPermission(opts) !== "granted") {
+      throw new Error("write permission denied");
+    }
+  }
+  const writable = await state.fileHandle.createWritable();
+  await writable.write(JSON.stringify(payload, null, 2));
+  await writable.close();
+  return true;
+}
+
+async function persist() {
+  state.pendingWrite = true;
+  refreshSavedIndicator();
+  const payload = emptyVerdicts();
+  try {
+    if (state.fallbackMode) {
+      localStorage.setItem(LS_KEY, JSON.stringify(payload));
+    } else {
+      await writeVerdictsFile(payload);
+    }
+    state.lastSaveTs = Date.now();
+    state.pendingWrite = false;
+    refreshSavedIndicator();
+    return true;
+  } catch (e) {
+    state.pendingWrite = false;
+    refreshSavedIndicator();
+    console.error("save error", e);
+    showError(`Save failed: ${e.message}\n\nYour verdict is in memory but not written to disk. Click Export backup now to download a snapshot, then reload and pick the file again.`);
+    return false;
+  }
+}
+
+async function setVerdict(v) {
+  const cell = state.cells[state.currentIdx];
+  if (!cell) return;
+  const notes = $("notes").value;
+  state.verdicts[cell.key] = {
+    verdict: v,
+    notes: notes,
+    ts: nowISO(),
+    reviewer: state.reviewer,
+  };
+  renderMatrix();
+  renderProgress();
+  $("currentVerdict").textContent = `current: ${v}`;
+  const ok = await persist();
+  if (ok) nextUngraded();
+}
+
+async function saveNotesOnly() {
+  const cell = state.cells[state.currentIdx];
+  if (!cell) return;
+  const notes = $("notes").value;
+  const prev = state.verdicts[cell.key];
+  state.verdicts[cell.key] = {
+    verdict: prev ? prev.verdict : "",
+    notes,
+    ts: nowISO(),
+    reviewer: state.reviewer,
+  };
+  const ok = await persist();
+  if (ok) {
+    $("notesSaved").textContent = "notes saved";
+    setTimeout(() => { $("notesSaved").textContent = ""; }, 2500);
+  }
+}
+
+function refreshSavedIndicator() {
+  const el = $("saved");
+  if (state.pendingWrite) {
+    el.textContent = "saving…";
+    el.className = "saved warn";
+    return;
+  }
+  if (!state.lastSaveTs) { el.textContent = "no saves yet"; el.className = "saved"; return; }
+  const d = Math.max(0, Math.floor((Date.now() - state.lastSaveTs) / 1000));
+  if (d < 5)    { el.textContent = "saved just now"; el.className = "saved recent"; }
+  else if (d < 60)   { el.textContent = "saved " + d + "s ago"; el.className = "saved recent"; }
+  else if (d < 3600) { el.textContent = "saved " + Math.floor(d/60) + "m ago"; el.className = "saved"; }
+  else              { el.textContent = "saved " + Math.floor(d/3600) + "h ago"; el.className = "saved"; }
+}
+
+setInterval(refreshSavedIndicator, 1000);
+
+// ----------------------------------------------------------------------------
+// Export (always-available manual download)
+// ----------------------------------------------------------------------------
+
+function exportBackup() {
+  const payload = emptyVerdicts();
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${slugify(state.reviewer)}-verdicts.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ----------------------------------------------------------------------------
+// Wire up
+// ----------------------------------------------------------------------------
+
+for (const id of ["bP","bPN","bN","bQ","bS"]) {
+  $(id).onclick = () => setVerdict($(id).dataset.v);
+}
+$("btnPrev").onclick = prevCell;
+$("btnNext").onclick = nextCell;
+$("btnPrevUngraded").onclick = prevUngraded;
+$("btnNextUngraded").onclick = nextUngraded;
+$("btnMatrix").onclick = () => { const p = $("matrixPanel"); p.open = !p.open; };
+$("btnSaveNotes").onclick = saveNotesOnly;
+$("btnExport").onclick = exportBackup;
+$("notes").addEventListener("blur", saveNotesOnly);
+
+document.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") {
+    if ((e.key === "s" || e.key === "S") && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault(); saveNotesOnly();
+    }
+    return;
+  }
+  if (e.key === "ArrowRight") {
+    e.preventDefault();
+    if (e.shiftKey) nextUngraded(); else nextCell();
+  } else if (e.key === "ArrowLeft") {
+    e.preventDefault();
+    if (e.shiftKey) prevUngraded(); else prevCell();
+  } else if (e.key === "p" || e.key === "P") setVerdict("P");
+   else if (e.key === "b" || e.key === "B") setVerdict("PN");
+   else if (e.key === "n" || e.key === "N") setVerdict("N");
+   else if (e.key === "q" || e.key === "Q") setVerdict("?");
+   else if (e.key === "x" || e.key === "X") setVerdict("S");
+   else if (e.key === "m" || e.key === "M") { const p = $("matrixPanel"); p.open = !p.open; }
+   else if (e.key === "f" || e.key === "F") { e.preventDefault(); $("notes").focus(); }
+});
+
+// Warn on close if there's an unwritten in-flight save (almost never happens).
+window.addEventListener("beforeunload", (e) => {
+  if (state.pendingWrite) {
+    e.preventDefault();
+    e.returnValue = "A save is in flight — wait a moment before closing.";
+  }
+});
+
+bootstrap();
+</script>
+</body>
+</html>

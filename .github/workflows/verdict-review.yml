@@ -1,0 +1,77 @@
+name: Verdict review
+
+# Runs whenever a pull request touches verdicts/*.json — combines every
+# reviewer file in verdicts/ and posts the agreement report as a PR comment.
+# No external dependencies; only stdlib Python is used by the merge script.
+
+on:
+  pull_request:
+    paths:
+      - "verdicts/**.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  agreement-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build agreement report
+        id: merge
+        run: |
+          mkdir -p /tmp/merge-out
+          if compgen -G "verdicts/*.json" > /dev/null; then
+            python3 tools/merge_verdicts.py verdicts/*.json \
+              --policy majority \
+              --out-dir /tmp/merge-out
+          else
+            echo "no verdicts/*.json files yet; skipping merge"
+            exit 0
+          fi
+
+      - name: Post agreement report as PR comment
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("fs");
+            const path = "/tmp/merge-out/T4-agreement-report.md";
+            if (!fs.existsSync(path)) {
+              core.info("No agreement report produced; skipping comment.");
+              return;
+            }
+            const body = "<!-- promptlab-agreement -->\n" +
+                         "## Inter-reviewer agreement (auto-generated)\n\n" +
+                         fs.readFileSync(path, "utf8");
+            // Find an existing bot comment and update in place, or create new.
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner, repo, issue_number, per_page: 100,
+            });
+            const existing = comments.find(c =>
+              c.user.type === "Bot" && c.body && c.body.startsWith("<!-- promptlab-agreement -->")
+            );
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner, repo, comment_id: existing.id, body,
+              });
+              core.info(`Updated existing comment ${existing.id}`);
+            } else {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number, body,
+              });
+              core.info("Created new agreement comment");
+            }
