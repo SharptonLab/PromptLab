@@ -236,9 +236,17 @@ Add to constraints:
 ## Model Notes
 
 ```
-Models tested: [To be completed]
-Date tested: [To be completed]
-Notes: [To be completed]
+Tested across the panel; verdicts set by human review.
+
+- Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
+- claude-opus-4.7 (2026-06-23): Pass
+- claude-sonnet-4.6 (2026-06-23): Pass
+- gemini-2.5-pro (2026-06-23): Pass
+- gpt-5.5 (2026-06-23): Pass
+- nemotron-3-super-120b (2026-06-23): Pass
+- step-3.7-flash (2026-06-23): Needs revision
+
+Full per-model raw outputs and reviewer notes: tests/fundamentals/structured-prompt-template/
 ```
 
 ## Related Prompts
