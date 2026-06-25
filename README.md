@@ -1,5 +1,8 @@
 # PromptLab
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20855199.svg)](https://doi.org/10.5281/zenodo.20855199)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 **Tested prompts for using large language models in life science research.**
 
 A collection of ready-to-use prompts designed for researchers who want to use LLMs effectively and responsibly. Every prompt includes failure modes, verification requirements, and has been tested with real inputs.
@@ -103,9 +106,11 @@ CC-BY-4.0
 
 ## Citation
 
-If you use PromptLab in your research, please cite this repository. See [`CITATION.cff`](CITATION.cff) for the canonical record (GitHub renders it as a "Cite this repository" widget in the right sidebar of the repo page).
+If you use PromptLab in your research, please cite this repository:
 
-Once the v1.0.0 release is archived on Zenodo, a citable DOI will appear in both `CITATION.cff` and below. Until then, cite the GitHub repository at the commit you used (`https://github.com/SharptonLab/PromptLab/commit/<sha>`).
+> Sharpton, T. (2026). *PromptLab: Tested prompts for using large language models in life science research* (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.20855199
+
+See [`CITATION.cff`](CITATION.cff) for the canonical machine-readable record; GitHub renders it as a "Cite this repository" widget in the right sidebar of the repo page. The DOI above is the concept DOI and resolves to the latest archived version.
 
 ## Maintainers
 

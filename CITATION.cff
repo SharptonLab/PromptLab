@@ -15,16 +15,10 @@ license: CC-BY-4.0
 version: "1.0.0"
 date-released: "2026-06-25"
 
-# Add the Zenodo concept DOI here after the v1.0.0 release is archived:
-# 1. Enable the repo at https://zenodo.org/account/settings/github/
-# 2. Cut the v1.0.0 release on GitHub (Releases > Draft new release > tag v1.0.0)
-# 3. Wait ~2 min for Zenodo to ingest, then copy the concept DOI
-# 4. Uncomment and fill in the next block:
-#
-# identifiers:
-#   - type: doi
-#     value: "10.5281/zenodo.XXXXXXX"
-#     description: "Concept DOI (all-versions)"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.20855199"
+    description: "Concept DOI (all versions) — resolves to the latest archived version on Zenodo"
 
 # Companion manuscript citation (fill in once the paper is published):
 # references:

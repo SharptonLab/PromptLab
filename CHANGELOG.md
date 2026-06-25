@@ -12,7 +12,9 @@ structured-output worked example for one extraction prompt (R1.7);
 prompt coverage for RNA-seq metadata extraction. See open GitHub issues
 for the current cut._
 
-## [1.0.0] — 2026-06-25 (planned release)
+## [1.0.0] — 2026-06-25
+
+Released and archived on Zenodo: <https://doi.org/10.5281/zenodo.20855199>.
 
 This release replaces the unverifiable "all 27 prompts tested" claim
 of the initial drop with a complete, human-verified cross-model
