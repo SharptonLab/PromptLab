@@ -5,6 +5,15 @@ PromptLab's prompts — the paper-cited evidence behind any claim about how
 specific models performed. Not needed for using the prompts themselves; see
 the top-level README for that.
 
+> **Planned for removal after the manuscript is accepted.** This whole
+> directory is scaffolding for the 2026-07 resubmission cycle. The audit
+> data is preserved long-term in the Zenodo archive (DOI-pinned) and in
+> git history; the prose drafts (`SECTION_7_DRAFT.md`,
+> `AI_DISCLOSURE_DRAFT.md`, `MANUSCRIPT_HANDOFF.md`) migrate into the
+> published manuscript itself. Once those landing places exist, this
+> directory comes out so the public repo's surface area is just the
+> prompts and the lightweight evaluation index (`tests/SUMMARY.md`).
+
 ## What's here
 
 | File | What it is |
