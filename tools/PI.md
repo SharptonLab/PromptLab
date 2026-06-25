@@ -57,10 +57,10 @@ Each reviewer produces a `<name>-verdicts.json` file. They can send it back via:
 Once you have all the reviewer files in one place:
 
 ```bash
-python3 tools/merge_verdicts.py verdicts/*.json --policy majority --out-dir .
+python3 tools/merge_verdicts.py verdicts/*.json --policy majority --out-dir evaluation
 ```
 
-Produces three files in the current directory:
+Produces three files in `evaluation/`:
 
 - `T4-canonical-verdicts.json` — one verdict per cell, majority decision. Cells without a majority stay PENDING.
 - `T4-audit-trail.json` — every reviewer's vote on every cell, preserved.
@@ -86,7 +86,17 @@ python3 tools/merge_verdicts.py \
 
 ## Applying canonical verdicts to the test result files
 
-`tools/apply_canonical.py` (to-be-written when T4 wraps; see TASKS.md T5) takes `T4-canonical-verdicts.json` and updates the per-result-file `Recommendation:` line + appends reviewer notes to the file's `## Overall Assessment` notes. Then `harness/reconcile_notes.py` updates the source prompts' `## Model Notes` sections from the now-approved results, and `harness/summarize_cross_model.py` produces `tests/SUMMARY.md`.
+`tools/apply_canonical.py` takes `evaluation/T4-canonical-verdicts.json` and updates the per-result-file `Recommendation:` line + appends reviewer-supplied notes to the file's `## Overall Assessment` notes.
+
+```bash
+python3 tools/apply_canonical.py evaluation/T4-canonical-verdicts.json
+# or, if cells already have a Recommendation from a previous canonical:
+python3 tools/apply_canonical.py evaluation/T4-canonical-verdicts.json --force
+```
+
+Reviewer-supplied notes carry attribution (e.g. `tjs (2026-06-25): <note>`); pure attribution without note content is omitted. The full audit trail lives in `evaluation/T4-audit-trail.json` so per-file notes stay clean.
+
+Then `harness/reconcile_notes.py` updates the source prompts' `## Model Notes` sections from the now-approved results, and `harness/summarize_cross_model.py` produces `tests/SUMMARY.md`.
 
 ## Sanity checks before declaring T4 done
 

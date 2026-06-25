@@ -10,6 +10,8 @@ LLMs can accelerate research workflows, but they fail in predictable ways—hall
 
 ## Contents
 
+**Prompts and guides** (the working surface — most users only need these):
+
 | Directory | Description |
 |-----------|-------------|
 | `fundamentals/` | Core prompting strategies (structured prompts, few-shot learning, chain-of-thought, meta-prompting, cross-validation) |
@@ -21,7 +23,21 @@ LLMs can accelerate research workflows, but they fail in predictable ways—hall
 | `documentation/` | Templates for documenting LLM use |
 | `examples/` | Worked case studies demonstrating complete workflows |
 | `guides/` | Quick-reference guides |
-| `tests/` | Test results showing prompt performance |
+
+**Evaluation evidence** (the paper's testing record — drill in if you want to verify our claims):
+
+| Directory | Description |
+|-----------|-------------|
+| `tests/` | Per-cell test results: one Markdown file per (prompt × model) capture, with raw model output and the human reviewer's verdict. The matrix overview is at `tests/SUMMARY.md`. |
+| `evaluation/` | Combined verdicts, audit trail, and inter-reviewer agreement report. Paper-cited evidence; not needed for using the prompts. |
+| `verdicts/` | Immutable per-reviewer verdict files (the raw input that produced `evaluation/`). |
+
+**Reviewing infrastructure** (for adding new reviewer rounds — see [`docs/REVIEWER.md`](docs/REVIEWER.md)):
+
+| Directory | Description |
+|-----------|-------------|
+| `docs/` | Static review web app, served via GitHub Pages at <https://sharptonlab.github.io/PromptLab/docs/>. Reviewers click through cells in a browser; verdicts save to a file on their disk. |
+| `tools/` | Scripts that build the cells manifest, merge reviewer verdicts, and apply canonical verdicts back to per-cell files. See [`tools/PI.md`](tools/PI.md) for the lead-reviewer workflow. |
 
 ## Quick Start
 
@@ -56,7 +72,16 @@ Each prompt includes:
 
 ## Testing
 
-The repository contains 24 runnable prompts plus reference guides and templates in `guides/`. Test results are in `tests/[category]/[prompt-name]/`. See `docs/TESTING-GUIDE.md` for the testing methodology and `tests/SUMMARY.md` for the cross-model coverage matrix.
+The repository contains 24 runnable prompts plus reference guides and templates in `guides/`. Every prompt has been tested across a 6-model panel (Claude Sonnet 4.6, Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) and human-verified by a project author.
+
+If you want to look at the test results:
+
+- **Each prompt file** has an in-line `## Model Notes` section summarizing how each model did on it — the fastest way to see results for a specific prompt.
+- **`tests/SUMMARY.md`** is the cross-model coverage matrix (one row per prompt, one column per model, verdicts in each cell). This is the index.
+- **`tests/<category>/<prompt-name>/`** holds the per-cell result files: raw model output and the reviewer's verdict, for each (prompt × model) pair.
+- **`evaluation/`** holds the combined verdicts, audit trail, and inter-reviewer agreement report — paper-cited evidence.
+
+See [`docs/TESTING-GUIDE.md`](docs/TESTING-GUIDE.md) for the testing methodology.
 
 ## Contributing
 

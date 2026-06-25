@@ -21,10 +21,15 @@ report.
 ## Combining them
 
 ```bash
-python3 tools/merge_verdicts.py verdicts/*.json --policy majority
+python3 tools/merge_verdicts.py verdicts/*.json --policy majority --out-dir evaluation
 ```
 
-Produces `T4-canonical-verdicts.json`, `T4-audit-trail.json`, and
-`T4-agreement-report.md` in the current directory.
+Writes the combined verdicts, audit trail, and agreement report into
+`evaluation/` (where the paper-cited artifacts live). After that, apply
+the canonical verdicts to the per-cell result files:
+
+```bash
+python3 tools/apply_canonical.py evaluation/T4-canonical-verdicts.json --force
+```
 
 See `tools/PI.md` for the full lead-reviewer workflow.
