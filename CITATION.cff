@@ -1,0 +1,38 @@
+# See https://citation-file-format.github.io for the schema.
+# GitHub auto-renders this as a "Cite this repository" widget on the repo page.
+cff-version: 1.2.0
+title: "PromptLab: Tested prompts for using large language models in life science research"
+type: software
+message: "If you use PromptLab in your research, please cite it as below."
+authors:
+  - family-names: Sharpton
+    given-names: Thomas
+    affiliation: "Oregon State University"
+    # orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"   # fill in before release
+repository-code: "https://github.com/SharptonLab/PromptLab"
+url: "https://sharptonlab.github.io/PromptLab/"
+license: CC-BY-4.0
+version: "1.0.0"
+date-released: "2026-06-25"
+
+# Add the Zenodo concept DOI here after the v1.0.0 release is archived:
+# 1. Enable the repo at https://zenodo.org/account/settings/github/
+# 2. Cut the v1.0.0 release on GitHub (Releases > Draft new release > tag v1.0.0)
+# 3. Wait ~2 min for Zenodo to ingest, then copy the concept DOI
+# 4. Uncomment and fill in the next block:
+#
+# identifiers:
+#   - type: doi
+#     value: "10.5281/zenodo.XXXXXXX"
+#     description: "Concept DOI (all-versions)"
+
+# Companion manuscript citation (fill in once the paper is published):
+# references:
+#   - type: article
+#     authors:
+#       - family-names: Sharpton
+#         given-names: Thomas
+#     title: "<paper title>"
+#     journal: "<journal>"
+#     year: <year>
+#     doi: "<paper DOI>"

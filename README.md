@@ -103,11 +103,9 @@ CC-BY-4.0
 
 ## Citation
 
-If you use PromptLab in your research, please cite:
+If you use PromptLab in your research, please cite this repository. See [`CITATION.cff`](CITATION.cff) for the canonical record (GitHub renders it as a "Cite this repository" widget in the right sidebar of the repo page).
 
-```
-[Citation information to be added after publication]
-```
+Once the v1.0.0 release is archived on Zenodo, a citable DOI will appear in both `CITATION.cff` and below. Until then, cite the GitHub repository at the commit you used (`https://github.com/SharptonLab/PromptLab/commit/<sha>`).
 
 ## Maintainers
 
