@@ -322,23 +322,16 @@ Your design has the right conceptual structure but two problems could make your 
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Comprehensive critique (227 lines) with prioritized recommendations (red-flag blockers vs manageable). Identifies cage confounding (only 2 cages/group), unmatched control diet (could confound fiber with other dietary changes), inadequate sample size for diet×disease interaction, and asks the right clarifying questions (when does diet start, what fiber type, etc.). Substantively excellent.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- All concerns are reasonable per common mouse-microbiome practice; nothing fabricated.
+- Cross-model: all 6 models converge on the same top concerns (cage effects, diet matching, randomization timing). High agreement on substance.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

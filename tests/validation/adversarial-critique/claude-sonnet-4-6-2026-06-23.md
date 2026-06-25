@@ -146,23 +146,15 @@ With microbiome data involving hundreds to thousands of taxa, a raw p < 0.05 thr
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Strong adversarial critique (82 lines) hitting all expected points (vague 'standard protocols', undefined 'immediately', outdated Greengenes, 'appropriate methods' meaningless, missing controls, missing IBD covariates). Priority table at end ranks issues as Critical/Major/Moderate. Calibrated bottom line: 'This paragraph would not pass peer review at a rigorous microbiome journal.' Genuinely critical, not gentle.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Cross-model: all 6 models converge on the same essential critiques (Greengenes outdated, vague terms unacceptable, missing controls, missing confounder adjustment). Very high agreement.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

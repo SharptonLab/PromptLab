@@ -305,23 +305,16 @@ if ("SubjectID" %in% names(meta)) {
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Detailed workflow (233 lines) with ranked assumptions table, R code workflow, and discussion. Recognizes independence/exchangeability as the top-ranked assumption (slightly different ordering from other models which often place dispersion first). Both rankings are defensible.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- The independence-first ranking is correct in principle but slightly differs from some other models that put dispersion first because the user's observed concern was dispersion. Either ranking is defensible.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

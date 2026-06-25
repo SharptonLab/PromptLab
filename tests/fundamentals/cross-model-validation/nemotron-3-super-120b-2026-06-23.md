@@ -20,6 +20,47 @@ Standard test input from prompt file (`## Test Input`).
 ## Filled Prompt
 ```
 {YOUR_ORIGINAL_PROMPT}
+```
+Run identical prompt through 2-3 different models. Compare outputs.
+
+### Adversarial Critique (Model B Critiques Model A)
+```
+Here is a response from another AI system to the following question:
+
+**Question:** {ORIGINAL_QUESTION}
+
+**Response to critique:**
+{MODEL_A_OUTPUT}
+
+Your task is to critically evaluate this response:
+
+1. **Factual accuracy:** Identify any claims that may be incorrect, outdated, or unverifiable
+2. **Logical validity:** Are there gaps in reasoning or unsupported conclusions?
+3. **Completeness:** What important considerations are missing?
+4. **Alternative perspectives:** What other approaches or interpretations weren't considered?
+5. **Confidence calibration:** Where is the response more confident than warranted?
+
+Be specific and direct. Identify concrete problems rather than vague concerns.
+```
+
+### Synthesis Across Models
+```
+I asked multiple AI systems the same question and received these responses:
+
+**Response 1:**
+{MODEL_A_OUTPUT}
+
+**Response 2:**
+{MODEL_B_OUTPUT}
+
+**Response 3 (optional):**
+{MODEL_C_OUTPUT}
+
+Synthesize these responses:
+1. Where do they agree? (Higher confidence)
+2. Where do they disagree? (Requires verification)
+3. What does each response include that others miss?
+4. What's the most defensible answer given the combination?
 
 Here is a response from another AI system to the following question:
 
@@ -45,62 +86,64 @@ Be specific and direct. Identify concrete problems rather than vague concerns.
 ```
 
 
-**1. Factual accuracy**  
-- **“Alpha diversity metrics … are continuous variables”** – Observed species richness is a *count* (integer) variable; Shannon diversity is bounded between 0 and log(S) and often behaves like a proportion after a logit transform. Treating them as unrestricted continuous normals is not strictly correct.  
-- **“Simply calculate the alpha diversity for each sample, then perform an independent samples t‑test”** – The default `t.test()` in R assumes *equal variances* and *normality* of the residuals. No check of these assumptions is mentioned, yet microbiome data frequently violate them (skewed richness, heteroscedasticity across groups).  
-- **“This is the standard approach used in most microbiome studies”** – While t‑tests appear in some papers, many recent microbiome studies explicitly recommend or use non‑parametric tests (Wilcoxon rank‑sum, permutation tests) or linear/mixed‑effects models because the normality assumption is often untenable. The claim overstates the prevalence of the t‑test approach.  
+### Adversarial Critique of Model A's Response  
+*(Applied to the microbiome alpha diversity question)*  
 
-**2. Logical validity**  
-- The argument jumps from “continuous variable → t‑test” without establishing that the *necessary* conditions (normality, homoscedasticity, independence) hold. This is a logical gap: continuity alone does not justify a parametric test.  
-- The recommendation to “use t.test() in R” ignores the option to set `var.equal = FALSE` (Welch’s test) when variances differ, which is a common scenario in microbiome data.  
-- No mention of effect‑size reporting or confidence intervals; a p‑value alone does not convey the magnitude of difference, yet the implication is that a significant p‑value suffices for interpretation.  
+#### 1. **Factual Accuracy**  
+- **Incorrect claim**: "Alpha diversity metrics like Shannon diversity [...] are continuous variables, making the t-test appropriate."  
+  - *Problem*: While Shannon diversity is technically continuous, it often violates t-test assumptions (normality, homoscedasticity) in microbiome data. Shannon indices frequently exhibit right-skew, zero-inflation, or bounded ranges (e.g., 0–5 for Shannon in low-diversity samples), making parametric tests unreliable without transformation or validation. Observed species richness is a *count* variable (non-negative integers), violating continuity assumptions entirely.  
+- **Outdated/unverifiable claim**: "This is the standard approach used in most microbiome studies."  
+  - *Problem*: Recent methodological papers (e.g., McMurdie & Holmes, 2014; Weiss et al., 2017) explicitly caution against t-tests/ANOVA for alpha diversity due to compositionality effects and non-normality. Permutation-based tests (e.g., Wilcoxon rank-sum) or linear models with appropriate error distributions (e.g., gamma, log-normal) are now recommended as defaults in tools like `phyloseq` or `microbiome`.  
 
-**3. Completeness**  
-- **Assumption checking:** No advice to inspect histograms, Q‑Q plots, or run Shapiro‑Wilk/Levene tests before deciding on a test.  
-- **Alternative tests:** No discussion of Wilcoxon rank‑sum (Mann‑Whitney), permutation‑based t‑test, or bootstrap confidence intervals, which are robust to non‑normality.  
-- **Model‑based approaches:** No mention of using linear models (`lm`) or generalized linear models (e.g., Gaussian with logit‑transformed Shannon, Poisson/negative‑binomial for richness) that can incorporate covariates (age, BMI, sequencing depth, batch).  
-- **Random effects / nesting:** No note about mixed‑effects models (`lme4::glmer`) when samples are clustered (e.g., multiple time points per subject, litter effects).  
-- **Multiple testing:** If several alpha‑diversity indices are examined, no correction (Bonferroni, FDR) is suggested.  
-- **Data preprocessing:** No comment on rarefaction vs. modeling sequencing depth as an offset or covariate, which can influence diversity estimates.  
-- **Visualization:** No recommendation to plot group distributions (box/violin plots, jittered points) to inspect overlap and outliers before testing.  
+#### 2. **Logical Validity**  
+- **Gap in reasoning**: Model A assumes alpha diversity metrics are "continuous variables" → therefore t-test is appropriate, but skips critical validation steps.  
+  - *Problem*: No mention of checking assumptions (e.g., Shapiro-Wilk for normality, Levene’s test for equal variance). Blindly applying a t-test risks inflated Type I/II errors if assumptions fail. For example, if Shannon diversity is log-normally distributed (common), a t-test on raw values lacks power; a log-transform *first* would be needed—but Model A omits this nuance.  
+- **Unsupported conclusion**: "Simply calculate the alpha diversity for each sample, then perform an independent samples t-test."  
+  - *Problem*: Ignores preprocessing dependencies. Alpha diversity values depend on rarefaction depth (if used) or sequencing depth normalization. Comparing raw counts without addressing depth bias (e.g., via CSS or TSS normalization) confounds biological signal with technical artifacts.  
 
-**4. Alternative perspectives**  
-- **Non‑parametric tests:** Wilcoxon rank‑sum (or Kruskal‑Wallis for >2 groups) is often more appropriate for richness and can be used for Shannon when normality fails.  
-- **Permutation tests:** A permutation‑based t‑test (e.g., `coin::independence_test` or `permute::permTS`) provides an exact p‑value under the exchangeability null, distributional‑free.  
-- **Bootstrap confidence intervals:** Bootstrapping the difference in means (or medians) yields a CI that does not rely on normality.  
-- **Generalized linear models:** Model richness with a Poisson or negative‑binomial GLM (including an offset for library size) and Shannon with a Gaussian GLM after a logit or log transformation.  
-- **Linear mixed‑effects models:** Account for repeated measures, litter, or plate effects (`lmer`/`glmer`).  
-- **Bayesian approaches:** Provide full posterior distributions for the group difference (e.g., via `brms` or `rstanarm`).  
-- **Effect‑size focus:** Report Cohen’s d, Hedges’ g, or Cliff’s delta alongside p‑values to convey practical significance.  
-- **Visualization & diagnostics:** Use violin plots, jittered points, and overlay model‑based estimated means with confidence intervals.  
+#### 3. **Completeness**  
+- **Missing considerations**:  
+  - **Data distribution checks**: No advice to visualize (QQ-plots, histograms) or test assumptions before choosing a test.  
+  - **Alternative tests**: Omits robust non-parametric options (Wilcoxon rank-sum/Mann-Whitney U) or modern alternatives (e.g., PERMANOVA for beta diversity *if* misapplied to alpha—though irrelevant here, it shows lack of scope awareness).  
+  - **Multiple testing correction**: If comparing >2 alpha diversity metrics (e.g., Shannon, Simpson, observed species), Model A ignores family-wise error rate inflation.  
+  - **Effect size**: Focuses solely on p-value; neglects reporting Cohen’s *d* or Cliff’s delta for practical significance.  
+  - **Software specifics**: No guidance on R implementation (e.g., `wilcox.test()` vs. `t.test(var.equal = FALSE)` for Welch’s correction).  
 
-**5. Confidence calibration**  
-- The statement “This is the standard approach used in most microbiome studies” is **overconfident**; empirical surveys of the literature show a substantial minority (often >30 %) using non‑parametric or model‑based methods, especially when sample sizes are modest or data are skewed.  
-- The claim that the t‑test “will give you a p‑value indicating whether the groups differ significantly” ignores that the p‑value’s validity hinges on unverified assumptions; presenting it as a guaranteed measure of significance is misleading.  
-- No qualification is given about small sample sizes (common in pilot microbiome work) where the t‑test can be severely anti‑conservative or overly conservative.  
-- The advice to “simply calculate … then perform” suggests a routine, plug‑and‑play procedure, which understates the need for exploratory diagnostics and thoughtful model selection.  
+#### 4. **Alternative Perspectives**  
+- **Overlooked approaches**:  
+  - **Transformations + parametric tests**: Log-transform Shannon diversity (to address skew) *then* use t-test—but only after verifying normality post-transform.  
+  - **Generalized linear models (GLMs)**: Model alpha diversity as gamma-distributed (for positive continuous data) or Poisson (for richness) with group as predictor—more flexible for non-normal data.  
+  - **Resampling methods**: Bootstrap confidence intervals for group differences (e.g., via `boot` package) to avoid distributional assumptions entirely.  
+  - **Bayesian approaches**: Estimate posterior probability of group difference (e.g., using `brms`), incorporating uncertainty in diversity estimation.  
+- **Misinterpretation risk**: Model A implies alpha diversity tests alone suffice, but microbiome studies often require *beta diversity* (e.g., UniFrac) for community-level shifts—alpha diversity may miss critical ecological changes.  
 
-**Bottom line:** While a t‑test *can* be appropriate for alpha‑diversity comparison when its assumptions are met, the response presents it as a universal, default solution without the necessary checks, alternatives, or nuance that microbiome analysts should consider. A more balanced recommendation would first examine distributional properties, consider robust or model‑based alternatives, report effect sizes and confidence intervals, and adjust for any relevant covariates or multiple testing.
+#### 5. **Confidence Calibration**  
+- **Overconfident claims**:  
+  - "Alpha diversity metrics [...] are continuous variables, making the t-test appropriate."  
+    - *Issue*: Expresses certainty about test suitability without acknowledging context-dependence (e.g., "appropriate *only if* assumptions hold"). In practice, microbiome alpha diversity often fails normality tests (Weiss et al., 2017), making this claim dangerously overconfident.  
+  - "This is the standard approach used in most microbiome studies."  
+    - *Issue: Overstates consensus. While t-tests appeared in early 2010s papers, current best practices (per `microbiome` tutorial, 2023) prioritize non-parametric or model-based methods. Citing "most studies" ignores methodological evolution and risks propagating outdated advice.  
+- **Understated uncertainty**: No mention of how sequencing depth, rarefaction, or compositionality affects alpha diversity validity—factors that could invalidate *any* test if unaddressed.  
+
+### Key Takeaway for Model A  
+The response correctly identifies alpha diversity as a univariate comparison problem but fails to operationalize statistical rigor. It treats test selection as a mechanical step ("calculate → t-test") rather than an assumption-dependent process. A defensible answer would: (1) mandate assumption checks, (2) prioritize robustness (e.g., Welch’s t-test *or* Wilcoxon by default), and (3) contextualize limitations (e.g., "If data are normal/homoscedastic, t-test is valid; otherwise, use Wilcoxon"). Confidence should scale with evidence—not default to parametric tests.  
+
+---  
+*Critique grounded in: Weiss et al. (2017) mSystems; McMurdie & Holmes (2014) PLOS ONE; `phyloseq`/`microbiome` vignettes (2023).*
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Follows the 5-section critique structure. Substantive points agree with the rest of the panel (t-test assumes normality, Wilcoxon is the more defensible default, sequencing depth / rarefaction is missing, etc.). **Flag**: this is the only output on this prompt that supplies specific author+year+journal citations to back its critique — "Weiss et al. (2017) mSystems," "McMurdie & Holmes (2014) PLOS ONE," and "phyloseq/microbiome vignettes (2023)." Both papers are well-known in the microbiome literature: Weiss et al. 2017 mSystems on normalization is real; McMurdie & Holmes 2014 is real but was published in PLOS Computational Biology ("Waste Not, Want Not"), not PLOS ONE — that journal name is likely wrong. The citation fabrication risk is exactly what this prompt is supposed to teach against, so this is a meaningful failure mode worth recording. Recommends gamma-distributed GLMs for alpha diversity and log-transformation for Shannon — both reasonable but worth a domain check.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Needs revision
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- That "McMurdie & Holmes (2014) PLOS ONE" is correctly cited — the well-known paper appears in PLOS Computational Biology, not PLOS ONE. If wrong, that is a partial-fabrication failure mode worth flagging in the prompt's failure modes.
+- That "Weiss et al. (2017) mSystems" is correctly cited and actually says what nemotron claims about non-parametric alternatives for alpha diversity.
+- That the gamma-distributed GLM recommendation is sound — gamma assumes positive continuous data but Shannon is bounded above by log(S).
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

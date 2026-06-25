@@ -80,23 +80,17 @@ We examined how gut microbial colonization shapes host immune responses in the i
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Clean style-matched revision (19 lines): shortened sentences, removed verbose phrases ('In the present investigation' → 'We examined'), kept all technical terms (flow cytometry, scRNA-seq, regulatory T cells, tissue-resident). 6-item Key Stylistic Changes section explicitly explains each transformation. Removed 'significantly' from the impact claim; note the original's 'significantly impacts' was likely a statistical claim that should be preserved if data support it.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Replaced 'significantly impacts' with 'drove substantial changes' — if the original 'significantly' carried statistical meaning (e.g., p<0.05), the user should reinstate it. The revision should retain statistical hedges.
+- All technical content preserved.
+- Cross-model: all 6 models produced similar style-matched revisions. Sonnet, Opus, GPT-5.5 dropped or softened 'significantly'; Gemini, Nemotron, Step-3.7 retained it.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

@@ -92,23 +92,16 @@ Output:
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Followed the format. Slight format deviation: 'Sequencing: Shotgun metagenomics (MetaPhlAn3)' bundles the tool name into the sequencing field as well as the analysis-tools field. Otherwise matches expected output completely.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Minor format deviation: bundling MetaPhlAn3 into the Sequencing field. The few-shot examples kept tools strictly in 'Analysis tools' — this is a minor stylistic miss.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

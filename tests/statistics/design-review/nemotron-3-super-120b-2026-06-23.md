@@ -242,23 +242,17 @@ Good luck with the study—feel free to ping me if you need help drafting the po
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Thorough critique (145 lines) presented with strengths/concerns tables and an end-of-document essential-items checklist (food intake daily, cages ≥4/group, litter stratification, pair-fed control, power analysis, mixed-effects model spec, PERMANOVA+PERMDISP, blinding verification, baseline immune profile, diet SOP, sequencing batch randomization). The checklist format is unusually actionable. Friendly close ('Good luck with the study!').
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Pair-fed control recommendation: standard mouse-diet-intervention practice; confirm feasibility.
+- Cages ≥4/group recommendation effectively means doubling/tripling cage count — substantial budget/welfare implication; the user should weigh.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

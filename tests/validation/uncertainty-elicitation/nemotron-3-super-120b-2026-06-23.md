@@ -141,23 +141,16 @@ Below I break down each statement from the original response, flag the ones I’
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Detailed self-assessment (80 lines, 12.5K chars). Table format for each problematic claim with quote, problem, and verification step. Includes the substantive observation that Weiss et al. 2017 is actually 'a paper on ANCOM-II' and may not contain the DESeq2 false-positive characterization attributed to it. Honest about own assumptions made.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- The claim that Weiss et al. 2017 is 'a paper on ANCOM-II' should be verified — Weiss et al. 2017 in Microbiome ('Normalization and microbial differential abundance strategies depend upon data characteristics') is actually a broader normalization/DA benchmark study, not exclusively about ANCOM-II. So Nemotron's correction may itself be partially incorrect.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

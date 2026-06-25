@@ -22,131 +22,264 @@ Standard test input from prompt file (`## Test Input`).
 Context: I have {R/Python} code for {ANALYSIS_DESCRIPTION}. I need to verify it produces correct results before using it for my research.
 
 The code to test:
+```{language}
+{PASTE_CODE_OR_FUNCTION}
+```
+
+What the code should do: {DESCRIBE_EXPECTED_BEHAVIOR}
+
+Test data available: {DESCRIBE_ANY_TEST_DATA_YOU_HAVE: e.g., "I have a small dataset with known results," "I can generate synthetic data"}
+
+Task: Help me create a testing strategy for this code:
+
+1. **Test cases**: Suggest specific test cases covering:
+   - Normal/expected inputs (does it work for typical data?)
+   - Edge cases (empty input, single row, extreme values)
+   - Known-answer tests (if possible)
+   - Boundary conditions
+
+2. **Test code**: Write test code I can run to verify each case. Use {TESTING_APPROACH: e.g., "simple assert statements," "testthat for R," "pytest for Python"}.
+
+3. **Validation checks**: What should I manually inspect in the output to verify correctness?
+
+4. **Red flags**: What output patterns would indicate the code is wrong?
+
+Constraints:
+- Focus on tests that catch meaningful errors, not pedantic checks
+- Prioritize tests for the parts most likely to be wrong
+- If full automated testing is overkill, suggest lightweight manual verification
+- Note any tests that require me to know the "right" answer in advance
+
+Output format: Test strategy with code examples for each test type.
 
 Context: I have Python code for normalizing microbiome count data using centered log-ratio (CLR) transformation. I need to verify it produces correct results before using it for my research.
 
 The code to test:
+```python
+import numpy as np
+
+def clr_transform(counts):
+    """Apply centered log-ratio transformation to count data."""
+    # Add pseudocount to avoid log(0)
+    counts_pseudo = counts + 0.5
+
+    # Calculate geometric mean per sample (row)
+    log_counts = np.log(counts_pseudo)
+    geometric_mean = np.exp(log_counts.mean(axis=1, keepdims=True))
+
+    # CLR = log(value / geometric mean)
+    clr = np.log(counts_pseudo / geometric_mean)
+
+    return clr
+```
+
+What the code should do: Transform count data using CLR, which centers each sample's log-transformed values by subtracting the geometric mean. Output should have mean of 0 across features for each sample.
+
+Test data available: I can create simple test matrices with known values.
+
+Task: Help me create a testing strategy using simple assert statements and manual checks.
 ```
 
 ## Model Output
 ```
 
 
-I notice your actual code snippet wasn't included in the message (the template shows `{ANALYSIS_DESCRIPTION}` and "The code to test:" but no code follows). **To properly verify your CLR implementation, I'll need to see your specific Python code.** Please paste it so I can analyze it directly.
-
-However, to help you verify correctness *in the meantime*, here's a **rigorous validation framework** for CLR transformation in microbiome analysis, including:
-1. A reference implementation (gold standard)
-2. Critical test cases targeting common errors
-3. Verification metrics you can run immediately
+**Testing Strategy for the CLR‑transform function**  
+*(Python – simple `assert` statements + optional manual inspection)*  
 
 ---
 
-### 🔬 Step-by-Step Verification Protocol for CLR Code
-*(Assume your function is `clr_transform(counts)` where `counts` is a numpy array/pandas DataFrame of shape `(n_samples, n_features)`)*
+## 1. Test‑case ideas  
 
-#### ✅ 1. **Reference Implementation (Use as Baseline)**
-```python
-import numpy as np
-
-def clr_reference(counts):
-    """Correct CLR transformation (natural log, handles zeros via pseudocount)"""
-    # Critical: Add pseudocount BEFORE geometric mean to avoid log(0)
-    # Standard practice: +1 pseudocount (adjust based on your data sparsity)
-    counts_pc = counts + 1.0  
-    
-    # Geometric mean per sample (axis=1)
-    gmean = np.exp(np.mean(np.log(counts_pc), axis=1, keepdims=True))
-    
-    # CLR: log(counts_pc / gmean)
-    return np.log(counts_pc / gmean)
-```
-
-#### ⚠️ 2. **Critical Test Cases to Run**  
-*(Replace `your_clr_function` with your actual function name)*
-
-| Test Case                | Input Data (3 samples × 4 features) | Expected Output Property                                                                 | Why This Tests Correctness                                                                 |
-|--------------------------|-------------------------------------|----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
-| **1. Zero Handling**     | `[[0, 2, 2, 2], [1,1,1,1], [10,0,0,10]]` | **No `-inf` or `NaN` values**<br>Row 0: All values equal after CLR? (Should be ~[-0.55, 0.15, 0.15, 0.15]) | Checks if pseudocount is added *before* geometric mean (most common error: adding after) |
-| **2. Constant Features** | `[[5,5,5,5], [5,5,5,5], [5,5,5,5]]`    | **All values = 0** (since log(5/gmean)=log(1)=0)                                        | Verifies geometric mean calculation is correct (if not zero → bug in gmean/logic)          |
-| **3. Sum-to-Zero Check** | Any positive data (e.g., `[[1,2,3],[4,5,6]]`) | **`np.allclose(np.sum(clr_result, axis=1), 0)`**<br>(Sum of CLR values per sample = 0) | **Fundamental CLR property**: ∑ log(x_i/g) = log(∏(x_i/g)) = log(1) = 0                  |
-| **4. Scale Invariance**  | `[[1,2,3], [2,4,6]]` (2nd sample = 2×1st) | **Identical CLR rows**<br>(CLR is invariant to sample-wise scaling)                     | Confirms transformation is ratio-based (not affected by sequencing depth)                  |
-| **5. Pseudocount Logic** | `[[0,0,0,1]]`                       | **Row should NOT be all zeros**<br>(After +1: [1,1,1,2] → gmean≈1.19 → CLR≈[-0.17,-0.17,-0.17,0.51]) | Tests if pseudocount is applied *per feature* before gmean (not after)                   |
-
-#### 📊 3. **Automated Verification Script**
-Add this to your test suite (replace `your_clr_func`):
-```python
-import numpy as np
-
-def verify_clr(your_clr_func):
-    # Test Case 1: Zero handling
-    data1 = np.array([[0, 2, 2, 2], [1,1,1,1], [10,0,0,10]])
-    out1 = your_clr_func(data1)
-    assert not np.any(np.isnan(out1)) and not np.any(np.isinf(out1)), "FAIL: NaN/inf in output"
-    
-    # Test Case 2: Constant features
-    data2 = np.full((3, 4), 5.0)
-    out2 = your_clr_func(data2)
-    assert np.allclose(out2, 0), "FAIL: Constant input ≠ zero output"
-    
-    # Test Case 3: Sum-to-zero (most critical!)
-    data3 = np.array([[1,2,3,4], [5,6,7,8], [0.1, 0.2, 0.3, 0.4]])
-    out3 = your_clr_func(data3)
-    row_sums = np.sum(out3, axis=1)
-    assert np.allclose(row_sums, 0, atol=1e-10), f"FAIL: Row sums ≠ zero (got {row_sums})"
-    
-    # Test Case 4: Scale invariance
-    data4a = np.array([[1, 2, 3]])
-    data4b = np.array([[2, 4, 6]])  # 2× data4a
-    out4a = your_clr_func(data4a)
-    out4b = your_clr_func(data4b)
-    assert np.allclose(out4a, out4b), "FAIL: Not scale-invariant"
-    
-    print("✅ ALL TESTS PASSED - CLR implementation is correct!")
-    return True
-
-# USAGE: verify_clr(your_clr_function)
-```
-
-#### 🚨 Key Pitfalls This Catches
-| Error Type                     | How Tests Catch It                                                                 |
-|--------------------------------|----------------------------------------------------------------------------------|
-| **Forgot pseudocount**         | Test 1 fails (NaN/-inf from log(0))                                              |
-| **Added pseudocount AFTER gmean** | Test 1 & 5 fail (e.g., `[0,2,2,2]` → gmean of [0,2,2,2] is 0 → division by zero) |
-| **Used arithmetic mean**       | Test 2 fails (constant input ≠ zero output)                                      |
-| **Wrong axis (features vs samples)** | Test 3 fails (row sums ≠ zero) or Test 4 fails (not scale-invariant)             |
-| **Used log10 instead of ln**   | *Still passes Tests 1-4!* → **You MUST additionally verify against known literature values** (e.g., CLR of [1,1,1] should be [0,0,0] in ANY log base) |
+| Category | What to test | Why it matters | Example data (you can generate) |
+|----------|--------------|----------------|---------------------------------|
+| **Normal / expected** | Typical count matrix (≥2 samples, ≥3 features) with moderate values | Checks the core algorithm on realistic data | `[[10, 20, 30], [5, 15, 25]]` |
+| **Edge – empty** | 0‑row or 0‑column matrix | Should raise a clear error or return an empty array of the same shape | `np.empty((0,3))` or `np.empty((2,0))` |
+| **Edge – single row / single column** | One sample or one feature | Verifies broadcasting & geometric‑mean handling | `[[1,2,3]]` (1×3) or `[[4],[8],[12]]` (3×1) |
+| **Edge – zeros** | Counts that contain true zeros (before pseudocount) | Pseudocount must prevent `log(0)`; after adding 0.5 the result should be finite | `[[0, 5, 10], [2,0,3]]` |
+| **Edge – extreme values** | Very large or very small counts (e.g., 1e6 vs 1) | Tests for overflow/underflow in log & exp | `[[1, 1_000_000], [10_000, 1]]` |
+| **Known‑answer** | Hand‑crafted matrix where you can compute CLR analytically | Guarantees the implementation matches the definition | See section 2 for a concrete example |
+| **Boundary – constant rows** | All counts in a row are identical (after pseudocount) | Geometric mean = that value → CLR should be (approximately) 0 for every feature | `[[5,5,5], [7,7,7]]` |
+| **Boundary – single feature** | Only one column → geometric mean = that value → CLR should be 0 (up to rounding) | Checks that `axis=1, keepdims=True` works when dimension size = 1 | `[[4],[9],[16]]` |
 
 ---
 
-### 📌 Critical Notes for Your Research
-1. **Zeros require a pseudocount strategy** – There's no universally "correct" value (common: +1, or multiplicative replacement like `zCompositions`). **Document your choice** – it impacts biological interpretation.
-2. **CLR assumes relative data** – Only valid for compositional data (counts where only ratios matter). If your data has absolute abundances, consider alternatives (e.g., ILR).
-3. **Always check the sum-to-zero property** – This is the fastest sanity check. If `sum(clr_result, axis=1) ≠ 0`, your implementation is **fundamentally broken**.
-4. **Compare to established tools** – Run your data through [scikit-bio's `clr`](https://scikit-bio.org/docs/latest/generated/skbio.stats.composition.clr.html) or [CoDaSeq](https://github.com/biostat3/CoDaSeq) and verify outputs match (within pseudocount choices).
+## 2. Test code (plain `assert` statements)
 
-**Once you share your actual code, I’ll give you a line-by-line audit** – highlighting exactly where it aligns/deviates from best practices. Please paste it when you can!  
+```python
+import numpy as np
 
-*In the meantime, run the verification script above on your function – it will catch 95% of critical errors in <1 second.* 💡
+def clr_transform(counts):
+    """Apply centered log-ratio transformation to count data."""
+    counts_pseudo = counts + 0.5
+    log_counts = np.log(counts_pseudo)
+    geometric_mean = np.exp(log_counts.mean(axis=1, keepdims=True))
+    clr = np.log(counts_pseudo / geometric_mean)
+    return clr
+
+# ------------------------------------------------------------------
+# Helper to compare with a tolerance (avoid exact float equality)
+def assert_allclose(a, b, rtol=1e-7, atol=1e-12):
+    if not np.allclose(a, b, rtol=rtol, atol=atol):
+        raise AssertionError(f"Arrays not close:\n{a}\n!\n{b}")
+
+# ------------------------------------------------------------------
+# 1. Normal case
+def test_normal():
+    X = np.array([[10., 20., 30.],
+                  [5., 15., 25.]])
+    out = clr_transform(X)
+    # each row should sum to ~0 (property of CLR)
+    assert_allclose(out.sum(axis=1), 0.)
+    # spot‑check one value (computed with a calculator or another implementation)
+    # For row 0: pseudo = [10.5,20.5,30.5]; gm = exp(mean(log(pseudo))) ≈ 19.0
+    # clr0 = log(10.5/19.0) ≈ -0.5878
+    assert_allclose(out[0, 0], -0.587789, atol=1e-5)
+
+# 2. Empty matrix – should return empty array of same shape
+def test_empty():
+    X = np.empty((0, 3))
+    out = clr_transform(X)
+    assert out.shape == (0, 3)
+    # No values to check; just ensure no exception
+
+# 3. Single row
+def test_single_row():
+    X = np.array([[1., 2., 3.]])
+    out = clr_transform(X)
+    assert_allclose(out.sum(), 0.)          # row sum ≈ 0
+    # manual check (optional)
+    # pseudo = [1.5,2.5,3.5]; gm ≈ exp(mean(log(pseudo))) ≈ 2.24
+    # clr ≈ [log(1.5/2.24), log(2.5/2.24), log(3.5/2.24)]
+    expected = np.log(np.array([1.5, 2.5, 3.5]) / np.exp(np.log(np.array([1.5,2.5,3.5])).mean()))
+    assert_allclose(out, expected)
+
+# 4. Single column
+def test_single_column():
+    X = np.array([[4.], [9.], [16.]])
+    out = clr_transform(X)
+    # With one feature, CLR = log(value/gm) where gm = value → should be 0
+    assert_allclose(out, 0.)
+
+# 5. Zeros (pseudocount prevents log(0))
+def test_zeros():
+    X = np.array([[0., 5., 10.],
+                  [2., 0., 3.]])
+    out = clr_transform(X)
+    # No NaN or -inf should appear
+    assert np.isfinite(out).all()
+    # Row sums ≈ 0
+    assert_allclose(out.sum(axis=1), 0.)
+
+# 6. Extreme values
+def test_extreme():
+    X = np.array([[1., 1_000_000.],
+                  [10_000., 1.]])
+    out = clr_transform(X)
+    assert np.isfinite(out).all()
+    assert_allclose(out.sum(axis=1), 0.)
+
+# 7. Constant row (should give ~0)
+def test_constant_row():
+    X = np.array([[5.,5.,5.],
+                  [7.,7.,7.]])
+    out = clr_transform(X)
+    assert_allclose(out, 0., atol=1e-12)
+
+# 8. Known‑answer test (hand‑derived)
+def test_known_answer():
+    # Simple 2×2 matrix where we can compute CLR by hand
+    X = np.array([[2., 8.],
+                  [1., 1.]])
+    # Add pseudocount 0.5
+    pseudo = X + 0.5          # [[2.5,8.5],[1.5,1.5]]
+    gm = np.exp(np.log(pseudo).mean(axis=1, keepdims=True))  # geometric mean per row
+    expected = np.log(pseudo / gm)
+    out = clr_transform(X)
+    assert_allclose(out, expected)
+
+# ------------------------------------------------------------------
+# Run all tests (simple script style)
+if __name__ == "__main__":
+    for name in [obj for obj in dir() if obj.startswith("test_")]:
+        func = globals()[name]
+        try:
+            func()
+            print(f"✓ {name}")
+        except AssertionError as e:
+            print(f"✗ {name}: {e}")
+```
+
+**How to use**
+
+* Copy the function `clr_transform` and the test block into a file (e.g., `test_clr.py`).  
+* Run `python test_clr.py`.  
+* Each test prints a check‑mark or a failure with the offending assertion.
+
+---
+
+## 3. Validation checks (what to look at manually)
+
+Even with the automated asserts, it’s good to eyeball a few outputs:
+
+| Check | What to verify |
+|-------|----------------|
+| **Row‑wise sum ≈ 0** | CLR forces the mean of log‑ratios to zero; `out.sum(axis=1)` should be ~0 (within numerical tolerance). |
+| **No NaN / -Inf** | After adding the pseudocount, every entry must be finite. |
+| **Symmetry for constant rows** | If a row contains identical counts (after pseudocount), the CLR row should be (near) all zeros. |
+| **Invariance to scaling** | Multiplying an entire row by a constant `c>0` should *not* change the CLR output (because the geometric mean scales the same way). You can test: `assert_allclose(clr_transform(X), clr_transform(X*c))`. |
+| **Monotonicity** | For a fixed row, if you increase one count while keeping others fixed, the corresponding CLR value should increase (others decrease slightly to keep row sum zero). Spot‑check a couple of rows. |
+
+---
+
+## 4. Red flags – patterns that signal a bug
+
+| Symptom | Likely cause |
+|---------|--------------|
+| **Row sums far from 0** (e.g., > 1e‑2) | Mistake in geometric‑mean calculation (wrong axis, missing `keepdims`, or using arithmetic mean). |
+| **Presence of `NaN` or `-Inf`** | Pseudocount missing or incorrectly placed; `log(0)` still occurring. |
+| **All zeros output for non‑constant data** | Accidentally dividing by the geometric mean *after* taking log (i.e., `log(counts) - log(gm)` vs `log(counts/gm)`). |
+| **Output changes when you multiply a row by a constant** | Using the original counts (without pseudocount) in the geometric mean or forgetting to apply the same scaling to the pseudo‑counts. |
+| **Very large absolute values (> 50) for moderate counts** | Overflow in `np.exp` or `np.log` due to missing pseudocount or using raw counts in the log step. |
+| **Shape mismatch** (output shape ≠ input shape) | Accidentally dropping a dimension (e.g., using `axis=1` without `keepdims=True` and then broadcasting incorrectly). |
+
+If any of these appear, revisit the lines:
+
+```python
+counts_pseudo = counts + 0.5
+log_counts = np.log(counts_pseudo)
+geometric_mean = np.exp(log_counts.mean(axis=1, keepdims=True))
+clr = np.log(counts_pseudo / geometric_mean)
+```
+
+---
+
+### Quick “lightweight” manual verification (if you don’t want to write the full test suite)
+
+1. **Create a tiny 2×3 matrix** (e.g., `[[1,2,3],[4,5,6]]`).  
+2. Compute the CLR by hand or with a trusted tool (R `compositions::clr`, or an online calculator).  
+3. Call your function and compare the two matrices with `np.allclose`.  
+4. Check that each row sums to zero and that there are no `NaN`s.  
+
+If those three checks pass, you can be reasonably confident the implementation is correct for typical microbiome count data.  
+
+--- 
+
+**Remember:** The only tests that *require* you to know the right answer in advance are the “known‑answer” and the manual spot‑check (step 2 above). All other tests (row‑sum zero, finiteness, scaling invariance, constant‑row zero) are self‑checking and protect against the most common logical mistakes. Happy testing!
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Complete test plan organized by test category (normal, edge, known-answer, boundary) with eight named tests plus a helper `assert_allclose`. Covers the standard CLR invariants (row-sum-zero, finite outputs, constant-row→zero, single-feature→zero, large/extreme values) and includes a known-answer test computed via the same formula being tested (so it's self-consistent rather than independent). Red-flags table maps symptoms to root causes. Suggests R `compositions::clr` and an online calculator as external references. Cross-model comparison: agrees with opus-4.7, sonnet, gpt-5.5, and step-3.7 on core invariants. One concern: the section-3 advice block tells the user to test scale invariance with `assert_allclose(clr_transform(X), clr_transform(X*c))` — but the pseudocount `+0.5` breaks exact scale invariance, so this assertion will fail at small tolerances (the other panel models flag this explicitly). No fabricated citations.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- That the scale-invariance assertion `assert_allclose(clr_transform(X), clr_transform(X*c))` is the right framing — strict equality fails because the pseudocount is additive, not multiplicative. Other panel members soften this to "approximately equal for large counts" or treat it as an INFO-only check.
+- That the known-answer test (computed by reapplying the same formula) is a real cross-check rather than a tautology.
+- That suggested cross-references (R `compositions::clr`, online calculators) match the orientation/pseudocount conventions of the code.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

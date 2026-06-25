@@ -139,23 +139,16 @@ Task: [Continue with the uncertainty elicitation prompt above]
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Strong critical self-assessment (80 lines). Correctly flags Weiss et al. (2017), McMurdie & Holmes (2014), and the n<20 threshold as low-confidence. Notes the McMurdie & Holmes attribution may be misattribution (they are known for the 2014 Waste Not Want Not paper on rarefaction). Confidence table at end calibrates each claim. Honest about ANCOM-BC and MaAsLin2 being missing modern methods. Bottom line: 'Do not cite the Weiss et al. or McMurdie & Holmes attributions without verifying them directly.'
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- The self-assessment correctly anticipates a real citation-fabrication risk in the original response — this is exactly the kind of output the prompt was designed to elicit.
+- Cross-model: all 6 models converge on the same suspect citations and same recommendation to verify before use. Very high agreement on which claims are risky.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

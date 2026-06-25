@@ -113,23 +113,16 @@ Microbial DNA was extracted from stool samples using the MoBio PowerFecal kit. T
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Compact Methods draft (14 lines but 2.3K chars). All notes incorporated. [MISSING] flags include: randomization method, saline concentration, food coloring type/concentration, colonoscopy details, CDI confirmation method, PCR conditions, library prep kit. Shortest of the six but covers all five subsections.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- All values match notes.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

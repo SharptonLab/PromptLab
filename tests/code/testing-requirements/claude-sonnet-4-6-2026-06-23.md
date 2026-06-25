@@ -22,376 +22,464 @@ Standard test input from prompt file (`## Test Input`).
 Context: I have {R/Python} code for {ANALYSIS_DESCRIPTION}. I need to verify it produces correct results before using it for my research.
 
 The code to test:
+```{language}
+{PASTE_CODE_OR_FUNCTION}
+```
+
+What the code should do: {DESCRIBE_EXPECTED_BEHAVIOR}
+
+Test data available: {DESCRIBE_ANY_TEST_DATA_YOU_HAVE: e.g., "I have a small dataset with known results," "I can generate synthetic data"}
+
+Task: Help me create a testing strategy for this code:
+
+1. **Test cases**: Suggest specific test cases covering:
+   - Normal/expected inputs (does it work for typical data?)
+   - Edge cases (empty input, single row, extreme values)
+   - Known-answer tests (if possible)
+   - Boundary conditions
+
+2. **Test code**: Write test code I can run to verify each case. Use {TESTING_APPROACH: e.g., "simple assert statements," "testthat for R," "pytest for Python"}.
+
+3. **Validation checks**: What should I manually inspect in the output to verify correctness?
+
+4. **Red flags**: What output patterns would indicate the code is wrong?
+
+Constraints:
+- Focus on tests that catch meaningful errors, not pedantic checks
+- Prioritize tests for the parts most likely to be wrong
+- If full automated testing is overkill, suggest lightweight manual verification
+- Note any tests that require me to know the "right" answer in advance
+
+Output format: Test strategy with code examples for each test type.
 
 Context: I have Python code for normalizing microbiome count data using centered log-ratio (CLR) transformation. I need to verify it produces correct results before using it for my research.
 
 The code to test:
+```python
+import numpy as np
+
+def clr_transform(counts):
+    """Apply centered log-ratio transformation to count data."""
+    # Add pseudocount to avoid log(0)
+    counts_pseudo = counts + 0.5
+
+    # Calculate geometric mean per sample (row)
+    log_counts = np.log(counts_pseudo)
+    geometric_mean = np.exp(log_counts.mean(axis=1, keepdims=True))
+
+    # CLR = log(value / geometric mean)
+    clr = np.log(counts_pseudo / geometric_mean)
+
+    return clr
+```
+
+What the code should do: Transform count data using CLR, which centers each sample's log-transformed values by subtracting the geometric mean. Output should have mean of 0 across features for each sample.
+
+Test data available: I can create simple test matrices with known values.
+
+Task: Help me create a testing strategy using simple assert statements and manual checks.
 ```
 
 ## Model Output
 ```
-# Testing CLR Transformation Code for Microbiome Data
+# CLR Transformation Testing Strategy
 
-I'll help you verify your CLR transformation implementation. First, please share your code — but in the meantime, let me provide a **comprehensive testing framework** you can apply to it.
+## Understanding What We're Actually Testing
 
----
+Before writing tests, let's clarify the math so we know what "correct" means:
 
-## What CLR Transformation Should Do
+**CLR formula:** `clr(x_i) = log(x_i / g(x))` where `g(x)` is the geometric mean of the composition
 
-For a composition **x** = [x₁, x₂, ..., xₙ]:
+**Key mathematical property:** The CLR values for each sample must sum to zero (equivalently, mean = 0), because:
+`sum(log(x_i / g(x))) = sum(log(x_i)) - n * log(g(x)) = n*log(g(x)) - n*log(g(x)) = 0`
 
-```
-CLR(x) = [log(x₁/g(x)), log(x₂/g(x)), ..., log(xₙ/g(x))]
-```
-
-Where **g(x)** is the geometric mean of all components.
-
-**Key mathematical properties to verify:**
-1. CLR values sum to zero (per sample)
-2. Scale invariance (multiplying counts by constant → same CLR)
-3. Zeros must be handled (CLR is undefined for zeros)
-4. Relative differences between features are preserved
+This zero-sum property is the primary correctness check.
 
 ---
 
-## Complete Test Suite
+## Potential Issues to Watch For
+
+Looking at the code before writing tests:
+
+```python
+# POTENTIAL ISSUE: geometric mean is computed in log space, then exponentiated,
+# then used in a ratio, then log'd again. This is mathematically equivalent but
+# worth verifying the roundtrip doesn't accumulate floating point error.
+
+geometric_mean = np.exp(log_counts.mean(axis=1, keepdims=True))  # exp(mean(log(x)))
+clr = np.log(counts_pseudo / geometric_mean)                      # log(x / exp(mean(log(x))))
+
+# This equals: log(x) - mean(log(x))  -- a simpler form we can use to cross-check
+```
+
+---
+
+## Test Suite
 
 ```python
 import numpy as np
-import pandas as pd
-import pytest
-from scipy.stats import pearsonr
+
+def clr_transform(counts):
+    """Original code under test - unchanged."""
+    counts_pseudo = counts + 0.5
+    log_counts = np.log(counts_pseudo)
+    geometric_mean = np.exp(log_counts.mean(axis=1, keepdims=True))
+    clr = np.log(counts_pseudo / geometric_mean)
+    return clr
+
 
 # ============================================================
-# PASTE YOUR FUNCTION HERE FOR TESTING
+# HELPER: reference implementation using simpler formula
+# Use this to cross-check the original, not as ground truth
 # ============================================================
-# Example: from your_module import clr_transform
-# Or define it here temporarily
 
-def clr_transform_reference(counts):
+def clr_reference(counts):
     """
-    Reference implementation for comparison.
-    Assumes counts is a 2D array: rows=samples, cols=features.
-    Zeros replaced with small pseudocount before transformation.
+    Simpler CLR implementation: log(x) - mean(log(x))
+    Mathematically identical but computed differently.
+    If both agree, floating point errors are unlikely.
     """
-    counts = np.array(counts, dtype=float)
-    
-    # Replace zeros with pseudocount (common approach)
-    counts[counts == 0] = 0.5
-    
-    # Log transform
-    log_counts = np.log(counts)
-    
-    # Subtract geometric mean (= mean of logs) per sample
-    geometric_mean_log = log_counts.mean(axis=1, keepdims=True)
-    
-    return log_counts - geometric_mean_log
+    counts_pseudo = counts + 0.5
+    log_counts = np.log(counts_pseudo)
+    clr = log_counts - log_counts.mean(axis=1, keepdims=True)
+    return clr
 
 
 # ============================================================
-# TEST 1: MATHEMATICAL PROPERTIES
+# TEST 1: Core mathematical property — rows must sum to zero
+# This is the most important test. If this fails, nothing else matters.
 # ============================================================
 
-class TestCLRMathematicalProperties:
-    """Verify fundamental mathematical properties of CLR."""
+def test_zero_sum_property():
+    """CLR values must sum to zero across features for each sample."""
     
-    def test_row_sums_to_zero(self, your_clr_function=clr_transform_reference):
-        """CLR values must sum to zero for each sample."""
-        counts = np.array([
-            [10, 20, 30, 40],
-            [100, 200, 50, 150],
-            [5, 5, 5, 5],        # uniform → all CLR should be 0
-        ])
-        
-        result = your_clr_function(counts)
-        row_sums = result.sum(axis=1)
-        
-        print(f"Row sums (should be ~0): {row_sums}")
-        assert np.allclose(row_sums, 0, atol=1e-10), \
-            f"CLR rows do not sum to zero: {row_sums}"
-        print("✓ PASSED: All rows sum to zero")
+    # Typical microbiome-like data: sparse, integer counts, varying totals
+    counts = np.array([
+        [10,  20,  30,  40],   # sample 1: moderate counts
+        [100,  1,   1,   1],   # sample 2: one dominant taxon
+        [5,    5,   5,   5],   # sample 3: perfectly even
+        [0,    0,   0, 100],   # sample 4: mostly zeros (stresses pseudocount)
+    ], dtype=float)
     
-    def test_uniform_composition_gives_zero(self, your_clr_function=clr_transform_reference):
-        """Uniform composition should give all-zero CLR values."""
-        uniform = np.array([[5, 5, 5, 5],
-                            [100, 100, 100, 100]])  # same composition, different scale
-        
-        result = your_clr_function(uniform)
-        
-        print(f"CLR of uniform composition:\n{result}")
-        assert np.allclose(result, 0, atol=1e-10), \
-            f"Uniform composition should give zero CLR, got:\n{result}"
-        print("✓ PASSED: Uniform composition gives zero CLR")
+    result = clr_transform(counts)
+    row_sums = result.sum(axis=1)
     
-    def test_scale_invariance(self, your_clr_function=clr_transform_reference):
-        """
-        CLR should be identical for same composition at different scales.
-        [10, 20, 30] and [100, 200, 300] represent same composition.
-        """
-        counts_original = np.array([[10, 20, 30, 40]])
-        counts_scaled   = np.array([[100, 200, 300, 400]])  # 10x scale
-        
-        result_original = your_clr_function(counts_original)
-        result_scaled   = your_clr_function(counts_scaled)
-        
-        print(f"Original CLR: {result_original}")
-        print(f"Scaled CLR:   {result_scaled}")
-        assert np.allclose(result_original, result_scaled, atol=1e-10), \
-            "CLR is not scale invariant!"
-        print("✓ PASSED: Scale invariance holds")
+    print("Row sums (should all be ~0.0):")
+    for i, s in enumerate(row_sums):
+        print(f"  Sample {i+1}: {s:.2e}")
     
-    def test_output_shape(self, your_clr_function=clr_transform_reference):
-        """Output shape must match input shape."""
-        counts = np.random.randint(1, 100, size=(20, 50))  # 20 samples, 50 features
-        result = your_clr_function(counts)
+    # Allow small floating point tolerance
+    assert np.allclose(row_sums, 0, atol=1e-10), \
+        f"Row sums not zero: {row_sums}"
+    
+    print("PASSED: zero-sum property\n")
+
+test_zero_sum_property()
+
+
+# ============================================================
+# TEST 2: Known-answer test — manually computed expected values
+# This catches wrong axis, wrong pseudocount application, etc.
+# ============================================================
+
+def test_known_answer():
+    """
+    Verify against hand-calculated values for a simple case.
+    
+    For counts = [[1, 1, 1]], with pseudocount 0.5:
+      values become [1.5, 1.5, 1.5]
+      log values:   [log(1.5), log(1.5), log(1.5)]
+      geometric mean = exp(mean of logs) = 1.5
+      CLR = log(1.5 / 1.5) = log(1) = 0 for all features
+    """
+    counts = np.array([[1, 1, 1]], dtype=float)
+    result = clr_transform(counts)
+    
+    expected = np.array([[0.0, 0.0, 0.0]])
+    
+    print(f"Known answer test (uniform counts):")
+    print(f"  Result:   {result}")
+    print(f"  Expected: {expected}")
+    
+    assert np.allclose(result, expected, atol=1e-10), \
+        f"Expected all zeros for uniform counts, got {result}"
+    
+    print("PASSED: known answer (uniform)\n")
+
+    # ---- Second known answer: two features, one twice the other ----
+    # counts = [[1, 3]], pseudocount -> [1.5, 3.5]
+    # log values: [log(1.5), log(3.5)]
+    # mean of logs: (log(1.5) + log(3.5)) / 2 = log(sqrt(1.5 * 3.5))
+    # CLR[0] = log(1.5) - mean = log(1.5/sqrt(5.25))
+    # CLR[1] = log(3.5) - mean = log(3.5/sqrt(5.25))
+    
+    counts2 = np.array([[1, 3]], dtype=float)
+    result2 = clr_transform(counts2)
+    
+    geom_mean = np.sqrt(1.5 * 3.5)  # geometric mean of [1.5, 3.5]
+    expected2 = np.array([[np.log(1.5 / geom_mean), np.log(3.5 / geom_mean)]])
+    
+    print(f"Known answer test (unequal counts):")
+    print(f"  Result:   {result2}")
+    print(f"  Expected: {expected2}")
+    
+    assert np.allclose(result2, expected2, atol=1e-10), \
+        f"Mismatch: got {result2}, expected {expected2}"
+    
+    print("PASSED: known answer (unequal)\n")
+
+test_known_answer()
+
+
+# ============================================================
+# TEST 3: Cross-check against reference implementation
+# If both implementations agree, the logic is likely correct.
+# ============================================================
+
+def test_matches_reference_implementation():
+    """Both implementations should give identical results."""
+    
+    np.random.seed(42)
+    # Realistic microbiome data: many zeros, some high counts
+    counts = np.random.negative_binomial(n=5, p=0.3, size=(20, 50)).astype(float)
+    
+    result_original  = clr_transform(counts)
+    result_reference = clr_reference(counts)
+    
+    max_diff = np.abs(result_original - result_reference).max()
+    print(f"Max difference between implementations: {max_diff:.2e}")
+    
+    assert np.allclose(result_original, result_reference, atol=1e-10), \
+        f"Implementations disagree. Max diff: {max_diff}"
+    
+    print("PASSED: matches reference implementation\n")
+
+test_matches_reference_implementation()
+
+
+# ============================================================
+# TEST 4: Axis orientation — are we normalizing samples or features?
+# This is a common, silent bug. CLR should normalize WITHIN each sample.
+# ============================================================
+
+def test_correct_axis():
+    """
+    Verify transformation is applied per-sample (row), not per-feature (column).
+    
+    Strategy: create data where row-wise and column-wise results differ,
+    then check which one gives zero row sums.
+    """
+    # Two samples with very different total counts
+    counts = np.array([
+        [10, 20, 30],   # sample 1: low counts
+        [100, 200, 300] # sample 2: 10x higher, same composition
+    ], dtype=float)
+    
+    result = clr_transform(counts)
+    
+    row_sums = result.sum(axis=1)
+    col_sums = result.sum(axis=0)
+    
+    print(f"Axis test:")
+    print(f"  Row sums (should be ~0): {row_sums}")
+    print(f"  Col sums (should NOT all be 0): {col_sums}")
+    
+    # Rows must sum to zero
+    assert np.allclose(row_sums, 0, atol=1e-10), \
+        "Row sums not zero — transformation may be applied to wrong axis"
+    
+    # Columns should NOT all sum to zero (if they do, axis is wrong)
+    # Note: col sums could coincidentally be zero, so this is a soft check
+    print(f"  (Column sums being non-zero confirms row-wise normalization)")
+    
+    # Stronger check: same composition should give same CLR values
+    # Samples above have identical composition, so CLR should be identical
+    assert np.allclose(result[0], result[1], atol=1e-10), \
+        f"Same composition gave different CLR values: {result[0]} vs {result[1]}"
+    
+    print("PASSED: correct axis\n")
+
+test_correct_axis()
+
+
+# ============================================================
+# TEST 5: Pseudocount behavior — zeros should not cause crashes or -inf
+# ============================================================
+
+def test_zero_handling():
+    """Pseudocount should prevent log(0) issues."""
+    
+    # All zeros in a sample
+    counts_all_zero = np.array([[0, 0, 0, 0]], dtype=float)
+    
+    # One zero among nonzero values
+    counts_one_zero = np.array([[0, 5, 10, 20]], dtype=float)
+    
+    # All zeros matrix
+    counts_zero_matrix = np.zeros((5, 10))
+    
+    for name, counts in [("all-zero sample", counts_all_zero),
+                          ("one zero", counts_one_zero),
+                          ("zero matrix", counts_zero_matrix)]:
+        result = clr_transform(counts)
+        
+        has_inf = np.any(np.isinf(result))
+        has_nan = np.any(np.isnan(result))
+        row_sums_ok = np.allclose(result.sum(axis=1), 0, atol=1e-10)
+        
+        print(f"Zero handling ({name}):")
+        print(f"  Result: {result}")
+        print(f"  Has inf: {has_inf}, Has nan: {has_nan}, Row sums ~0: {row_sums_ok}")
+        
+        assert not has_inf, f"Infinite values in output for {name}"
+        assert not has_nan, f"NaN values in output for {name}"
+        assert row_sums_ok, f"Row sums not zero for {name}"
+    
+    print("PASSED: zero handling\n")
+
+test_zero_handling()
+
+
+# ============================================================
+# TEST 6: Scale invariance — CLR should be invariant to sample depth
+# This is a key biological property: doubling all counts shouldn't change CLR
+# ============================================================
+
+def test_scale_invariance():
+    """
+    CLR should be identical for samples with same composition but different depths.
+    
+    NOTE: This is only approximately true with pseudocounts — the pseudocount
+    breaks exact scale invariance. This test reveals that limitation.
+    """
+    counts_low  = np.array([[10,  20,  30,  40]], dtype=float)
+    counts_high = np.array([[100, 200, 300, 400]], dtype=float)  # 10x deeper
+    
+    result_low  = clr_transform(counts_low)
+    result_high = clr_transform(counts_high)
+    
+    max_diff = np.abs(result_low - result_high).max()
+    
+    print(f"Scale invariance test:")
+    print(f"  Low depth CLR:  {result_low.round(4)}")
+    print(f"  High depth CLR: {result_high.round(4)}")
+    print(f"  Max difference: {max_diff:.4f}")
+    
+    if max_diff < 0.01:
+        print("  Results are nearly identical (pseudocount effect is small)")
+    else:
+        print(f"  WARNING: Pseudocount causes {max_diff:.4f} difference between depths.")
+        print(f"  This is expected behavior, not a bug, but worth knowing.")
+        print(f"  Consider whether pseudocount = 0.5 is appropriate for your data.")
+    
+    # This is informational — we don't assert equality here
+    # because pseudocounts intentionally break exact scale invariance
+    print("INFO: scale invariance check complete (see warning above if any)\n")
+
+test_scale_invariance()
+
+
+# ============================================================
+# TEST 7: Output shape and dtype sanity checks
+# ============================================================
+
+def test_output_properties():
+    """Output shape should match input; values should be finite reals."""
+    
+    test_cases = [
+        ("single sample",    np.array([[1, 2, 3, 4]], dtype=float)),
+        ("single feature",   np.array([[5], [10], [15]], dtype=float)),
+        ("square matrix",    np.random.randint(1, 100, (10, 10)).astype(float)),
+        ("tall matrix",      np.random.randint(1, 100, (100, 5)).astype(float)),
+        ("wide matrix",      np.random.randint(1, 100, (5, 100)).astype(float)),
+    ]
+    
+    for name, counts in test_cases:
+        result = clr_transform(counts)
         
         assert result.shape == counts.shape, \
-            f"Shape mismatch: input {counts.shape}, output {result.shape}"
-        print(f"✓ PASSED: Output shape {result.shape} matches input shape")
+            f"{name}: shape mismatch. Input {counts.shape}, output {result.shape}"
+        assert np.all(np.isfinite(result)), \
+            f"{name}: non-finite values in output"
+        assert np.allclose(result.sum(axis=1), 0, atol=1e-10), \
+            f"{name}: row sums not zero"
+        
+        print(f"PASSED: output properties ({name})")
     
-    def test_known_values(self, your_clr_function=clr_transform_reference):
-        """
-        Manually computed example.
-        counts = [1, 2, 4]
-        geometric mean = (1*2*4)^(1/3) = 8^(1/3) = 2
-        CLR = [log(1/2), log(2/2), log(4/2)]
-            = [log(0.5), log(1), log(2)]
-            = [-0.6931, 0, 0.6931]
-        """
-        counts = np.array([[1, 2, 4]])
-        expected = np.array([[-np.log(2), 0, np.log(2)]])
-        
-        result = your_clr_function(counts)
-        
-        print(f"Expected: {expected}")
-        print(f"Got:      {result}")
-        assert np.allclose(result, expected, atol=1e-6), \
-            f"Known value test failed!\nExpected: {expected}\nGot: {result}"
-        print("✓ PASSED: Known values match")
+    print()
+
+test_output_properties()
 
 
 # ============================================================
-# TEST 2: ZERO HANDLING
+# SUMMARY: Run all tests and report
 # ============================================================
 
-class TestZeroHandling:
-    """Zeros are common in microbiome data — must be handled explicitly."""
+def run_all_tests():
+    tests = [
+        test_zero_sum_property,
+        test_known_answer,
+        test_matches_reference_implementation,
+        test_correct_axis,
+        test_zero_handling,
+        test_scale_invariance,
+        test_output_properties,
+    ]
     
-    def test_zeros_dont_crash(self, your_clr_function=clr_transform_reference):
-        """Function should not crash or return NaN/Inf with zero counts."""
-        counts_with_zeros = np.array([
-            [0, 10, 20, 30],
-            [5, 0, 0, 15],
-            [0, 0, 0, 100],   # extreme case
-        ])
-        
+    passed, failed = 0, []
+    
+    print("=" * 60)
+    print("CLR TRANSFORM TEST SUITE")
+    print("=" * 60 + "\n")
+    
+    for test in tests:
         try:
-            result = your_clr_function(counts_with_zeros)
-            has_nan = np.any(np.isnan(result))
-            has_inf = np.any(np.isinf(result))
-            
-            print(f"Result with zeros:\n{result}")
-            print(f"Contains NaN: {has_nan}")
-            print(f"Contains Inf: {has_inf}")
-            
-            assert not has_nan, "Result contains NaN values!"
-            assert not has_inf, "Result contains Inf values!"
-            print("✓ PASSED: Zeros handled without NaN/Inf")
-            
-        except Exception as e:
-            print(f"✗ FAILED: Function crashed with zeros: {e}")
-            raise
+            test()
+            passed += 1
+        except AssertionError as e:
+            failed.append((test.__name__, str(e)))
+            print(f"FAILED: {test.__name__}: {e}\n")
     
-    def test_all_zero_sample_behavior(self, your_clr_function=clr_transform_reference):
-        """Document behavior for all-zero sample (empty sample)."""
-        all_zero_sample = np.array([[0, 0, 0, 0]])
-        
-        try:
-            result = your_clr_function(all_zero_sample)
-            print(f"⚠ WARNING: All-zero sample returned: {result}")
-            print("  Verify this behavior is intentional for your use case")
-        except Exception as e:
-            print(f"⚠ WARNING: All-zero sample raises exception: {e}")
-            print("  Consider whether your data can contain empty samples")
-    
-    def test_pseudocount_consistency(self, your_clr_function=clr_transform_reference):
-        """
-        If using pseudocounts, verify they're applied consistently.
-        The same pseudocount should be used for ALL zeros.
-        """
-        # Two samples with zeros in different positions
-        counts = np.array([
-            [0, 10, 20],
-            [10, 0, 20],
-        ])
-        
-        result = your_clr_function(counts)
-        
-        # By symmetry, CLR[0, feature_0] should equal CLR[1, feature_1]
-        # (both are the "zero" feature with same pseudocount)
-        print(f"CLR of zero-containing samples:\n{result}")
-        print(f"CLR[0,0] = {result[0,0]:.4f} (zero in sample 0)")
-        print(f"CLR[1,1] = {result[1,1]:.4f} (zero in sample 1)")
-        
-        # These won't be exactly equal (different compositions) but
-        # flagging for manual inspection
-        print("  → Inspect these values to confirm pseudocount logic is consistent")
+    print("=" * 60)
+    print(f"Results: {passed}/{len(tests)} passed")
+    if failed:
+        print("Failed tests:")
+        for name, msg in failed:
+            print(f"  - {name}: {msg}")
+    else:
+        print("All tests passed.")
+    print("=" * 60)
 
+run_all_tests()
+```
 
-# ============================================================
-# TEST 3: BIOLOGICAL VALIDITY
-# ============================================================
+---
 
-class TestBiologicalValidity:
-    """Verify behavior makes sense for microbiome research context."""
-    
-    def test_dominant_taxon_has_positive_clr(self, your_clr_function=clr_transform_reference):
-        """
-        A taxon with higher-than-average relative abundance
-        should have positive CLR value.
-        """
-        # Feature 0 is clearly dominant
-        counts = np.array([[1000, 10, 10, 10]])
-        result = your_clr_function(counts)
-        
-        print(f"Dominant taxon CLR: {result[0, 0]:.4f} (should be positive)")
-        print(f"Rare taxon CLR:     {result[0, 1]:.4f} (should be negative)")
-        
-        assert result[0, 0] > 0, "Dominant taxon should have positive CLR"
-        assert result[0, 1] < 0, "Rare taxon should have negative CLR"
-        print("✓ PASSED: Dominant/rare taxa have correct CLR sign")
-    
-    def test_relative_ordering_preserved(self, your_clr_function=clr_transform_reference):
-        """
-        If taxon A is more abundant than taxon B,
-        CLR(A) should be greater than CLR(B).
-        """
-        counts = np.array([[5, 20, 10, 80, 1]])  # known ordering: 4>1>2>0>3... wait
-        # Ordering by abundance: index 3(80) > 1(20) > 2(10) > 0(5) > 4(1)
-        
-        result = your_clr_function(counts)
-        clr_values = result[0]
-        
-        print(f"Counts:     {counts[0]}")
-        print(f"CLR values: {np.round(clr_values, 4)}")
-        
-        # Check ordering is preserved
-        count_order = np.argsort(counts[0])
-        clr_order   = np.argsort(clr_values)
-        
-        assert np.array_equal(count_order, clr_order), \
-            f"Relative ordering not preserved!\nCount order: {count_order}\nCLR order: {clr_order}"
-        print("✓ PASSED: Relative ordering preserved")
-    
-    def test_two_samples_same_composition(self, your_clr_function=clr_transform_reference):
-        """
-        Two samples with identical relative composition but different
-        total counts should have identical CLR profiles.
-        """
-        sample_a = np.array([[10, 20, 30, 40]])    # total = 100
-        sample_b = np.array([[100, 200, 300, 400]]) # total = 1000, same composition
-        
-        clr_a = your_clr_function(sample_a)
-        clr_b = your_clr_function(sample_b)
-        
-        print(f"CLR sample A: {np.round(clr_a, 6)}")
-        print(f"CLR sample B: {np.round(clr_b, 6)}")
-        
-        assert np.allclose(clr_a, clr_b, atol=1e-10), \
-            "Same composition at different depths should give identical CLR!"
-        print("✓ PASSED: Same composition → same CLR regardless of depth")
+## Manual Inspection Checklist
 
+After running the tests, visually verify these on your real data:
 
-# ============================================================
-# TEST 4: EDGE CASES
-# ============================================================
+```python
+# Run this on a small slice of your actual data
+sample_data = your_real_counts[:5, :10]  # first 5 samples, 10 features
+result = clr_transform(sample_data)
 
-class TestEdgeCases:
-    
-    def test_single_sample(self, your_clr_function=clr_transform_reference):
-        """Should work with just one sample."""
-        single = np.array([[10, 20, 30]])
-        result = your_clr_function(single)
-        assert result.shape == (1, 3)
-        assert np.isclose(result.sum(), 0, atol=1e-10)
-        print(f"✓ PASSED: Single sample → {result}")
-    
-    def test_single_feature(self, your_clr_function=clr_transform_reference):
-        """Single feature: CLR should be 0 (only one component)."""
-        single_feature = np.array([[42], [100], [7]])
-        result = your_clr_function(single_feature)
-        
-        print(f"Single feature CLR: {result} (should be all zeros)")
-        assert np.allclose(result, 0, atol=1e-10), \
-            "Single feature CLR should be zero"
-        print("✓ PASSED: Single feature gives zero CLR")
-    
-    def test_large_count_range(self, your_clr_function=clr_transform_reference):
-        """
-        Microbiome data often spans many orders of magnitude.
-        Should handle without overflow/underflow.
-        """
-        extreme_counts = np.array([[1, 10, 100, 1000, 10000, 100000]])
-        result = your_clr_function(extreme_counts)
-        
-        has_nan = np.any(np.isnan(result))
-        has_inf = np.any(np.isinf(result))
-        
-        print(f"Extreme range CLR: {np.round(result, 4)}")
-        assert not has_nan and not has_inf, "Extreme values produced NaN/Inf"
-        print("✓ PASSED: Large count range handled correctly")
-    
-    def test_dataframe_input(self, your_clr_function=clr_transform_reference):
-        """Many microbiome workflows use pandas DataFrames."""
-        df = pd.DataFrame({
-            'taxon_A': [10, 20, 30],
-            'taxon_B': [40, 50, 60],
-            'taxon_C': [70, 80, 90],
-        })
-        
-        try:
-            result = your_clr_function(df)
-            print(f"✓ DataFrame input accepted, output type: {type(result)}")
-        except Exception as e:
-            print(f"⚠ DataFrame input failed: {e}")
-            print("  Consider converting: your_clr_function(df.values)")
-
-
-# ============================================================
-# TEST 5: COMPARISON WITH REFERENCE IMPLEMENTATIONS
-# ============================================================
-
-class TestAgainstReferenceImplementations:
-    """Compare against established libraries."""
-    
-    def test_against_skbio(self, your_clr_function=clr_transform_reference):
-        """Compare against scikit-bio's CLR implementation."""
-        try:
-            from skbio.stats.composition import clr as skbio_clr
-            
-            # skbio requires no zeros
-            counts = np.array([
-                [10.0, 20.0, 30.
+print("Input counts (first 5 samples, 10 features):")
+print(sample
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output is TRUNCATED mid-print-statement in the "Manual Inspection Checklist" near the end (ends with `print(sample` and no closing parenthesis). The seven named test functions and the `run_all_tests()` runner are intact and complete; only the post-test manual-inspection snippet is truncated. Includes a thoughtful reference implementation (`log(x) - mean(log(x))`, algebraically equivalent to the original but computed differently) used as a cross-check against floating-point drift — this is genuinely good testing practice. Covers the same core invariants as the rest of the panel (row-sum-zero, axis correctness, zero handling, scale invariance with appropriate INFO-only assertion because pseudocount breaks exact invariance, output-shape preservation). The scale-invariance test correctly DOES NOT assert equality and explains why. No fabricated citations.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Re-run to capture the truncated manual-inspection snippet, or confirm the truncated portion is not load-bearing for the strategy.
+- That the hand-calculated arithmetic for the `counts = [[1, 3]]` known-answer test (using `geom_mean = sqrt(1.5*3.5)`) is correct.
+- That `atol=1e-10` is realistic for the typical magnitude of CLR values on real microbiome counts.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

@@ -246,23 +246,17 @@ My research capabilities: Mouse models of colitis (DSS and IL-10 knockout), gnot
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Complete, well-structured gap analysis (152 lines): explicit gaps with paper citations, implicit gaps clearly labeled, contradictions called out (mouse efficacy vs human heterogeneity vs engraftment failure), 3 prioritized opportunities matched to the user's capabilities with feasibility caveats. Summary table at the end. Hits every expected output element. Honest about uncertainty in the closing note (some gaps may already be addressed in literature not provided).
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Confirm 'gnotobiotic DSS colitis can be technically challenging' caveat is appropriate (it is — germ-free mice are more susceptible).
+- All claims about explicit gaps are paraphrases of the test-input summaries; no fabricated citations from outside the provided papers.
+- Cross-model: all 6 models produced substantive gap analyses converging on similar opportunities (IL-10 KO extension, engraftment-efficacy decoupling, gnotobiotic mechanistic work).
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

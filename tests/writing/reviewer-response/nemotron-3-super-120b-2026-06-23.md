@@ -108,23 +108,17 @@ Please let us know if additional clarification is needed.
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Detailed response (34 lines, 3.3K chars) framed as 'Response to Reviewer #X'. All numbers match. Adds the substantive point about network centrality / betweenness centrality / connectivity as a justification for retaining weak correlations — sophisticated framing. Page/line numbers are illustrative.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- All numbers match user's notes.
+- The network-centrality framing (betweenness centrality, connectors between metabolic modules) is sophisticated but goes slightly beyond what the user's notes specify — confirm this is the intended retention rationale, vs the simpler 'biologically interesting as part of networks' the user wrote.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

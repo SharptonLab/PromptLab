@@ -71,23 +71,17 @@ We investigated how the gut microbiome modulates host immune responses. Using fl
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Compact revision (8 lines, 1.1K chars). Preserves 'significantly influences' — correct retention of the statistical hedge. Retains 'immunological landscape' and 'functional capacity' (which Sonnet/Opus removed as inflated), so it's slightly less aggressive in stripping formality than the Claude responses. Still substantially closer to reference style than the original.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Retains 'significantly' — correct.
+- Whether 'immunological landscape' and 'functional capacity' are kept-or-cut depends on the user's preference; the reference sample uses neither phrase, so the Claude trims are slightly more on-style.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

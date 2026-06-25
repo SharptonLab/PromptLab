@@ -296,23 +296,18 @@ Feel free to adjust thresholds, colour palettes, or the number of permutations a
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Complete script (212 lines) with assumptions, validation-check appendix, and explicit mention of using `subject_id` as blocking/strata in adonis2. Includes a sample-filtering step at <1000 reads — this is a substantive analytical choice not in the original prompt, worth flagging. Reference category for treatment not stated explicitly; verify in the body.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- The <1000 reads filter is a script-injected choice not requested in the prompt; confirm it's a sensible default or document that the user should review/adjust the threshold.
+- Verify the adonis2 call actually uses `permutations = how(blocks = subject_id)` (vegan 2.6+ idiom) or the older `strata` argument correctly.
+- Whether the QC filtering of low-read samples is applied before or after PCoA — this affects whether the ordination and PERMANOVA see the same samples.
+- Spot-check that the plot has color=treatment and shape=timepoint.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

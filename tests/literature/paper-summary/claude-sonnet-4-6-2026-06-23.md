@@ -169,23 +169,17 @@ This paper provides **human correlational evidence** that butyrate and propionat
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Comprehensive 8-section structured summary (85 lines). All statistics extracted accurately (p=0.003 butyrate, p=0.02 propionate, r=-0.42, p=0.004). Correctly uses 'Year not provided in excerpt' / 'Journal not provided in excerpt' rather than fabricating. Open Questions section adds the specific point that acetate selectivity is unexplained in the excerpt. Relevance section thoughtfully connects to mouse-model work with a translational caveat about mouse-human gut differences. No fabrication detected.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- All 5 specific statistical claims (sample sizes, p-values, r-value) trace to the test input verbatim.
+- The translational caveat is appropriately conservative.
+- Cross-model: all 6 models produced faithful summaries with the same statistics — high agreement.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

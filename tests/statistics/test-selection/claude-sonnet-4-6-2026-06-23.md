@@ -355,23 +355,15 @@ Excellent for multivariable analysis. Consider running alongside ANCOM-BC2 as a 
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Comprehensive test-selection guide (279 lines). Splits the question into community-level (PERMANOVA) and taxon-level (ANCOM-BC/MaAsLin2) analyses. Honest about small n (45) as a limit on statistical power and recommends framing as exploratory. Limitations table at end is clearly calibrated. Recommends statistician consultation for clinical work.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Cross-model: all 6 models converge on PERMANOVA + ANCOM-BC/MaAsLin2 + small-n caveat + statistician recommendation. Very high agreement on substance.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

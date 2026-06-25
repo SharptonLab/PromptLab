@@ -108,23 +108,16 @@ We believe these revisions directly address the reviewer's concerns without over
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Excellent reviewer response (36 lines): summary of reviewer comment, structured 2-part response, draft Methods text and draft Discussion text both clearly marked as revised text with [page X / lines X-X] placeholders. All numbers (847 tests, 77 taxa, 11 metabolites, q<0.05) match input exactly. Professional, collegial tone. Justifies retaining weak correlations rather than removing post-hoc. Includes a 'Summary of changes' block at the end.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- All numbers match user's notes.
+- Cross-model: all 6 models produced professional responses with the same key numbers. Step-3.7 added a fabricated specific example (F. prausnitzii / butyrate r=0.27) not in user notes — see that cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

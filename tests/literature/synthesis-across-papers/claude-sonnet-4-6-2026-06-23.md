@@ -173,23 +173,16 @@ The available evidence from these three papers establishes that antibiotic-induc
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Comprehensive synthesis (80 lines): overview, agreement/disagreement, methodological comparison, gaps, synthesis statement. All attributions correct (Anderson = amoxicillin 30 adults; Martinez & Lee = meta-analysis of 12 studies; Thompson = RCT 60 subjects). Honestly flags that no paper tested alternative interventions (FMT, prebiotics, dietary) and that probiotic strain/dose details aren't in the summary. No fabricated citations.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- All 3 paper attributions are correct; no citations from outside the provided set.
+- Cross-model: all 6 models reached the same essential synthesis — high agreement on the structure and conclusion.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

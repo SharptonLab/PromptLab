@@ -154,23 +154,16 @@ Bioinformatic processing was performed in QIIME2 [MISSING: specify version, e.g.
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Methods draft (57 lines) covering all 5 required subsections with extensive [MISSING] flags. Statistical Analysis subsection is fully flagged with a detailed list of what should be included. Summary-of-flags table at the end is directly actionable. No fabricated specifics — all numbers/details trace to the notes. Adds a specific [MISSING] for FDA guidance document citation, filter pore size, and PCR conditions.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- All specific values (n=48, 18-75 years, 6 hours processing, 50 mL, 515F/806R, 2×250bp, -80°C, 2 hours) match notes verbatim.
+- Cross-model: all 6 models produced faithful drafts with appropriate [MISSING] flags; no fabrication. Very high agreement.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

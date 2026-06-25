@@ -127,23 +127,16 @@ Colorectal cancer (CRC) is the second leading cause of cancer death in the Unite
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Polished Specific Aims (36 lines): hook, knowledge gap, central goal, two aims with rationale/approach/outcome, integration & impact paragraph. All preliminary data (25/25, 12 taxa, 78% AUC) match input exactly. Five [CITE] flags and two [NEEDS PRELIM DATA] flags clearly marked. End-of-document Author Flags block lists items to address before submission. Substantively excellent and on-scope for R21.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- All preliminary data numbers match input.
+- Cross-model: all 6 models produced faithful Specific Aims using the same numbers; agreement is high. Step-3.7 wrongly stated 'no unsubstantiated claims or missing citations were identified' — that statement is wrong (the prompt asked for [CITE] flags for stats; step-3.7 still added [CITE]-equivalent gaps inline but missed flagging them in the summary).
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

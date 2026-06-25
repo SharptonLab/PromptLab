@@ -183,23 +183,16 @@ These three projects leverage your mouse colitis models (DSS & IL‑10⁻/⁻), 
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Complete gap analysis (87 lines). Same 6-section structure. Three prioritized opportunities each with Rationale, Approach, and Impact subsections — well-organized. Adds the suggestion to test 'freeze-dried vs microencapsulated' formulations which is concrete but slightly beyond the immediately-evident gaps in the provided summaries (could be argued either way).
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- The formulation-comparison suggestion (freeze-dried vs microencapsulated) extends beyond what's directly stated in the summaries. Confirm this is a reasonable inference vs an introduction from training data.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

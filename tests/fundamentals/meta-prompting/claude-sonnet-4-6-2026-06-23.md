@@ -24,6 +24,40 @@ I want your help with a task, but before I describe it, I want you to ask me cla
 The task involves: {BRIEF_TASK_DESCRIPTION}
 
 What questions do you have about the format, scope, audience, constraints, or purpose that would help you assist me effectively?
+```
+
+### Prompt Critique Approach
+```
+Here's a prompt I'm planning to use for {TASK_DESCRIPTION}:
+
+---
+{DRAFT_PROMPT}
+---
+
+Please critique this prompt:
+1. What's ambiguous or underspecified?
+2. What assumptions am I making that might not hold?
+3. What failure modes might this prompt produce?
+4. How would you improve it to make outputs more consistent and reliable?
+
+Provide a revised version of the prompt incorporating your suggestions.
+```
+
+### Reverse Engineering Approach
+```
+I want to create a prompt that produces outputs like these examples:
+
+Example output 1:
+{EXAMPLE_OUTPUT_1}
+
+Example output 2:
+{EXAMPLE_OUTPUT_2}
+
+Based on these examples, write a prompt that would reliably produce this type of output. Include:
+- Clear task specification
+- Appropriate constraints
+- Output format specification
+- Any examples that would help
 
 Here's a prompt I'm planning to use for analyzing differential gene expression results:
 
@@ -42,136 +76,118 @@ Provide a revised version of the prompt incorporating your suggestions.
 
 ## Model Output
 ```
-## Prompt Critique
+## Prompt Critique: RNA-seq Differential Expression Analysis
 
-### 1. What's Ambiguous or Underspecified?
+### 1. What's Ambiguous or Underspecified
 
-**"Important" is doing enormous, undefined work here.**
-- Important by statistical significance? Effect size? Biological relevance? Clinical translatability?
-- Important to *whom* — a statistician, a biologist, a grant reviewer?
-- Important relative to what prior knowledge or pathway context?
-
-**The data itself is unspecified:**
+**Data-related ambiguities:**
 - What format is the data in? (DESeq2 output, edgeR, a raw count matrix, a spreadsheet?)
-- What columns exist? (log2FC, p-value, adjusted p-value, baseMean?)
-- How many genes total? How many are differentially expressed?
-- What thresholds, if any, have already been applied?
+- What columns are present? (log2FC, p-value, adjusted p-value, baseMean, gene symbols, Ensembl IDs?)
+- How many genes are in the dataset? Are results pre-filtered or is this the full output?
+- Has normalization already been applied?
 
-**"Tell me which genes" is an unclear deliverable:**
-- A ranked list? A narrative summary? A table? A pathway analysis?
-- How many genes — top 10? Top 100? All significant ones?
+**Analysis-related ambiguities:**
+- What does "important" mean to you? Statistically significant? Biologically relevant? Both?
+- What significance thresholds should be used? (|log2FC| > 1? padj < 0.05? These are conventions, not universal truths)
+- Do you want upregulated genes, downregulated genes, or both?
+- Should the analysis prioritize known metabolic/liver pathways, or is this exploratory?
 
-**The biological context is thin:**
-- What's the specific hypothesis or research question?
-- What timepoint? What sex/age of mice? What duration of diet?
-- Are there covariates (batch effects, animal IDs)?
+**Output ambiguities:**
+- What should the response look like? A ranked list? A narrative summary? A table?
+- Do you want pathway enrichment interpretation, or just gene-level findings?
+- What's the downstream use — a paper, a presentation, deciding what to validate experimentally?
 
 ---
 
-### 2. Assumptions You're Making That May Not Hold
+### 2. Assumptions That Might Not Hold
 
 | Assumption | Why It's Risky |
 |---|---|
-| The model knows what "important" means in your context | It will guess, and guess differently each time |
-| The model can infer data format from context | It may hallucinate column interpretations |
-| Standard thresholds (p<0.05, \|log2FC\|>1) are appropriate | These may be too lenient or too strict for your data |
-| The model has relevant domain knowledge about liver metabolism | It does, but it may over-rely on well-known genes and miss novel findings |
-| A single prompt can replace analytical judgment | It cannot — it will produce plausible-sounding but potentially misleading prioritization |
+| The AI knows your experimental design details | Mouse strain, age, sex, diet duration, n per group all affect interpretation |
+| Standard thresholds are appropriate | Your study may be underpowered or have specific biological reasons to use different cutoffs |
+| Gene symbols are unambiguous | Mouse gene nomenclature has aliases; Ensembl IDs are safer anchors |
+| "High-fat diet liver" context is sufficient | The AI may apply generic knowledge rather than your specific biological question |
+| The AI can see your data | The prompt implies data will be shared but doesn't specify how |
 
 ---
 
-### 3. Failure Modes This Prompt Will Likely Produce
+### 3. Failure Modes This Prompt Could Produce
 
-- **Confident vagueness:** A narrative about "upregulated metabolic genes" that sounds authoritative but isn't grounded in your actual data
-- **Threshold hallucination:** The model invents or assumes cutoffs you didn't specify
-- **Recency/fame bias:** Over-emphasis on well-known genes (e.g., *Ppara*, *Fasn*) regardless of what your data actually shows
-- **Inconsistent outputs:** Running this prompt twice will produce meaningfully different answers
-- **Missing the actual question:** Without knowing *why* you're doing this study, "important" genes for one purpose may be noise for another
-- **No uncertainty flagging:** The model won't tell you when it's guessing
-
----
-
-### 4. How to Improve It
-
-**Core principles to apply:**
-- Define "important" operationally with explicit criteria
-- Specify the data format and available columns
-- State the biological question, not just the experimental design
-- Request a structured output format
-- Ask for reasoning to be shown, so you can catch errors
-- Set explicit thresholds or ask the model to apply and *state* the ones it uses
+- **Generic response** — lists well-known HFD genes (Fasn, Srebp1c, Ppara) without actually analyzing your specific results
+- **Hallucinated statistics** — invents fold-change values or p-values if data isn't clearly provided
+- **Threshold arbitrariness** — applies whatever cutoffs it assumes without justification
+- **Missing the biological question** — identifies statistically significant genes without connecting them to what you actually care about (steatosis? inflammation? insulin resistance?)
+- **Overconfident pathway claims** — draws strong biological conclusions from a gene list without appropriate caveats
+- **Ignores data quality signals** — doesn't flag if your results look unusual (e.g., thousands of significant genes suggesting a normalization problem)
 
 ---
 
-## Revised Prompt
+### 4. Revised Prompt
 
 ```
-I have differential gene expression results from a mouse liver RNA-seq study 
-comparing high-fat diet (HFD, n=X) to normal chow controls (n=X) after [duration]. 
-Mice were [age, sex]. The analysis was performed using [DESeq2/edgeR/limma].
+I have differential gene expression results from a mouse liver RNA-seq experiment 
+comparing high-fat diet (HFD) to normal chow control. I will paste the data below.
 
-The data is provided as a table with the following columns:
-- gene_symbol
-- log2FoldChange (HFD vs. control)
-- pvalue
-- padj (Benjamini-Hochberg adjusted)
-- baseMean (mean normalized counts)
+**Experimental context:**
+- Tissue: Liver
+- Species: Mus musculus [add strain if known, e.g., C57BL/6J]
+- Comparison: HFD vs. control (HFD is the numerator, so positive log2FC = 
+  upregulated in HFD)
+- Analysis tool used: [e.g., DESeq2 / edgeR / limma]
+- Sample sizes: n=[X] per group
+- Primary biological question: [e.g., What metabolic and inflammatory pathways 
+  are dysregulated by HFD in the liver?]
 
-[PASTE DATA HERE or describe it]
+**Data columns are:** [list them, e.g., gene_symbol, log2FoldChange, pvalue, 
+padj, baseMean]
 
-My primary research question is: [e.g., "What metabolic pathways are disrupted 
-by HFD in the liver?" OR "Are there transcription factors driving the 
-transcriptional response?"]
+**Data:**
+[paste data here]
 
-Please do the following, in order:
+Please analyze these results as follows:
 
-1. **Filter** for statistically significant DEGs using padj < 0.05 and 
-   |log2FoldChange| > 1. State how many genes pass this filter.
+1. **Quality check** — Does anything about the results look unusual 
+   (e.g., unexpected number of significant genes, extreme fold-changes)?
 
-2. **Separate** into upregulated and downregulated gene lists. 
-   Show the top 20 by absolute log2FoldChange in each direction as a table.
+2. **Significant gene summary** — Using thresholds of |log2FC| ≥ 1 and 
+   padj ≤ 0.05, report: how many genes are significantly up- and 
+   down-regulated, and list the top 10 in each direction ranked by padj.
 
-3. **Prioritize** genes by these criteria (apply in order):
-   a. Highest statistical confidence (lowest padj)
-   b. Largest effect size (|log2FC|)
-   c. Adequate expression level (baseMean > 50, to exclude lowly expressed genes)
-   
-4. **Interpret** the top hits in the context of liver lipid metabolism, 
-   insulin signaling, and inflammation. For each gene you highlight, state:
-   - Direction and magnitude of change
-   - Known function relevant to this context
-   - Confidence level in your interpretation (high/medium/low) and why
+3. **Biological interpretation** — What functional themes emerge from the 
+   top hits? Connect findings to known HFD liver biology where supported 
+   by the data. Flag any surprising findings.
 
-5. **Flag** any results that seem unusual, potentially artifactual, 
-   or that require experimental validation before interpretation.
+4. **Caveats** — Note any limitations in interpreting these results 
+   (e.g., genes with low baseMean, anything that warrants experimental 
+   validation before drawing conclusions).
 
-Do not speculate beyond what the data supports. If you are uncertain about 
-a gene's function in this specific context, say so explicitly.
+Format the output with clear section headers. Distinguish between what 
+the data directly shows versus your biological interpretation.
 ```
 
 ---
 
-**The core improvement:** You've shifted from asking for a judgment call ("which are important") to asking for a defined analytical procedure with explicit criteria, structured outputs, and built-in uncertainty acknowledgment. This makes the output reproducible, auditable, and much harder to silently get wrong.
+### Key Improvements Made
+- **Grounds the AI in your actual data** rather than generic HFD knowledge
+- **Defines "important"** with explicit, justifiable thresholds
+- **Requests a QC step** so problems surface before interpretation
+- **Separates data description from interpretation** — a critical scientific discipline
+- **Asks for caveats explicitly** — prevents overconfident conclusions
+- **Specifies directionality** of the comparison to avoid fold-change sign confusion
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Follows the 4-part critique structure with tables for ambiguities and assumptions, list for failure modes, then a revised prompt. Hits all expected critique points: data format, "important" undefined, missing experimental context, sign-of-fold-change directionality, risk of generic well-known-gene answers (calls out Fasn, Srebp1c, Ppara). Revised prompt is notable for explicitly putting a QC step BEFORE biological interpretation ("Does anything about the results look unusual?"), which several other panel members do not do. Also explicitly states fold-change directionality ("HFD is the numerator, so positive log2FC = upregulated in HFD") — preventing a common error. "Key Improvements Made" summary at the end maps each critique to the fix. Cross-model comparison: substantive critique points unanimous across all 6 models. No fabricated citations.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- That the QC step ahead of interpretation is the right ordering pedagogically (it is, but worth confirming for the materials).
+- That the recommended thresholds (|log2FC| ≥ 1 and padj ≤ 0.05) are appropriate defaults for the audience — they're common but conservative for some designs.
+- That the directionality framing prevents the right common error (it does, but verify the exact wording is unambiguous).
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

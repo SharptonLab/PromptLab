@@ -27,6 +27,29 @@ Think through this step by step:
 3. Finally, {REACH_CONCLUSION}
 
 Show your reasoning at each step before providing your final answer.
+```
+
+### Structured Version
+```
+{CONTEXT}
+
+{TASK_SPECIFICATION}
+
+Work through this systematically:
+
+**Step 1 - {FIRST_PHASE}:**
+[Explain what to analyze first]
+
+**Step 2 - {SECOND_PHASE}:**
+[Explain what to consider next]
+
+**Step 3 - {THIRD_PHASE}:**
+[Explain how to synthesize]
+
+**Final recommendation:**
+[Specify what the conclusion should include]
+
+Show your reasoning explicitly at each step.
 
 I need to select a statistical approach for analyzing my microbiome data. Here's my study:
 
@@ -60,187 +83,177 @@ Show your reasoning explicitly at each step.
 ```
 # Statistical Approach Selection for Microbiome Data
 
-## Step 1 — Data Structure Analysis
+---
 
-Let me identify the key features that constrain the analysis:
+## Step 1 — Data Structure
 
-**Experimental design features:**
-- **Repeated measures**: Same 20 mice measured at 3 time points → observations within a mouse are correlated; this is not ignorable
-- **Two-level nesting**: Mice are nested within cages (2–3 per cage), and cages are nested within treatment groups → a second correlation structure exists
-- **Small n**: 10 mice/group means roughly 4–5 cages/group (assuming ~2.5 mice/cage), so cage-level replication is limited
-- **Balanced design**: Equal group sizes is helpful, but the cage structure may be unbalanced
+**Key features that constrain analysis choice:**
 
-**Outcome variable features:**
-- **Compositional data**: Relative abundances sum to 1 (or 100%) — this is a hard constraint, not just a distributional preference
-- Compositional data live in a **simplex**, not Euclidean space; standard Euclidean-based methods are technically inappropriate without transformation
-- **High dimensionality**: Likely dozens to hundreds of taxa, many with zero counts (sparse)
-- **Non-normal distributions**: Relative abundances are typically zero-inflated and right-skewed
+**Compositional nature of the outcome**
+Relative abundances sum to 1 (or 100%), meaning they are not independent — increasing one taxon mathematically decreases others. This violates the assumptions of most standard statistical methods, which treat variables as if they exist on an unrestricted real number line. Analyzing raw proportions directly can produce spurious correlations and misleading results.
 
-**The core statistical challenge in one sentence:**
-> You have compositional, high-dimensional, repeated-measures data with two levels of clustering (mouse, cage), and your treatment is assigned at the cage level — making cage the true unit of randomization.
+**Repeated measures / longitudinal structure**
+Each mouse contributes 3 observations (days 0, 14, 28). These are not independent — the same animal's microbiome at day 14 is correlated with its own day 0 baseline. Ignoring this pseudoreplication inflates false positive rates.
+
+**Cage effects (clustering)**
+Co-housing 2–3 mice per cage introduces a second level of non-independence. Mice sharing a cage exchange microbiota through coprophagy and environmental exposure, making cage-mates more similar to each other than to mice in other cages. This is a well-documented and frequently ignored confound in rodent microbiome studies. With only ~7–10 cages total, this is a serious design constraint.
+
+**Small sample size**
+n = 20 mice (10/group) is modest. After accounting for cage clustering, your effective sample size for the treatment comparison is closer to the number of cages (~7–10), not the number of mice. This severely limits power and rules out complex models.
+
+**Multivariate outcome**
+"Community composition" is not a single number — it is a high-dimensional vector of taxon abundances. The question can be addressed at two levels:
+- *Community-level* (whole composition): Does the overall community differ?
+- *Taxon-level*: Which specific taxa drive any difference?
 
 ---
 
 ## Step 2 — Candidate Approaches
 
-I'll organize these by what level of the data they address:
+### A. Permanova (Permutational MANOVA) on beta-diversity distances
+**What it does:** Tests whether the centroid and/or dispersion of community composition differs between groups, using a distance/dissimilarity matrix (e.g., Bray-Curtis, UniFrac).
 
-### 2A. Community-level (multivariate) approaches
-These ask: *Does the overall community differ?*
+**Assumes:** Exchangeability of samples under the null (permutation-based, so distribution-free); homogeneity of multivariate dispersion between groups (tested separately with PERMDISP).
 
-| Approach | What it tests | Key assumptions |
-|---|---|---|
-| **PERMANOVA** (adonis2 in vegan) | Differences in centroid/dispersion of distance matrix between groups | Exchangeability of units under H₀; handles any distance metric |
-| **PERMDISP** | Differences in *dispersion* (variance) rather than location | Complement to PERMANOVA; tests a different null |
-| **MANOVA / db-RDA** | Linear multivariate differences; constrained ordination | Multivariate normality (MANOVA); linearity |
-| **Mixed-effects multivariate models** | Group × time effects with random effects | More parametric; computationally intensive |
+**Tests:** Overall community-level differences in composition.
 
-### 2B. Taxon-level (univariate) approaches
-These ask: *Which specific taxa differ?*
+---
 
-| Approach | What it tests | Key assumptions |
-|---|---|---|
-| **DESeq2 / edgeR** | Differential abundance per taxon | Negative binomial counts; size-factor normalization |
-| **ANCOM-BC** | Differential abundance with bias correction | Sparse log-normal; handles compositionality explicitly |
-| **MaAsLin2** | Multivariable association per taxon | Linear/log-linear models; handles random effects |
-| **ALDEx2** | Differential abundance via CLR + Dirichlet sampling | Compositional; Bayesian uncertainty propagation |
+### B. Linear mixed models on CLR-transformed abundances (taxon-level)
+**What it does:** Applies the centered log-ratio (CLR) transformation to address compositionality, then fits linear mixed models with random effects for mouse (repeated measures) and cage.
 
-### 2C. Diversity approaches
-These reduce the community to scalar summaries:
+**Assumes:** Approximate normality of CLR-transformed values (often reasonable); correctly specified random effects structure.
 
-| Approach | What it tests | Key assumptions |
-|---|---|---|
-| **Alpha diversity (LMM)** | Within-sample richness/evenness over time | Normality of diversity metric; handles repeated measures |
-| **Beta diversity trajectories** | Change in community distance over time | Requires careful distance metric choice |
+**Tests:** Treatment and time effects on individual taxa.
+
+---
+
+### C. ANCOM-BC2 (Analysis of Compositions of Microbiomes with Bias Correction)
+**What it does:** A purpose-built method for differential abundance testing that explicitly accounts for compositionality and estimates sampling fractions. The BC2 version handles repeated measures and random effects.
+
+**Assumes:** A structural zero model; sparse true differences (most taxa are not differentially abundant).
+
+**Tests:** Taxon-level differential abundance with compositional correction.
+
+---
+
+### D. Dirichlet-Multinomial Mixed Models
+**What it does:** Models count data (before converting to proportions) using a Dirichlet-Multinomial distribution, which naturally handles compositionality and overdispersion.
+
+**Assumes:** Dirichlet-Multinomial generative process; can incorporate random effects but implementation is complex.
+
+**Tests:** Community-level and taxon-level differences.
+
+---
+
+### E. Naive repeated-measures ANOVA / MANOVA on raw proportions
+**What it does:** Standard parametric tests applied directly to relative abundances.
+
+**Assumes:** Independence of components, normality, homoscedasticity.
+
+**Tests:** Treatment and time effects.
+
+---
+
+### F. Mixed-effects models in a distance framework (e.g., PERMANOVA with strata)
+**What it does:** Extension of PERMANOVA that restricts permutations within strata (e.g., cages) to account for clustering.
+
+**Assumes:** Same as PERMANOVA but with structured permutation scheme.
+
+**Tests:** Community-level differences while partially controlling for cage.
 
 ---
 
 ## Step 3 — Assumption Evaluation
 
-This is where your specific data structure creates real problems:
+| Approach | Compositionality | Repeated Measures | Cage Effect | Small n | Verdict |
+|---|---|---|---|---|---|
+| **PERMANOVA (basic)** | ✅ Handles via distance | ⚠️ Ignores within-mouse correlation | ❌ Ignores cage clustering | ✅ Permutation robust | Problematic as-is |
+| **PERMANOVA + strata** | ✅ | ⚠️ Partial | ⚠️ Partial | ⚠️ Fewer permutations | Better, still imperfect |
+| **LMM on CLR** | ✅ CLR addresses this | ✅ Random effect for mouse | ✅ Random effect for cage | ⚠️ May overfit | Strong candidate |
+| **ANCOM-BC2** | ✅ Designed for this | ✅ Handles longitudinal | ⚠️ Cage RE support varies by version | ⚠️ Needs checking | Strong candidate |
+| **Dirichlet-Multinomial** | ✅ | ⚠️ Complex to implement with RE | ⚠️ Complex | ❌ Unstable with small n | Likely impractical here |
+| **Naive ANOVA/MANOVA** | ❌ Violates compositionality | ❌ Ignores correlation | ❌ Ignores cage | ⚠️ | **Do not use** |
 
-### 🔴 Critical problem: Cage is the unit of randomization
+**Critical problem shared by most approaches:** The cage effect is the hardest constraint. With ~7–10 cages and 20 mice, you cannot simultaneously fit random effects for both mouse (repeated measures) and cage without running into severe estimation problems. You may need to choose one or aggregate to the cage level.
 
-Treatment was assigned to cages, not individual mice. This means:
-
-- **Mice within a cage are pseudoreplicates** for the treatment effect
-- The effective sample size for testing treatment is the **number of cages** (~4–5 per group), not the number of mice (10 per group)
-- Ignoring cage effects **inflates Type I error** — you may find "significant" treatment effects that are actually cage effects
-
-> **This is the single most important issue in your design.** Many microbiome papers get this wrong.
-
-### 🔴 Critical problem: Compositionality
-
-Standard PERMANOVA with Bray-Curtis dissimilarity is common but:
-- Bray-Curtis operates on relative abundances directly, which are not independent
-- The **Aitchison distance** (Euclidean distance on CLR-transformed data) is theoretically more appropriate for compositional data
-- Using inappropriate distances can distort the geometry of your data
-
-### 🟡 Moderate problem: Repeated measures in PERMANOVA
-
-Standard PERMANOVA (`adonis2`) does **not** natively handle repeated measures or random effects. Options:
-- `lme4`-based permutation schemes
-- `vegan::adonis2` with strata argument (partial permutation — imperfect)
-- Dedicated tools like `PERMANOVA+` (commercial) or `glmmTMB` for taxon-level models
-
-### 🟡 Moderate problem: Small cage-level n
-
-With ~4–5 cages per group:
-- Random effects for cage will be estimated with high uncertainty
-- Some methods (e.g., REML-based LMMs) may struggle to partition variance reliably
-- Permutation-based methods may have limited power
-
-### 🟡 Moderate problem: Multiple testing
-
-Testing hundreds of taxa simultaneously requires correction (FDR/Benjamini-Hochberg), but standard corrections assume independence — which your data violates due to compositionality and correlation structure.
-
-### 🟢 Less problematic: Time points
-
-Three time points is manageable. You can model time as:
-- **Categorical** (days 0, 14, 28) — flexible, no shape assumption
-- **Continuous** — assumes linear or smooth trajectory
-- The key question is whether you expect a **treatment × time interaction** (trajectories diverge) or just a **main effect of treatment**
+**The repeated measures structure** is also non-trivial — day 0 baseline values should ideally be used as a covariate rather than a time point, or the model needs to explicitly account for autocorrelation across time points.
 
 ---
 
 ## Step 4 — Practical Considerations
 
-| Factor | Consideration |
-|---|---|
-| **Field conventions** | PERMANOVA + ordination (PCoA/NMDS) is expected in microbiome papers; reviewers will ask for it even if it's not optimal |
-| **Software** | R ecosystem is mature: `vegan`, `phyloseq`, `MaAsLin2`, `ANCOM-BC`, `ALDEx2`, `lme4`, `glmmTMB` all freely available |
-| **Interpretability** | Community-level results (ordination plots) are intuitive; taxon-level results are more actionable but require multiple testing correction |
-| **Reproducibility** | Permutation-based methods require setting seeds; document this |
-| **Compositionality tools** | `ALDEx2` and `ANCOM-BC` are increasingly standard and handle compositionality; `DESeq2` is borrowed from RNA-seq and its assumptions are debated for microbiome |
+**Software availability**
+- PERMANOVA: `vegan::adonis2` in R — widely available, well-documented
+- LMM on CLR: `lme4` or `nlme` in R — standard, flexible
+- ANCOM-BC2: `ANCOMBC` Bioconductor package — actively maintained, has longitudinal vignettes
+- Dirichlet-Multinomial: `DirichletMultinomial` or `MaAsLin2` — available but less straightforward
+
+**Field conventions**
+Microbiome papers conventionally report:
+1. Beta-diversity analysis (PERMANOVA on Bray-Curtis ± UniFrac) for community-level questions
+2. A compositionally-aware method (ANCOM, ALDEx2, MaAsLin2, or ANCOM-BC) for taxon-level questions
+
+Reviewers will expect to see both levels addressed. Using only one will likely draw criticism.
+
+**Interpretability**
+- PERMANOVA gives a single p-value and R² for the overall community — easy to communicate
+- CLR-LMM gives effect sizes per taxon — more mechanistically informative
+- ANCOM-BC2 gives W-statistics and effect sizes — interpretable but requires explanation for non-specialist audiences
+
+**Transparency about limitations**
+Given the cage effect and small n, any approach will have limited power. Being explicit about this in your methods is more defensible than choosing a method that obscures the problem.
 
 ---
 
-## Step 5 — Recommended Approach
+## Step 5 — Recommendation
 
-### My suggested analytical framework (to discuss with a statistician):
+### Suggested analytical strategy (two-level approach)
 
-```
-Primary question: Does treatment affect community composition over time?
-│
-├── Community level (required for publication)
-│   ├── Aitchison distance (CLR-based) OR Bray-Curtis (conventional)
-│   ├── PCoA ordination — visualize trajectories
-│   └── PERMANOVA with cage as blocking factor
-│       └── ⚠️ Ask statistician: how to properly handle
-│           repeated measures + cage random effect
-│
-├── Diversity level (secondary)
-│   ├── Alpha diversity ~ treatment * time + (1|cage/mouse)
-│   └── Linear mixed model in lme4
-│
-└── Taxon level (exploratory/mechanistic)
-    ├── MaAsLin2 — handles random effects for cage + mouse
-    ├── ANCOM-BC — compositionally aware
-    └── Report with FDR correction; treat as hypothesis-generating
-```
+**For community-level composition (primary question):**
+> Use **PERMANOVA on Bray-Curtis dissimilarity** (`adonis2` in R), with cage included as a covariate or using stratified permutations. Supplement with **PERMDISP** to test whether dispersion (not just location) differs between groups. For the longitudinal component, consider running separate PERMANOVA at each time point and/or including time as a factor, while acknowledging the repeated-measures limitation.
 
-### Specific questions to ask your statistician:
+**For taxon-level differential abundance:**
+> Use **ANCOM-BC2** with its longitudinal/repeated-measures functionality, or **MaAsLin2** with CLR transformation and random effects for mouse and cage. These are the most defensible current options for your data type.
 
-**On the cage effect (highest priority):**
-1. *"Given that treatment was assigned at the cage level, should cage be treated as a fixed or random effect, and does this change my effective sample size for the treatment test?"*
-2. *"Is there a valid permutation scheme for PERMANOVA that accounts for both the cage clustering and the repeated measures structure simultaneously?"*
-
-**On compositionality:**
-3. *"Should I use Aitchison distance instead of Bray-Curtis, and does this change my conclusions in practice with this dataset?"*
-4. *"For taxon-level analysis, which method — MaAsLin2, ANCOM-BC, or ALDEx2 — best handles my combination of repeated measures, cage effects, and compositional constraints?"*
-
-**On the time component:**
-5. *"Should I model the treatment × time interaction, or test treatment effect averaged across time points? What are the power implications given my small cage n?"*
-6. *"Is day 0 (baseline) expected to differ between groups? If not, should I use a baseline-adjusted model or include it as a covariate?"*
-
-**On power:**
-7. *"With ~4–5 cages per group as my true replication unit, am I adequately powered to detect a treatment effect? Should I report a post-hoc power analysis?"*
+**Regarding the cage effect specifically:**
+> This deserves a dedicated conversation. Options include: (1) including cage as a fixed effect (loses degrees of freedom), (2) including cage as a random effect (may not converge with small n), (3) averaging within cages before analysis (reduces n further but is statistically clean), or (4) using cage-stratified permutations in PERMANOVA. None is perfect.
 
 ---
 
-### Bottom line recommendation:
+### Questions to bring to your statistician
 
-> Use a **two-analysis strategy**: (1) community-level PERMANOVA with Aitchison distance, with cage properly accounted for, plus ordination visualization; and (2) taxon-level MaAsLin2 with cage and mouse as nested random effects. The cage effect is your most urgent methodological concern — if it's ignored, your treatment p-values are not trustworthy regardless of which distance metric you choose.
+1. **"Given that I have ~7–10 cages and 20 mice, can I reliably fit both a cage random effect and a mouse random effect simultaneously, or do I need to choose one?"**
+
+2. **"Should I treat day 0 as a baseline covariate rather than a time point, and how does that change the model structure?"**
+
+3. **"For the PERMANOVA, how should I structure the permutations to respect both the repeated-measures and cage-clustering structure?"**
+
+4. **"Does ANCOM-BC2's longitudinal mode support a nested random effects structure (mouse within cage), and if not, what's the best workaround?"**
+
+5. **"Given my sample size, what is my realistic power to detect a treatment effect, and should I pre-specify a minimum effect size of interest?"**
+
+6. **"Should I analyze the full taxon table or aggregate to a higher taxonomic level (e.g., genus or family) to reduce dimensionality and improve stability?"**
+
+---
+
+### One honest caution
+
+> With 10 mice per group, co-housing, and 3 time points, this study is **underpowered for the complexity of the question being asked**. The most important statistical decision may be managing expectations about what can be concluded, not which test to run. A statistician should help you define what effect size is detectable given your design, so that null results are interpreted appropriately.
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Follows the 5-step structure. Particularly useful artifact: a "verdict table" that scores each candidate approach against the four constraints (compositionality, repeated measures, cage effect, small n) and gives a one-word verdict. Explicitly states naive ANOVA/MANOVA on raw proportions: "Do not use." Identifies the cage effect as the hardest constraint and notes that ~7-10 cages reduces effective n. Suggests using day 0 as a baseline covariate rather than a time point — an opinionated choice that is defensible but worth flagging. Ends with an "honest caution" that the study is underpowered for the complexity of the question. Cross-model comparison: agrees with the other complete outputs on PERMANOVA + ANCOM-BC2/MaAsLin2 recommendation; gives a more compact treatment than gpt-5.5 or nemotron. Includes a specific claim that "ANCOM-BC2 cage RE support varies by version" — a concrete verifiable claim. No fabricated paper citations.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- That "ANCOM-BC2 cage RE support varies by version" is accurate against current ANCOMBC documentation.
+- That the day-0-as-baseline-covariate suggestion is statistically sound and standard for this design.
+- That the verdict table's per-approach scoring (especially "Do not use" for naive ANOVA/MANOVA) is appropriately calibrated.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

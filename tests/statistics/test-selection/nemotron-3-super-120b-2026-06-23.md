@@ -128,23 +128,17 @@ Specific considerations:
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Most exhaustive of the six (50 lines but 9.6K chars). Large table comparing 4 methods (PERMANOVA, dbRDA/CAP, PCoA-axis logistic regression, differential abundance) with assumptions, advantages, limitations, and alternatives if assumptions fail. Recommends Firth's penalized logistic regression for low events-per-variable — a sophisticated and correct suggestion. Mentions PhyloFactor/TreeWAS as phylogenetic-aware alternatives.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Verify PhyloFactor and TreeWAS exist as named — both are real (PhyloFactor by Washburne et al., TreeWAS in microbiome ecology) but the user should confirm relevance to their question.
+- EPV (events-per-variable) framing: with 25 responders and ≤2-3 predictors recommended, this is a defensible constraint per Vittinghoff/Peduzzi guidance.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

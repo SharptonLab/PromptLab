@@ -281,23 +281,16 @@ The results are genuinely interesting and publishable with appropriate framing. 
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Comprehensive critical interpretation (199 lines): supports initial interpretation with caveats, lists alternative explanations (single-donor effects, non-specific microbiome perturbation, baseline imbalance), addresses weight/glucose disconnect as potentially interesting rather than a problem, suggests specific follow-ups (GTT/ITT, germ-free colonization). Summary table ranks elements clearly. Calibrated framing recommendation (proof-of-concept, not mechanism).
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- The framing that 'weight-independent glucose effect could be a novel finding' is a reasonable scientific interpretation worth confirming with the user's interests.
+- Cross-model: all 6 models reach similar essential interpretations and flag the same alternative explanations. High agreement.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

@@ -78,23 +78,17 @@ In the intestinal permeability assay, serum FITC‑dextran fluorescence was mark
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** **Numerical transcription error**: writes the DSS group SEM as `8.7 ± 0.6 μg/mL` when the input was `8.7 ± 1.2`. This is a fabricated number — the prompt's most important constraint ('every statistic matches your actual output exactly') is violated. Other values (F, p, control, DSS+Probiotic) appear correct.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Needs revision
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Numerical error: DSS SEM is 0.6 in the response but 1.2 in the input notes — confirm this is a transcription error (not e.g., a user-side typo).
+- All other numbers should also be re-verified, since one transcription error suggests other numbers should not be trusted at face value.
+- Cross-model: this is the only output of the six with a numerical error in the means/SEMs.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

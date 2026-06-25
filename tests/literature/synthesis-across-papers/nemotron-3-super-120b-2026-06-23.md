@@ -124,23 +124,17 @@ Based solely on the supplied evidence, there is no demonstrated intervention tha
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Synthesis (29 lines) with a clean methodological comparison table. All attributions correct. Identifies tension between Anderson's 'incomplete at 90 days' and Martinez & Lee's '21-45 day mean recovery times' — a reasonable framing of the apparent disagreement. Marks analytical techniques as '(implied)' where the summaries don't specify them — appropriately conservative.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- All attributions correct.
+- The methodological-comparison table notes 16S sequencing as '(implied)' for Anderson — the summary doesn't actually state the platform. Good honesty.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

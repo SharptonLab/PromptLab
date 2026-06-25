@@ -139,23 +139,16 @@ Implementing these specifics will transform the paragraph from a terse, opaque s
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Critique (73 lines, 9.2K chars) with a useful 'Quick-Fix Recommendations' table at the end providing concrete revision text for each problem (e.g., 'within 5 min of defecation', 'ZymoBIOMICS mock community', '2 × 250 bp chemistry', 'rarefied to 10000 reads', 'DESeq2 Wald test, BH FDR < 0.05'). Highly actionable.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- The concrete numbers in the Quick-Fix table (5 min to freezer, 10000 reads rarefaction, 78% recovery, etc.) are presented as examples not as the user's actual data — verify the user understands these are placeholders.
+- Cross-model: see Sonnet cell.
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

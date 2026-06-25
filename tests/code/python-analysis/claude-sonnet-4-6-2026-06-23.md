@@ -541,23 +541,18 @@ def plot_diversity_trajectories(
 ```
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Long, well-structured script (450 lines): docstring, type hints, REQUIRED_COLUMNS constant, conda-forge ImportError messaging, t-based 95% CI (more appropriate than 1.96*SEM at small n), random-intercept + random-slope LMM with fallback to intercept-only on convergence failure, seaborn publication theme. Code is **truncated** mid-tick-formatting (`midpoints = sorted(summary` — no closing). Structure looks excellent before truncation. The math (t-based CI, mixed-model formula `shannon ~ age_days * delivery_cesarean` with random intercept+slope by subject) appears sound.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Needs revision
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Truncation: regenerate with higher token cap. The script is incomplete past the figure formatting.
+- Whether the t-based CI (`stats.t.ppf(0.975, df=max(n-1,1))`) per bin matches the user's reporting convention (vs the simpler 1.96*SEM the other models used).
+- Random slope on age_days is more flexible than random intercept only; confirm this is the intended model. Sonnet adds a graceful fallback to intercept-only if convergence fails — confirm this fallback policy is acceptable.
+- Whether actually running the script on the user's data produces sensible output (the harness can't check that).
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW
