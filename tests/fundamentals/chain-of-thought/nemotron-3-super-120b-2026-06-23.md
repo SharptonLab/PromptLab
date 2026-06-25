@@ -209,22 +209,8 @@ Show your reasoning explicitly at each step.
 Following this roadmap will give you a statistically rigorous, interpretable analysis that respects both the experimental design and the peculiarities of microbiome data. Good luck with your project!
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
-
-**Machine triage:** Follows the 5-step structure with heavy use of comparison tables (candidate approaches × what it tests × assumptions; approach × problematic assumption). Recommends a two-tier strategy: PERMANOVA (Aitchison or weighted UniFrac with `strata=mouseID`) for the community-level test, then either zero-inflated beta GLMM via `glmmTMB` or Dirichlet-multinomial GLMM via `brms` for taxon-level follow-up. Includes example R code blocks for both. Cross-model comparison: substantive recommendations agree with opus-4.7, sonnet-4.6, gpt-5.5, step-3.7; gemini truncated. **Flag**: cites "Morton et al. 2019" and "Weiss et al. 2021" as supporting references for using PERMANOVA and DESeq2/ANCOM-BC/MaAsLin2 in microbiome longitudinal work. These author+year citations are specific enough that they should be verified — if fabricated, that is a substantive hallucination. Also recommends specific glmmTMB syntax (`family = betalink(), zi = ~1`) and a `brms` Dirichlet-multinomial formula that should be checked against current package APIs.
-
-**Suggested verdict (UNCONFIRMED):** Needs revision
-
-**What still needs human verification:**
-- That the citations "Morton et al. 2019" and "Weiss et al. 2021" are real papers that say what is claimed — author+year citations of this specificity are the highest-risk fabrication pattern.
-- That the glmmTMB syntax `family = betalink(), zi = ~1` and the `brms` `family = dirichlet_multinomial()` syntax actually work in the current package versions.
-- That `vegan::adonis2(..., strata = mouseID)` is the correct way to handle repeated measures in current vegan (the strata argument has changed semantics across versions).
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Cannot judge from output alone
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

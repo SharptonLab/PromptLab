@@ -127,22 +127,8 @@ Specific considerations:
 **Bottom line:** With 45 melanoma patients, a PERMANOVA (checking dispersion) is the most straightforward way to test whether overall gut‑microbiome beta‑diversity differs between responders and non‑responders. Complementary dbRDA/PCoA‑based logistic regression offers effect‑size estimates and covariate adjustment, while differential abundance pipelines (DESeq2/ANCOM‑BC/LEfSe) let you identify candidate taxa. Always verify the underlying assumptions, report limitations, and seek statistical guidance when those assumptions are not met or when the model becomes more complex.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Most exhaustive of the six (50 lines but 9.6K chars). Large table comparing 4 methods (PERMANOVA, dbRDA/CAP, PCoA-axis logistic regression, differential abundance) with assumptions, advantages, limitations, and alternatives if assumptions fail. Recommends Firth's penalized logistic regression for low events-per-variable — a sophisticated and correct suggestion. Mentions PhyloFactor/TreeWAS as phylogenetic-aware alternatives.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- Verify PhyloFactor and TreeWAS exist as named — both are real (PhyloFactor by Washburne et al., TreeWAS in microbiome ecology) but the user should confirm relevance to their question.
-- EPV (events-per-variable) framing: with 25 responders and ≤2-3 predictors recommended, this is a defensible constraint per Vittinghoff/Peduzzi guidance.
-- Cross-model: see Sonnet cell.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

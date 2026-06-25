@@ -124,21 +124,8 @@ The two aims are sequential and synergistic: Aim 1 establishes the reliability
 - The pilot‑study AUC of 78 % and the plan to validate/refine the classifier rely on preliminary data; any claim about expected performance improvements should be noted as needing further validation [NEEDS PRELIM DATA].
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Specific Aims (32 lines, 4K chars) with [CITE] and [NEEDS PRELIM DATA] flags inline. All numbers match input. Includes a concise 'Flags for attention' section at end. Substantively complete but more terse than Sonnet/Opus.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- All preliminary data numbers match input.
-- Cross-model: see Sonnet cell.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

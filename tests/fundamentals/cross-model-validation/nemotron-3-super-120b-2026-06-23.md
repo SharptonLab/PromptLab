@@ -132,22 +132,8 @@ The response correctly identifies alpha diversity as a univariate comparison pro
 *Critique grounded in: Weiss et al. (2017) mSystems; McMurdie & Holmes (2014) PLOS ONE; `phyloseq`/`microbiome` vignettes (2023).*
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
-
-**Machine triage:** Follows the 5-section critique structure. Substantive points agree with the rest of the panel (t-test assumes normality, Wilcoxon is the more defensible default, sequencing depth / rarefaction is missing, etc.). **Flag**: this is the only output on this prompt that supplies specific author+year+journal citations to back its critique — "Weiss et al. (2017) mSystems," "McMurdie & Holmes (2014) PLOS ONE," and "phyloseq/microbiome vignettes (2023)." Both papers are well-known in the microbiome literature: Weiss et al. 2017 mSystems on normalization is real; McMurdie & Holmes 2014 is real but was published in PLOS Computational Biology ("Waste Not, Want Not"), not PLOS ONE — that journal name is likely wrong. The citation fabrication risk is exactly what this prompt is supposed to teach against, so this is a meaningful failure mode worth recording. Recommends gamma-distributed GLMs for alpha diversity and log-transformation for Shannon — both reasonable but worth a domain check.
-
-**Suggested verdict (UNCONFIRMED):** Needs revision
-
-**What still needs human verification:**
-- That "McMurdie & Holmes (2014) PLOS ONE" is correctly cited — the well-known paper appears in PLOS Computational Biology, not PLOS ONE. If wrong, that is a partial-fabrication failure mode worth flagging in the prompt's failure modes.
-- That "Weiss et al. (2017) mSystems" is correctly cited and actually says what nemotron claims about non-parametric alternatives for alpha diversity.
-- That the gamma-distributed GLM recommendation is sound — gamma assumes positive continuous data but Shannon is bounded above by log(S).
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Needs revision
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

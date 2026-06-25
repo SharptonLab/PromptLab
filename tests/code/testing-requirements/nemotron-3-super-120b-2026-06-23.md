@@ -268,22 +268,8 @@ If those three checks pass, you can be reasonably confident the implementation i
 **Remember:** The only tests that *require* you to know the right answer in advance are the “known‑answer” and the manual spot‑check (step 2 above). All other tests (row‑sum zero, finiteness, scaling invariance, constant‑row zero) are self‑checking and protect against the most common logical mistakes. Happy testing!
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
-
-**Machine triage:** Complete test plan organized by test category (normal, edge, known-answer, boundary) with eight named tests plus a helper `assert_allclose`. Covers the standard CLR invariants (row-sum-zero, finite outputs, constant-row→zero, single-feature→zero, large/extreme values) and includes a known-answer test computed via the same formula being tested (so it's self-consistent rather than independent). Red-flags table maps symptoms to root causes. Suggests R `compositions::clr` and an online calculator as external references. Cross-model comparison: agrees with opus-4.7, sonnet, gpt-5.5, and step-3.7 on core invariants. One concern: the section-3 advice block tells the user to test scale invariance with `assert_allclose(clr_transform(X), clr_transform(X*c))` — but the pseudocount `+0.5` breaks exact scale invariance, so this assertion will fail at small tolerances (the other panel models flag this explicitly). No fabricated citations.
-
-**Suggested verdict (UNCONFIRMED):** Pass with notes
-
-**What still needs human verification:**
-- That the scale-invariance assertion `assert_allclose(clr_transform(X), clr_transform(X*c))` is the right framing — strict equality fails because the pseudocount is additive, not multiplicative. Other panel members soften this to "approximately equal for large counts" or treat it as an INFO-only check.
-- That the known-answer test (computed by reapplying the same formula) is a real cross-check rather than a tautology.
-- That suggested cross-references (R `compositions::clr`, online calculators) match the orientation/pseudocount conventions of the code.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

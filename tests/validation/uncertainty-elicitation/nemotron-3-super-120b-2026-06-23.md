@@ -140,21 +140,8 @@ Below I break down each statement from the original response, flag the ones I’
 | **Wilcoxon rank‑sum on CLR data may be more appropriate for n < 20** | 3 | Reasonable heuristic (ALDEx2 uses Wilcoxon on CLR), but the n < 20 cutoff is not
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Detailed self-assessment (80 lines, 12.5K chars). Table format for each problematic claim with quote, problem, and verification step. Includes the substantive observation that Weiss et al. 2017 is actually 'a paper on ANCOM-II' and may not contain the DESeq2 false-positive characterization attributed to it. Honest about own assumptions made.
-
-**Suggested verdict (UNCONFIRMED):** Pass with notes
-
-**What still needs human verification:**
-- The claim that Weiss et al. 2017 is 'a paper on ANCOM-II' should be verified — Weiss et al. 2017 in Microbiome ('Normalization and microbial differential abundance strategies depend upon data characteristics') is actually a broader normalization/DA benchmark study, not exclusively about ANCOM-II. So Nemotron's correction may itself be partially incorrect.
-- Cross-model: see Sonnet cell.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

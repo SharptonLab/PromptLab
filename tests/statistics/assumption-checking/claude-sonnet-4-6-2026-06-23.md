@@ -421,22 +421,8 @@ cbind(
 # Method 1: Distance to group centroid (
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Long, well-structured PERMANOVA assumption workflow (352 lines). Correctly leads with the dispersion homogeneity assumption as most critical. Provides betadisper code. Workflow is **truncated** at Assumption 6 (Method 1: Distance to group centroid — sentence cut off). Pre-truncation content is comprehensive and accurate per common PERMANOVA practice.
-
-**Suggested verdict (UNCONFIRMED):** Needs revision
-
-**What still needs human verification:**
-- Truncation: regenerate with higher token cap. Assumption 6 is incomplete.
-- The framing that PERMANOVA is 'not assumption-free' is correct and important — verify the user is OK with this push-back framing.
-- Cross-model: all 6 models reach the same essential conclusion (betadisper is the key test; balanced design helps; tight clustering is biologically interesting). High agreement on substance.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

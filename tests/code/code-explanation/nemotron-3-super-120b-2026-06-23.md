@@ -152,22 +152,8 @@ This R script prepares a count‑based differential abundance analysis with **DE
 Feel free to ask if any part needs more detail or if you’d like to see how to visualize the results (e.g., MA‑plot, volcano plot, PCA of VST‑transformed data). Happy analyzing!
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
-
-**Machine triage:** Complete and on-topic; heavily table-based (walkthrough, key concepts, inputs/outputs, issues). Answers all five user confusion points and adds practical extras (VST/rlog for visualization, contrast spelling check, factor coercion). One specific claim diverges from the rest of the panel and warrants a DESeq2-expert eye: nemotron says `lfcThreshold` triggers a likelihood ratio test (LRT). The other complete models (opus-4.7, sonnet-4.6, gpt-5.5, step-3.7) describe it as modifying the Wald test's null hypothesis to |LFC|≤threshold; LRT is associated with `test="LRT"` separately. If nemotron is wrong here, this is a substantive cross-model disagreement worth recording. No fabricated citations or refusals.
-
-**Suggested verdict (UNCONFIRMED):** Pass with notes
-
-**What still needs human verification:**
-- Whether `lfcThreshold` triggers an LRT (nemotron's claim) or modifies the Wald test's null (the rest of the panel) — this is the most consequential disagreement on this prompt and a DESeq2 expert should settle it.
-- Whether the practical extras (VST/rlog, contrast spelling, factor coercion advice, LRT example for interaction testing) match the level of detail you want students to see.
-- Whether the "redundant for significance" framing of the padj+|LFC| filter is acceptable wording.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

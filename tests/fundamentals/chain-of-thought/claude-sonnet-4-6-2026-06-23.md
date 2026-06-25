@@ -242,22 +242,8 @@ Given the cage effect and small n, any approach will have limited power. Being e
 > With 10 mice per group, co-housing, and 3 time points, this study is **underpowered for the complexity of the question being asked**. The most important statistical decision may be managing expectations about what can be concluded, not which test to run. A statistician should help you define what effect size is detectable given your design, so that null results are interpreted appropriately.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
-
-**Machine triage:** Follows the 5-step structure. Particularly useful artifact: a "verdict table" that scores each candidate approach against the four constraints (compositionality, repeated measures, cage effect, small n) and gives a one-word verdict. Explicitly states naive ANOVA/MANOVA on raw proportions: "Do not use." Identifies the cage effect as the hardest constraint and notes that ~7-10 cages reduces effective n. Suggests using day 0 as a baseline covariate rather than a time point — an opinionated choice that is defensible but worth flagging. Ends with an "honest caution" that the study is underpowered for the complexity of the question. Cross-model comparison: agrees with the other complete outputs on PERMANOVA + ANCOM-BC2/MaAsLin2 recommendation; gives a more compact treatment than gpt-5.5 or nemotron. Includes a specific claim that "ANCOM-BC2 cage RE support varies by version" — a concrete verifiable claim. No fabricated paper citations.
-
-**Suggested verdict (UNCONFIRMED):** Pass with notes
-
-**What still needs human verification:**
-- That "ANCOM-BC2 cage RE support varies by version" is accurate against current ANCOMBC documentation.
-- That the day-0-as-baseline-covariate suggestion is statistically sound and standard for this design.
-- That the verdict table's per-approach scoring (especially "Do not use" for naive ANOVA/MANOVA) is appropriately calibrated.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

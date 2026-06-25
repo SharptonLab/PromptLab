@@ -107,21 +107,8 @@ We believe these revisions directly address the reviewer's concerns without over
 > - No results were removed; the complete correlation matrix remains available in Supplementary Table X.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Excellent reviewer response (36 lines): summary of reviewer comment, structured 2-part response, draft Methods text and draft Discussion text both clearly marked as revised text with [page X / lines X-X] placeholders. All numbers (847 tests, 77 taxa, 11 metabolites, q<0.05) match input exactly. Professional, collegial tone. Justifies retaining weak correlations rather than removing post-hoc. Includes a 'Summary of changes' block at the end.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- All numbers match user's notes.
-- Cross-model: all 6 models produced professional responses with the same key numbers. Step-3.7 added a fabricated specific example (F. prausnitzii / butyrate r=0.27) not in user notes — see that cell.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

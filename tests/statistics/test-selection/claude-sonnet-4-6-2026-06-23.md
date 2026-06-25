@@ -354,20 +354,8 @@ Excellent for multivariable analysis. Consider running alongside ANCOM-BC2 as a 
 | Single time point | Cannot assess microbiome dynamics | Acknowledge as limitation |
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Comprehensive test-selection guide (279 lines). Splits the question into community-level (PERMANOVA) and taxon-level (ANCOM-BC/MaAsLin2) analyses. Honest about small n (45) as a limit on statistical power and recommends framing as exploratory. Limitations table at end is clearly calibrated. Recommends statistician consultation for clinical work.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- Cross-model: all 6 models converge on PERMANOVA + ANCOM-BC/MaAsLin2 + small-n caveat + statistician recommendation. Very high agreement on substance.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

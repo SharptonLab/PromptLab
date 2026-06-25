@@ -123,22 +123,8 @@ Across the three studies, antibiotic exposure consistently disrupts the gut micr
 Based solely on the supplied evidence, there is no demonstrated intervention that accelerates microbiome recovery after antibiotic exposure; probiotic co‑administration fails to prevent diversity loss or hasten recovery, and recovery appears to be driven primarily by antibiotic class, host age, and prior antibiotic history, often remaining incomplete for months. Further research is needed to test other potential restorative strategies and to characterize longer‑term functional recovery.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Synthesis (29 lines) with a clean methodological comparison table. All attributions correct. Identifies tension between Anderson's 'incomplete at 90 days' and Martinez & Lee's '21-45 day mean recovery times' — a reasonable framing of the apparent disagreement. Marks analytical techniques as '(implied)' where the summaries don't specify them — appropriately conservative.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- All attributions correct.
-- The methodological-comparison table notes 16S sequencing as '(implied)' for Anderson — the summary doesn't actually state the platform. Good honesty.
-- Cross-model: see Sonnet cell.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

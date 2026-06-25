@@ -145,20 +145,8 @@ With microbiome data involving hundreds to thousands of taxa, a raw p < 0.05 thr
 **Bottom line:** This paragraph would not pass peer review at a rigorous microbiome journal. It reads as a placeholder draft. The most urgent fixes are the database issue, statistical reporting, and QIIME2 versioning—these are not stylistic problems but reproducibility and validity failures.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Strong adversarial critique (82 lines) hitting all expected points (vague 'standard protocols', undefined 'immediately', outdated Greengenes, 'appropriate methods' meaningless, missing controls, missing IBD covariates). Priority table at end ranks issues as Critical/Major/Moderate. Calibrated bottom line: 'This paragraph would not pass peer review at a rigorous microbiome journal.' Genuinely critical, not gentle.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- Cross-model: all 6 models converge on the same essential critiques (Greengenes outdated, vague terms unacceptable, missing controls, missing confounder adjustment). Very high agreement.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

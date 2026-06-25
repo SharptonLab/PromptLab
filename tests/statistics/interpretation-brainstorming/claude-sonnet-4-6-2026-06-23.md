@@ -280,21 +280,8 @@ Be explicit about these boundaries when presenting:
 The results are genuinely interesting and publishable with appropriate framing. The glucose effect without weight change is actually a potentially novel and important finding if you lean into it rather than treating it as a puzzle to explain away—it suggests the microbiome may influence glucose homeostasis through weight-independent pathways, which is worth investigating directly.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Comprehensive critical interpretation (199 lines): supports initial interpretation with caveats, lists alternative explanations (single-donor effects, non-specific microbiome perturbation, baseline imbalance), addresses weight/glucose disconnect as potentially interesting rather than a problem, suggests specific follow-ups (GTT/ITT, germ-free colonization). Summary table ranks elements clearly. Calibrated framing recommendation (proof-of-concept, not mechanism).
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- The framing that 'weight-independent glucose effect could be a novel finding' is a reasonable scientific interpretation worth confirming with the user's interests.
-- Cross-model: all 6 models reach similar essential interpretations and flag the same alternative explanations. High agreement.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

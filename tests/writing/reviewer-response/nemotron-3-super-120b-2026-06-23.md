@@ -107,22 +107,8 @@ We have incorporated the reviewer’s suggestions by (i) reporting the exact num
 Please let us know if additional clarification is needed.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Detailed response (34 lines, 3.3K chars) framed as 'Response to Reviewer #X'. All numbers match. Adds the substantive point about network centrality / betweenness centrality / connectivity as a justification for retaining weak correlations — sophisticated framing. Page/line numbers are illustrative.
-
-**Suggested verdict (UNCONFIRMED):** Pass with notes
-
-**What still needs human verification:**
-- All numbers match user's notes.
-- The network-centrality framing (betweenness centrality, connectors between metabolic modules) is sophisticated but goes slightly beyond what the user's notes specify — confirm this is the intended retention rationale, vs the simpler 'biologically interesting as part of networks' the user wrote.
-- Cross-model: see Sonnet cell.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

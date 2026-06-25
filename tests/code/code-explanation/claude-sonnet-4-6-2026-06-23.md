@@ -314,22 +314,8 @@ res_sig                   → Your differentially abundant microbes
 ```
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
-
-**Machine triage:** Complete 5-section walkthrough, well-calibrated depth for stated audience ("comfortable with R basics, new to DESeq2"). Explicitly answers all five user confusion points and includes a comparison table for the lfcThreshold-in-results-call vs the post-hoc |LFC|>1 filter, with the correct conceptual distinction (test-statistic vs estimate filter). Defines jargon (negative binomial, overdispersion, padj/BH, log2FoldChange). Closes with a useful pipeline-flow ASCII summary. Recommends ANCOM-BC, MaAsLin2, ALDEx2 as microbiome alternatives. Cross-model comparison: agrees with opus-4.7, gpt-5.5, nemotron, and step-3.7 on substance; nemotron diverges on whether lfcThreshold triggers an LRT vs modifying the Wald null. No fabricated citations or refusals.
-
-**Suggested verdict (UNCONFIRMED):** Pass with notes
-
-**What still needs human verification:**
-- That the lfcThreshold-vs-filter conceptual table is correct (it is in agreement with DESeq2 docs, but worth a domain check).
-- The contrast-format claim that the format is `c(variable, numerator, denominator)`.
-- Whether the recommended alternatives (ANCOM-BC, MaAsLin2, ALDEx2) and the implicit suggestion to use `lfcShrink()` are conventions you want students to be shown.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

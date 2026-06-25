@@ -106,21 +106,8 @@ Here is the extracted methodology information based solely on what is explicitly
 - Age at induction (8–10 weeks) is similarly stated but not captured by the current fields.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** All 10 fields extracted accurately from the methods text. Bonus value-add: flags two pieces of information present in the text but not in the template (sex = male only; age = 8-10 weeks), suggesting the user might want to extend the schema. The flag is helpful and clearly labeled as not an inference.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- Whether the value-add 'flag' notes at the end are welcome (they go slightly beyond what the prompt asked, but explicitly disclaim they're not inferences).
-- Cross-model agreement is very high — all 6 models extracted the same fields. Step-3.7 is the one outlier, marking 'Key confounds: Not reported' when the text actually does state the confound (no pre-registration / no power analysis).
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

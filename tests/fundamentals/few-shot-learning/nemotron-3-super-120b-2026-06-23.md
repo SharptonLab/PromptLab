@@ -91,21 +91,8 @@ Output:
 - Organism: Human
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Followed the format. Slight format deviation: 'Sequencing: Shotgun metagenomics (MetaPhlAn3)' bundles the tool name into the sequencing field as well as the analysis-tools field. Otherwise matches expected output completely.
-
-**Suggested verdict (UNCONFIRMED):** Pass with notes
-
-**What still needs human verification:**
-- Minor format deviation: bundling MetaPhlAn3 into the Sequencing field. The few-shot examples kept tools strictly in 'Analysis tools' — this is a minor stylistic miss.
-- Cross-model: see Sonnet cell.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

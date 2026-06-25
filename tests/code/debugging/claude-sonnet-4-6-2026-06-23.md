@@ -220,22 +220,8 @@ assert n_samples < n_taxa, "Suspiciously more samples than taxa — check orient
 ```
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
-
-**Machine triage:** Correctly diagnoses the row-vs-column indexing bug and matches the prompt's expected fix (`otu_table[j]` plus `pdist`+`squareform` vectorized alternative). Includes a side-by-side shape table, the corrected loop, the vectorized version, and three sanity-check assertions (symmetric matrix, zero diagonal) — these are useful and verifiable. Cross-model agreement with the other 5 models is unanimous on diagnosis and fix. One prevention bullet adds `assert n_samples < n_taxa` as a "fail fast" check; this is a heuristic that holds for typical microbiome datasets but is not a universal rule.
-
-**Suggested verdict (UNCONFIRMED):** Pass with notes
-
-**What still needs human verification:**
-- Whether the `assert n_samples < n_taxa` heuristic should be presented as general advice — it would incorrectly fire on valid datasets with more samples than features.
-- That the inline assertions (symmetric, zero diagonal) actually pass when the corrected code is executed against a real OTU table.
-- That the explanatory shape table accurately reflects scipy 1.11 / numpy 1.24 indexing semantics (it does, but worth a glance).
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

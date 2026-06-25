@@ -85,22 +85,8 @@ Despite this partial recovery, serum fluorescence in the DSS + Probiotic group r
 > **[VERIFY: sample size / degrees of freedom]** With n = 8 per group (total N = 24), the within-groups degrees of freedom for a one-way ANOVA should be 21 (i.e., 24 − 3), which is consistent with the reported F(2,21). This checks out, but please confirm no animals were excluded from any group prior to analysis, as any exclusions would alter the expected df and should be reported.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Clean 2-paragraph Results write-up. All numbers (means, SEMs, p-values, F-stat) match input exactly. Includes the calculated 51% reduction (8.7→4.3 is approximately 51% reduction; calculation is correct). Adds a thoughtful flag at the end about checking df consistency. No mechanistic speculation. Appropriate hedging ('attenuated', 'reduced') without overclaiming causation.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- All numbers match input: control 2.1±0.3, DSS 8.7±1.2, DSS+Pro 4.3±0.6, F(2,21)=18.4, all p-values.
-- The calculated 51% reduction is correct ((8.7-4.3)/8.7 = 50.6%).
-- Cross-model: 5 of 6 models faithfully transcribed all numbers. Nemotron mis-transcribed the DSS SEM as 0.6 instead of 1.2 — see that cell.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

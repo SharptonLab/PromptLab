@@ -180,22 +180,8 @@ This response would be **actively harmful** to a researcher who followed it with
 A researcher following this advice could submit a paper with inappropriate statistical methods and face rejection or post-publication criticism. The correct response should present a **decision framework**, not a single answer.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
-
-**Machine triage:** Follows the 5-section critique structure. Correctly identifies the response under review as overconfident and incomplete. Includes a structured table of unmentioned alternatives (Wilcoxon, linear-model-with-covariates, permutation, mixed-effects, Kruskal-Wallis) marked as Absent. Closes with the strongest verdict on the panel: "actively harmful" — defensible given the critique but more emphatic than the other 5 models. Argues that "most studies do it" is not methodological justification (a meta-critique of the original response's reasoning) — a useful framing. Cross-model comparison: substantive critique points unanimous across all 6 models; this output is more rhetorical than opus-4.7's tighter version. No fabricated citations; no refusals.
-
-**Suggested verdict (UNCONFIRMED):** Pass with notes
-
-**What still needs human verification:**
-- That the "actively harmful" framing is the right tonal calibration for a teaching example — the other panel models use softer language.
-- That the alternatives table (Wilcoxon, linear model with covariates, permutation test, mixed-effects model, Kruskal-Wallis) is comprehensive enough for the audience.
-- The implicit claim that "most studies do it" is itself an unsupported overgeneralization — the critique attacks that pattern but does not explicitly source the counter-claim.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

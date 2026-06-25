@@ -170,22 +170,8 @@ Here's a thorough critique of your draft prompt for analyzing differential gene 
 This prompt turns a vague request into a precise, reproducible workflow—critical for avoiding misleading conclusions in genomic analysis. Would you like to adjust any constraints (e.g., different FDR/log₂FC thresholds, specific pathway focus, or output details)? I can refine this further based on your actual data structure or study goals.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
-
-**Machine triage:** Follows the 4-part critique structure. Hits all expected critique points: "important" undefined, data access ambiguity, missing statistical thresholds, no output format, risk of confabulation. Revised prompt is the most explicit on the panel about file-access limits ("I CANNOT access external files or databases. You MUST paste a representative snippet"). Includes a full worked example (input snippet + expected output table) inside the revised prompt itself — this is a useful few-shot scaffolding pattern. Specifies the output table columns including an Entrez ID anchor (a good defensive choice against gene-symbol ambiguity). Cross-model comparison: substantive critique points unanimous across all 6 models. **Flag**: the worked example uses specific Entrez ID `14118` for *Fasn* and `19016` for *Pparg* — these are verifiable claims; the model should not be inventing Entrez IDs but these particular numbers are within typical ranges and look plausible. No fabricated paper citations.
-
-**Suggested verdict (UNCONFIRMED):** Pass with notes
-
-**What still needs human verification:**
-- That the specific Entrez IDs `14118` (Fasn) and `19016` (Pparg) given in the example output are correct — these are easily verifiable against NCBI and should be checked.
-- Whether including a worked example inside the revised prompt is a pattern you want to demonstrate (it shows few-shot scaffolding but adds length).
-- Whether the heavy use of bold/all-caps emphasis in the revised prompt is the style you want.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

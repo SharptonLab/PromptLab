@@ -241,22 +241,8 @@ Addressing the essential items will substantially reduce the risk that any obser
 Good luck with the study—feel free to ping me if you need help drafting the power analysis, mixed‑effects model code, or a detailed SOP for diet preparation!
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Thorough critique (145 lines) presented with strengths/concerns tables and an end-of-document essential-items checklist (food intake daily, cages ≥4/group, litter stratification, pair-fed control, power analysis, mixed-effects model spec, PERMANOVA+PERMDISP, blinding verification, baseline immune profile, diet SOP, sequencing batch randomization). The checklist format is unusually actionable. Friendly close ('Good luck with the study!').
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- Pair-fed control recommendation: standard mouse-diet-intervention practice; confirm feasibility.
-- Cages ≥4/group recommendation effectively means doubling/tripling cage count — substantial budget/welfare implication; the user should weigh.
-- Cross-model: see Sonnet cell.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

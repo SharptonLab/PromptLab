@@ -176,22 +176,8 @@ the data directly shows versus your biological interpretation.
 - **Specifies directionality** of the comparison to avoid fold-change sign confusion
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 (refresh) to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review. This draft was regenerated after a harness bug (truncated test inputs on this prompt) was fixed and the model was re-run with the full prompt._
-
-**Machine triage:** Follows the 4-part critique structure with tables for ambiguities and assumptions, list for failure modes, then a revised prompt. Hits all expected critique points: data format, "important" undefined, missing experimental context, sign-of-fold-change directionality, risk of generic well-known-gene answers (calls out Fasn, Srebp1c, Ppara). Revised prompt is notable for explicitly putting a QC step BEFORE biological interpretation ("Does anything about the results look unusual?"), which several other panel members do not do. Also explicitly states fold-change directionality ("HFD is the numerator, so positive log2FC = upregulated in HFD") — preventing a common error. "Key Improvements Made" summary at the end maps each critique to the fix. Cross-model comparison: substantive critique points unanimous across all 6 models. No fabricated citations.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- That the QC step ahead of interpretation is the right ordering pedagogically (it is, but worth confirming for the materials).
-- That the recommended thresholds (|log2FC| ≥ 1 and padj ≤ 0.05) are appropriate defaults for the audience — they're common but conservative for some designs.
-- That the directionality framing prevents the right common error (it does, but verify the exact wording is unambiguous).
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

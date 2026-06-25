@@ -168,22 +168,8 @@ This paper provides **human correlational evidence** that butyrate and propionat
 > ⚠️ **Translational caveat:** Mouse and human gut microbiomes differ substantially in composition; findings regarding specific taxa (*F. prausnitzii*, *Roseburia*) may not translate directly, and this paper provides no mouse data.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Comprehensive 8-section structured summary (85 lines). All statistics extracted accurately (p=0.003 butyrate, p=0.02 propionate, r=-0.42, p=0.004). Correctly uses 'Year not provided in excerpt' / 'Journal not provided in excerpt' rather than fabricating. Open Questions section adds the specific point that acetate selectivity is unexplained in the excerpt. Relevance section thoughtfully connects to mouse-model work with a translational caveat about mouse-human gut differences. No fabrication detected.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- All 5 specific statistical claims (sample sizes, p-values, r-value) trace to the test input verbatim.
-- The translational caveat is appropriately conservative.
-- Cross-model: all 6 models produced faithful summaries with the same statistics — high agreement.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

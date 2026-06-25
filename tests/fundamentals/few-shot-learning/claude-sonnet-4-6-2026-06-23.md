@@ -89,21 +89,8 @@ Output:
 - Organism: Human
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Followed the 8-field format exactly. All extracted values match what is explicitly stated in the abstract. Matches the expected output. No fabrication.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- Confirm 'Recurrent CDI' is the correct parenthetical expansion (CDI = C. difficile infection — yes).
-- Cross-model: all 6 models produced essentially identical extractions. Very high agreement — likely indicates a well-specified task.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

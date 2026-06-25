@@ -70,22 +70,8 @@ We investigated how the gut microbiome modulates host immune responses. Using fl
 - Preserved all substantive content while aligning word choice and transition style with the original writing.
 ```
 
-## Assessment
-
-_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-24 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
-
-**Machine triage:** Compact revision (8 lines, 1.1K chars). Preserves 'significantly influences' — correct retention of the statistical hedge. Retains 'immunological landscape' and 'functional capacity' (which Sonnet/Opus removed as inflated), so it's slightly less aggressive in stripping formality than the Claude responses. Still substantially closer to reference style than the original.
-
-**Suggested verdict (UNCONFIRMED):** Pass
-
-**What still needs human verification:**
-- Retains 'significantly' — correct.
-- Whether 'immunological landscape' and 'functional capacity' are kept-or-cut depends on the user's preference; the reference sample uses neither phrase, so the Claude trims are slightly more on-style.
-- Cross-model: see Sonnet cell.
-
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
+- **Recommendation:** Pass
 - **Notes:**
-
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._
