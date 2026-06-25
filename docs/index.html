@@ -122,6 +122,28 @@
   </div>
 </div>
 
+<!-- FILE-PICKER CHOICE MODAL -->
+<div class="modal-backdrop" id="filePickerChoice" style="display:none;">
+  <div class="modal">
+    <h2>Pick a verdicts file</h2>
+    <p>Your verdicts will be written to this file on every click. Pick one option:</p>
+    <div class="buttons" style="flex-direction:column; gap:10px;">
+      <button class="primary" id="fpNew" style="text-align:left; padding:12px;">
+        <strong>Create a new file</strong><br>
+        <span class="small" style="color:#fff; opacity:.9;">Recommended for a fresh review. You'll be prompted to name and save the file.</span>
+      </button>
+      <button id="fpOpen" style="text-align:left; padding:12px;">
+        <strong>Open an existing verdicts file</strong><br>
+        <span class="small">Resume previous work or import another reviewer's file.</span>
+      </button>
+      <button id="fpFallback" style="text-align:left; padding:12px;">
+        <strong>Use browser storage instead</strong><br>
+        <span class="small">Less safe — your verdicts live in this browser only. Export them often.</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- ERROR MODAL -->
 <div class="modal-backdrop" id="errorModal" style="display:none;">
   <div class="modal">
@@ -317,72 +339,76 @@ $("onboardingName").addEventListener("keydown", e => {
   if (e.key === "Enter") $("onboardingNext").click();
 });
 
-async function pickVerdictsFile() {
-  // Try FSA mode first; fall back to localStorage if not supported or denied.
+function pickVerdictsFile() {
+  // showSaveFilePicker / showOpenFilePicker can ONLY be called from a direct
+  // user-gesture handler. So we show a modal and wire each button to its own
+  // fresh click handler that invokes the FSA API synchronously (no awaits
+  // before the picker call).
   if (!fsaSupported) {
     enterFallbackMode();
     return;
   }
-  // Show a small prompt asking whether to pick an existing or create new.
-  const choice = confirm(
-    "Pick a verdicts file to save your work to.\n\n" +
-    "OK  → Create a NEW file (recommended for a fresh review)\n" +
-    "Cancel → Open an EXISTING verdicts file (resume previous work)"
-  );
+  $("filePickerChoice").style.display = "flex";
+}
+
+$("fpNew").onclick = async () => {
   try {
-    if (choice) {
-      const suggested = `${slugify(state.reviewer)}-verdicts.json`;
-      state.fileHandle = await window.showSaveFilePicker({
-        suggestedName: suggested,
-        types: [{ description: "PromptLab verdicts", accept: { "application/json": [".json"] } }],
-      });
-      // Initialize the empty file
-      await writeVerdictsFile(emptyVerdicts());
-    } else {
-      const [handle] = await window.showOpenFilePicker({
-        types: [{ description: "PromptLab verdicts", accept: { "application/json": [".json"] } }],
-        multiple: false,
-      });
-      state.fileHandle = handle;
-      // Read existing contents
-      const file = await handle.getFile();
-      const text = await file.text();
-      try {
-        const parsed = JSON.parse(text);
-        if (parsed.schema !== SCHEMA) {
-          console.warn("loading verdicts file with unexpected schema:", parsed.schema);
-        }
-        state.verdicts = parsed.verdicts || {};
-        if (parsed.reviewer && parsed.reviewer !== state.reviewer) {
-          if (!confirm(`This file was started by "${parsed.reviewer}", but you said your name is "${state.reviewer}". Continue and overwrite the reviewer name on save? (Cancel to abort.)`)) {
-            location.reload();
-            return;
-          }
-        }
-        state.startedAt = parsed.started || nowISO();
-      } catch (e) {
-        showError(`Could not parse that file as a verdicts JSON: ${e.message}`);
-        location.reload();
-        return;
-      }
-    }
+    const suggested = `${slugify(state.reviewer)}-verdicts.json`;
+    // FSA call MUST be the first thing in this handler — no awaits before it.
+    const handle = await window.showSaveFilePicker({
+      suggestedName: suggested,
+      types: [{ description: "PromptLab verdicts", accept: { "application/json": [".json"] } }],
+    });
+    state.fileHandle = handle;
+    $("filePickerChoice").style.display = "none";
+    state.startedAt = nowISO();
+    await writeVerdictsFile(emptyVerdicts());
     localStorage.setItem(LS_HANDLE_FLAG, "1");
     onSaveTargetReady();
   } catch (e) {
-    if (e.name === "AbortError") {
-      // user cancelled — fall back
-      if (confirm("No file selected. Use browser storage as a fallback? (Your work will live in this browser only; click Export periodically to back it up.)")) {
-        enterFallbackMode();
-      } else {
-        bootstrap();  // try again
-      }
-    } else {
-      console.error(e);
-      showError(`Could not open file: ${e.message}\n\nFalling back to browser storage.`);
-      enterFallbackMode();
-    }
+    if (e.name === "AbortError") return; // user cancelled; leave modal up
+    showError(`Could not create file: ${e.message}\n\nTry the browser-storage fallback if your browser is blocking file picker calls.`);
   }
-}
+};
+
+$("fpOpen").onclick = async () => {
+  try {
+    const [handle] = await window.showOpenFilePicker({
+      types: [{ description: "PromptLab verdicts", accept: { "application/json": [".json"] } }],
+      multiple: false,
+    });
+    state.fileHandle = handle;
+    const file = await handle.getFile();
+    const text = await file.text();
+    let parsed;
+    try {
+      parsed = JSON.parse(text);
+    } catch (parseErr) {
+      showError(`Could not parse that file as a verdicts JSON: ${parseErr.message}`);
+      return;
+    }
+    if (parsed.schema && !String(parsed.schema).startsWith("promptlab-t4-verdicts")) {
+      console.warn("loading verdicts file with unexpected schema:", parsed.schema);
+    }
+    state.verdicts = parsed.verdicts || {};
+    state.startedAt = parsed.started || nowISO();
+    if (parsed.reviewer && parsed.reviewer !== state.reviewer) {
+      // can't use confirm() — too late in the handler chain. Just warn in the UI banner.
+      console.warn(`File reviewer "${parsed.reviewer}" differs from current reviewer "${state.reviewer}"; using current.`);
+    }
+    $("filePickerChoice").style.display = "none";
+    localStorage.setItem(LS_HANDLE_FLAG, "1");
+    onSaveTargetReady();
+  } catch (e) {
+    if (e.name === "AbortError") return;
+    showError(`Could not open file: ${e.message}`);
+  }
+};
+
+$("fpFallback").onclick = () => {
+  $("filePickerChoice").style.display = "none";
+  enterFallbackMode();
+};
 
 function enterFallbackMode() {
   state.fallbackMode = true;
