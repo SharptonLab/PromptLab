@@ -455,7 +455,9 @@ function onSaveTargetReady() {
 
 async function loadManifestAndStart() {
   try {
-    const r = await fetch("cells-manifest.json");
+    // Cache-bust the manifest fetch so a regenerated manifest is picked up
+    // immediately rather than served from a stale browser/CDN cache.
+    const r = await fetch("cells-manifest.json?t=" + Date.now(), { cache: "no-store" });
     if (!r.ok) throw new Error(`manifest fetch failed: HTTP ${r.status}`);
     state.manifest = await r.json();
   } catch (e) {
