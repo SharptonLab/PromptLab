@@ -3,82 +3,10 @@
   "reviewer": "TJS",
   "started": "2026-06-25T01:54:47.266Z",
   "verdicts": {
-    "code/code-explanation/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T01:55:47.417Z",
-      "reviewer": "TJS"
-    },
-    "code/code-explanation/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T01:55:58.037Z",
-      "reviewer": "TJS"
-    },
-    "code/code-explanation/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T01:56:31.948Z",
-      "reviewer": "TJS"
-    },
-    "code/code-explanation/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T01:56:44.733Z",
-      "reviewer": "TJS"
-    },
-    "code/code-explanation/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T01:56:56.408Z",
-      "reviewer": "TJS"
-    },
-    "code/code-explanation/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T01:57:49.486Z",
-      "reviewer": "TJS"
-    },
     "code/code-explanation/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T01:58:22.998Z",
-      "reviewer": "TJS"
-    },
-    "code/debugging/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T01:59:26.374Z",
-      "reviewer": "TJS"
-    },
-    "code/debugging/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:04:26.835Z",
-      "reviewer": "TJS"
-    },
-    "code/debugging/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:04:33.706Z",
-      "reviewer": "TJS"
-    },
-    "code/debugging/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:04:36.303Z",
-      "reviewer": "TJS"
-    },
-    "code/debugging/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:04:40.406Z",
-      "reviewer": "TJS"
-    },
-    "code/debugging/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:04:49.810Z",
       "reviewer": "TJS"
     },
     "code/debugging/claude-opus-4-2026-02-04": {
@@ -87,82 +15,10 @@
       "ts": "2026-06-25T02:04:58.399Z",
       "reviewer": "TJS"
     },
-    "code/python-analysis/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:05:56.713Z",
-      "reviewer": "TJS"
-    },
-    "code/python-analysis/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:07:17.917Z",
-      "reviewer": "TJS"
-    },
-    "code/python-analysis/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:07:33.050Z",
-      "reviewer": "TJS"
-    },
-    "code/python-analysis/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:07:40.927Z",
-      "reviewer": "TJS"
-    },
-    "code/python-analysis/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:10:05.738Z",
-      "reviewer": "TJS"
-    },
-    "code/python-analysis/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:10:21.836Z",
-      "reviewer": "TJS"
-    },
     "code/python-analysis/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:11:53.974Z",
-      "reviewer": "TJS"
-    },
-    "code/r-script-generation/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:12:06.621Z",
-      "reviewer": "TJS"
-    },
-    "code/r-script-generation/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:12:54.806Z",
-      "reviewer": "TJS"
-    },
-    "code/r-script-generation/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:13:22.027Z",
-      "reviewer": "TJS"
-    },
-    "code/r-script-generation/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:13:32.315Z",
-      "reviewer": "TJS"
-    },
-    "code/r-script-generation/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:13:58.163Z",
-      "reviewer": "TJS"
-    },
-    "code/r-script-generation/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:14:12.749Z",
       "reviewer": "TJS"
     },
     "code/r-script-generation/claude-opus-4-2026-02-04": {
@@ -171,82 +27,10 @@
       "ts": "2026-06-25T02:14:30.678Z",
       "reviewer": "TJS"
     },
-    "code/testing-requirements/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:15:28.059Z",
-      "reviewer": "TJS"
-    },
-    "code/testing-requirements/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:15:40.461Z",
-      "reviewer": "TJS"
-    },
-    "code/testing-requirements/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:16:37.248Z",
-      "reviewer": "TJS"
-    },
-    "code/testing-requirements/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:17:08.219Z",
-      "reviewer": "TJS"
-    },
-    "code/testing-requirements/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:18:42.372Z",
-      "reviewer": "TJS"
-    },
-    "code/testing-requirements/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:18:59.180Z",
-      "reviewer": "TJS"
-    },
     "code/testing-requirements/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:19:57.500Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/chain-of-thought/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:20:24.792Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/chain-of-thought/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:20:38.122Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/chain-of-thought/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:20:54.825Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/chain-of-thought/gemini-2-5-pro-2026-06-23": {
-      "verdict": "PN",
-      "notes": "response exceeds the api token budget limit.",
-      "ts": "2026-06-25T02:23:33.101Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/chain-of-thought/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "?",
-      "notes": "",
-      "ts": "2026-06-25T02:27:32.599Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/chain-of-thought/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:28:02.066Z",
       "reviewer": "TJS"
     },
     "fundamentals/chain-of-thought/claude-opus-4-2026-02-04": {
@@ -255,82 +39,10 @@
       "ts": "2026-06-25T02:35:00.508Z",
       "reviewer": "TJS"
     },
-    "fundamentals/cross-model-validation/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:35:26.785Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/cross-model-validation/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:35:51.411Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/cross-model-validation/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:35:53.079Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/cross-model-validation/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:35:54.637Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/cross-model-validation/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-06-25T02:36:05.503Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/cross-model-validation/step-3-7-flash-2026-06-23": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-06-25T02:36:55.265Z",
-      "reviewer": "TJS"
-    },
     "fundamentals/cross-model-validation/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:37:15.946Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/few-shot-learning/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:37:28.810Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/few-shot-learning/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:37:30.159Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/few-shot-learning/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:37:32.148Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/few-shot-learning/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:37:40.050Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/few-shot-learning/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:38:03.504Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/few-shot-learning/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:38:08.048Z",
       "reviewer": "TJS"
     },
     "fundamentals/few-shot-learning/claude-opus-4-2026-02-04": {
@@ -339,82 +51,10 @@
       "ts": "2026-06-25T02:41:14.655Z",
       "reviewer": "TJS"
     },
-    "fundamentals/meta-prompting/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:41:17.845Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/meta-prompting/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:41:18.933Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/meta-prompting/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:41:20.313Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/meta-prompting/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:41:21.630Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/meta-prompting/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:41:23.324Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/meta-prompting/step-3-7-flash-2026-06-23": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-06-25T02:41:26.273Z",
-      "reviewer": "TJS"
-    },
     "fundamentals/meta-prompting/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:41:34.888Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/structured-prompt-template/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:41:37.085Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/structured-prompt-template/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:41:43.281Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/structured-prompt-template/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:41:47.605Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/structured-prompt-template/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:41:50.648Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/structured-prompt-template/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:41:52.243Z",
-      "reviewer": "TJS"
-    },
-    "fundamentals/structured-prompt-template/step-3-7-flash-2026-06-23": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-06-25T02:41:54.259Z",
       "reviewer": "TJS"
     },
     "fundamentals/structured-prompt-template/claude-opus-4-2026-02-04": {
@@ -423,82 +63,10 @@
       "ts": "2026-06-25T02:42:05.445Z",
       "reviewer": "TJS"
     },
-    "literature/gap-identification/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:42:10.296Z",
-      "reviewer": "TJS"
-    },
-    "literature/gap-identification/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:42:11.670Z",
-      "reviewer": "TJS"
-    },
-    "literature/gap-identification/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:42:33.716Z",
-      "reviewer": "TJS"
-    },
-    "literature/gap-identification/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:42:35.282Z",
-      "reviewer": "TJS"
-    },
-    "literature/gap-identification/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:43:18.145Z",
-      "reviewer": "TJS"
-    },
-    "literature/gap-identification/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:43:19.665Z",
-      "reviewer": "TJS"
-    },
     "literature/gap-identification/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:44:04.721Z",
-      "reviewer": "TJS"
-    },
-    "literature/paper-summary/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:12.877Z",
-      "reviewer": "TJS"
-    },
-    "literature/paper-summary/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:13.869Z",
-      "reviewer": "TJS"
-    },
-    "literature/paper-summary/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:15.028Z",
-      "reviewer": "TJS"
-    },
-    "literature/paper-summary/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:20.877Z",
-      "reviewer": "TJS"
-    },
-    "literature/paper-summary/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:22.190Z",
-      "reviewer": "TJS"
-    },
-    "literature/paper-summary/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:23.442Z",
       "reviewer": "TJS"
     },
     "literature/paper-summary/claude-opus-4-2026-02-04": {
@@ -507,82 +75,10 @@
       "ts": "2026-06-25T02:44:28.271Z",
       "reviewer": "TJS"
     },
-    "literature/synthesis-across-papers/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:29.806Z",
-      "reviewer": "TJS"
-    },
-    "literature/synthesis-across-papers/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:31.223Z",
-      "reviewer": "TJS"
-    },
-    "literature/synthesis-across-papers/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:32.546Z",
-      "reviewer": "TJS"
-    },
-    "literature/synthesis-across-papers/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:33.908Z",
-      "reviewer": "TJS"
-    },
-    "literature/synthesis-across-papers/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:35.156Z",
-      "reviewer": "TJS"
-    },
-    "literature/synthesis-across-papers/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:44:36.575Z",
-      "reviewer": "TJS"
-    },
     "literature/synthesis-across-papers/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:45:13.961Z",
-      "reviewer": "TJS"
-    },
-    "statistics/assumption-checking/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:46:02.029Z",
-      "reviewer": "TJS"
-    },
-    "statistics/assumption-checking/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:46:06.838Z",
-      "reviewer": "TJS"
-    },
-    "statistics/assumption-checking/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:46:07.994Z",
-      "reviewer": "TJS"
-    },
-    "statistics/assumption-checking/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:46:34.071Z",
-      "reviewer": "TJS"
-    },
-    "statistics/assumption-checking/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:07.182Z",
-      "reviewer": "TJS"
-    },
-    "statistics/assumption-checking/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:11.505Z",
       "reviewer": "TJS"
     },
     "statistics/assumption-checking/claude-opus-4-2026-02-04": {
@@ -591,82 +87,10 @@
       "ts": "2026-06-25T02:47:19.962Z",
       "reviewer": "TJS"
     },
-    "statistics/design-review/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:21.860Z",
-      "reviewer": "TJS"
-    },
-    "statistics/design-review/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:23.184Z",
-      "reviewer": "TJS"
-    },
-    "statistics/design-review/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:24.457Z",
-      "reviewer": "TJS"
-    },
-    "statistics/design-review/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:25.685Z",
-      "reviewer": "TJS"
-    },
-    "statistics/design-review/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:27.058Z",
-      "reviewer": "TJS"
-    },
-    "statistics/design-review/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:28.932Z",
-      "reviewer": "TJS"
-    },
     "statistics/design-review/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:47:33.176Z",
-      "reviewer": "TJS"
-    },
-    "statistics/interpretation-brainstorming/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:34.628Z",
-      "reviewer": "TJS"
-    },
-    "statistics/interpretation-brainstorming/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:35.805Z",
-      "reviewer": "TJS"
-    },
-    "statistics/interpretation-brainstorming/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:37.265Z",
-      "reviewer": "TJS"
-    },
-    "statistics/interpretation-brainstorming/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:39.119Z",
-      "reviewer": "TJS"
-    },
-    "statistics/interpretation-brainstorming/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:41.348Z",
-      "reviewer": "TJS"
-    },
-    "statistics/interpretation-brainstorming/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:42.726Z",
       "reviewer": "TJS"
     },
     "statistics/interpretation-brainstorming/claude-opus-4-2026-02-04": {
@@ -675,82 +99,10 @@
       "ts": "2026-06-25T02:47:55.365Z",
       "reviewer": "TJS"
     },
-    "statistics/test-selection/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:56.846Z",
-      "reviewer": "TJS"
-    },
-    "statistics/test-selection/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:47:59.065Z",
-      "reviewer": "TJS"
-    },
-    "statistics/test-selection/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:00.450Z",
-      "reviewer": "TJS"
-    },
-    "statistics/test-selection/gemini-2-5-pro-2026-06-23": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-06-25T02:48:03.639Z",
-      "reviewer": "TJS"
-    },
-    "statistics/test-selection/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:05.566Z",
-      "reviewer": "TJS"
-    },
-    "statistics/test-selection/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:06.948Z",
-      "reviewer": "TJS"
-    },
     "statistics/test-selection/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:48:11.858Z",
-      "reviewer": "TJS"
-    },
-    "validation/adversarial-critique/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:13.780Z",
-      "reviewer": "TJS"
-    },
-    "validation/adversarial-critique/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:15.295Z",
-      "reviewer": "TJS"
-    },
-    "validation/adversarial-critique/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:16.831Z",
-      "reviewer": "TJS"
-    },
-    "validation/adversarial-critique/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:18.507Z",
-      "reviewer": "TJS"
-    },
-    "validation/adversarial-critique/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:20.366Z",
-      "reviewer": "TJS"
-    },
-    "validation/adversarial-critique/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:21.814Z",
       "reviewer": "TJS"
     },
     "validation/adversarial-critique/claude-opus-4-2026-02-04": {
@@ -759,82 +111,10 @@
       "ts": "2026-06-25T02:48:31.170Z",
       "reviewer": "TJS"
     },
-    "validation/uncertainty-elicitation/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:32.541Z",
-      "reviewer": "TJS"
-    },
-    "validation/uncertainty-elicitation/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:34.274Z",
-      "reviewer": "TJS"
-    },
-    "validation/uncertainty-elicitation/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:36.029Z",
-      "reviewer": "TJS"
-    },
-    "validation/uncertainty-elicitation/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:37.680Z",
-      "reviewer": "TJS"
-    },
-    "validation/uncertainty-elicitation/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:39.923Z",
-      "reviewer": "TJS"
-    },
-    "validation/uncertainty-elicitation/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:48:41.873Z",
-      "reviewer": "TJS"
-    },
     "validation/uncertainty-elicitation/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:49:00.730Z",
-      "reviewer": "TJS"
-    },
-    "writing/methods-drafting/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:02.361Z",
-      "reviewer": "TJS"
-    },
-    "writing/methods-drafting/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:03.899Z",
-      "reviewer": "TJS"
-    },
-    "writing/methods-drafting/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:05.265Z",
-      "reviewer": "TJS"
-    },
-    "writing/methods-drafting/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:06.625Z",
-      "reviewer": "TJS"
-    },
-    "writing/methods-drafting/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:13.456Z",
-      "reviewer": "TJS"
-    },
-    "writing/methods-drafting/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:14.994Z",
       "reviewer": "TJS"
     },
     "writing/methods-drafting/claude-opus-4-2026-02-04": {
@@ -843,82 +123,10 @@
       "ts": "2026-06-25T02:49:18.713Z",
       "reviewer": "TJS"
     },
-    "writing/results-description/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:20.252Z",
-      "reviewer": "TJS"
-    },
-    "writing/results-description/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:31.219Z",
-      "reviewer": "TJS"
-    },
-    "writing/results-description/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:34.529Z",
-      "reviewer": "TJS"
-    },
-    "writing/results-description/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:36.079Z",
-      "reviewer": "TJS"
-    },
-    "writing/results-description/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-06-25T02:49:40.888Z",
-      "reviewer": "TJS"
-    },
-    "writing/results-description/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:42.938Z",
-      "reviewer": "TJS"
-    },
     "writing/results-description/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:49:51.337Z",
-      "reviewer": "TJS"
-    },
-    "writing/reviewer-response/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:52.611Z",
-      "reviewer": "TJS"
-    },
-    "writing/reviewer-response/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:54.310Z",
-      "reviewer": "TJS"
-    },
-    "writing/reviewer-response/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:55.798Z",
-      "reviewer": "TJS"
-    },
-    "writing/reviewer-response/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:56.996Z",
-      "reviewer": "TJS"
-    },
-    "writing/reviewer-response/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:49:58.476Z",
-      "reviewer": "TJS"
-    },
-    "writing/reviewer-response/step-3-7-flash-2026-06-23": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-06-25T02:50:00.576Z",
       "reviewer": "TJS"
     },
     "writing/reviewer-response/claude-opus-4-2026-02-04": {
@@ -927,82 +135,10 @@
       "ts": "2026-06-25T02:50:05.896Z",
       "reviewer": "TJS"
     },
-    "writing/specific-aims/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:07.643Z",
-      "reviewer": "TJS"
-    },
-    "writing/specific-aims/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:15.066Z",
-      "reviewer": "TJS"
-    },
-    "writing/specific-aims/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:16.194Z",
-      "reviewer": "TJS"
-    },
-    "writing/specific-aims/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:17.595Z",
-      "reviewer": "TJS"
-    },
-    "writing/specific-aims/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:19.155Z",
-      "reviewer": "TJS"
-    },
-    "writing/specific-aims/step-3-7-flash-2026-06-23": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-06-25T02:50:21.488Z",
-      "reviewer": "TJS"
-    },
     "writing/specific-aims/claude-opus-4-2026-02-04": {
       "verdict": "P",
       "notes": "",
       "ts": "2026-06-25T02:50:32.103Z",
-      "reviewer": "TJS"
-    },
-    "writing/style-matching/claude-sonnet-4-6-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:35.812Z",
-      "reviewer": "TJS"
-    },
-    "writing/style-matching/claude-opus-4-7-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:36.962Z",
-      "reviewer": "TJS"
-    },
-    "writing/style-matching/gpt-5-5-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:39.560Z",
-      "reviewer": "TJS"
-    },
-    "writing/style-matching/gemini-2-5-pro-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:41.501Z",
-      "reviewer": "TJS"
-    },
-    "writing/style-matching/nemotron-3-super-120b-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:43.017Z",
-      "reviewer": "TJS"
-    },
-    "writing/style-matching/step-3-7-flash-2026-06-23": {
-      "verdict": "P",
-      "notes": "",
-      "ts": "2026-06-25T02:50:44.501Z",
       "reviewer": "TJS"
     },
     "writing/style-matching/claude-opus-4-2026-02-04": {
