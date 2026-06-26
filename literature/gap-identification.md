@@ -179,6 +179,34 @@ Wong et al. (2024). "Engraftment of probiotic strains is rare and transient in a
 - Future directions: Authors suggest personalized approaches based on baseline microbiome
 
 My research capabilities: Mouse models of colitis (DSS and IL-10 knockout), gnotobiotic facilities, 16S and shotgun sequencing, bacterial culture and strain isolation.
+
+Task: Analyze these papers to identify research gaps and opportunities. Structure your analysis as follows:
+
+1. **Explicit Gaps**: Questions or limitations the authors themselves identify as needing future work. Quote or paraphrase directly from the papers.
+
+2. **Implicit Gaps**: Questions that arise from the work but are not explicitly flagged by authors:
+   - Untested assumptions
+   - Missing controls or comparisons
+   - Unexplored mechanisms
+   - Populations or systems not studied
+   - Methodological limitations that could be addressed
+
+3. **Contradictions Requiring Resolution**: Conflicting findings across papers that represent opportunities to resolve through new experiments.
+
+4. **Methodological Opportunities**: New techniques, larger samples, or improved designs that could advance understanding.
+
+5. **Translation Gaps**: For basic research—what would be needed to move toward application? For applied research—what mechanistic understanding is missing?
+
+6. **Prioritized Opportunities**: Based on my stated research capabilities, which 2-3 gaps are most tractable and impactful for me to address?
+
+Constraints:
+- Base your analysis ONLY on the papers provided—do not introduce gaps from your general knowledge
+- For each gap, cite which paper(s) suggest it
+- Distinguish between "authors say this is needed" and "I infer this is needed"
+- Do not overstate the significance of gaps—some are minor or already being addressed
+- If a gap seems important but may already be addressed in literature not provided, note this uncertainty
+
+Output format: Use the numbered structure above. Use bullet points within each section with specific paper attributions.
 ```
 
 **Expected output should include:**

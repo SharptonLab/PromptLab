@@ -131,11 +131,34 @@ Discussion: Our findings suggest that reduced SCFA production, particularly buty
 
 Relevance aspect: how microbial metabolites affect gut health in my mouse models
 
-**Constraints:**
+Task: Summarize this paper using the following structure.
+
+1. **Citation**: Format as: Authors (Year). Title. Journal.
+
+2. **Central Finding**: One to two sentences stating the main result or conclusion. Be specific about what was found, not just what was studied.
+
+3. **Research Question/Hypothesis**: What question did the authors set out to answer?
+
+4. **Methods Overview**:
+   - Study system/organism
+   - Key techniques or approaches
+   - Sample size and design (if applicable)
+
+5. **Key Results**: Three to five bullet points of specific findings. Include effect sizes or quantitative results where available.
+
+6. **Limitations**: What limitations do the authors acknowledge? What limitations are apparent but not discussed?
+
+7. **Open Questions**: What questions remain unanswered? What would logical next steps be?
+
+8. **Relevance to My Work**: How might this paper inform how microbial metabolites affect gut health in my mouse models?
+
+Constraints:
 - Use only information present in the paper—do not add context from other sources
 - If a section cannot be completed from the available text, state "Not available in provided text"
 - Distinguish between what authors claim and what the data support
 - Note if sample sizes or effect sizes are not reported
+
+Output format: Use the numbered structure above with headers in bold.
 ```
 
 **Expected output should include:**

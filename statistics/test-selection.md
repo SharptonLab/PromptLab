@@ -225,6 +225,25 @@ Specific considerations:
 - I want to test if communities differ between responders and non-responders
 - I also want to identify specific taxa associated with response
 - Relatively small sample size for a clinical study
+
+Task: Suggest appropriate statistical approaches for this analysis.
+
+For each approach, provide:
+1. **Test/method name**: What is it called?
+2. **When appropriate**: Under what conditions is this method suitable?
+3. **Key assumptions**: What must be true for this test to be valid?
+4. **Advantages**: Why might I choose this approach?
+5. **Limitations**: What are the drawbacks or risks?
+6. **Alternatives**: If assumptions aren't met, what else could I consider?
+
+Constraints:
+- Suggest 2-4 approaches, from simpler to more complex
+- Be explicit about assumptions I need to verify
+- Note when I should consult a statistician
+- If my data description suggests problems (e.g., too small n), say so
+- Do not present a single "correct" answer when multiple approaches are defensible
+
+Output format: Structured list of options with the information above for each.
 ```
 
 **Expected output should include:**

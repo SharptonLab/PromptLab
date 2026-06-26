@@ -151,6 +151,36 @@ Innovation: First study to combine microbiome signatures with established screen
 My lab: expertise in microbiome bioinformatics, machine learning, established GI collaborations
 
 Target length: 1 page (R21 limit)
+
+Task: Draft a Specific Aims page with the following structure:
+
+**Opening paragraph (The Hook):**
+- First sentence: Establish the problem and its significance (the "so what")
+- Knowledge gap: What critical barrier limits progress?
+- Your solution: How does your approach address this gap?
+- Long-term goal and overall objective for this proposal
+
+**Specific Aims (2-3 typically):**
+For each aim:
+- State the aim as a clear objective (what you will do)
+- Brief rationale (why this aim matters)
+- Approach summary (1-2 sentences on how)
+- Expected outcome (what you'll learn)
+
+**Closing paragraph:**
+- How the aims integrate and build on each other
+- Impact statement: what will be possible after this work that isn't possible now?
+- Connection to agency mission (if applicable)
+
+Constraints:
+- Use ONLY information from my notes—do not fabricate preliminary data, citations, or capabilities
+- Flag any claims that need preliminary data support as [NEEDS PRELIM DATA]
+- Flag any citations needed as [CITE]
+- Keep within target length
+- Use active, confident language—avoid excessive hedging
+- Make aims concrete and achievable within the funding period
+
+Output format: Formatted aims page with section headers. Flag gaps for my attention.
 ```
 
 **Expected output should include:**

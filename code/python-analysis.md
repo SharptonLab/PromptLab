@@ -488,7 +488,35 @@ Task: Write a Python script that:
 4. Creates a figure showing diversity over time by delivery mode (mean ± 95% CI)
 5. Outputs: summary statistics table, model results, publication-quality figure
 
-Requirements as specified in the prompt template.
+Requirements:
+1. **Structure**:
+   - Use functions with docstrings for reusable operations
+   - Include a `main()` function with `if __name__ == "__main__":` guard
+   - Group imports at the top (standard library, third-party, local)
+
+2. **Documentation**:
+   - Module-level docstring describing the script's purpose
+   - Type hints for function arguments and returns
+   - Comments for non-obvious logic
+
+3. **Error handling**:
+   - Validate inputs exist and have expected format
+   - Provide informative error messages
+   - Handle common failure modes gracefully
+
+4. **Output**:
+   - Summary statistics table (CSV), linear mixed model results (text/CSV), publication-quality figure showing diversity trajectories by delivery mode with mean ± 95% CI
+
+Constraints:
+- Use only packages from standard library, PyPI, or conda-forge
+- Prefer pandas/numpy idioms over loops where appropriate
+- Flag assumptions about data structure with comments
+- Note any operations that may be slow on large data
+
+Output format: Complete Python script. After the script, provide:
+- Requirements list (for requirements.txt or environment.yml)
+- Assumptions made
+- Validation checks to run
 ```
 
 **Expected output should include:**

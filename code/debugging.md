@@ -230,6 +230,23 @@ Environment details:
 - Python 3.10
 - scipy 1.11.0
 - numpy 1.24.0
+
+Task: Please help me debug this issue:
+
+1. **Explain the error**: What does this error message mean in plain language?
+
+2. **Identify the cause**: What specifically in my code is triggering this error?
+
+3. **Provide the fix**: Show the corrected code with comments explaining the changes.
+
+4. **Explain why**: Why does the fix work? What was wrong with my original approach?
+
+5. **Prevention**: How can I avoid similar errors in the future?
+
+Constraints:
+- If you need more information to diagnose the issue, ask before guessing
+- If there are multiple possible causes, list them in order of likelihood
+- If the error might be environment-specific, note that
 ````
 
 **Expected output should include:**

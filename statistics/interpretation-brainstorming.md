@@ -245,6 +245,28 @@ Results summary:
 - Unexpected: FMT-obese group showed slightly (non-significant) lower glucose than Control
 
 My initial interpretation: Lean-donor microbiota transfers metabolically beneficial effects to obese recipients, potentially through specific bacterial taxa that improve glucose regulation.
+
+Task: Help me think through these results critically:
+
+1. **Support for initial interpretation**: What evidence supports my interpretation? How strong is it?
+
+2. **Alternative interpretations**: What other explanations could produce these results? For each alternative:
+   - What would it predict?
+   - How could I distinguish it from my interpretation?
+
+3. **Potential confounds**: What factors might have influenced the results that aren't captured in my interpretation?
+
+4. **Limitations to acknowledge**: What caveats should I include when presenting these findings?
+
+5. **Questions for follow-up**: What additional experiments or analyses would strengthen the interpretation?
+
+6. **What the results don't show**: What conclusions would be overreach?
+
+Constraints:
+- Be genuinely critical—I want to anticipate reviewer objections
+- Don't just agree with my interpretation; actively generate alternatives
+- Distinguish between plausible alternatives and unlikely ones
+- Focus on scientific interpretation, not just statistical significance
 ```
 
 **Expected output should include:**

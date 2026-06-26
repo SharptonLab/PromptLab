@@ -102,6 +102,24 @@ We investigated how specific bacterial metabolites influence regulatory T cell d
 
 Text to revise:
 "In the present investigation, we sought to elucidate the mechanistic underpinnings of how the gut microbiome modulates host immune responses. Utilizing state-of-the-art methodological approaches including flow cytometric analysis and single-cell RNA sequencing technologies, we comprehensively characterized the immunological landscape of the intestinal mucosa. Our findings demonstrate that microbial colonization status significantly impacts the development and functional capacity of tissue-resident immune cell populations, with particularly notable effects observed in the regulatory T cell compartment."
+
+Task: Revise the "text to revise" to match the style of my reference sample. Preserve all substantive content while adjusting:
+
+1. **Sentence structure**: Match my typical sentence length and complexity
+2. **Voice and tone**: Match my level of formality, confidence, and directness
+3. **Word choice**: Use vocabulary consistent with my writing; replace words I wouldn't use
+4. **Hedging patterns**: Match how I express uncertainty or qualification
+5. **Transition style**: Match how I connect ideas between sentences and paragraphs
+6. **Technical language**: Match my balance of technical vs. accessible language
+
+Constraints:
+- Do NOT change the meaning or substance of the content
+- Do NOT add new information or claims
+- Do NOT remove important details or qualifications
+- Flag any content issues (not style issues) as [CONTENT NOTE: description]
+- If the reference sample is too short or inconsistent to reliably match, note this
+
+Output format: Revised text, followed by a brief note on the key stylistic changes made.
 ```
 
 **Expected output should include:**

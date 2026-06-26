@@ -114,6 +114,30 @@ My planned response/action:
 - Added new sentence to Discussion acknowledging this limitation
 - However, some weak correlations are still biologically interesting as part of networks
 - Did not remove any results but added appropriate caveats
+
+Task: Draft a response to this reviewer comment. Follow these guidelines:
+
+1. **Acknowledge the point**: Start by thanking the reviewer for the observation or showing you understood their concern.
+
+2. **Summarize the issue**: Briefly restate what the reviewer raised (shows you understood).
+
+3. **Provide your response**: Explain what you did in response, with specifics:
+   - If you made changes: describe what was changed and where
+   - If you did additional analysis: summarize the approach and findings
+   - If you respectfully disagree: explain your reasoning clearly
+
+4. **Quote new text if applicable**: If the manuscript was revised, show the new/revised text.
+
+5. **Be specific about locations**: Reference page numbers, line numbers, figure numbers, or section names.
+
+Constraints:
+- Maintain a professional, collegial tone throughout
+- Do not be defensive or dismissive—even if the comment seems unfair
+- Do not fabricate experiments, analyses, or results you haven't done
+- If you disagree with the reviewer, provide scientific reasoning, not assertions
+- Do not over-promise changes you won't make
+
+Output format: Response suitable for inclusion in a point-by-point response document.
 ```
 
 **Expected output should include:**

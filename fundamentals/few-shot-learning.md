@@ -157,6 +157,19 @@ Output:
 - Key finding: Antibiotic exposure reduces diversity and delays metabolic pathway maturation
 - Organism: Human (infant)
 
+**Example 3:**
+Input: "Dietary fiber modulates gut microbial composition in murine models. C57BL/6 mice (n=40) were randomized to high-fiber or control diet for 8 weeks. 16S rRNA sequencing of cecal contents using Illumina MiSeq showed increased Bacteroidetes and decreased Firmicutes in the high-fiber group. Metabolomic analysis confirmed elevated short-chain fatty acid production."
+
+Output:
+- Study type: Randomized controlled (animal)
+- Disease/condition: Dietary intervention (not disease)
+- Sample type: Cecal contents
+- Sample size: 40 mice
+- Sequencing: 16S rRNA (Illumina MiSeq)
+- Analysis tools: Not specified
+- Key finding: High-fiber diet increases Bacteroidetes, decreases Firmicutes, elevates SCFAs
+- Organism: Mouse (C57BL/6)
+
 Now process the following using the same format:
 
 Input: "Fecal microbiota transplantation (FMT) shows promise for recurrent Clostridioides difficile infection. This randomized controlled trial enrolled 68 patients with recurrent CDI, assigning them to FMT (n=34) or vancomycin (n=34). Stool samples were analyzed using shotgun metagenomics with MetaPhlAn3. At 8 weeks, FMT achieved 91% cure rate versus 62% for vancomycin (p=0.008). FMT recipients showed rapid engraftment of donor Bacteroidetes species and restoration of secondary bile acid metabolism."

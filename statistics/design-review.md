@@ -234,6 +234,33 @@ Potential confounders I've considered:
 - Food consumption differences
 
 Planned analysis: Compare clinical scores with repeated measures ANOVA; compare microbiome with PERMANOVA; correlate microbiome changes with immune parameters.
+
+Task: Review this experimental design critically. Please identify:
+
+1. **Strengths**: What aspects of the design are well-constructed?
+
+2. **Missing controls**: Are there controls that should be added?
+
+3. **Potential confounds**: What factors could produce the expected result without the hypothesized mechanism?
+
+4. **Threats to validity**:
+   - Internal validity: Could something other than the treatment explain results?
+   - External validity: How generalizable are potential findings?
+
+5. **Statistical concerns**:
+   - Is the sample size likely adequate?
+   - Does the design match the planned analysis?
+   - Are there design features that complicate analysis?
+
+6. **Practical issues**: What could go wrong during execution?
+
+7. **Recommendations**: Prioritized list of suggested improvements
+
+Constraints:
+- Be critical—I want to find problems now, not after data collection
+- Distinguish between essential fixes and nice-to-haves
+- If you need more information to evaluate an aspect, ask
+- Don't assume expertise I may not have; explain concerns clearly
 ```
 
 **Expected output should include:**

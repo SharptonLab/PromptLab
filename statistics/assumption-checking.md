@@ -346,6 +346,25 @@ Data characteristics I've noticed:
 - Groups have different spread on PCoA plots (dispersion looks unequal)
 - One treatment group clusters more tightly than others
 - Sample sizes are equal across groups
+
+Task: Provide a complete assumption-checking workflow:
+
+1. **List all assumptions** for this test, in order of importance (which violations are most problematic)
+
+2. **For each assumption**:
+   - What it means in plain language
+   - How to test it (formal tests and/or visual diagnostics)
+   - How to interpret the results
+   - What to do if violated (robust alternatives, transformations, or when it's okay to proceed)
+
+3. **Code examples** for the assumption checks in R with vegan
+
+4. **Decision summary**: A flowchart or decision tree for how to proceed based on results
+
+Constraints:
+- Be practical—focus on violations that meaningfully affect inference
+- Note when minor violations are unlikely to matter
+- Acknowledge that some assumption tests have their own limitations
 ```
 
 **Expected output should include:**

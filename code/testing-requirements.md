@@ -286,7 +286,27 @@ What the code should do: Transform count data using CLR, which centers each samp
 
 Test data available: I can create simple test matrices with known values.
 
-Task: Help me create a testing strategy using simple assert statements and manual checks.
+Task: Help me create a testing strategy for this code:
+
+1. **Test cases**: Suggest specific test cases covering:
+   - Normal/expected inputs (does it work for typical data?)
+   - Edge cases (empty input, single row, extreme values)
+   - Known-answer tests (if possible)
+   - Boundary conditions
+
+2. **Test code**: Write test code I can run to verify each case. Use simple assert statements.
+
+3. **Validation checks**: What should I manually inspect in the output to verify correctness?
+
+4. **Red flags**: What output patterns would indicate the code is wrong?
+
+Constraints:
+- Focus on tests that catch meaningful errors, not pedantic checks
+- Prioritize tests for the parts most likely to be wrong
+- If full automated testing is overkill, suggest lightweight manual verification
+- Note any tests that require me to know the "right" answer in advance
+
+Output format: Test strategy with code examples for each test type.
 ````
 
 **Expected output should include:**

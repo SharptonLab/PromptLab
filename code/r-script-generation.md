@@ -254,10 +254,29 @@ Task: Write an R script that:
 6. Outputs: ordination plot as PDF, PERMANOVA results summary
 
 Requirements:
-1. Packages: phyloseq, vegan, ggplot2
-2. Code style: Well-commented with section headers
-3. Input file path: "data/probiotic_study.rds"
-4. Output: Publication-quality figure, statistical summary to console
+1. **Packages**: Use phyloseq, vegan, ggplot2. If you suggest other packages, explain why.
+
+2. **Code style**:
+   - Include comments explaining each major step
+   - Use descriptive variable names
+   - Group related operations into labeled sections
+
+3. **Input/Output**:
+   - Input file path: "data/probiotic_study.rds"
+   - Output: Publication-quality ordination figure as PDF, statistical summary (PERMANOVA results) printed to console
+
+4. **Error handling**: Include basic checks for common issues (missing data, unexpected formats)
+
+Constraints:
+- Use only packages available on CRAN or Bioconductor
+- Prefer base R or tidyverse solutions when possible for maintainability
+- Flag any assumptions about data structure as comments
+- If there are multiple valid approaches, briefly note alternatives
+
+Output format: Complete R script with section headers and comments. After the script, provide:
+- List of required packages
+- Any assumptions made about the data
+- Suggested validation checks to run
 ```
 
 **Expected output should include:**

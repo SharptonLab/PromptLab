@@ -189,6 +189,31 @@ The text to critique:
 "Stool samples were collected from all participants using standard protocols. Samples were immediately frozen at -80°C and DNA was extracted using the Qiagen PowerSoil kit following manufacturer instructions. 16S rRNA gene sequencing was performed using the V4 region primers 515F and 806R on an Illumina MiSeq platform. Sequences were processed using QIIME2 with default parameters, and taxonomy was assigned using the Greengenes database. Alpha diversity was calculated using Shannon index and beta diversity was calculated using Bray-Curtis distances. All statistical analyses were performed using appropriate methods and significance was set at p < 0.05."
 
 Background: This is for a study comparing gut microbiome between healthy controls and patients with inflammatory bowel disease (n=30 per group).
+
+Task: Provide an adversarial critique of this content. Your job is to find problems, not to validate. Please identify:
+
+1. **Logical weaknesses**: Flaws in reasoning, unsupported leaps, circular arguments
+
+2. **Factual concerns**: Claims that seem unsupported, incorrect, or unverifiable
+   - Flag specific claims that should be checked
+   - Note anything that seems too convenient or too clean
+
+3. **Missing considerations**: Important perspectives, alternatives, or caveats that are absent
+
+4. **Overstated claims**: Where has the author gone beyond what the evidence supports?
+
+5. **Structural issues**: Problems with organization, flow, or clarity
+
+6. **What a skeptical reviewer would say**: If this were submitted for peer review, what objections would a critical reviewer raise?
+
+Constraints:
+- Be genuinely critical—I want problems surfaced, not reassurance
+- Distinguish between minor issues and significant concerns
+- Be specific: quote the problematic text and explain the issue
+- If something is actually good, you can note it briefly, but focus on problems
+- Do not soften criticism or sandwich it between praise
+
+Output format: Structured critique with specific issues and recommended fixes where applicable.
 ```
 
 **Expected output should include:**

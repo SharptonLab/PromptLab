@@ -170,12 +170,27 @@ Microbiome analysis:
 - Illumina MiSeq 2x250bp
 - QIIME2 with DADA2 for ASV inference
 
-Subsections needed:
+Task: Draft a Methods section based on my notes. Structure the section with the following subsections:
+
 1. Study Design and Participants
 2. FMT Preparation and Administration
 3. Outcome Measures
 4. Microbiome Analysis
 5. Statistical Analysis [notes missing for this]
+
+For each subsection:
+- Write in past tense, passive or active voice as appropriate for the target journal
+- Include specific details: reagent names, concentrations, instrument settings, software versions
+- State the purpose of each step where not obvious
+- Note sample sizes and replicates
+
+Constraints:
+- Use ONLY information from my notes—do not add steps, reagents, or parameters I didn't specify
+- If my notes are missing critical details, flag them as [MISSING: description] rather than inventing values
+- Do not add interpretation or results—this is Methods only
+- Keep prose clear and direct; avoid unnecessary hedging
+
+Output format: Structured prose with subsection headers. Flag any gaps or ambiguities for my attention.
 ```
 
 **Expected output should include:**

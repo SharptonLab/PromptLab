@@ -217,6 +217,29 @@ What confuses me:
 - What does contrast = c("treatment", "diseased", "healthy") do?
 - What is lfcThreshold and why use it?
 - Why check padj AND log2FoldChange when lfcThreshold was already set?
+
+Task: Explain this code clearly. Please provide:
+
+1. **Overview**: What does this code accomplish overall? (2-3 sentences)
+
+2. **Step-by-step walkthrough**: Go through the code section by section, explaining:
+   - What each section does
+   - Why it's done this way
+   - Any non-obvious operations or syntax
+
+3. **Key concepts**: Explain any programming concepts, patterns, or library features I might not know based on my stated background.
+
+4. **Inputs and outputs**: What does this code expect as input? What does it produce?
+
+5. **Potential issues**: Are there any limitations, edge cases, or potential problems with this code?
+
+Constraints:
+- Adjust explanation depth to my stated background level
+- If the code has errors or poor practices, note them
+- Don't assume I know jargon—define terms as needed
+- If parts are unclear without more context, say so
+
+Output format: Structured explanation with numbered sections and code snippets where helpful.
 ````
 
 **Expected output should include:**

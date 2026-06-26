@@ -114,6 +114,28 @@ Additional notes:
 - DSS = dextran sulfate sodium colitis model
 
 Research question: Does probiotic treatment protect against colitis-induced intestinal barrier dysfunction?
+
+Task: Write a results paragraph describing these findings. Follow these guidelines:
+
+1. **State the main finding first**: Lead with what the data show, not the methods used to show it.
+
+2. **Report specific values**: Include effect sizes, confidence intervals, p-values, or other relevant statistics as provided.
+
+3. **Describe patterns accurately**: For figures, describe trends, differences, or distributions visible in the data.
+
+4. **Reference the figure/table**: Include appropriate references (e.g., "Figure 2A").
+
+5. **Maintain appropriate scope**: Describe what IS shown; do not extrapolate beyond the data.
+
+Constraints:
+- Use ONLY the data I have provided—do not invent statistics or findings
+- Distinguish between statistically significant and non-significant findings
+- Do not interpret causation from correlation
+- Do not include discussion of mechanisms or implications (that's for Discussion)
+- If the data are unclear or seem inconsistent, flag this rather than smoothing over it
+- Flag any values that seem unusual with [VERIFY: concern]
+
+Output format: One to three paragraphs of results prose, with figure/table references in parentheses.
 ```
 
 **Expected output should include:**

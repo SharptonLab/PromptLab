@@ -157,6 +157,33 @@ Thompson et al. (2024). "Probiotic co-administration does not prevent antibiotic
 Synthesis focus: What is known about microbiome recovery after antibiotic exposure?
 
 My specific research question: Whether there are interventions that could accelerate microbiome recovery.
+
+Task: Synthesize these papers with respect to what is known about microbiome recovery after antibiotic exposure. Structure your synthesis as follows:
+
+1. **Overview**: One paragraph summarizing the collective state of knowledge across these papers.
+
+2. **Points of Agreement**: What do these papers consistently find or conclude? Be specific about which papers support each point.
+
+3. **Points of Disagreement or Tension**: Where do findings, interpretations, or recommendations conflict? Characterize the nature of the disagreement.
+
+4. **Methodological Comparison**: How do the approaches differ? Consider:
+   - Study systems/organisms
+   - Sample sizes and designs
+   - Analytical techniques
+   - Outcome measures
+
+5. **Gaps and Limitations**: What questions remain unaddressed across this literature? What limitations are shared?
+
+6. **Synthesis Statement**: Two to three sentences capturing the bottom line for whether there are interventions that could accelerate microbiome recovery.
+
+Constraints:
+- Use ONLY information from the papers I have provided
+- Do NOT introduce findings, citations, or context from other sources
+- When attributing a claim to a paper, be specific (e.g., "Smith et al. found..." not "studies show...")
+- If papers contradict each other, present both positions without resolving the disagreement
+- If you cannot determine something from the provided texts, state this explicitly
+
+Output format: Use the numbered structure above. For Points of Agreement and Disagreement, use bullet points with specific paper attributions.
 ```
 
 **Expected output should include:**

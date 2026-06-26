@@ -174,7 +174,30 @@ Context: You previously provided the following output when I asked about methods
 
 "For differential abundance analysis in microbiome studies, DESeq2 and ANCOM are the most commonly used methods. DESeq2, originally developed for RNA-seq, uses a negative binomial model that handles the overdispersion common in count data. According to Weiss et al. (2017), DESeq2 has high sensitivity but can have elevated false positive rates with small sample sizes. ANCOM uses a log-ratio approach that accounts for compositionality and was shown by Mandal et al. (2015) to have better false positive control. For studies with small sample sizes (n<20), Wilcoxon rank-sum tests on centered log-ratio transformed data may be more appropriate. The recommended approach is to use at least two methods and focus on taxa identified by both, as suggested in the McMurdie and Holmes (2014) review of microbiome statistical methods."
 
-Task: [Continue with the uncertainty elicitation prompt above]
+Task: Now step back and critically assess your own response. Please identify:
+
+1. **Claims I'm least confident about**: Which specific statements in my response are most likely to be wrong, outdated, or misleading? For each:
+   - Quote the claim
+   - Explain why I'm uncertain
+   - Suggest how to verify
+
+2. **Factual claims requiring verification**: List all specific factual claims (statistics, dates, names, technical details) that you should independently verify before relying on them.
+
+3. **Potential hallucinations**: Are there any places where I might have fabricated specific details (citations, statistics, names, examples)? What are the highest-risk items?
+
+4. **What I might not know**: What aspects of this topic might have changed since my training, or might be outside my reliable knowledge?
+
+5. **Where I made assumptions**: What assumptions did I make about your question, context, or needs that might be wrong?
+
+6. **Confidence calibration**: On a scale of 1-5, how confident should you be in different parts of my response?
+   - 5 = Very confident (basic, well-established facts)
+   - 3 = Moderate (reasonable interpretation but should verify)
+   - 1 = Low (speculative, uncertain, or higher hallucination risk)
+
+Constraints:
+- Be genuinely self-critical—the goal is to surface real issues
+- Don't hedge on everything equally—prioritize the most concerning uncertainties
+- Be specific about what to verify and how
 ```
 
 **Expected output should include:**
