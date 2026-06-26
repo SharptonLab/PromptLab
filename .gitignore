@@ -47,3 +47,4 @@ __pycache__/
 
 # Harness run logs (any directory)
 *.log
+/evaluation/code-test-results.md
