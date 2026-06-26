@@ -51,7 +51,7 @@ Environment details:
 
 ## Filled Prompt
 
-```
+````
 Context: I am working on a microbiome diversity analysis in Python. I'm encountering an error I can't resolve.
 
 The error message:
@@ -105,7 +105,7 @@ Constraints:
 - If you need more information to diagnose the issue, ask before guessing
 - If there are multiple possible causes, list them in order of likelihood
 - If the error might be environment-specific, note that
-```
+````
 
 ## Model Output
 

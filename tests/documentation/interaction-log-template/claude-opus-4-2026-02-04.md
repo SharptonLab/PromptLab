@@ -33,7 +33,7 @@ Parameters:
 
 ## Filled Prompt
 
-```
+````
 I just completed an LLM interaction that I need to document for research purposes. Help me create a structured log entry.
 
 Interaction details:
@@ -65,7 +65,7 @@ Please format this as a structured log entry with the following sections:
 6. Verification status: [Not yet verified / Partially verified / Fully verified]
 7. Verification notes: [To be completed]
 8. Usage notes: [How this output was used in the research]
-```
+````
 
 ## Model Output
 

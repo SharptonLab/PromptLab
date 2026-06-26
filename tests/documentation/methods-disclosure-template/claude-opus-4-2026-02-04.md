@@ -43,7 +43,7 @@ LLM use in this project:
 
 ## Filled Prompt
 
-```
+````
 I need to write a disclosure statement for the Methods section of a scientific manuscript describing my use of large language models. Help me draft appropriate disclosure language based on the following information.
 
 Context about the manuscript:
@@ -88,7 +88,7 @@ Please draft disclosure language that:
 Provide the disclosure in two versions:
 1. Full Methods section version (for substantial LLM involvement)
 2. Brief Acknowledgments version (for light assistance)
-```
+````
 
 ## Model Output
 

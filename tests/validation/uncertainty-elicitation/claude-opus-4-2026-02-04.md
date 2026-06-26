@@ -20,7 +20,7 @@ Task: [Continue with the uncertainty elicitation prompt above]
 
 ## Filled Prompt
 
-```
+````
 Context: You previously provided the following output when I asked about methods for analyzing differential abundance in microbiome data:
 
 "For differential abundance analysis in microbiome studies, DESeq2 and ANCOM are the most commonly used methods. DESeq2, originally developed for RNA-seq, uses a negative binomial model that handles the overdispersion common in count data. According to Weiss et al. (2017), DESeq2 has high sensitivity but can have elevated false positive rates with small sample sizes. ANCOM uses a log-ratio approach that accounts for compositionality and was shown by Mandal et al. (2015) to have better false positive control. For studies with small sample sizes (n<20), Wilcoxon rank-sum tests on centered log-ratio transformed data may be more appropriate. The recommended approach is to use at least two methods and focus on taxa identified by both, as suggested in the McMurdie and Holmes (2014) review of microbiome statistical methods."
@@ -49,7 +49,7 @@ Constraints:
 - Be genuinely self-critical—the goal is to surface real issues
 - Don't hedge on everything equally—prioritize the most concerning uncertainties
 - Be specific about what to verify and how
-```
+````
 
 ## Model Output
 

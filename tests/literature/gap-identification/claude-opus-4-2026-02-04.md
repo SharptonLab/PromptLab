@@ -43,7 +43,7 @@ My research capabilities: Mouse models of colitis (DSS and IL-10 knockout), gnot
 
 ## Filled Prompt
 
-```
+````
 Context: I am a microbiome researcher working on probiotic development. I am trying to identify research gaps and opportunities based on the following papers I have read.
 
 Papers provided:
@@ -100,7 +100,7 @@ Constraints:
 - If a gap seems important but may already be addressed in literature not provided, note this uncertainty
 
 Output format: Use the numbered structure above. Use bullet points within each section with specific paper attributions.
-```
+````
 
 ## Model Output
 

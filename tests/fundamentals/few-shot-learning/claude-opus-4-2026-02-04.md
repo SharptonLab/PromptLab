@@ -10,7 +10,7 @@
 Standard test input from prompt file (FMT clinical trial abstract extraction)
 
 ## Filled Prompt
-```
+````
 I need to extract structured metadata from microbiome study abstracts. Extract only information explicitly stated in the abstract.
 
 Here are examples of the format I need:
@@ -46,7 +46,7 @@ Now process the following using the same format:
 Input: "Fecal microbiota transplantation (FMT) shows promise for recurrent Clostridioides difficile infection. This randomized controlled trial enrolled 68 patients with recurrent CDI, assigning them to FMT (n=34) or vancomycin (n=34). Stool samples were analyzed using shotgun metagenomics with MetaPhlAn3. At 8 weeks, FMT achieved 91% cure rate versus 62% for vancomycin (p=0.008). FMT recipients showed rapid engraftment of donor Bacteroidetes species and restoration of secondary bile acid metabolism."
 
 Output:
-```
+````
 
 ## Model Output
 ```

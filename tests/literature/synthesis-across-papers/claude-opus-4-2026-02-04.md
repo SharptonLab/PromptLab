@@ -45,7 +45,7 @@ My specific research question: Whether there are interventions that could accele
 
 ## Filled Prompt
 
-```
+````
 Context: I am synthesizing literature on antibiotic effects on the gut microbiome for a review section. I have read the following papers and am providing summaries below.
 
 Papers provided:
@@ -99,7 +99,7 @@ Constraints:
 - If you cannot determine something from the provided texts, state this explicitly
 
 Output format: Use the numbered structure above. For Points of Agreement and Disagreement, use bullet points with specific paper attributions.
-```
+````
 
 ## Model Output
 

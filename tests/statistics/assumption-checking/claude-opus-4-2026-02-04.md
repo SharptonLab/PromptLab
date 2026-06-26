@@ -28,7 +28,7 @@ Data characteristics I've noticed:
 
 ## Filled Prompt
 
-```
+````
 Context: I plan to use PERMANOVA to analyze my data. I need to verify the assumptions are met.
 
 Analysis details:
@@ -61,7 +61,7 @@ Constraints:
 - Be practical—focus on violations that meaningfully affect inference
 - Note when minor violations are unlikely to matter
 - Acknowledge that some assumption tests have their own limitations
-```
+````
 
 ## Model Output
 

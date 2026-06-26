@@ -21,7 +21,7 @@ Background: This is for a study comparing gut microbiome between healthy control
 
 ## Filled Prompt
 
-```
+````
 Context: I need critical feedback on a manuscript Methods section paragraph about microbiome sample collection.
 
 The text/content to critique:
@@ -53,7 +53,7 @@ Constraints:
 - Do not soften criticism or sandwich it between praise
 
 Output format: Structured critique with specific issues and recommended fixes where applicable.
-```
+````
 
 ## Model Output
 

@@ -39,7 +39,7 @@ Relevance aspect: how microbial metabolites affect gut health in my mouse models
 
 ## Filled Prompt
 
-```
+````
 Context: I am a microbiome researcher reviewing literature on diet-microbiome interactions. I need a structured summary of the following paper for my literature notes.
 
 Paper text:
@@ -83,7 +83,7 @@ Constraints:
 - Note if sample sizes or effect sizes are not reported
 
 Output format: Use the numbered structure above with headers in bold.
-```
+````
 
 ## Model Output
 

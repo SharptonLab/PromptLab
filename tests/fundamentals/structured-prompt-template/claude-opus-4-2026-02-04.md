@@ -10,7 +10,7 @@
 Standard test input from prompt file (methods extraction from IBD microbiome paper excerpt)
 
 ## Filled Prompt
-```
+````
 **Context:**
 I'm conducting a systematic review of gut microbiome studies in mouse models of inflammatory bowel disease. I need to extract standardized methodology information from each paper for comparison.
 
@@ -50,7 +50,7 @@ Provide the following fields, one per line:
 
 **Evaluation criteria:**
 Accuracy and completeness are paramount. It is better to report "Not reported" than to guess.
-```
+````
 
 ## Model Output
 ```

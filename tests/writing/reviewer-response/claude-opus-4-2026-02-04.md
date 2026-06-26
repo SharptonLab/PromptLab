@@ -11,7 +11,7 @@ Standard test input from prompt file (microbiome-metabolome multiple testing con
 
 ## Filled Prompt
 
-```
+````
 Context: I am preparing a response to reviewers for a manuscript on microbiome-metabolome interactions in inflammatory bowel disease.
 
 Reviewer comment:
@@ -50,7 +50,7 @@ Constraints:
 - Do not over-promise changes you won't make
 
 Output format: Response suitable for inclusion in a point-by-point response document.
-```
+````
 
 ## Model Output
 

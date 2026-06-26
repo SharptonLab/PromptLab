@@ -35,7 +35,7 @@ Requirements as specified in the prompt template.
 
 ## Filled Prompt
 
-```
+````
 Context: I am a microbiome researcher working on a longitudinal infant gut microbiome study. I need a Python script to calculate and plot diversity trajectories.
 
 Data description:
@@ -86,7 +86,7 @@ Output format: Complete Python script. After the script, provide:
 - Requirements list (for requirements.txt or environment.yml)
 - Assumptions made
 - Validation checks to run
-```
+````
 
 ## Model Output
 

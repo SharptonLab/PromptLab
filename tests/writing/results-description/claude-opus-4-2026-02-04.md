@@ -11,7 +11,7 @@ Standard test input from prompt file (probiotic effects on gut barrier function)
 
 ## Filled Prompt
 
-```
+````
 Context: I am writing the Results section for a manuscript on probiotic effects on gut barrier function. I need to describe the findings shown in Figure 3 (intestinal permeability assay).
 
 My data summary:
@@ -54,7 +54,7 @@ Constraints:
 - Flag any values that seem unusual with [VERIFY: concern]
 
 Output format: One to three paragraphs of results prose, with figure/table references in parentheses.
-```
+````
 
 ## Model Output
 

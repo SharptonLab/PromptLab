@@ -10,7 +10,7 @@
 Standard test input from prompt file (adversarial critique of t-test recommendation for alpha diversity)
 
 ## Filled Prompt
-```
+````
 Here is a response from another AI system to the following question:
 
 **Question:** What statistical test should I use to compare alpha diversity between two groups in my microbiome study?
@@ -29,7 +29,7 @@ Your task is to critically evaluate this response:
 5. **Confidence calibration:** Where is the response more confident than warranted?
 
 Be specific and direct. Identify concrete problems rather than vague concerns.
-```
+````
 
 ## Model Output
 ```

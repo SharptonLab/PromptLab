@@ -39,7 +39,7 @@ Planned analysis: Compare clinical scores with repeated measures ANOVA; compare 
 
 ## Filled Prompt
 
-```
+````
 Context: I am planning an experiment to test whether a high-fiber diet alters gut microbiome-immune interactions in a mouse model of autoimmune disease. I want critical feedback before I begin. I want you to identify potential problems, not just validate my plan.
 
 Research question: Does dietary fiber supplementation modify gut microbiome composition and reduce autoimmune inflammation in the EAE mouse model?
@@ -91,7 +91,7 @@ Constraints:
 - Distinguish between essential fixes and nice-to-haves
 - If you need more information to evaluate an aspect, ask
 - Don't assume expertise I may not have; explain concerns clearly
-```
+````
 
 ## Model Output
 

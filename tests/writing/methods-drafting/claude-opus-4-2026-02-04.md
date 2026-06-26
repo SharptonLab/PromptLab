@@ -11,7 +11,7 @@ Standard test input from prompt file (FMT clinical trial methods notes)
 
 ## Filled Prompt
 
-```
+````
 Context: I am preparing a Methods section for a manuscript on fecal microbiota transplantation efficacy targeting a clinical microbiology journal. Below are my detailed notes.
 
 My notes:
@@ -78,7 +78,7 @@ Constraints:
 - Keep prose clear and direct; avoid unnecessary hedging
 
 Output format: Structured prose with subsection headers. Flag any gaps or ambiguities for my attention.
-```
+````
 
 ## Model Output
 

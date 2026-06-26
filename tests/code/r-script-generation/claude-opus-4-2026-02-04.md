@@ -36,7 +36,7 @@ Requirements:
 
 ## Filled Prompt
 
-```
+````
 Context: I am a microbiome researcher working on a probiotic intervention study. I need an R script to perform ordination analysis and visualize community composition.
 
 Data description:
@@ -77,7 +77,7 @@ Output format: Complete R script with section headers and comments. After the sc
 - List of required packages
 - Any assumptions made about the data
 - Suggested validation checks to run
-```
+````
 
 ## Model Output
 

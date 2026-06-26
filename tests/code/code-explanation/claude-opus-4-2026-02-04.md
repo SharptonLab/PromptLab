@@ -41,7 +41,7 @@ What confuses me:
 
 ## Filled Prompt
 
-```
+````
 Context: I am a microbiome researcher trying to understand code from a published paper on differential abundance analysis. My programming background: comfortable with R basics, new to DESeq2.
 
 The code I need explained:
@@ -91,7 +91,7 @@ Constraints:
 - If parts are unclear without more context, say so
 
 Output format: Structured explanation with numbered sections and code snippets where helpful.
-```
+````
 
 ## Model Output
 

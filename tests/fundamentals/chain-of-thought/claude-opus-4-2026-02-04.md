@@ -10,7 +10,7 @@
 Standard test input from prompt file (probiotic microbiome study with cage effects)
 
 ## Filled Prompt
-```
+````
 I need to select a statistical approach for analyzing my microbiome data. Here's my study:
 
 - 20 mice, 10 per treatment group (probiotic vs. placebo)
@@ -37,7 +37,7 @@ What practical factors (software availability, interpretability, field conventio
 Based on the above, what approach or approaches would you suggest I discuss with a statistician? What specific questions should I ask them?
 
 Show your reasoning explicitly at each step.
-```
+````
 
 ## Model Output
 ```

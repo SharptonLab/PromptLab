@@ -35,7 +35,7 @@ LLM outputs requiring verification:
 
 ## Filled Prompt
 
-```
+````
 I need to create a verification log for LLM outputs in my research project. Help me set up a structured tracking system.
 
 Project context:
@@ -65,7 +65,7 @@ For each output type, help me define:
 4. Sign-off requirements (who confirms verification is complete)
 
 Then generate a verification log template I can use to track each item.
-```
+````
 
 ## Model Output
 

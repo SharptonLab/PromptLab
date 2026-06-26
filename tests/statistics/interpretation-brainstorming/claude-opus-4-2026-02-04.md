@@ -33,7 +33,7 @@ My initial interpretation: Lean-donor microbiota transfers metabolically benefic
 
 ## Filled Prompt
 
-```
+````
 Context: I have completed an experiment and am interpreting the results. I want to think through possible interpretations thoroughly, including alternatives to my initial hypothesis.
 
 Research question: Does fecal microbiota transplantation from lean donors improve metabolic outcomes in obese mice?
@@ -74,7 +74,7 @@ Constraints:
 - Don't just agree with my interpretation; actively generate alternatives
 - Distinguish between plausible alternatives and unlikely ones
 - Focus on scientific interpretation, not just statistical significance
-```
+````
 
 ## Model Output
 

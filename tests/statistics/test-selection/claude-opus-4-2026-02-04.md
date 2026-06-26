@@ -31,7 +31,7 @@ Specific considerations:
 
 ## Filled Prompt
 
-```
+````
 Context: I need help selecting an appropriate statistical approach for my research question.
 
 Research question: Is there an association between gut microbiome beta diversity and clinical response to immunotherapy in melanoma patients?
@@ -67,7 +67,7 @@ Constraints:
 - Do not present a single "correct" answer when multiple approaches are defensible
 
 Output format: Structured list of options with the information above for each.
-```
+````
 
 ## Model Output
 

@@ -10,7 +10,7 @@
 Standard test input from prompt file (RNA-seq prompt critique scenario)
 
 ## Filled Prompt
-```
+````
 Here's a prompt I'm planning to use for analyzing differential gene expression results:
 
 ---
@@ -24,7 +24,7 @@ Please critique this prompt:
 4. How would you improve it to make outputs more consistent and reliable?
 
 Provide a revised version of the prompt incorporating your suggestions.
-```
+````
 
 ## Model Output
 ```

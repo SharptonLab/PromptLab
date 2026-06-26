@@ -41,7 +41,7 @@ Task: Help me create a testing strategy using simple assert statements and manua
 
 ## Filled Prompt
 
-```
+````
 Context: I have Python code for normalizing microbiome count data using centered log-ratio (CLR) transformation. I need to verify it produces correct results before using it for my research.
 
 The code to test:
@@ -88,7 +88,7 @@ Constraints:
 - Note any tests that require me to know the "right" answer in advance
 
 Output format: Test strategy with code examples for each test type.
-```
+````
 
 ## Model Output
 

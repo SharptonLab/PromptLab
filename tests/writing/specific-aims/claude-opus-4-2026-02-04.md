@@ -11,7 +11,7 @@ Standard test input from prompt file (NIH R21 microbiome biomarkers for colorect
 
 ## Filled Prompt
 
-```
+````
 Context: I am drafting a Specific Aims page for an NIH R21 (exploratory/developmental) on microbiome biomarkers for colorectal cancer screening. The funding agency emphasizes innovative approaches and high-risk/high-reward research.
 
 My research plan notes:
@@ -70,7 +70,7 @@ Constraints:
 - Make aims concrete and achievable within the funding period
 
 Output format: Formatted aims page with section headers. Flag gaps for my attention.
-```
+````
 
 ## Model Output
 

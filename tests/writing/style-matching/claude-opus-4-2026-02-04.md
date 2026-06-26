@@ -11,7 +11,7 @@ Standard test input from prompt file (microbiome-immune interactions manuscript)
 
 ## Filled Prompt
 
-```
+````
 Context: I am finalizing a manuscript on microbiome-immune interactions. I need to revise text to match my established writing style.
 
 Reference sample (my existing writing):
@@ -39,7 +39,7 @@ Constraints:
 - If the reference sample is too short or inconsistent to reliably match, note this
 
 Output format: Revised text, followed by a brief note on the key stylistic changes made.
-```
+````
 
 ## Model Output
 
