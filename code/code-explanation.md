@@ -21,7 +21,7 @@ Get clear explanations of unfamiliar code—what it does, how it works, and why 
 
 ## The Prompt
 
-```
+````
 Context: I am a {RESEARCHER_ROLE} trying to understand code from {SOURCE: e.g., "a published paper," "a collaborator," "a tutorial"}. My programming background: {YOUR_LEVEL: e.g., "intermediate R, learning Python," "comfortable with basic Python, new to pandas"}.
 
 The code I need explained:
@@ -55,7 +55,7 @@ Constraints:
 - If parts are unclear without more context, say so
 
 Output format: Structured explanation with numbered sections and code snippets where helpful.
-```
+````
 
 ## Prompt Components Explained
 
@@ -69,7 +69,7 @@ Output format: Structured explanation with numbered sections and code snippets w
 
 ## Example Input
 
-```
+````
 Context: I am a microbiome researcher trying to understand code from a published paper on 16S analysis. My programming background: comfortable with basic R, new to the tidyverse.
 
 The code I need explained:
@@ -97,7 +97,7 @@ What confuses me:
 - I don't understand the pipe (%>%) and what group_by/summarise do
 - What is fct_reorder doing?
 - Why is stat = "identity" needed?
-```
+````
 
 ## Example Output
 
@@ -190,7 +190,7 @@ ggplot(plot_data, aes(x = Sample, y = Abundance, fill = Phylum)) +
 
 Use the following code explanation scenario to test this prompt:
 
-```
+````
 Context: I am a microbiome researcher trying to understand code from a published paper on differential abundance analysis. My programming background: comfortable with R basics, new to DESeq2.
 
 The code I need explained:
@@ -217,7 +217,7 @@ What confuses me:
 - What does contrast = c("treatment", "diseased", "healthy") do?
 - What is lfcThreshold and why use it?
 - Why check padj AND log2FoldChange when lfcThreshold was already set?
-```
+````
 
 **Expected output should include:**
 - Overview explaining DESeq2 differential abundance testing

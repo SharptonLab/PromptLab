@@ -21,7 +21,7 @@ Generate test cases and testing strategies for analysis code, ensuring that scri
 
 ## The Prompt
 
-```
+````
 Context: I have {R/Python} code for {ANALYSIS_DESCRIPTION}. I need to verify it produces correct results before using it for my research.
 
 The code to test:
@@ -54,7 +54,7 @@ Constraints:
 - Note any tests that require me to know the "right" answer in advance
 
 Output format: Test strategy with code examples for each test type.
-```
+````
 
 ## Prompt Components Explained
 
@@ -68,7 +68,7 @@ Output format: Test strategy with code examples for each test type.
 
 ## Example Input
 
-```
+````
 Context: I have R code for calculating beta diversity distance matrices from a phyloseq object. I need to verify it produces correct results before using it for my research.
 
 The code to test:
@@ -95,7 +95,7 @@ What the code should do: Calculate pairwise Bray-Curtis dissimilarity between al
 Test data available: I can create a simple phyloseq object with known abundances where I can calculate expected distances by hand.
 
 Task: Help me create a testing strategy using simple assert statements and manual checks.
-```
+````
 
 ## Example Output
 
@@ -260,7 +260,7 @@ These patterns indicate something is wrong:
 
 Use the following scenario to test this prompt:
 
-```
+````
 Context: I have Python code for normalizing microbiome count data using centered log-ratio (CLR) transformation. I need to verify it produces correct results before using it for my research.
 
 The code to test:
@@ -287,7 +287,7 @@ What the code should do: Transform count data using CLR, which centers each samp
 Test data available: I can create simple test matrices with known values.
 
 Task: Help me create a testing strategy using simple assert statements and manual checks.
-```
+````
 
 **Expected output should include:**
 - Test cases for:

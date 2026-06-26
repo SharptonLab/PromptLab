@@ -20,7 +20,7 @@ Diagnose and fix errors in code by providing error messages, relevant code, and 
 
 ## The Prompt
 
-```
+````
 Context: I am working on {BRIEF_PROJECT_DESCRIPTION} in {LANGUAGE}. I'm encountering an error I can't resolve.
 
 The error message:
@@ -59,7 +59,7 @@ Constraints:
 - If you need more information to diagnose the issue, ask before guessing
 - If there are multiple possible causes, list them in order of likelihood
 - If the error might be environment-specific, note that
-```
+````
 
 ## Prompt Components Explained
 
@@ -75,7 +75,7 @@ Constraints:
 
 ## Example Input
 
-```
+````
 Context: I am working on a microbiome analysis pipeline in R. I'm encountering an error I can't resolve.
 
 The error message:
@@ -122,7 +122,7 @@ Environment details:
 - R 4.3.1
 - phyloseq 1.44.0
 - Running in RStudio on Windows
-```
+````
 
 ## Example Output
 
@@ -193,7 +193,7 @@ To avoid scoping issues in the future:
 
 Use the following debugging scenario to test this prompt:
 
-```
+````
 Context: I am working on a microbiome diversity analysis in Python. I'm encountering an error I can't resolve.
 
 The error message:
@@ -230,7 +230,7 @@ Environment details:
 - Python 3.10
 - scipy 1.11.0
 - numpy 1.24.0
-```
+````
 
 **Expected output should include:**
 - Explanation: braycurtis expects two 1D vectors of same length; error occurs because otu_table[i] has 100 elements but otu_table[:,j] is selecting all 50 rows of column j

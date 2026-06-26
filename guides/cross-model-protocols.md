@@ -167,7 +167,7 @@ Use multiple models to review generated code for logic errors, bugs, and issues.
 **Step 1: Generate code with Model A**
 
 **Step 2: Review with Model B**
-```
+````
 Please review this code for correctness, potential bugs, and logic errors. Do not assume it is correct.
 
 ```{language}
@@ -186,7 +186,7 @@ Specifically check:
 Optionally, ask Model B to write its own implementation:
 ```
 Write code to accomplish [same task]. Do not look at the previous implementation—write your own approach.
-```
+````
 
 Compare the two implementations. If they differ significantly:
 - Understand why
