@@ -957,6 +957,8 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 (r
 - That the random-slope fallback path actually runs cleanly in statsmodels with this data
 - That `seaborn` is a real (used) import — it is loaded but barely used in the figure beyond `set_theme`
 
+**Local code check:** Syntax PASS across 2 block(s) · 5/11 imports available.
+
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**

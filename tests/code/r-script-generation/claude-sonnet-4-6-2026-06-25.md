@@ -787,6 +787,8 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 (r
 - Whether the added dplyr/tibble/scales dependencies are acceptable to the user
 - Statistical correctness of PERMANOVA + main-effects + dispersion sub-tests for this design
 
+**Local code check:** Syntax PASS across 3 block(s) · 6/6 imports available.
+
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**

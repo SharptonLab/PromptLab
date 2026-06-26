@@ -158,6 +158,8 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Whether the suggested zero-inflated model alternatives (`metagenomeSeq`, `ZIG`) are current best practice
 - Whether explanation depth fits the "R basics, new to DESeq2" reader
 
+**Local code check:** N/A — this prompt asks the model to explain existing code, no model-generated runnable code to test.
+
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**

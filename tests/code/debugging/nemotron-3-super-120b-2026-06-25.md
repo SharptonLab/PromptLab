@@ -193,6 +193,8 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - That the upper-triangle loop snippet is correct (i ≤ j range, mirror assignment)
 - Whether the unit-test prevention tip (`assert braycurtis(ones, ones) == 0.0`) is appropriate for this reader
 
+**Local code check:** Syntax FAIL (1/5) across 5 block(s) · 0/2 imports available · fails — block 5 (python): line 3: 'return' outside function.
+
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**

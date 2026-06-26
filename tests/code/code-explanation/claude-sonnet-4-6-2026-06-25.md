@@ -337,6 +337,8 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - The suggested alternative filter (`rowSums(counts(dds) >= 5) >= (0.2 * ncol(dds))`) — confirm it is well-formed R and a sensible default
 - Whether explanation depth is appropriately calibrated to the stated background
 
+**Local code check:** N/A — this prompt asks the model to explain existing code, no model-generated runnable code to test.
+
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**

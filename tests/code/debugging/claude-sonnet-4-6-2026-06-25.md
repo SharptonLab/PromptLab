@@ -210,6 +210,8 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - That sanity-check assertions execute cleanly on representative data
 - Whether the explanatory verbosity matches the prompt's intent for someone asking for a debug fix
 
+**Local code check:** Syntax PASS across 4 block(s) · 0/2 imports available.
+
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**

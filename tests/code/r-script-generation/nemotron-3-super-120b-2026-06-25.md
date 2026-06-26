@@ -304,6 +304,8 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - That the MRPP fallback for dispersion-test failures matches reviewer preference
 - Spot-check the script runs without errors on test data
 
+**Local code check:** Syntax PASS across 1 block(s) · no imports.
+
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW
 - **Notes:**
