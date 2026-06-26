@@ -95,23 +95,17 @@ We believe these revisions adequately address the reviewer’s concerns regardin
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output produces response addressed to "Reviewer #2" with clean structure. Complete, no truncation. Includes a footer note about line/page references mapping to the revised manuscript file — practical detail peers omit.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the "Reviewer #2" attribution is appropriate (the prompt doesn't specify reviewer number)
+- That the manuscript-file-name footnote is helpful or pedantic
+- Spot-check 847 computation
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

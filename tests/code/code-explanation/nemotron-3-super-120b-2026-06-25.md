@@ -145,23 +145,18 @@ With this pipeline you obtain a list of OTUs that are both statistically reliabl
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers all 5 requested sections in dense table format, addresses every user question, and is not truncated. Heavy use of markdown tables with embedded fenced code (some tables contain literal `\n` escape sequences inside cells — a minor rendering quirk that may display oddly). Cross-model: agrees with Opus, Sonnet, GPT, and Step on core DESeq2 semantics. Stronger than peers on confounding diagnostics (`table(treatment, batch)`) and recommends `plotDispEsts` / `plotMA` for diagnostics. States the post-filter is unambiguously redundant ("it will never drop a row that passed the test") — contradicts Sonnet's framing.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the post-filter claim ("will never drop a row that passed the test") is strictly correct given lfcShrink/MAP estimates — Sonnet and Opus describe rare cases where shrinkage could disagree
+- Table formatting with literal `\n` inside code blocks — confirm it renders acceptably in the final docs
+- Whether the suggested zero-inflated model alternatives (`metagenomeSeq`, `ZIG`) are current best practice
+- Whether explanation depth fits the "R basics, new to DESeq2" reader
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

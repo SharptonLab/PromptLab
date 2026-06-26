@@ -181,23 +181,17 @@ By consistently checking shapes, using the correct axis (rows for samples), and 
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers all 5 requested sections, correctly diagnoses the indexing bug, and notably **goes beyond peers** by showing the actual Bray-Curtis formula `num/den` to demonstrate why same-length vectors are required. Includes an upper-triangle-only optimization (with symmetric mirror) plus a vectorized `pdist`/`squareform` alternative, plus prevention table including a unit-test suggestion. Complete, no truncation. **Strong cross-model agreement** on the root cause.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Confirm the inlined Bray-Curtis formula is accurate (it shows the numerator/denominator form, which matches the standard definition)
+- That the upper-triangle loop snippet is correct (i ≤ j range, mirror assignment)
+- Whether the unit-test prevention tip (`assert braycurtis(ones, ones) == 0.0`) is appropriate for this reader
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

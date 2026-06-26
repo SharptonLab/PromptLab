@@ -72,23 +72,17 @@ Output format: Revised text, followed by a brief note on the key stylistic chang
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output produces revised text + 5 numbered stylistic changes + content note flagging the "significantly impacts" → "influenced" tradeoff for statistical-vs-narrative framing. Complete, no truncation. Strong cross-model agreement.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the "epistemic honesty" hedging addition is appropriate for the reference style
+- That the [CONTENT NOTE] flag accurately identifies the statistical-vs-narrative semantic shift
+- Spot-check that revised text preserves all substantive claims
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

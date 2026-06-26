@@ -77,23 +77,17 @@ Probiotic treatment partially attenuated the increase in intestinal permeability
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output produces Results paragraph faithfully using source numbers AND includes a "[VERIFY]" flag on the p=0.048 borderline significance, with explicit recommendation to confirm the comparison attribution. Complete, no truncation. Most reviewer-friendly of the panel for flagging.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the [VERIFY] flagging pattern is the preferred reviewer-aid pattern
+- Confirm all numbers match source
+- That the "approximately 51% reduction" calculation is correct
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

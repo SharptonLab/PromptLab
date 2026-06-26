@@ -113,23 +113,16 @@ The response gives a confident, simple answer to a question that requires condit
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers all 5 requested critique dimensions and closes with a "Better Response Looks Like" framework + Bottom Line. Complete, no truncation. Correctly identifies the t-test-as-standard claim as wrong and Wilcoxon as more appropriate default. **Strong cross-model agreement** with Opus, Gemini, GPT, Nemotron, Step on substantive critique. No quantitative citations were fabricated.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- The framing "A student following this advice uncritically could produce statistically invalid results" — confirm this is acceptable tone for the use case
+- Spot-check the field-practice claims (e.g., that the field "generally favors non-parametric approaches")
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

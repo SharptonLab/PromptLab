@@ -324,23 +324,18 @@ DESeq2 automatically sets `padj` to `NA` for OTUs with very low counts or extrem
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers all 5 requested sections, uses tables to organize material, and explicitly addresses each user-stated confusion. No truncation; concludes with a one-sentence summary. Cross-model: substantively agrees with Opus 4.7, GPT-5.5, Nemotron, and Step on every major concept (design formula, low-count filter rationale, contrast direction, lfcThreshold semantics, padj). Cannot verify DESeq2 internals are technically correct without domain review.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Claim that `lfcThreshold = 1` and `abs(log2FoldChange) > 1` are "doing different things" but the post-filter is mostly redundant — Step flags a one-sided test concern that should be checked
+- Recommendation to "always use `padj`, not `pvalue`" is correct in spirit but absolutist; verify reviewer comfort
+- The suggested alternative filter (`rowSums(counts(dds) >= 5) >= (0.2 * ncol(dds))`) — confirm it is well-formed R and a sensible default
+- Whether explanation depth is appropriately calibrated to the stated background
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

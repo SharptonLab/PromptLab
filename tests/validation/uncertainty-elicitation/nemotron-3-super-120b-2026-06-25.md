@@ -141,23 +141,17 @@ The core ideas—that DESeq2 and ANCOM are popular, that DESeq2 is NB‑based, a
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers required dimensions. Complete, no truncation. **Citation risk:** suggests "Weiss et al. 2022 Nature Microbiology 'Statistical analysis of microbiome data: pitfalls and recommendations'" as a recommended review — this specific reference may be fabricated/conflated (Weiss et al. 2017 microbiome paper is real, but Weiss et al. 2022 in Nature Microbiology with that title needs verification). Otherwise the self-critique is sound.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- **Critical:** verify whether "Weiss et al. 2022 Nature Microbiology" with that title exists or is a fabricated/conflated reference
+- Whether the meta-uncertainty framing is well-calibrated
+- That the bottom-line vulnerability list covers the right claims
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

@@ -85,9 +85,9 @@ Workflow
 3. Compute per-bin summary statistics (mean, SD, 95 % CI).
 4. Fit a linear mixed-effects model:
        shannon ~ age_days * delivery_mode + (1 + age_days | subject_id)
-   using statsmodels MixedLM.
-5. Export summary statistics (CSV), model results (CSV + plain-text),
-   and a publication-quality figure (PNG + PDF).
+   to test whether delivery mode modifies the diversity trajectory.
+5. Export a summary statistics table, model results, and a
+   publication-quality figure.
 
 Usage
 -----
@@ -122,6 +122,8 @@ from statsmodels.tools.sm_exceptions import ConvergenceWarning
 # ---------------------------------------------------------------------------
 # Module-level constants
 # ---------------------------------------------------------------------------
+
+# Columns that must be present in the input file
 REQUIRED_COLUMNS: list[str] = [
     "sample_id",
     "subject_id",
@@ -132,17 +134,26 @@ REQUIRED_COLUMNS: list[str] = [
     "feeding_mode",
 ]
 
-# Bin edges in days (0-30, 31-60, …, 331-365)
-# ASSUMPTION: "first year" means days 0-365 inclusive.
-BIN_EDGES: list[int] = list(range(0, 366, 30)) + [366]  # 13 bins
-BIN_LABELS: list[str] = [f"{BIN_EDGES[i]+1 if i > 0 else 0}-{BIN_EDGES[i+1]}" for i in range(len(BIN_EDGES) - 1)]
+# Allowed category labels (case-insensitive comparison performed at load time)
+VALID_DELIVERY_MODES: set[str] = {"vaginal", "cesarean"}
+VALID_FEEDING_MODES: set[str] = {"breastfed", "formula"}
 
-# Colour palette – colour-blind-friendly (Wong 2011)
-PALETTE: dict[str, str] = {
-    "vaginal": "#0072B2",   # blue
-    "cesarean": "#D55E00",  # vermillion
-}
+# Month bin edges (days).  Covers 0–365 days in 30-day windows.
+# ASSUMPTION: "month" is approximated as 30-day intervals; the final bin
+#             captures any samples beyond day 330 up to day 365.
+BIN_EDGES: list[int] = list(range(0, 361, 30)) + [366]  # 13 bins
+BIN_LABELS: list[str] = [f"{e}-{BIN_EDGES[i+1]-1}" for i, e in enumerate(BIN_EDGES[:-1])]
 
+# Colour palette for delivery modes (colour-blind friendly)
+PALETTE: dict[str, str] = {"vaginal": "#2196F3", "cesarean": "#FF5722"}
+
+# Figure aesthetics
+FIGURE_DPI: int = 300
+FIGURE_SIZE: tuple[float, float] = (8.0, 5.0)
+
+# ---------------------------------------------------------------------------
+# Logging configuration
+# ---------------------------------------------------------------------------
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -151,12 +162,12 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
-# ---------------------------------------------------------------------------
-# 1. Data loading & validation
-# ---------------------------------------------------------------------------
+# ===========================================================================
+# Data loading and validation
+# ===========================================================================
 
 def load_and_validate(filepath: str | Path) -> pd.DataFrame:
-    """Load the microbiome CSV and validate its structure.
+    """Load the microbiome CSV and perform structural / semantic validation.
 
     Parameters
     ----------
@@ -166,120 +177,140 @@ def load_and_validate(filepath: str | Path) -> pd.DataFrame:
     Returns
     -------
     pd.DataFrame
-        Cleaned dataframe ready for downstream analysis.
+        Cleaned and type-coerced DataFrame ready for downstream analysis.
 
     Raises
     ------
     FileNotFoundError
         If *filepath* does not exist.
     ValueError
-        If required columns are missing or key columns contain unexpected values.
+        If required columns are missing, categorical values are unexpected,
+        or numeric columns contain only NaN.
     """
     filepath = Path(filepath)
     if not filepath.exists():
         raise FileNotFoundError(f"Input file not found: {filepath}")
-    if filepath.stat().st_size == 0:
-        raise ValueError(f"Input file is empty: {filepath}")
 
     log.info("Loading data from %s", filepath)
     df = pd.read_csv(filepath)
 
-    # ---- Column presence check ----
+    # ---- Column presence check -------------------------------------------
     missing_cols = set(REQUIRED_COLUMNS) - set(df.columns)
     if missing_cols:
         raise ValueError(
-            f"Missing required columns: {missing_cols}\n"
-            f"Found columns: {list(df.columns)}"
+            f"Input CSV is missing required columns: {sorted(missing_cols)}\n"
+            f"Found columns: {sorted(df.columns.tolist())}"
         )
 
-    # ---- Type coercion ----
+    # ---- Type coercion ------------------------------------------------------
     df["age_days"] = pd.to_numeric(df["age_days"], errors="coerce")
     df["shannon"] = pd.to_numeric(df["shannon"], errors="coerce")
     df["observed_features"] = pd.to_numeric(df["observed_features"], errors="coerce")
 
-    # ---- Range checks ----
-    n_before = len(df)
-    df = df.dropna(subset=["age_days", "shannon"])
-    n_dropped = n_before - len(df)
-    if n_dropped > 0:
-        log.warning("Dropped %d rows with NaN in age_days or shannon.", n_dropped)
-
-    invalid_age = df[(df["age_days"] < 0) | (df["age_days"] > 365)]
-    if not invalid_age.empty:
-        log.warning(
-            "%d samples have age_days outside [0, 365] and will be excluded.",
-            len(invalid_age),
-        )
-        df = df[df["age_days"].between(0, 365)]
-
-    if df["shannon"].lt(0).any():
-        raise ValueError("Shannon diversity contains negative values – check input data.")
-
-    # ---- Categorical checks ----
-    # ASSUMPTION: delivery_mode is exactly 'vaginal' or 'cesarean' (case-insensitive).
+    # Normalise categorical columns to lowercase for consistent comparisons
     df["delivery_mode"] = df["delivery_mode"].str.strip().str.lower()
-    unexpected_dm = set(df["delivery_mode"].unique()) - {"vaginal", "cesarean"}
-    if unexpected_dm:
-        raise ValueError(
-            f"Unexpected delivery_mode values: {unexpected_dm}. "
-            "Expected 'vaginal' or 'cesarean'."
-        )
-
     df["feeding_mode"] = df["feeding_mode"].str.strip().str.lower()
 
-    # ---- Duplicate sample check ----
+    # ---- Semantic validation ------------------------------------------------
+    _check_numeric_column(df, "age_days", min_val=0, max_val=400)
+    _check_numeric_column(df, "shannon", min_val=0.0)
+    _check_categorical_column(df, "delivery_mode", VALID_DELIVERY_MODES)
+    _check_categorical_column(df, "feeding_mode", VALID_FEEDING_MODES)
+
+    # ---- Drop rows with missing key values and report -----------------------
+    n_before = len(df)
+    df = df.dropna(subset=["age_days", "shannon", "subject_id", "delivery_mode"])
+    n_dropped = n_before - len(df)
+    if n_dropped > 0:
+        log.warning(
+            "Dropped %d row(s) with missing values in key columns.", n_dropped
+        )
+
+    # ---- Duplicate sample check ---------------------------------------------
     dupes = df.duplicated(subset=["sample_id"])
     if dupes.any():
         log.warning(
-            "%d duplicate sample_ids detected; keeping first occurrence.",
+            "Found %d duplicate sample_id(s); keeping first occurrence.",
             dupes.sum(),
         )
-        df = df[~dupes]
+        df = df[~dupes].copy()
 
     log.info(
-        "Loaded %d samples from %d subjects (%d vaginal, %d cesarean).",
+        "Loaded %d samples from %d subjects.",
         len(df),
         df["subject_id"].nunique(),
-        (df["delivery_mode"] == "vaginal").sum(),
-        (df["delivery_mode"] == "cesarean").sum(),
     )
     return df.reset_index(drop=True)
 
 
-# ---------------------------------------------------------------------------
-# 2. Monthly binning & summary statistics
-# ---------------------------------------------------------------------------
+def _check_numeric_column(
+    df: pd.DataFrame,
+    col: str,
+    min_val: float | None = None,
+    max_val: float | None = None,
+) -> None:
+    """Raise ValueError if a numeric column is all-NaN or out of range."""
+    if df[col].isna().all():
+        raise ValueError(f"Column '{col}' contains only NaN after coercion.")
+    n_nan = df[col].isna().sum()
+    if n_nan > 0:
+        log.warning("Column '%s' has %d NaN value(s).", col, n_nan)
+    if min_val is not None and (df[col].dropna() < min_val).any():
+        log.warning("Column '%s' contains values below expected minimum %s.", col, min_val)
+    if max_val is not None and (df[col].dropna() > max_val).any():
+        log.warning("Column '%s' contains values above expected maximum %s.", col, max_val)
 
-def assign_month_bins(df: pd.DataFrame) -> pd.DataFrame:
-    """Add a *month_bin* column that groups samples into 30-day windows.
+
+def _check_categorical_column(
+    df: pd.DataFrame, col: str, valid_values: set[str]
+) -> None:
+    """Raise ValueError if unexpected category labels are found."""
+    observed = set(df[col].dropna().unique())
+    unexpected = observed - valid_values
+    if unexpected:
+        raise ValueError(
+            f"Column '{col}' contains unexpected values: {unexpected}. "
+            f"Expected one of: {valid_values}"
+        )
+
+
+# ===========================================================================
+# Binning and summary statistics
+# ===========================================================================
+
+def bin_by_month(df: pd.DataFrame) -> pd.DataFrame:
+    """Assign each sample to a 30-day age bin.
 
     Parameters
     ----------
     df:
-        Validated dataframe containing *age_days*.
+        Validated DataFrame with an ``age_days`` column.
 
     Returns
     -------
     pd.DataFrame
-        Input dataframe with two new columns:
-        - ``month_bin``  : string label, e.g. ``"0-30"``
-        - ``month_mid``  : midpoint of the bin in days (for plotting)
+        Original DataFrame with two new columns:
+
+        * ``age_bin``       – interval label string (e.g. ``"0-29"``)
+        * ``age_bin_mid``   – midpoint of the bin in days (used for plotting)
     """
-    # pd.cut is vectorised – no Python loop needed.
+    # pd.cut assigns each value to the half-open interval (left, right]
+    # ASSUMPTION: right=True means day 0 falls in the first bin via
+    #             include_lowest=True.
     df = df.copy()
-    df["month_bin"] = pd.cut(
+    df["age_bin"] = pd.cut(
         df["age_days"],
         bins=BIN_EDGES,
         labels=BIN_LABELS,
         right=True,
-        include_lowest=True,  # ensures day 0 is captured in the first bin
+        include_lowest=True,
     )
-    # Map label → midpoint for continuous x-axis plotting
-    midpoints = {
+    # Compute bin midpoints for x-axis positioning
+    bin_mids = {
         label: (BIN_EDGES[i] + BIN_EDGES[i + 1]) / 2
         for i, label in enumerate(BIN_LABELS)
     }
-    df["month_mid"] = df["month_bin"].map(midpoints)
+    df["age_bin_mid"] = df["age_bin"].map(bin_mids)
     return df
 
 
@@ -288,241 +319,643 @@ def compute_summary_stats(df: pd.DataFrame) -> pd.DataFrame:
 
     Statistics computed
     -------------------
-    n, mean, sd, se, ci95_lower, ci95_upper (95 % CI via t-distribution)
+    * n          – sample count
+    * mean       – arithmetic mean
+    * sd         – standard deviation
+    * sem        – standard error of the mean
+    * ci95_lower – lower bound of the 95 % CI (t-distribution)
+    * ci95_upper – upper bound of the 95 % CI (t-distribution)
+    * median     – median
 
     Parameters
     ----------
     df:
-        Dataframe with *month_bin*, *month_mid*, *delivery_mode*, *shannon*.
+        DataFrame with columns ``age_bin``, ``age_bin_mid``,
+        ``delivery_mode``, and ``shannon``.
 
     Returns
     -------
     pd.DataFrame
-        One row per (month_bin × delivery_mode) combination.
+        One row per (age_bin, delivery_mode) combination.
     """
-    def _agg(x: pd.Series) -> pd.Series:
-        n = x.count()
-        mean = x.mean()
-        sd = x.std(ddof=1)
-        se = sd / np.sqrt(n) if n > 1 else np.nan
-        # Two-sided 95 % CI using t-distribution (appropriate for small n per bin)
-        t_crit = stats.t.ppf(0.975, df=n - 1) if n > 1 else np.nan
-        return pd.Series(
-            {
-                "n": n,
-                "mean": mean,
-                "sd": sd,
-                "se": se,
-                "ci95_lower": mean - t_crit * se,
-                "ci95_upper": mean + t_crit * se,
-            }
-        )
+    # NOTE: groupby on Categorical preserves bin order automatically.
+    grouped = df.groupby(["age_bin", "age_bin_mid", "delivery_mode"], observed=True)
 
-    # NOTE: groupby + apply can be slow for very large dataframes; here ~800 rows
-    # is fine. For >100 k rows consider using agg with named aggregations instead.
-    summary = (
-        df.groupby(["month_bin", "month_mid", "delivery_mode"], observed=True)["shannon"]
-        .apply(_agg)
-        .reset_index()
-    )
-    # Ensure month_mid is numeric (it may become object after groupby)
-    summary["month_mid"] = pd.to_numeric(summary["month_mid"])
-    summary = summary.sort_values(["delivery_mode", "month_mid"]).reset_index(drop=True)
+    summary = grouped["shannon"].agg(
+        n="count",
+        mean="mean",
+        sd="std",
+        median="median",
+    ).reset_index()
+
+    summary["sem"] = summary["sd"] / np.sqrt(summary["n"])
+
+    # 95 % CI using the t-distribution (appropriate for small per-bin n)
+    # scipy.stats.t.ppf returns the quantile for the given probability.
+    t_crit = stats.t.ppf(0.975, df=summary["n"] - 1)
+    summary["ci95_lower"] = summary["mean"] - t_crit * summary["sem"]
+    summary["ci95_upper"] = summary["mean"] + t_crit * summary["sem"]
+
+    # Clip lower CI at 0 (Shannon diversity cannot be negative)
+    summary["ci95_lower"] = summary["ci95_lower"].clip(lower=0.0)
+
+    # Sort by bin midpoint for clean plotting
+    summary = summary.sort_values(["delivery_mode", "age_bin_mid"]).reset_index(drop=True)
+
+    log.info("Summary statistics computed for %d group-bin combinations.", len(summary))
     return summary
 
 
-# ---------------------------------------------------------------------------
-# 3. Linear mixed-effects model
-# ---------------------------------------------------------------------------
+# ===========================================================================
+# Linear mixed-effects model
+# ===========================================================================
 
 def fit_mixed_model(df: pd.DataFrame) -> tuple[object, pd.DataFrame]:
-    """Fit a linear mixed-effects model for Shannon ~ age × delivery_mode.
+    """Fit a linear mixed-effects model to test the delivery-mode × age interaction.
 
     Model specification
     -------------------
-    Fixed effects : age_days + delivery_mode + age_days:delivery_mode
-    Random effects: random intercept + random slope for age_days per subject
+    Fixed effects  : shannon ~ age_days * delivery_mode
+    Random effects : random intercept + random slope for age_days per subject
 
-    ASSUMPTION: The random-slope model may fail to converge with small cohorts.
-    If convergence fails, the function falls back to a random-intercept-only model
-    and logs a warning.
+        shannon_ij = (β0 + b0_j)
+                   + (β1 + b1_j) * age_days_ij
+                   + β2 * delivery_mode_j
+                   + β3 * age_days_ij * delivery_mode_j
+                   + ε_ij
+
+    where j indexes subjects and i indexes observations within subjects.
+
+    ASSUMPTION: delivery_mode is constant within a subject (assigned at birth).
+    ASSUMPTION: residuals are approximately normally distributed.
+    NOTE: Fitting a random slope model on ~800 observations can take 10–30 s.
 
     Parameters
     ----------
     df:
-        Dataframe with columns *shannon*, *age_days*, *delivery_mode*, *subject_id*.
+        Validated DataFrame with columns ``shannon``, ``age_days``,
+        ``delivery_mode``, and ``subject_id``.
 
     Returns
     -------
     result : statsmodels MixedLMResults
         Fitted model object.
-    coef_df : pd.DataFrame
-        Tidy coefficient table with columns:
-        coef, se, z, p_value, ci_lower, ci_upper.
+    coef_table : pd.DataFrame
+        Coefficient table with estimates, SE, z-scores, and p-values.
     """
-    # Encode delivery_mode as a dummy (vaginal = 0, cesarean = 1)
-    # ASSUMPTION: 'vaginal' is the reference category.
-    df = df.copy()
-    df["delivery_mode_bin"] = (df["delivery_mode"] == "cesarean").astype(int)
+    # Encode delivery_mode as a dummy variable (vaginal = reference)
+    # ASSUMPTION: "vaginal" is the reference category.
+    df_model = df.copy()
+    df_model["delivery_mode_cesarean"] = (
+        df_model["delivery_mode"] == "cesarean"
+    ).astype(int)
 
-    # Centre age_days to reduce multicollinearity with the interaction term.
-    age_mean = df["age_days"].mean()
-    df["age_c"] = df["age_days"] - age_mean
+    # Centre age_days to reduce multicollinearity with the interaction term
+    age_mean = df_model["age_days"].mean()
+    df_model["age_days_c"] = df_model["age_days"] - age_mean
     log.info("Age centred at %.1f days for model fitting.", age_mean)
 
-    formula = "shannon ~ age_c * delivery_mode_bin"
+    formula = "shannon ~ age_days_c * delivery_mode_cesarean"
 
-    # ---- Attempt random intercept + slope ----
-    try:
-        with warnings.catch_warnings():
-            warnings.simplefilter("error", ConvergenceWarning)
+    log.info("Fitting linear mixed model: %s", formula)
+    log.info("Random effects: random intercept + slope per subject (may take ~30 s).")
+
+    # Suppress convergence warnings temporarily; we check manually below.
+    with warnings.catch_warnings(record=True) as caught_warnings:
+        warnings.simplefilter("always")
+        try:
             model = mixedlm(
                 formula,
-                data=df,
-                groups=df["subject_id"],
-                re_formula="~age_c",   # random slope for age
+                data=df_model,
+                groups=df_model["subject_id"],
+                # Random intercept + random slope for centred age
+                re_formula="~age_days_c",
             )
             result = model.fit(method="lbfgs", maxiter=500)
-        log.info("Random intercept + slope model converged successfully.")
-    except (ConvergenceWarning, np.linalg.LinAlgError) as exc:
-        log.warning(
-            "Random slope model did not converge (%s). "
-            "Falling back to random-intercept-only model.",
-            exc,
-        )
-        model = mixedlm(formula, data=df, groups=df["subject_id"])
-        result = model.fit(method="lbfgs", maxiter=500)
+        except Exception as exc:
+            # Fall back to random-intercept-only model if random slope fails
+            log.warning(
+                "Random slope model failed (%s). "
+                "Falling back to random-intercept-only model.",
+                exc,
+            )
+            model = mixedlm(
+                formula,
+                data=df_model,
+                groups=df_model["subject_id"],
+            )
+            result = model.fit(method="lbfgs", maxiter=500)
 
-    # ---- Build tidy coefficient table ----
-    coef_df = pd.DataFrame(
+    # Report any convergence warnings
+    convergence_issues = [
+        w for w in caught_warnings if issubclass(w.category, ConvergenceWarning)
+    ]
+    if convergence_issues:
+        log.warning(
+            "Model convergence warning(s) detected. "
+            "Interpret results with caution. Consider scaling predictors or "
+            "simplifying the random-effects structure."
+        )
+
+    # Build a tidy coefficient table
+    coef_table = pd.DataFrame(
         {
-            "coef": result.fe_params,
-            "se": result.bse_fe,
-            "z": result.tvalues,
-            "p_value": result.pvalues,
-            "ci_lower": result.conf_int().iloc[:, 0],
-            "ci_upper": result.conf_int().iloc[:, 1],
+            "term": result.params.index,
+            "estimate": result.params.values,
+            "std_err": result.bse.values,
+            "z_value": result.tvalues.values,
+            "p_value": result.pvalues.values,
         }
     )
-    coef_df.index.name = "term"
-    coef_df = coef_df.reset_index()
+    coef_table["sig"] = coef_table["p_value"].apply(_significance_stars)
 
-    # Human-readable term names
-    term_map = {
-        "Intercept": "Intercept (vaginal, mean age)",
-        "age_c": "Age (days, centred)",
-        "delivery_mode_bin": "Cesarean vs. vaginal",
-        "age_c:delivery_mode_bin": "Age × Cesarean interaction",
-    }
-    coef_df["term"] = coef_df["term"].map(term_map).fillna(coef_df["term"])
-
-    log.info("Model AIC: %.2f | BIC: %.2f", result.aic, result.bic)
-    return result, coef_df
+    log.info("Model fitting complete. AIC = %.2f", result.aic)
+    return result, coef_table
 
 
-# ---------------------------------------------------------------------------
-# 4. Visualisation
-# ---------------------------------------------------------------------------
+def _significance_stars(p: float) -> str:
+    """Return conventional significance stars for a p-value."""
+    if p < 0.001:
+        return "***"
+    if p < 0.01:
+        return "**"
+    if p < 0.05:
+        return "*"
+    return "ns"
+
+
+def format_model_summary(result: object, coef_table: pd.DataFrame) -> str:
+    """Produce a human-readable text summary of the mixed model.
+
+    Parameters
+    ----------
+    result:
+        Fitted statsmodels MixedLMResults object.
+    coef_table:
+        Tidy coefficient table from :func:`fit_mixed_model`.
+
+    Returns
+    -------
+    str
+        Multi-line summary string suitable for writing to a text file.
+    """
+    lines = [
+        "=" * 70,
+        "Linear Mixed-Effects Model Results",
+        "=" * 70,
+        f"Formula : shannon ~ age_days_c * delivery_mode_cesarean",
+        f"Random  : random intercept + slope per subject",
+        f"N obs   : {int(result.nobs)}",
+        f"N groups: {int(result.ngroups)}",
+        f"AIC     : {result.aic:.2f}",
+        f"BIC     : {result.bic:.2f}",
+        f"Log-lik : {result.llf:.2f}",
+        "",
+        "Fixed Effects",
+        "-" * 70,
+        coef_table.to_string(index=False, float_format="{:.4f}".format),
+        "",
+        "Significance codes: *** p<0.001  ** p<0.01  * p<0.05  ns p≥0.05",
+        "=" * 70,
+    ]
+    return "\n".join(lines)
+
+
+# ===========================================================================
+# Visualisation
+# ===========================================================================
 
 def plot_diversity_trajectories(
     summary: pd.DataFrame,
-    coef_df: pd.DataFrame,
-    outdir: Path,
-) -> None:
-    """Create a publication-quality figure of Shannon diversity trajectories.
+    raw_df: pd.DataFrame,
+    outpath: str | Path,
+) -> plt.Figure:
+    """Create a publication-quality figure of Shannon diversity over time.
 
-    The figure shows mean ± 95 % CI for each delivery mode across monthly bins,
-    with individual data points overlaid as a strip plot.
+    The figure contains two panels:
+
+    * **Top panel** – mean ± 95 % CI ribbon + mean line per delivery mode,
+      with individual subject trajectories shown as faint lines.
+    * **Bottom panel** – sample size (n) per bin per delivery mode as a
+      grouped bar chart (data-density indicator).
 
     Parameters
     ----------
     summary:
-        Output of :func:`compute_summary_stats`.
-    coef_df:
-        Tidy coefficient table from :func:`fit_mixed_model`.
-    outdir:
-        Directory where the figure files will be saved.
+        Per-bin summary statistics from :func:`compute_summary_stats`.
+    raw_df:
+        Full validated DataFrame (used for individual-level trajectories).
+    outpath:
+        File path for the saved figure (extension determines format).
+
+    Returns
+    -------
+    matplotlib.figure.Figure
+        The constructed figure object.
     """
-    # ---- Style ----
-    sns.set_theme(style="whitegrid", context="paper", font_scale=1.2)
+    sns.set_theme(style="whitegrid", font_scale=1.1)
     plt.rcParams.update(
         {
             "font.family": "sans-serif",
             "axes.spines.top": False,
             "axes.spines.right": False,
-            "figure.dpi": 150,
         }
     )
 
-    fig, ax = plt.subplots(figsize=(9, 5))
+    fig, axes = plt.subplots(
+        2, 1,
+        figsize=FIGURE_SIZE,
+        gridspec_kw={"height_ratios": [4, 1], "hspace": 0.08},
+        sharex=True,
+    )
+    ax_main, ax_n = axes
 
-    delivery_modes = ["vaginal", "cesarean"]
-
-    for dm in delivery_modes:
-        sub = summary[summary["delivery_mode"] == dm].sort_values("month_mid")
-        color = PALETTE[dm]
-        label = dm.capitalize()
-
-        # ---- Shaded 95 % CI ribbon ----
-        ax.fill_between(
-            sub["month_mid"],
-            sub["ci95_lower"],
-            sub["ci95_upper"],
-            alpha=0.20,
-            color=color,
-            linewidth=0,
-            label="_nolegend_",
+    # ---- Individual subject trajectories (faint background lines) ----------
+    # NOTE: Drawing ~100 lines is fast; for >500 subjects consider subsampling.
+    for subject, grp in raw_df.groupby("subject_id"):
+        grp_sorted = grp.sort_values("age_days")
+        delivery = grp_sorted["delivery_mode"].iloc[0]
+        ax_main.plot(
+            grp_sorted["age_days"],
+            grp_sorted["shannon"],
+            color=PALETTE[delivery],
+            alpha=0.06,
+            linewidth=0.6,
+            zorder=1,
         )
 
-        # ---- Mean line ----
-        ax.plot(
-            sub["month_mid"],
-            sub["mean"],
+    # ---- Mean ± 95 % CI per delivery mode ----------------------------------
+    for mode, grp in summary.groupby("delivery_mode"):
+        color = PALETTE[mode]
+        x = grp["age_bin_mid"].values
+        y = grp["mean"].values
+        lo = grp["ci95_lower"].values
+        hi = grp["ci95_upper"].values
+
+        # Shaded CI ribbon
+        ax_main.fill_between(x, lo, hi, color=color, alpha=0.20, zorder=2)
+
+        # Mean trajectory line
+        ax_main.plot(
+            x, y,
             color=color,
             linewidth=2.2,
             marker="o",
             markersize=5,
-            label=label,
+            label=mode.capitalize(),
             zorder=3,
         )
 
-        # ---- Error bars (explicit, for clarity at each bin) ----
-        ax.errorbar(
-            sub["month_mid"],
-            sub["mean"],
-            yerr=[
-                sub["mean"] - sub["ci95_lower"],
-                sub["ci95_upper"] - sub["mean"],
-            ],
-            fmt="none",
-            color=color,
-            capsize=3,
-            linewidth=1.2,
-            zorder=2,
+    ax_main.set_ylabel("Shannon Diversity Index", fontsize=12)
+    ax_main.set_ylim(bottom=0)
+    ax_main.legend(
+        title="Delivery mode",
+        title_fontsize=10,
+        fontsize=10,
+        frameon=False,
+        loc="upper left",
+    )
+    ax_main.set_title(
+        "Infant Gut Microbiome Diversity Trajectories\n"
+        "by Delivery Mode (Mean ± 95 % CI)",
+        fontsize=13,
+        pad=10,
+    )
+
+    # ---- Sample-size bar chart (bottom panel) -------------------------------
+    bar_width = 10  # days
+    offsets = {"vaginal": -bar_width / 2, "cesarean": bar_width / 2}
+
+    for mode, grp in summary.groupby("delivery_mode"):
+        x = grp["age_bin_mid"].values + offsets[mode]
+        ax_n.bar(
+            x,
+            grp["n"].values,
+            width=bar_width * 0.9,
+            color=PALETTE[mode],
+            alpha=0.75,
+            label=mode.capitalize(),
         )
 
-    # ---- Axis labels & formatting ----
-    ax.set_xlabel("Age (days)", fontsize=
+    ax_n.set_ylabel("n", fontsize=10)
+    ax_n.set_xlabel("Age (days)", fontsize=12)
+    ax_n.yaxis.set_major_locator(mticker.MaxNLocator(integer=True, nbins=3))
+
+    # Shared x-axis ticks at bin midpoints
+    tick_positions = summary["age_bin_mid"].unique()
+    tick_labels = [str(int(t)) for t in sorted(tick_positions)]
+    ax_n.set_xticks(sorted(tick_positions))
+    ax_n.set_xticklabels(tick_labels, rotation=45, ha="right", fontsize=9)
+
+    fig.tight_layout()
+
+    outpath = Path(outpath)
+    outpath.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(outpath, dpi=FIGURE_DPI, bbox_inches="tight")
+    log.info("Figure saved to %s", outpath)
+    return fig
+
+
+# ===========================================================================
+# Output helpers
+# ===========================================================================
+
+def save_summary_table(summary: pd.DataFrame, outpath: str | Path) -> None:
+    """Write the summary statistics table to a CSV file.
+
+    Parameters
+    ----------
+    summary:
+        DataFrame from :func:`compute_summary_stats`.
+    outpath:
+        Destination CSV path.
+    """
+    outpath = Path(outpath)
+    outpath.parent.mkdir(parents=True, exist_ok=True)
+    # Round floats for readability
+    float_cols = ["mean", "sd", "sem", "ci95_lower", "ci95_upper", "median"]
+    out = summary.copy()
+    out[float_cols] = out[float_cols].round(4)
+    out.to_csv(outpath, index=False)
+    log.info("Summary statistics saved to %s", outpath)
+
+
+def save_model_results(
+    coef_table: pd.DataFrame,
+    model_text: str,
+    outdir: str | Path,
+) -> None:
+    """Save model coefficient table (CSV) and full text summary.
+
+    Parameters
+    ----------
+    coef_table:
+        Tidy coefficient table from :func:`fit_mixed_model`.
+    model_text:
+        Formatted text summary from :func:`format_model_summary`.
+    outdir:
+        Directory in which to write ``model_coefficients.csv`` and
+        ``model_summary.txt``.
+    """
+    outdir = Path(outdir)
+    outdir.mkdir(parents=True, exist_ok=True)
+
+    coef_path = outdir / "model_coefficients.csv"
+    coef_table.round(6).to_csv(coef_path, index=False)
+    log.info("Model coefficients saved to %s", coef_path)
+
+    text_path = outdir / "model_summary.txt"
+    text_path.write_text(model_text, encoding="utf-8")
+    log.info("Model summary saved to %s", text_path)
+
+
+# ===========================================================================
+# CLI argument parsing
+# ===========================================================================
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    """Parse command-line arguments.
+
+    Parameters
+    ----------
+    argv:
+        Argument list (defaults to ``sys.argv[1:]``).
+
+    Returns
+    -------
+    argparse.Namespace
+        Parsed arguments with attributes ``input``, ``outdir``,
+        and ``no_model``.
+    """
+    parser = argparse.ArgumentParser(
+        description="Infant gut microbiome diversity trajectory analysis.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument(
+        "--input",
+        required=True,
+        metavar="CSV",
+        help="Path to the input CSV file.",
+    )
+    parser.add_argument(
+        "--outdir",
+        default="results",
+        metavar="DIR",
+        help="Directory for all output files.",
+    )
+    parser.add_argument(
+        "--no-model",
+        action="store_true",
+        help="Skip the mixed-effects model (useful for quick QC runs).",
+    )
+    parser.add_argument(
+        "--figure-format",
+        default="pdf",
+        choices=["pdf", "png", "svg", "tiff"],
+        help="Output format for the figure.",
+    )
+    return parser.parse_args(argv)
+
+
+# ===========================================================================
+# Main entry point
+# ===========================================================================
+
+def main(argv: list[str] | None = None) -> int:
+    """Orchestrate the full analysis pipeline.
+
+    Parameters
+    ----------
+    argv:
+        Optional argument list for programmatic invocation.
+
+    Returns
+    -------
+    int
+        Exit code (0 = success, 1 = error).
+    """
+    args = parse_args(argv)
+    outdir = Path(args.outdir)
+
+    # ------------------------------------------------------------------
+    # Step 1 – Load and validate
+    # ------------------------------------------------------------------
+    try:
+        df = load_and_validate(args.input)
+    except (FileNotFoundError, ValueError) as exc:
+        log.error("Data loading failed: %s", exc)
+        return 1
+
+    # ------------------------------------------------------------------
+    # Step 2 – Bin by month and compute summary statistics
+    # ------------------------------------------------------------------
+    df = bin_by_month(df)
+    summary = compute_summary_stats(df)
+
+    save_summary_table(summary, outdir / "summary_statistics.csv")
+
+    # Print a quick overview to stdout
+    print("\n── Summary Statistics (first 10 rows) ──────────────────────────")
+    print(summary.head(10).to_string(index=False))
+    print()
+
+    # ------------------------------------------------------------------
+    # Step 3 – Linear mixed-effects model
+    # ------------------------------------------------------------------
+    if not args.no_model:
+        try:
+            result, coef_table = fit_mixed_model(df)
+            model_text = format_model_summary(result, coef_table)
+            save_model_results(coef_table, model_text, outdir)
+            print(model_text)
+        except Exception as exc:
+            log.error("Model fitting failed: %s", exc)
+            log.error("Continuing without model results.")
+    else:
+        log.info("Skipping mixed-effects model (--no-model flag set).")
+
+    # ------------------------------------------------------------------
+    # Step 4 – Figure
+    # ------------------------------------------------------------------
+    fig_path = outdir / f"diversity_trajectories.{args.figure_format}"
+    try:
+        plot_diversity_trajectories(summary, df, fig_path)
+    except Exception as exc:
+        log.error("Figure generation failed: %s", exc)
+        return 1
+
+    log.info("Analysis complete. All outputs written to '%s/'.", outdir)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+---
+
+## Requirements
+
+### `requirements.txt`
+```text
+pandas>=2.0
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+seaborn>=0.12
+statsmodels>=0.14
+```
+
+### `environment.yml` (conda-forge)
+```yaml
+name: microbiome_diversity
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pandas>=2.0
+  - numpy>=1.24
+  - scipy>=1.10
+  - matplotlib>=3.7
+  - seaborn>=0.12
+  - statsmodels>=0.14
+  - pip
+```
+
+---
+
+## Assumptions
+
+| # | Assumption | Where flagged |
+|---|-----------|---------------|
+| 1 | **Delivery mode is time-invariant** — each subject has exactly one delivery mode that does not change across visits | `fit_mixed_model` docstring |
+| 2 | **"Month" ≈ 30 days** — bins are 0–29, 30–59, … rather than calendar months | `BIN_EDGES` constant |
+| 3 | **"vaginal" is the reference category** for the dummy-coded delivery mode variable | `fit_mixed_model` |
+| 4 | **Residuals are approximately normal** — required for valid LMM inference; not formally tested in the script | `fit_mixed_model` docstring |
+| 5 | **Age range is 0–365 days** — samples outside this range trigger a warning but are not removed | `_check_numeric_column` |
+| 6 | **sample_id is unique per row** — duplicates are dropped with a warning rather than raising an error | `load_and_validate` |
+| 7 | **Individual trajectories are plottable** — for >500 subjects the background lines should be subsampled | `plot_diversity_trajectories` comment |
+
+---
+
+## Validation Checks to Run
+
+### 1. Smoke test with synthetic data
+```python
+import pandas as pd, numpy as np
+
+rng = np.random.default_rng(42)
+n = 800
+df = pd.DataFrame({
+    "sample_id":        [f"S{i:04d}" for i in range(n)],
+    "subject_id":       [f"P{i//8:03d}" for i in range(n)],
+    "age_days":         rng.integers(0, 365, n),
+    "shannon":          rng.uniform(0.5, 4.5, n),
+    "observed_features":rng.integers(10, 300, n),
+    "delivery_mode":    rng.choice(["vaginal","cesarean"], n),
+    "feeding_mode":     rng.choice(["breastfed","formula"], n),
+})
+df.to_csv("test_data.csv", index=False)
+# Then run: python diversity_trajectories.py --input test_data.csv --outdir test_results
+```
+
+### 2. Column validation
+```bash
+# Should raise ValueError listing missing columns
+python -c "
+from diversity_trajectories import load_and_validate
+import pandas as pd
+pd.DataFrame({'sample_id':[1],'subject_id':['A']}).to_csv('/tmp/bad.csv',index=False)
+load_and_validate('/tmp/bad.csv')
+"
+```
+
+### 3. Category validation
+```bash
+# Should raise ValueError for unexpected delivery_mode value
+python -c "
+from diversity_trajectories import load_and_validate
+import pandas as pd
+df = pd.read_csv('test_data.csv')
+df.loc[0,'delivery_mode'] = 'unknown'
+df.to_csv('/tmp/bad_cat.csv', index=False)
+load_and_validate('/tmp/bad_cat.csv')
+"
+```
+
+### 4. Output file checks
+```bash
+# After a successful run, verify all expected outputs exist
+ls -lh results/summary_statistics.csv \
+        results/model_coefficients.csv \
+        results/model_summary.txt \
+        results/diversity_trajectories.pdf
+```
+
+### 5. Model sanity checks
+- Open `results/model_summary.txt` and confirm:
+  - `N obs` matches the number of rows in your cleaned data
+  - `N groups` matches the number of unique subjects
+  - The `age_days_c` coefficient is positive (diversity increases with age in healthy infants)
+  - The interaction term `age_days_c:delivery_mode_cesarean` p-value is interpretable (not NaN)
+  - No `ConvergenceWarning` in the log output
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 (re-triage after max_tokens bump and re-capture). An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output is complete (script + requirements + assumptions + validation checks), ends cleanly, no truncation. Script follows requested structure (main(), if __name__ guard, type hints, module docstring, grouped imports), uses statsmodels MixedLM with random intercept + slope per subject for the longitudinal design, computes per-bin summary stats with t-based 95% CI, and produces a two-panel figure including a sample-size strip. Format spec from the prompt (script, then requirements, assumptions, validation checks) is honored. I cannot verify statistical correctness of the mixed-model specification for this design or that the binning/centering choices are appropriate for the user's research question.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Statistical appropriateness of random intercept + random slope on age_days_c per subject for ~800 obs / 100 subjects
+- Whether the 0–365 day binning (final bin 330–365) is acceptable, given the prompt asked for "0-30, 31-60, etc."
+- Whether the t-distribution CI on per-bin means (rather than CI derived from the LMM) is what the user wants
+- That the random-slope fallback path actually runs cleanly in statsmodels with this data
+- That `seaborn` is a real (used) import — it is loaded but barely used in the figure beyond `set_theme`
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

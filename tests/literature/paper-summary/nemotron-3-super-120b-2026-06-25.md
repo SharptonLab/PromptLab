@@ -110,23 +110,17 @@ The study demonstrates a functional link between microbial metabolite output (pa
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers all required sections. Suggests specific therapeutic-strategy follow-up questions and emphasizes cecal SCFA measurement for mouse models. Complete, no truncation. Strong cross-model agreement.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the recommended prebiotics/probiotics/supplementation list is appropriate
+- Spot-check cited claims against source
+- That the cecal-vs-fecal distinction is correctly characterized
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

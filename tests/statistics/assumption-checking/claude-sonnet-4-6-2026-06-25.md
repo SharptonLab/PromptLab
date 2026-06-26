@@ -118,338 +118,316 @@ print(permanova_repeated)
 ```
 
 ```r
-# Option 2: Separate analyses per timepoint if interaction isn't the focus
-# Timepoint 1 only
-meta_t1 <- metadata[metadata$Time == "T1", ]
-dist_t1 <- as.dist(as.matrix(bc_dist)[meta_t1$SampleID, meta_t1$SampleID])
-
-permanova_t1 <- adonis2(dist_t1 ~ Treatment, data = meta_t1, permutations = 9999)
-
-# Timepoint 2 only  
-meta_t2 <- metadata[metadata$Time == "T2", ]
-dist_t2 <- as.dist(as.matrix(bc_dist)[meta_t2$SampleID, meta_t2$SampleID])
-
-permanova_t2 <- adonis2(dist_t2 ~ Treatment, data = meta_t2, permutations = 9999)
-```
-
-```r
-# Option 3: Mixed-effects analog using lme-style approach
-# The 'permute' package gives fine-grained control
+# Option 2: For more complex repeated measures, consider lme-style approaches
+# using the 'permute' package for fine-grained control
 
 library(permute)
 
-# Define a permutation scheme: free permutation within blocks (subjects)
+# Define a permutation scheme: permute Time within Subject blocks
 h <- how(
-  nperm    = 9999,
-  blocks   = metadata$Subject,   # never permute across subjects
-  plots    = Plots(strata = metadata$Subject, type = "free")
+  nperm = 9999,
+  blocks = metadata$Subject,    # never permute across subjects
+  plots  = Plots(
+    strata = metadata$Subject,
+    type   = "free"             # free permutation within each subject block
+  )
 )
 
-# Check that your scheme makes sense
-# Should show permutations restricted within subjects
-check(metadata, control = h)
-
-permanova_mixed <- adonis2(
+permanova_complex <- adonis2(
   bc_dist ~ Treatment * Time,
   data         = metadata,
   permutations = h
 )
 ```
 
-### Interpreting the strata approach
-When you use `blocks`, permutations are restricted so that Time labels are shuffled only within each subject. This correctly accounts for the within-subject correlation. The effective number of permutations may be lower — check this with `check()`.
+**If samples are truly independent (different subjects at each timepoint):**
+Standard permutation is valid, but note you cannot make within-subject inferences.
 
 ---
 
 ## Assumption 2: Homogeneity of Multivariate Dispersions
 
 ### What it means in plain language
-PERMANOVA tests whether group **centroids** differ in multivariate space. But if one group is tightly clustered and another is spread out (as you've observed), a significant PERMANOVA result could mean either:
-- The groups genuinely differ in composition (centroid difference) ✓
-- The groups differ only in *variability*, not location ✗
+PERMANOVA tests whether group **centroids** differ in multivariate space. However, if one group has much tighter clustering than another (lower dispersion), PERMANOVA can return a significant result even when centroids are identical — it's detecting **spread differences, not location differences**.
 
-This is the multivariate analog of Levene's test for homogeneity of variance. The key function is `betadisper()`.
+Think of it like a univariate analogy: a t-test assumes equal variances; when variances differ dramatically, you can get significant results that don't mean what you think they mean.
 
-> ⚠️ **You've already noticed this problem** — one treatment group clusters more tightly. This needs formal testing.
+> ⚠️ **You've already noticed this in your data** — one treatment group clusters more tightly. This is your highest-priority diagnostic to run.
 
-### How to test it
+### How to test it: `betadisper()`
 
 ```r
-# ============================================================
-# BETADISPER: Test homogeneity of multivariate dispersions
-# ============================================================
-
 library(vegan)
-
-# Test dispersion by Treatment group
-disp_treatment <- betadisper(bc_dist, metadata$Treatment)
-
-# Formal test: permutation-based (preferred over parametric ANOVA)
-set.seed(123)
-disp_test_treatment <- permutest(disp_treatment, permutations = 9999)
-print(disp_test_treatment)
-
-# Also run parametric ANOVA for comparison
-disp_anova_treatment <- anova(disp_treatment)
-print(disp_anova_treatment)
-
-# Tukey HSD to identify which groups differ in dispersion
-disp_tukey_treatment <- TukeyHSD(disp_treatment)
-print(disp_tukey_treatment)
-```
-
-```r
-# Test dispersion by Time
-disp_time <- betadisper(bc_dist, metadata$Time)
-set.seed(123)
-permutest(disp_time, permutations = 9999)
-
-# Test dispersion by Treatment:Time combination
-metadata$TreatTime <- interaction(metadata$Treatment, metadata$Time)
-disp_interaction <- betadisper(bc_dist, metadata$TreatTime)
-set.seed(123)
-permutest(disp_interaction, permutations = 9999)
-```
-
-```r
-# ============================================================
-# VISUALIZATION: This is often more informative than the test
-# ============================================================
-
-par(mfrow = c(1, 2))
-
-# Plot 1: PCoA with dispersion ellipses
-plot(disp_treatment,
-     hull    = FALSE,      # convex hulls can be misleading
-     ellipse = TRUE,       # standard deviation ellipses
-     main    = "Dispersion by Treatment",
-     col     = c("#E41A1C", "#377EB8", "#4DAF4A"),
-     label   = TRUE)
-
-# Plot 2: Boxplot of distances to centroid
-# This directly shows which groups have higher spread
-boxplot(disp_treatment,
-        main   = "Distance to Group Centroid",
-        ylab   = "Distance to centroid",
-        col    = c("#E41A1C", "#377EB8", "#4DAF4A"),
-        notch  = FALSE)
-
-par(mfrow = c(1, 1))
-```
-
-```r
-# ============================================================
-# GGPLOT VERSION: More publication-ready
-# ============================================================
-
 library(ggplot2)
-library(dplyr)
 
-# Extract distances to centroid
-distances_df <- data.frame(
-  Distance  = disp_treatment$distances,
-  Treatment = metadata$Treatment,
-  Time      = metadata$Time
+# ── 1. Formal test: PERMDISP (betadisper + permutest) ──────────────────────
+
+# Test dispersion for Treatment groups
+disp_treatment <- betadisper(
+  d      = bc_dist,
+  group  = metadata$Treatment,
+  type   = "centroid"  # "centroid" is more robust than "median" for most cases
+                       # use "median" if you have outliers
 )
 
-# Boxplot with individual points
-ggplot(distances_df, aes(x = Treatment, y = Distance, fill = Treatment)) +
-  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
-  geom_jitter(width = 0.15, size = 2, alpha = 0.6) +
-  facet_wrap(~Time) +
-  labs(
-    title    = "Multivariate Dispersion by Group",
-    subtitle = "Distance to group centroid (Bray-Curtis)",
-    y        = "Distance to centroid",
-    x        = "Treatment"
-  ) +
-  theme_bw() +
-  theme(legend.position = "none")
+# Permutation test for dispersion differences
+set.seed(42)
+permutest_treatment <- permutest(
+  disp_treatment,
+  permutations = 9999,
+  pairwise     = TRUE   # get pairwise comparisons between groups
+)
+
+print(permutest_treatment)
+
+# Also run for Time and the interaction
+disp_time <- betadisper(bc_dist, metadata$Time, type = "centroid")
+permutest_time <- permutest(disp_time, permutations = 9999)
+
+# For interaction: create combined group label
+metadata$TreatTime <- interaction(metadata$Treatment, metadata$Time)
+disp_interaction <- betadisper(bc_dist, metadata$TreatTime, type = "centroid")
+permutest_interaction <- permutest(disp_interaction, permutations = 9999, pairwise = TRUE)
 ```
 
-### Interpreting betadisper results
+```r
+# ── 2. Visual diagnostics ──────────────────────────────────────────────────
+
+# Plot 1: Boxplot of distances to centroid (most informative)
+par(mfrow = c(1, 2))
+
+boxplot(
+  disp_treatment,
+  main   = "Dispersion by Treatment",
+  ylab   = "Distance to Centroid",
+  col    = c("#E69F00", "#56B4E9", "#009E73"),
+  notch  = FALSE,
+  las    = 2
+)
+
+# Add individual points for transparency
+stripchart(
+  disp_treatment$distances ~ disp_treatment$group,
+  vertical = TRUE,
+  method   = "jitter",
+  add      = TRUE,
+  pch      = 16,
+  col      = "black",
+  cex      = 0.6
+)
+
+# Plot 2: PCoA with ellipses (what you've been looking at visually)
+plot(
+  disp_treatment,
+  hull    = FALSE,
+  ellipse = TRUE,
+  main    = "PCoA with 95% Ellipses",
+  col     = c("#E69F00", "#56B4E9", "#009E73")
+)
+```
+
+```r
+# ── 3. ggplot2 version for publication-quality figures ─────────────────────
+
+# Extract PCoA scores and distances for ggplot
+pcoa_scores <- as.data.frame(scores(disp_treatment, display = "sites"))
+pcoa_scores$Treatment <- metadata$Treatment
+pcoa_scores$Distance_to_centroid <- disp_treatment$distances
+
+# PCoA plot
+p1 <- ggplot(pcoa_scores, aes(x = PCoA1, y = PCoA2, color = Treatment)) +
+  geom_point(size = 3, alpha = 0.7) +
+  stat_ellipse(level = 0.95, linewidth = 1) +
+  scale_color_manual(values = c("#E69F00", "#56B4E9", "#009E73")) +
+  theme_bw(base_size = 12) +
+  labs(
+    title    = "PCoA of Bray-Curtis Distances",
+    subtitle = "Ellipses = 95% confidence regions",
+    x        = paste0("PCoA1 (", round(disp_treatment$eig[1]/sum(disp_treatment$eig)*100, 1), "%)"),
+    y        = paste0("PCoA2 (", round(disp_treatment$eig[2]/sum(disp_treatment$eig)*100, 1), "%)")
+  )
+
+# Dispersion boxplot
+p2 <- ggplot(pcoa_scores, aes(x = Treatment, y = Distance_to_centroid, fill = Treatment)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  geom_jitter(width = 0.15, size = 2, alpha = 0.6) +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73")) +
+  theme_bw(base_size = 12) +
+  labs(
+    title = "Multivariate Dispersion by Treatment",
+    y     = "Distance to Group Centroid",
+    x     = "Treatment"
+  ) +
+  theme(legend.position = "none")
+
+library(patchwork)
+p1 + p2
+```
+
+### How to interpret the results
 
 | betadisper p-value | Interpretation | Action |
 |-------------------|----------------|--------|
-| p > 0.05 | Dispersions are homogeneous | Proceed with PERMANOVA normally |
-| p < 0.05, small effect | Mild heterogeneity | Report both tests, note caveat |
-| p < 0.05, large effect | Serious heterogeneity | PERMANOVA result is ambiguous |
+| p > 0.05 | No significant dispersion difference | Proceed with PERMANOVA normally |
+| p = 0.01–0.05 | Marginal difference | Report both tests; interpret cautiously |
+| p < 0.01 | Significant dispersion difference | PERMANOVA result is ambiguous |
+
+**Critical nuance**: A significant PERMANOVA + significant betadisper means you cannot distinguish between:
+1. Groups have different community compositions (centroids differ)
+2. Groups have different variability (dispersions differ)
+3. Both
 
 ### What to do if violated
 
 ```r
-# ============================================================
-# OPTION 1: Report PERMANOVA + betadisper together
-# Standard practice — let readers interpret both
-# ============================================================
+# ── Option A: Report both tests and be explicit about interpretation ────────
+# This is the most common approach in published microbiome papers
+# State: "PERMANOVA detected significant differences (F=X, p=Y);
+#         PERMDISP also detected dispersion differences (F=X, p=Y),
+#         suggesting results may reflect differences in variability
+#         rather than (or in addition to) community composition."
 
-# Run both and report side by side
-results_permanova  <- adonis2(bc_dist ~ Treatment * Time, data = metadata, permutations = 9999)
-results_betadisper <- permutest(disp_treatment, permutations = 9999)
+# ── Option B: Use distance-based tests less sensitive to dispersion ─────────
+# ANOSIM is sometimes suggested but has its own problems (more sensitive
+# to dispersion than PERMANOVA, not less — avoid this)
 
-# If PERMANOVA is significant BUT betadisper is also significant:
-# "Groups differ in composition (PERMANOVA p = X), but also in 
-#  dispersion (betadisper p = Y), so the PERMANOVA result may 
-#  partly reflect differences in variability rather than location."
-```
-
-```r
-# ============================================================
-# OPTION 2: Transformation to stabilize dispersion
-# Hellinger transformation often reduces dispersion differences
-# ============================================================
-
+# ── Option C: Hellinger transformation before computing distances ───────────
+# Can reduce dispersion heterogeneity in some cases
 library(vegan)
 
-# Hellinger-transform the OTU/ASV table first
+# Transform the OTU/ASV table (rows = samples, cols = taxa)
 otu_hellinger <- decostand(otu_table, method = "hellinger")
 
-# Then compute Euclidean distance on transformed data
-# (equivalent to Hellinger distance)
+# Then use Euclidean distance on Hellinger-transformed data
+# (mathematically equivalent to chord distance)
 hell_dist <- dist(otu_hellinger, method = "euclidean")
 
-# Re-check dispersion
+# Re-run betadisper on new distance matrix
 disp_hell <- betadisper(hell_dist, metadata$Treatment)
 permutest(disp_hell, permutations = 9999)
+
+# ── Option D: Subset analysis ───────────────────────────────────────────────
+# If one group drives the dispersion difference, run PERMANOVA
+# on pairwise comparisons excluding that group to see if results hold
+
+# Pairwise PERMANOVA (manual approach)
+groups_to_compare <- list(
+  c("Control", "Treatment1"),
+  c("Control", "Treatment2"),
+  c("Treatment1", "Treatment2")
+)
+
+pairwise_results <- lapply(groups_to_compare, function(grps) {
+  idx <- metadata$Treatment %in% grps
+  sub_dist <- as.dist(as.matrix(bc_dist)[idx, idx])
+  sub_meta <- metadata[idx, ]
+  adonis2(sub_dist ~ Treatment, data = sub_meta, permutations = 9999)
+})
+
+names(pairwise_results) <- sapply(groups_to_compare, paste, collapse = "_vs_")
+pairwise_results
 ```
 
-```r
-# ============================================================
-# OPTION 3: ANOSIM as a complementary test
-# More sensitive to location differences, less to dispersion
-# (though it has its own limitations)
-# ============================================================
-
-anosim_result <- anosim(bc_dist, metadata$Treatment, permutations = 9999)
-summary(anosim_result)
-# R statistic: 1 = complete separation, 0 = no separation, negative = more within than between
-# Compare with PERMANOVA — if both significant, more confident in location difference
-```
-
-```r
-# ============================================================
-# OPTION 4: Multivariate Levene's test approach
-# Test dispersion differences directly as your primary question
-# ============================================================
-
-# If your biological question IS about variability (e.g., does 
-# treatment reduce community variability?), betadisper IS your test
-summary(disp_treatment)
-# Groups with smaller mean distance to centroid = more homogeneous communities
-```
+> **Limitation of betadisper**: The test itself assumes equal sample sizes for optimal power (you're fine here) and can be sensitive to outliers. The permutation test is more reliable than the accompanying ANOVA F-test — always use `permutest()`, not just the ANOVA output.
 
 ---
 
 ## Assumption 3: Appropriate Distance Metric
 
 ### What it means in plain language
-PERMANOVA doesn't care what distance matrix you use, but your choice determines what biological question you're answering. Bray-Curtis is appropriate for most microbiome work, but it's worth confirming it matches your question.
+PERMANOVA tests for differences in the distance matrix you provide. If your distance metric doesn't capture the biological signal you care about, a non-significant result doesn't mean communities are similar — it means they're similar *by that metric*.
 
-### How to evaluate it
+Bray-Curtis is generally appropriate for microbiome data because it:
+- Ignores joint absences (two samples sharing many zero-abundance taxa shouldn't be considered similar)
+- Is abundance-weighted
+- Ranges 0–1 with intuitive interpretation
 
-```r
-# ============================================================
-# COMPARE DISTANCE METRICS: Do conclusions change?
-# ============================================================
-
-# Bray-Curtis (abundance-weighted, ignores joint absences)
-bc_dist <- vegdist(otu_table, method = "bray")
-
-# Jaccard (presence/absence only)
-jac_dist <- vegdist(otu_table, method = "jaccard", binary = TRUE)
-
-# Weighted UniFrac (if phylogenetic tree available)
-# library(phyloseq)
-# wunifrac_dist <- UniFrac(physeq, weighted = TRUE)
-
-# Unweighted UniFrac
-# uwunifrac_dist <- UniFrac(physeq, weighted = FALSE)
-
-# Run PERMANOVA with each
-perm_bc  <- adonis2(bc_dist  ~ Treatment * Time, data = metadata, permutations = 9999)
-perm_jac <- adonis2(jac_dist ~ Treatment * Time, data = metadata, permutations = 9999)
-
-# Compare R² values and p-values
-cat("Bray-Curtis R²:", perm_bc$R2[1:3], "\n")
-cat("Jaccard R²:    ", perm_jac$R2[1:3], "\n")
-```
+### How to evaluate metric choice
 
 ```r
-# ============================================================
-# MANTEL TEST: Are distance matrices correlated?
-# Checks if different metrics tell the same story
-# ============================================================
+# ── Sensitivity analysis: compare results across distance metrics ───────────
 
-mantel_result <- mantel(bc_dist, jac_dist, method = "pearson", permutations = 9999)
-print(mantel_result)
-# r > 0.9: metrics are telling the same story
-# r < 0.7: metrics diverge — investigate why (rare taxa driving differences?)
-```
+library(vegan)
 
-### Decision guide for distance metrics
+# Compute multiple distance matrices
+dist_bray     <- vegdist(otu_table, method = "bray")
+dist_jaccard  <- vegdist(otu_table, method = "jaccard",  binary = TRUE)  # presence/absence
+dist_unifrac  <- # requires phyloseq or GUniFrac package
+dist_wunifrac <- # weighted UniFrac (abundance + phylogeny)
 
-```
-Is phylogenetic relatedness important?
-├── YES → Use UniFrac (weighted if abundance matters, unweighted if presence/absence)
-└── NO  → 
-    Is your question about rare vs. dominant taxa?
-    ├── Dominant taxa matter more → Bray-Curtis (default for microbiome)
-    ├── All taxa equally → Jaccard (presence/absence)
-    └── Unsure → Run both and compare
+# Run PERMANOVA on each
+results_comparison <- lapply(
+  list(Bray = dist_bray, Jaccard = dist_jaccard),
+  function(d) {
+    adonis2(d ~ Treatment * Time, data = metadata, permutations = 9999)
+  }
+)
+
+# If results are consistent across metrics, conclusions are robust
+# If results differ dramatically, the signal may be metric-dependent
+
+# ── Check for excessive zeros (affects Bray-Curtis reliability) ─────────────
+zero_prop <- sum(otu_table == 0) / prod(dim(otu_table))
+cat("Proportion of zeros in OTU table:", round(zero_prop, 3), "\n")
+# > 0.90 (90% zeros) suggests very sparse data; consider rarefaction
+# or alternative approaches
+
+# ── Rarefaction check ───────────────────────────────────────────────────────
+# Unequal sequencing depth can distort Bray-Curtis distances
+# Check library sizes
+lib_sizes <- rowSums(otu_table)
+summary(lib_sizes)
+hist(lib_sizes, main = "Library Sizes", xlab = "Read Count", col = "steelblue")
+
+# Large variation in library size (CV > 0.5) warrants rarefaction
+# or use of relative abundances
+cv_lib <- sd(lib_sizes) / mean(lib_sizes)
+cat("Coefficient of variation for library sizes:", round(cv_lib, 3), "\n")
 ```
 
 ---
 
-## Assumption 4: Independence of Observations
+## Assumption 4: Independence of Samples
 
 ### What it means in plain language
-Samples should not be correlated with each other beyond what's explained by your predictors. Common violations:
-- Multiple samples from the same subject (covered in Assumption 1)
-- Spatial autocorrelation (samples near each other are more similar)
-- Temporal autocorrelation (samples close in time are more similar)
-- Batch effects (samples processed together are more similar)
+Each sample should provide independent information. Violations occur when:
+- Samples from the same cage/tank/plot are treated as independent
+- Spatial autocorrelation exists (nearby samples are more similar)
+- Temporal autocorrelation exists beyond your designed timepoints
 
-### How to test it
-
-```r
-# ============================================================
-# CHECK FOR BATCH EFFECTS
-# ============================================================
-
-# If you have batch information:
-adonis2(bc_dist ~ Batch + Treatment * Time, data = metadata, permutations = 9999)
-# If Batch is significant, it's a confound
-
-# Visual check: does PCoA cluster by batch?
-pcoa_result <- cmdscale(bc_dist, k = 2, eig = TRUE)
-pcoa_df <- data.frame(
-  PC1   = pcoa_result$points[, 1],
-  PC2   = pcoa_result$points[, 2],
-  Batch = metadata$Batch,
-  Treatment = metadata$Treatment
-)
-
-ggplot(pcoa_df, aes(x = PC1, y = PC2, color = Treatment, shape = Batch)) +
-  geom_point(size = 3) +
-  theme_bw() +
-  labs(title = "PCoA: Check for batch clustering")
-```
+### How to check
 
 ```r
-# ============================================================
-# CHECK FOR SPATIAL/TEMPORAL AUTOCORRELATION
-# ============================================================
+# ── Check for clustering by potential confounders ──────────────────────────
 
-# Mantel test against geographic/temporal distance
-# (if you have spatial coordinates or collection dates)
+# If you have batch information, check whether batch explains variance
+if ("Batch" %in% names(metadata)) {
+  adonis2(bc_dist ~ Batch + Treatment * Time,
+          data         = metadata,
+          permutations = 9999,
+          by           = "margin")  # Type III SS — tests each term
+                                    # after accounting for all others
+}
 
-# Create a geographic distance matrix
-geo_dist <- dist(metadata[, c("Longitude", "Latitude")])
+# ── Mantel test for spatial autocorrelation (if you have coordinates) ───────
+if (all(c("Latitude", "Longitude") %in% names(metadata))) {
+  geo_dist <- dist(metadata[, c("Latitude", "Longitude")])
+  mantel_result <- mantel(bc_dist, geo_dist, permutations = 9999)
+  print(mantel_result)
+  # Significant result suggests spatial structure that should be modeled
+}
 
-# Test correlation between community similarity and geographic distance
-mantel_geo <- mantel(bc_dist, geo_dist, method = "pearson", permutations = 9999)
-print(mantel_geo)
-# Significant positive r: nearby samples are more similar (spatial autocorrelation)
+# ── For cage/tank effects: use strata in permutations ──────────────────────
+if ("Cage" %in% names(metadata)) {
+  permanova_caged <- adonis2(
+    bc_dist ~ Treatment * Time,
+    data         = metadata,
+    permutations = how(
+      nperm  = 9999,
+      blocks = metadata$Cage  # permute only within cages
+    )
+  )
+}
 ```
 
 ---
@@ -457,27 +435,251 @@ print(mantel_geo)
 ## Assumption 5: Sufficient Permutations
 
 ### What it means in plain language
-The p-value precision is limited by the number of permutations. With 999 permutations, the minimum possible p-value is 0.001. With 9999, it's 0.0001. For borderline results,
+The p-value from PERMANOVA is estimated from a permutation distribution. Too few permutations = imprecise p-value. This matters most when p-values are near your threshold (e.g., p ≈ 0.05).
+
+### Rule of thumb and implementation
+
+```r
+# ── Standard recommendation: 9999 permutations ─────────────────────────────
+# With 9999 permutations, minimum achievable p-value = 0.0001
+# With 999 permutations, minimum = 0.001
+
+# Check precision of your p-value
+# If p = 0.048 with 999 permutations, rerun with 9999
+# If p = 0.001 with 9999 permutations, result is stable
+
+set.seed(42)  # Always set seed for reproducibility
+permanova_final <- adonis2(
+  bc_dist ~ Treatment * Time,
+  data         = metadata,
+  permutations = 9999,
+  by           = "margin"  # recommended for interaction models
+)
+
+# ── Check stability: run twice with different seeds ─────────────────────────
+set.seed(123)
+p1_check <- adonis2(bc_dist ~ Treatment * Time, data = metadata,
+                    permutations = 9999, by = "margin")
+
+set.seed(456)
+p2_check <- adonis2(bc_dist ~ Treatment * Time, data = metadata,
+                    permutations = 9999, by = "margin")
+
+# P-values should agree to 2 decimal places with 9999 permutations
+cat("Run 1 Treatment p-value:", p1_check["Treatment", "Pr(>F)"], "\n")
+cat("Run 2 Treatment p-value:", p2_check["Treatment", "Pr(>F)"], "\n")
+```
+
+---
+
+## Complete Workflow: All Checks Together
+
+```r
+# ════════════════════════════════════════════════════════════════════════════
+# COMPLETE PERMANOVA ASSUMPTION CHECKING WORKFLOW
+# ════════════════════════════════════════════════════════════════════════════
+
+library(vegan)
+library(ggplot2)
+library(patchwork)
+
+# ── Setup ───────────────────────────────────────────────────────────────────
+# Inputs required:
+#   otu_table : matrix/df, rows = samples, cols = taxa
+#   metadata  : data.frame with columns Treatment, Time, Subject (if repeated)
+#   bc_dist   : Bray-Curtis distance matrix
+
+bc_dist <- vegdist(otu_table, method = "bray")
+
+# ── STEP 1: Check exchangeability (design question) ─────────────────────────
+cat("═══ STEP 1: Exchangeability ═══\n")
+cat("Are the same subjects measured at both timepoints? (Y/N): ")
+# If YES: use strata/blocks in permutations (see Assumption 1 code above)
+# If NO:  standard permutation is valid
+
+# ── STEP 2: Check dispersion homogeneity ────────────────────────────────────
+cat("\n═══ STEP 2: Dispersion Homogeneity ═══\n")
+
+# 2a. By Treatment
+disp_trt <- betadisper(bc_dist, metadata$Treatment, type = "centroid")
+perm_trt  <- permutest(disp_trt, permutations = 9999, pairwise = TRUE)
+
+cat("Treatment dispersion test:\n")
+print(perm_trt)
+
+# 2b. By Time
+disp_time <- betadisper(bc_dist, metadata$Time, type = "centroid")
+perm_time  <- permutest(disp_time, permutations = 9999)
+
+cat("\nTime dispersion test:\n")
+print(perm_time)
+
+# 2c. By Treatment:Time interaction
+metadata$TreatTime <- interaction(metadata$Treatment, metadata$Time)
+disp_int  <- betadisper(bc_dist, metadata$TreatTime, type = "centroid")
+perm_int   <- permutest(disp_int, permutations = 9999, pairwise = TRUE)
+
+cat("\nTreatment:Time interaction dispersion test:\n")
+print(perm_int)
+
+# 2d. Visualize
+par(mfrow = c(1, 3))
+boxplot(disp_trt,  main = "Dispersion: Treatment", col = 2:4, las = 2)
+boxplot(disp_time, main = "Dispersion: Time",      col = 5:6, las = 2)
+boxplot(disp_int,  main = "Dispersion: Interaction", col = 2:7, las = 2)
+par(mfrow = c(1, 1))
+
+# ── STEP 3: Check library sizes ─────────────────────────────────────────────
+cat("\n═══ STEP 3: Library Size Check ═══\n")
+lib_sizes <- rowSums(otu_table)
+cv_lib    <- sd(lib_sizes) / mean(lib_sizes)
+cat("Library size summary:\n")
+print(summary(lib_sizes))
+cat("Coefficient of variation:", round(cv_lib, 3), "\n")
+if (cv_lib > 0.5) {
+  cat("⚠️  High variation in library sizes. Consider rarefaction.\n")
+} else {
+  cat("✓  Library sizes are reasonably uniform.\n")
+}
+
+# ── STEP 4: Run PERMANOVA ────────────────────────────────────────────────────
+cat("\n═══ STEP 4: PERMANOVA ═══\n")
+
+# Determine permutation scheme based on Step 1
+# CASE A: Independent samples (different subjects at each timepoint)
+set.seed(42)
+permanova_result <- adonis2(
+  bc_dist ~ Treatment * Time,
+  data         = metadata,
+  permutations = 9999,
+  by           = "margin"   # Type III: each term after all others
+                             # use "terms" for sequential (Type I) SS
+)
+
+# CASE B: Repeated measures (same subjects at both timepoints)
+# set.seed(42)
+# permanova_result <- adonis2(
+#   bc_dist ~ Treatment * Time,
+#   data         = metadata,
+#   permutations = how(nperm = 9999, blocks = metadata$Subject)
+# )
+
+print(permanova_result)
+
+# ── STEP 5: Interpret with dispersion context ────────────────────────────────
+cat("\n═══ STEP 5: Integrated Interpretation ═══\n")
+
+# Extract p-values
+p_trt  <- perm_trt$tab["Groups", "Pr(>F)"]
+p_time <- perm_time$tab["Groups", "Pr(>F)"]
+
+p_perm_trt  <- permanova_result["Treatment", "Pr(>F)"]
+p_perm_time <- permanova_result["Time",      "Pr(>F)"]
+p_perm_int  <- permanova_result["Treatment:Time", "Pr(>F)"]
+
+# Automated interpretation helper
+interpret_result <- function(perm_p, disp_p, term_name) {
+  cat(sprintf("\n%s:\n", term_name))
+  cat(sprintf("  PERMANOVA p = %.4f | PERMDISP p = %.4f\n", perm_p, disp_p))
+
+  if (perm_p >= 0.05) {
+    cat("  → No significant difference detected.\n")
+  } else if (perm_p < 0.05 && disp_p >= 0.05) {
+    cat("  → ✓ Significant difference in community composition.\n")
+    cat("     Dispersion is homogeneous; result reflects centroid differences.\n")
+  } else if (perm_p < 0.05 && disp_p < 0.05) {
+    cat("  → ⚠️  Significant PERMANOVA but also significant dispersion difference.\n")
+    cat("     Cannot distinguish composition vs. variability differences.\n")
+    cat("     Report both results; interpret with caution.\n")
+  }
+}
+
+interpret_result(p_perm_trt,  p_trt,  "Treatment")
+interpret_result(p_perm_time, p_time, "Time")
+```
+
+---
+
+## Decision Flowchart
+
+```
+START: Plan to run PERMANOVA
+│
+├─► Q1: Are samples independent?
+│   (Same subjects at multiple timepoints?)
+│   │
+│   ├─ YES (repeated measures)
+│   │   └─► Use strata/blocks in permutations
+│   │       (how(blocks = Subject))
+│   │
+│   └─ NO → Continue
+│
+├─► Q2: Are library sizes highly variable? (CV > 0.5)
+│   │
+│   ├─ YES → Rarefy or use relative abundances
+│   │        then recompute Bray-Curtis
+│   │
+│   └─ NO → Continue
+│
+├─► Q3: Run betadisper + permutest
+│   │
+│   ├─ p > 0.05 (homogeneous dispersion)
+│   │   └─► ✓ Run PERMANOVA normally
+│   │       Significant result = centroid difference
+│   │
+│   └─ p < 0.05 (heterogeneous dispersion)
+│       │
+│       ├─► Run PERMANOVA anyway (it's still informative)
+│       │
+│       ├─► Try Hellinger transformation → recheck dispersion
+│       │
+│       └─► In paper: report BOTH PERMANOVA and PERMDISP results
+│           State: "differences may reflect composition AND/OR variability"
+│
+├─► Q4: Run PERMANOVA (9999 permutations, by = "margin")
+│
+└─► Q5: Is p-value near threshold (0.04–0.06)?
+    │
+    ├─ YES → Rerun with different seed to confirm stability
+    │        Consider increasing to 99,999 permutations
+    │
+    └─ NO → Report results with R² (effect size) and p-value
+```
+
+---
+
+## Reporting Template
+
+Based on this workflow, here is language you can adapt for a methods section:
+
+> "Community composition was compared using PERMANOVA (Anderson 2001) implemented with the `adonis2` function in the vegan package (v2.x; Oksanen et al. 2022) with Bray-Curtis dissimilarities and 9,999 permutations. Terms were tested using marginal (Type III) sums of squares. Prior to PERMANOVA, homogeneity of multivariate dispersions was assessed using `betadisper` with permutation testing (PERMDISP; Anderson 2006). [If violated: Dispersion differed significantly among treatment groups (F = X, p = Y); therefore, PERMANOVA results are interpreted as reflecting differences in community structure broadly, which may include both location and dispersion effects.] All analyses were conducted in R v4.x."
+
+---
+
+## Key Takeaways for Your Specific Situation
+
+Given what you've described, here is the priority order for your analysis:
+
+1. **First**: Determine if you have repeated measures — this affects the validity of every p-value you compute
+2. **Second**: Run `betadisper` on Treatment groups — you've already visually identified this problem and need to quantify it
+3. **Third**: If dispersion is significantly heterogeneous, you cannot claim PERMANOVA is detecting composition differences alone — you must report this limitation explicitly
+4. **Fourth**: Equal sample sizes (n=10 per cell) is genuinely helpful — PERMANOVA is more robust to dispersion heterogeneity with balanced designs than unbalanced ones, so your situation is better than it could be
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 (re-triage after max_tokens bump and re-capture). An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output is complete and ends cleanly. Covers all four requested parts (ranked assumptions, per-assumption detail, R code, decision flowchart). Notable: the response explicitly assumes the design has "two timepoints per subject" as repeated measures, but the prompt only says "Time (2 levels)" — this is ambiguous in the prompt and the model flags the ambiguity by treating it as a design question to verify. Methods table includes Anderson 2001 (PERMANOVA) and Anderson 2006 (PERMDISP) author/year citations in the reporting template — these are real attributions and broadly correct, but the user should verify the exact citation format. Reporting template also references "Oksanen et al. 2022" for vegan — the vegan package author list is correct, but year/version should be cross-checked. Code examples use modern `how(blocks=...)` idiom. I cannot verify all the statistical claims (e.g., that betadisper "more reliable than the accompanying ANOVA F-test") match current literature, nor that the user's repeated-measures interpretation is correct.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- The Anderson 2001/2006 and Oksanen et al. citations in the reporting template (author/year/journal accuracy)
+- That assuming the prompt's "Time (2 levels)" implies repeated measures within subject is correct for this study
+- The claim that ANOSIM is "more sensitive to dispersion than PERMANOVA, not less" — check against current literature
+- The recommendation to use `type = "centroid"` over `type = "median"` in betadisper
+- Statistical correctness of the overall workflow for this design
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

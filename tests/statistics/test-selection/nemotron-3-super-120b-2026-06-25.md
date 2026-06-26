@@ -141,23 +141,17 @@ Below are three defensible strategies, ordered from relatively simple to more co
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers 3 strategies (PERMANOVA, dbRDA, MaAsLin2 + sPLS-DA). Complete, no truncation. Bottom-line workflow ties them together with PERMDISP and statistician-consult flags. Strong cross-model agreement on the multi-step pipeline.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether sparse PLS-DA (sPLS-DA) is appropriate for the n=45 / high-dimensional task
+- That dbRDA after PERMANOVA is the recommended sequence vs. alternatives
+- Spot-check the variance-partitioning interpretation
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

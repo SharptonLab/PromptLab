@@ -83,62 +83,69 @@ Output format: Formatted aims page with section headers. Flag gaps for my attent
 ````
 # Specific Aims
 
-Colorectal cancer (CRC) is the second leading cause of cancer death in the United States, yet it is largely preventable through early detection of precancerous adenomas [CITE: CRC incidence/mortality statistics]. The central barrier to prevention is not biology—it is compliance. Despite the proven efficacy of colonoscopy, only ~60% of eligible adults undergo screening [CITE: screening compliance data], leaving millions at undetected risk. Current non-invasive alternatives, including fecal immunochemical testing (FIT) and multi-target stool DNA testing (Cologuard), have limited sensitivity for adenomas—the critical window for intervention—creating an urgent need for more accurate, non-invasive screening tools [CITE: FIT/Cologuard sensitivity data for adenomas]. The gut microbiome undergoes measurable compositional shifts during CRC development [CITE: foundational microbiome-CRC studies], offering an underexplored biological signal that could be harnessed for earlier detection. Our **long-term goal** is to develop a validated, non-invasive microbiome-based screening tool that improves adenoma detection and increases screening uptake. The **overall objective of this proposal** is to validate a stool microbiome classifier for adenoma detection and determine whether integrating microbiome signatures with FIT results produces a superior combined diagnostic model. Our pilot data in 50 participants (25 adenoma cases, 25 controls) identified 12 differentially abundant taxa and yielded a random forest classifier with 78% AUC, establishing proof-of-concept and providing the foundation for the following aims.
+Colorectal cancer (CRC) is the second leading cause of cancer death in the United States, yet it is largely preventable through early detection of precancerous adenomas [CITE: CRC incidence/mortality statistics]. Colonoscopy remains the gold standard for screening, but patient compliance is only ~60%, leaving millions at elevated risk [CITE: compliance rate source]. Non-invasive stool-based tests such as FIT and Cologuard have improved access to screening, but their sensitivity for detecting precancerous adenomas—the critical window for intervention—remains inadequate [CITE: FIT/Cologuard sensitivity data for adenomas]. **A critical gap exists: no validated, non-invasive biomarker strategy reliably detects adenomas before malignant transformation.** The gut microbiome is emerging as a promising source of disease-relevant biomarkers, as microbial community composition shifts measurably during CRC development [CITE: foundational microbiome-CRC studies], yet microbiome-based classifiers have not been integrated with established screening biomarkers to maximize detection performance. Our **long-term goal** is to develop a clinically deployable, non-invasive stool-based screening tool that improves early CRC detection and increases screening uptake. The **overall objective of this proposal** is to validate a microbiome-derived classifier for adenoma detection and determine whether integrating microbiome signatures with FIT results produces a superior combined diagnostic model. Our pilot data in 50 participants (25 adenoma cases, 25 controls) identified 12 differentially abundant taxa and yielded a random forest classifier with 78% AUC, providing the foundation for the studies proposed here.
 
 ---
 
 ## Aim 1: Validate and refine the stool microbiome classifier for adenoma detection in an independent prospective cohort.
 
-**Rationale:** A classifier trained on 50 participants requires independent validation before its clinical utility can be assessed. Prospective collection in a real-world GI clinic setting will test generalizability and identify the most robust microbial features for adenoma detection.
+**Rationale:** A classifier trained on 50 participants requires independent validation before clinical translation can be considered. Prospective collection in a real-world GI clinic setting will test generalizability and enable feature refinement under conditions that reflect intended use.
 
-**Approach:** We will prospectively enroll 100 adenoma cases and 100 colonoscopy-confirmed controls through our established GI clinic partnership. Stool samples will undergo 16S rRNA sequencing, and the existing classifier will be tested in this held-out cohort. We will then apply feature selection and model refinement to optimize classifier performance. [NEEDS PRELIM DATA: Power/sample size justification for 100/100 target—recommend adding sensitivity analysis showing this N is sufficient to detect a meaningful AUC improvement over baseline]
+**Approach:** We will partner with our established GI clinic collaborators to prospectively collect stool samples and matched clinical data from 100 adenoma cases and 100 colonoscopy-confirmed controls. Samples will undergo 16S rRNA sequencing using our validated pipeline, and the existing random forest classifier will be tested in this independent cohort. We will apply regularization and feature selection methods to refine the taxon panel and optimize classifier performance.
 
-**Expected Outcome:** A validated, refined microbiome classifier with defined sensitivity, specificity, and AUC in an independent cohort, along with a prioritized set of microbial features for integration in Aim 2.
+**Expected Outcome:** A validated, refined microbiome classifier with defined sensitivity, specificity, and AUC in an independent cohort, and an optimized feature set suitable for integration in Aim 2.
 
----
-
-## Aim 2: Determine whether integrating the microbiome classifier with FIT improves adenoma detection accuracy beyond either biomarker alone.
-
-**Rationale:** FIT and microbiome signatures likely capture complementary biological signals—host-derived blood loss and microbial dysbiosis, respectively. A combined model may overcome the sensitivity limitations of each test individually, representing a clinically actionable advance. [NEEDS PRELIM DATA: Any pilot data or published evidence suggesting FIT and microbiome signals are non-redundant would strengthen this rationale—flag for literature review or add to pilot if feasible]
-
-**Approach:** FIT results will be collected concurrently with stool microbiome samples from the Aim 1 cohort, enabling direct comparison within the same participants. We will build an integrated classifier combining microbiome features and FIT scores using machine learning approaches established in our lab, benchmarked against each biomarker alone using cross-validated AUC.
-
-**Expected Outcome:** Quantification of the additive diagnostic value of combining microbiome and FIT data, and a prototype integrated classifier ready for larger-scale validation. If the combined model does not outperform FIT alone, this negative result will itself provide critical guidance for the field. [NOTE: Framing the null result as informative is appropriate for R21 high-risk/high-reward framing]
+> ⚑ **FLAG:** The 78% AUC from the pilot is promising but was achieved in a small, likely homogeneous sample. Consider adding a sentence acknowledging potential performance variation across demographic subgroups and whether your 100/100 cohort is powered to detect a meaningful AUC improvement. [NEEDS PRELIM DATA or power calculation to justify n=100 as sufficient for validation.]
 
 ---
 
-## Integration and Impact
+## Aim 2: Determine whether integrating the microbiome classifier with FIT improves adenoma detection performance over either biomarker alone.
 
-These aims are deliberately sequential and mutually reinforcing: Aim 1 produces a validated classifier and a well-characterized cohort with concurrent FIT data, which Aim 2 directly leverages to build and test the integrated model. Together, they transform a promising pilot signal into a rigorously validated, multi-marker diagnostic framework. **Upon completion, this work will establish—for the first time—whether microbiome signatures provide independent and additive value over existing standard-of-care screening tests for adenoma detection.** This positions our team to pursue R01-level validation in larger, diverse populations and to engage clinical and regulatory pathways for test development. By advancing non-invasive, accurate adenoma detection, this research directly supports NCI's mission to reduce cancer mortality through improved early detection and screening. [CITE: NCI strategic plan or relevant program announcement if applicable]
+**Rationale:** FIT and microbiome signatures likely capture complementary biological signals—host mucosal bleeding and microbial dysbiosis, respectively. A combined model may achieve clinically meaningful sensitivity gains that neither biomarker achieves independently, addressing the core limitation of current non-invasive screening tools.
+
+**Approach:** FIT results will be collected alongside microbiome samples from the Aim 1 cohort, enabling direct head-to-head and integrated analyses within the same participants. We will build a multivariate integrated classifier combining microbiome features and FIT scores, comparing performance of the combined model against each biomarker alone using cross-validated AUC, sensitivity, and specificity.
+
+**Expected Outcome:** Quantitative evidence for whether microbiome-FIT integration provides additive diagnostic value, and a prototype integrated classifier with defined performance characteristics to support a future R01 validation trial.
+
+> ⚑ **FLAG:** The innovation claim—"first study to combine microbiome signatures with established screening biomarkers for adenoma detection"—is strong but must be verified with a thorough literature search before submission. If prior studies exist, reframe as the first prospective, integrated classifier with head-to-head comparison. [CITE: confirm novelty or adjust claim.]
+
+> ⚑ **FLAG:** You will need FIT data from the same participants as microbiome samples. Confirm your GI clinic protocol captures FIT results routinely or that your IRB/collection protocol explicitly includes FIT co-collection. Missing FIT data could undermine Aim 2.
 
 ---
 
-> **Author's Flags for Attention Before Submission:**
-> - **[CITE]** markers appear at 5 locations requiring literature citations (CRC statistics, compliance rates, FIT/Cologuard sensitivity, microbiome-CRC foundational studies, NCI mission statement)
-> - **[NEEDS PRELIM DATA]** flags appear at 2 locations: (1) power/sample size justification for Aim 1 enrollment targets; (2) mechanistic rationale for FIT + microbiome non-redundancy in Aim 2
-> - **Innovation claim** ("first study to combine microbiome signatures with FIT for adenoma detection") should be verified with a current literature search before submission—this claim is central to the application's novelty argument and must be defensible
-> - Consider adding 1–2 sentences on **diversity/equity** in cohort enrollment, as NIH increasingly scrutinizes this in study design
-> - The 78% AUC from your pilot is a strength—consider whether space allows one sentence quantifying the gap between your classifier and FIT alone to sharpen the motivation for Aim 2
+## Closing
+
+Aims 1 and 2 are deliberately sequential and synergistic: the validated, refined classifier from Aim 1 directly feeds the integration analysis in Aim 2, and both aims draw from the same prospective cohort, maximizing efficiency and internal consistency. Together, these aims will produce the first validated, integrated microbiome-FIT classifier for non-invasive adenoma detection—an advance that is not currently possible given the absence of independently validated microbiome classifiers in this space. **Successful completion will generate the performance data, biospecimen infrastructure, and analytical framework needed to support a fully powered R01 clinical validation trial.** This work aligns directly with NIH's priority to develop innovative, patient-centered approaches to cancer prevention and early detection, and with NCI's emphasis on reducing the burden of preventable cancer mortality through improved screening strategies [CITE: NCI strategic plan or relevant PA if applicable].
+
+---
+
+### ⚑ Summary of Flags for Your Attention
+
+| # | Flag | Action Needed |
+|---|------|---------------|
+| 1 | CRC mortality/incidence statistic | Add citation (e.g., Siegel et al., CA Cancer J Clin) |
+| 2 | 60% colonoscopy compliance rate | Add citation to source this figure |
+| 3 | FIT/Cologuard adenoma sensitivity limitations | Add citation(s) to support this claim |
+| 4 | Microbiome-CRC association | Add 2–3 foundational citations |
+| 5 | Innovation claim ("first study") | Conduct literature search to confirm; adjust if needed |
+| 6 | Power justification for n=100/100 | Add brief power calculation or rationale in Research Strategy |
+| 7 | FIT co-collection logistics | Confirm IRB protocol and clinic workflow support this |
+| 8 | NCI strategic plan alignment | Add specific PA number or NCI priority language if known |
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 (re-triage after max_tokens bump and re-capture). An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output is complete and ends cleanly with a flag-summary table. Follows the requested structure (opening hook → 2 aims with rationale/approach/expected outcome → closing). Uses `[CITE]` and `[NEEDS PRELIM DATA]` flags consistently rather than inventing references — meets the "use only information from my notes" constraint. Adds embedded `⚑ FLAG` callouts after each aim noting power calculation gaps, FIT co-collection logistics, and the innovation claim that needs literature verification. Two aims (within the 2-3 spec), aligned with the user's notes. The summary flag table at the end is helpful but may exceed strict R21 one-page formatting if rendered. No fabricated preliminary data — sticks to the n=50 pilot, 12 taxa, 78% AUC. NCI strategic plan reference is flagged `[CITE]` rather than fabricated. I cannot verify whether the prose actually fits within one R21 page when rendered, nor whether the flag callouts would be acceptable inline in a real submission.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the page-length target (1 page R21 limit) is actually met when rendered (the embedded flag callouts and summary table likely push it over)
+- That the innovation claim ("first study to combine microbiome signatures with established screening biomarkers for adenoma detection") survives a real literature search
+- The framing of Aim 2 as a "head-to-head and integrated" analysis aligns with the user's actual study capacity
+- Whether n=100/100 is genuinely powered to detect a meaningful AUC improvement (flagged but not resolved)
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

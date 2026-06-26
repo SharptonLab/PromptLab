@@ -82,23 +82,16 @@ Output:
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output produces all 8 expected fields exactly matching the few-shot template format. Key finding wording is slightly more explicit than Opus 4.7's, citing both cure rates ("91% vs. 62%"). No fabrication. **Strong cross-model agreement** with all 5 other panel models.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Confirm Sonnet's "91% cure rate vs. 62% for vancomycin" framing is preferred over Opus's "(91% vs 62%)" parenthetical
+- Spot-check each field against the source abstract for explicit support
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

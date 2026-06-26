@@ -44,11 +44,24 @@ methodological transparency:
    provider's internal default, not the T=0.0 the harness requested. Claude
    Sonnet 4.6 and Gemini 2.5 Pro accepted T=0.0.
 
-2. **`max_tokens` was bumped for two reasoning models** (GPT-5.5: 32 000,
-   Step-3.7 Flash: 16 384). The harness default of 4 096 was consumed by
-   internal chain-of-thought on long-input prompts and the visible answer
-   was empty. With the increased budgets all 144 cells produced
-   substantive output.
+2. **`max_tokens` was bumped above the harness default** (`4 096`) for
+   every panel model except Sonnet's stated default-tier behavior could
+   span long responses without it. Final values used: Sonnet 4.6 = 16 384;
+   Opus 4.7 = 32 000; GPT-5.5 = 32 000; Gemini 2.5 Pro = 32 000;
+   Nemotron 3 Super = 16 384; Step-3.7 Flash = 16 384. The default 4 096
+   was consumed by internal chain-of-thought on reasoning-capable models
+   (the visible answer was empty) and by long-output prompts on the
+   non-reasoning models (mid-sentence truncation). The bumps were applied
+   in two passes: an initial round before the main capture for the models
+   we expected to need it (GPT-5.5, Step-3.7, Nemotron), and a second
+   targeted re-run for 19 cells across Sonnet, Opus, and Gemini that
+   showed mid-sentence truncation in the first pass. The 19 re-runs used
+   `--force --date 2026-06-25` to overwrite in place; the previous
+   truncated captures are recoverable from git history. One re-run cell
+   (Opus 4.7 on `literature/paper-summary`) still ended mid-sentence at
+   the bumped 32 000-token cap, suggesting either a stop-sequence quirk
+   or a model-side limit we did not characterize; the captured output is
+   substantive and was reviewed as-is.
 
 Captured outputs were then human-verified by the lead author through a
 static review SPA (deployed via GitHub Pages, source at `docs/index.html`)

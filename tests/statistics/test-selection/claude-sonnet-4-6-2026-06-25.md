@@ -232,23 +232,17 @@ Random Forest classifier with cross-validation, used to assess predictive accura
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers all required dimensions with explicit "when to consult a statistician" decision points. Complete, no truncation. Suggests partial PERMANOVA with covariate adjustment. Strong cross-model agreement.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the conditions triggering "consult a statistician" cover the right scenarios
+- That partial PERMANOVA recommendation handles the covariate adjustment appropriately
+- Whether the unweighted UniFrac sensitivity check is standard practice
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

@@ -84,23 +84,17 @@ Output:
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output produces all 8 expected fields. Two minor format anomalies: (1) each line ends with two trailing spaces (Markdown linebreak syntax); (2) the Sequencing field includes "(MetaPhlAn3)" parenthetically AND the Analysis tools field also lists MetaPhlAn3 — minor duplication. Also includes the p-value "(p=0.008)" in the Key finding, which is the most quantitatively complete of the 6 panel responses. **Strong cross-model agreement** on structural extraction.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the trailing-space line-break formatting affects downstream parsing
+- Whether crossing "MetaPhlAn3" between Sequencing and Analysis tools fields is an error
+- Spot-check that p=0.008 is correctly transcribed from the source
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

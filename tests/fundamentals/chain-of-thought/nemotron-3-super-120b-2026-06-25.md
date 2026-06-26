@@ -153,23 +153,17 @@ By walking through these steps with a statistician, you’ll land on a method th
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output follows the 5-step chain-of-thought structure and concludes with a substantive recommendation plus a list of questions for the statistician. Complete, no truncation. Recommends multivariate LME on ILR-transformed data with random effects — partially diverges from peers who lean more on PERMANOVA + ANCOM-BC2. **Cross-model agreement** on cage-effect importance and need for compositional handling, but ILR-LME-first emphasis is somewhat unique to Nemotron in this panel.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether ILR-LME-as-primary is appropriate vs. the panel-majority "PERMANOVA + MaAsLin2/ANCOM-BC2" recommendation
+- That the suggested R packages would actually fit the recommended models cleanly on this design
+- Whether emphasizing "ILR" over "CLR" is justified for the use case
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

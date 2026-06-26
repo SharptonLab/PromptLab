@@ -292,23 +292,17 @@ Feel free to adapt the script (e.g., change permutation number, add faceting by 
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output is **complete** — full R script + a tabulated validation checks section. One of 3 of 6 panel models that did not truncate. Includes set.seed, suggests Hellinger transformation as alternative, capscale-based diagnostics. Strong cross-model agreement with GPT/Step on core workflow.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Confirm the validation table cells (e.g., "hist(as.matrix(bray_dist))" for distance inspection) are technically appropriate
+- That the MRPP fallback for dispersion-test failures matches reviewer preference
+- Spot-check the script runs without errors on test data
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

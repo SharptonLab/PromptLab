@@ -141,23 +141,17 @@ A reviewer with microbiome expertise would likely write something close to the f
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers required dimensions with severity table and bottom-line "would not survive peer review" judgment. Complete, no truncation. Strong cross-model agreement on substantive issues.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the severity ratings (Major/Critical/Minor) match reviewer judgment
+- That the Greengenes-as-outdated claim is correct
+- Whether the "first draft placeholder" framing is the right tone
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

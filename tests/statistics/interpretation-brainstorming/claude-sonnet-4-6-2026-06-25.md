@@ -283,23 +283,17 @@ The most intellectually honest framing of your results is this: **you have a cle
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers all required dimensions. Complete, no truncation. Concludes with explicit "Core Tension" framing — useful for manuscript discussion. Argues weight dissociation should be framed as a finding rather than limitation. Strong cross-model agreement on substantive issues.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether "weight-glucose dissociation as finding" framing aligns with reviewer expectation
+- That the recommended manuscript-level framing is appropriate
+- Spot-check the analysis of FMT-obese non-significance
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

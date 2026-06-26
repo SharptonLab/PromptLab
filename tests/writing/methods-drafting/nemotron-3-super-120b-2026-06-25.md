@@ -101,23 +101,17 @@ Total DNA was extracted from stool samples using the MoBio PowerFecal kit. The V
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output produces Methods section with explicit [MISSING] flag at Statistical Analysis. Complete, no truncation. Most concise of the panel; relies heavily on flags rather than draft prose for missing sections. Strong cross-model agreement.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether brevity vs. peer verbosity is the preferred trade-off
+- That the drafted prose (FMT preparation steps, colonoscopy administration) is faithful to source notes
+- Spot-check no fabricated specifics
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

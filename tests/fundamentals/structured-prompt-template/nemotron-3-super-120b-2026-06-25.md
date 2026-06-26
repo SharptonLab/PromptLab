@@ -77,23 +77,16 @@ Accuracy and completeness are paramount. It is better to report "Not reported" t
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output produces all 10 expected fields. Adds inferential framing "DSS-induced colitis" (peers say just "DSS"). Moderately terse on details (e.g., omits "2×250 bp" read description that GPT/Opus include). **Strong cross-model agreement** on structural extraction.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether "DSS-induced colitis" is an acceptable elaboration vs. the literal-only "DSS" choice peers made
+- Spot-check each field against the source
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

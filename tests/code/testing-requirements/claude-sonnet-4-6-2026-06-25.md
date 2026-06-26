@@ -429,23 +429,17 @@ The **zero-mean property** and **sample independence** tests are the two you sho
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers priority assessment, comprehensive tests, failure-mode-to-cause table. Complete, no truncation. Longest of the panel at 455 lines. Cross-model agreement with peers on test priorities; recommends "zero-mean property and sample independence" as the two most trustworthy tests.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Verify the verbosity (455 lines for a testing strategy) matches reviewer expectation
+- Whether the suggested test code snippets would execute cleanly
+- That the priority-assessment ordering matches the actual highest-risk failure modes for this CLR implementation
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

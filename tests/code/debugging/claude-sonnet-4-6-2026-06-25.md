@@ -198,23 +198,17 @@ sample_j = otu_table[j]   # shape (n_taxa,)
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers all 5 requested sections with a clean before/after visual diff for the fix, includes built-in sanity-check asserts (shape, symmetry, diagonal-zero), and goes further than peers by writing a runnable `assert np.allclose(distances, distances_v2)` cross-check between the two fix versions. Complete, no truncation. **Strong cross-model agreement** with all 5 other models on the diagnosis and recommended fix.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Performance claim ("~2x faster" for `pdist` vs manual loop) — actual factor is typically much larger than 2x; minor accuracy quibble worth checking
+- That sanity-check assertions execute cleanly on representative data
+- Whether the explanatory verbosity matches the prompt's intent for someone asking for a debug fix
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

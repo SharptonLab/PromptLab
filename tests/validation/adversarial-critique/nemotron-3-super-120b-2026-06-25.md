@@ -142,23 +142,17 @@ Output format: Structured critique with specific issues and recommended fixes wh
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers required dimensions and includes a notable "ready-to-paste reviewer report" prose paragraph at the end. Complete, no truncation. Strong cross-model agreement on substantive issues. The reviewer-prose section is more comprehensive than peer offerings.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the bundled "ready-to-paste reviewer report" prose is appropriate to include (could be misused)
+- That the specific recommendations (SILVA 138, 9999 permutations, GTDB) are field-standard current versions
+- Spot-check the PowerSoil claim ("designed for soil") for accuracy — the kit is widely used for stool DNA extraction with documented validation
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

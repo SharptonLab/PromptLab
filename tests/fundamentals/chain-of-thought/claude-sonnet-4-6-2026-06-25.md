@@ -263,23 +263,17 @@ This combination is justified because:
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output follows all 5 requested chain-of-thought steps. Complete, no truncation. Includes a useful nested-design ASCII diagram and an assumption matrix table comparing 5 methods × 5 criteria. Cites Gloor et al. and Quinn et al. for the compositionality argument. Concludes with a clearly framed "Honest Caveat" about study power. **Strong cross-model agreement** with Opus, GPT, Step on recommended methods.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- **Citation verification:** Gloor et al. and Quinn et al. references for compositionality — confirm these papers exist and support the claim
+- The assumption-comparison table — verify each cell (e.g., "ANCOM-BC2 handles compositionality via core feature") is technically accurate
+- Whether the explicit "reviewer pushback in 2024+" framing for Bray-Curtis-only is appropriate guidance
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

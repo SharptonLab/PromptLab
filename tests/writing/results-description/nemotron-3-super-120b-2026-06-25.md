@@ -71,23 +71,17 @@ In the intestinal permeability assay, serum fluorescence of oral FITC‑dextran 
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output produces Results paragraph faithfully using source numbers. Complete, no truncation. Uses **[VERIFY: borderline significance]** flags around the p=0.048 — more cautious framing than peers (e.g., Sonnet's [VERIFY]). Strong cross-model agreement on substance.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the in-text [VERIFY: borderline significance] flag belongs in a draft submitted for author review or should be a margin comment
+- Confirm all numbers match source
+- That the "leaky gut" colloquial framing is appropriate
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

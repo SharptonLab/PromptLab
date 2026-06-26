@@ -180,23 +180,17 @@ I'm moderately uncertain here. The n<20 threshold feels like a specific number I
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers required dimensions with explicit "Do not cite these without verifying" summary. Complete, no truncation. Treats Nearing et al. 2022 (Nature Communications) as a starting reference but caveats that the paper should be confirmed. Strong cross-model agreement.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Confirm the Nearing et al. 2022 Nature Communications reference exists
+- Whether the self-critique level of meta-uncertainty is well-calibrated
+- That the recommendation to trust technical descriptions more than specific citations is sound advice
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

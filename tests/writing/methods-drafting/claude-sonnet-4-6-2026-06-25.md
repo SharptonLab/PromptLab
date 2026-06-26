@@ -180,23 +180,17 @@ Resolving these gaps before submission will substantially reduce the likelihood 
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output produces Methods section with [MISSING] flags + a closing checklist of items that need to be resolved before submission. Complete, no truncation. Highest-priority list (IRB, power, randomization, allocation concealment, statistical methods) matches typical reviewer requirements.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the prioritized "resolve before submission" list captures the right severity ordering
+- That drafted prose accurately represents the source notes
+- Spot-check no fabricated specifics
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

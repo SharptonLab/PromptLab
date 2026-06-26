@@ -178,23 +178,17 @@ When you discuss the data, frame the conclusion as “*consistent with* a benefi
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output is **TRUNCATED** mid-bullet at the start of "Bottom Line for Your Discussion" — the recommendation list is incomplete. Cross-model: 2 of 6 truncated on this prompt.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Needs revision
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Confirm capture-side token cap; re-run with higher max-tokens
+- That the captured content covers the main alternative interpretations
+- Whether the partial bottom-line bullets match peer recommendations
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

@@ -100,23 +100,17 @@ The AI’s answer oversimplifies a common analytical step. While a t‑test *can
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers all 5 requested critique dimensions, uses a table to organize factual problems, and ends with a "Bottom-line critique". Complete, no truncation. Mentions GLM-Gamma, lmer, brms, multivariate frameworks as alternatives — broader than most peers. **Strong cross-model agreement** with peers on the critique substance. No fabricated citations.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the Bayesian (brms/rstanarm) alternative is appropriate to recommend here
+- That the "0.2-unit Shannon change may be negligible" claim is field-appropriate
+- Verify table formatting renders cleanly
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

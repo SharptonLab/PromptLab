@@ -114,23 +114,17 @@ Current evidence indicates that gut microbiome recovery after antibiotics is var
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output covers all required sections. Complete, no truncation. Concise synthesis. Strong cross-model agreement with peers.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the specific Bacteroides example for persistent depletion is attributed correctly to Anderson et al.
+- Spot-check all cited claims against source paper excerpts
+- That author/year citations match
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

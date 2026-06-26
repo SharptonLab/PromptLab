@@ -120,23 +120,17 @@ Aim 1 establishes the reliability and refinement of the microbiome‑based ade
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to speed T4 review. An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output produces Specific Aims with explicit [NEEDS PRELIM DATA] and [CITE] flag conventions. Complete, no truncation. Most disciplined of the panel on attribution placeholders.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- Whether the dual-flag convention ([NEEDS PRELIM DATA] vs [CITE]) is the preferred pattern
+- That all expected-performance claims are appropriately flagged
+- Spot-check pilot data
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW

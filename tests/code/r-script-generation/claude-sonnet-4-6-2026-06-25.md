@@ -76,410 +76,716 @@ Output format: Complete R script with section headers and comments. After the sc
 # =============================================================================
 # SECTION 1: Package Loading
 # =============================================================================
-# Core packages:
-#   - phyloseq: microbiome data handling (Bioconductor)
-#   - vegan: ecological statistics including PERMANOVA (CRAN)
-#   - ggplot2: publication-quality plotting (CRAN, via tidyverse)
-# Additional packages:
-#   - dplyr: data manipulation, cleaner than base R for metadata handling (CRAN)
-#   - ggrepel: non-overlapping labels if sample labels are needed (CRAN)
-#   - patchwork: combining multiple plots into one figure (CRAN)
-#   - scales: axis formatting and color palette helpers (CRAN)
 
-required_packages <- c("phyloseq", "vegan", "ggplot2", "dplyr",
-                        "ggrepel", "patchwork", "scales")
+# Core packages for microbiome analysis and visualization
+library(phyloseq)   # Microbiome data structures and basic operations
+library(vegan)      # Ecological statistics (PERMANOVA, distance matrices)
+library(ggplot2)    # Publication-quality visualization
 
-# Check and alert for any missing packages before attempting to load
-missing_packages <- required_packages[
-  !sapply(required_packages, requireNamespace, quietly = TRUE)
-]
-
-if (length(missing_packages) > 0) {
-  stop(
-    "The following required packages are not installed:\n",
-    paste(" -", missing_packages, collapse = "\n"), "\n\n",
-    "Install CRAN packages with: install.packages(c(",
-    paste0('"', missing_packages, '"', collapse = ", "), "))\n",
-    "Install Bioconductor packages with:\n",
-    "  BiocManager::install('phyloseq')"
-  )
-}
-
-suppressPackageStartupMessages({
-  library(phyloseq)
-  library(vegan)
-  library(ggplot2)
-  library(dplyr)
-  library(ggrepel)
-  library(patchwork)
-  library(scales)
-})
-
-cat("All packages loaded successfully.\n")
+# Additional packages (all on CRAN) - see notes at end of script for rationale
+library(dplyr)      # Data manipulation; cleaner than base R for data frames
+library(tibble)     # Modern data frames; rownames_to_column() is essential here
+library(scales)     # Color scale helpers for ggplot2
 
 # =============================================================================
 # SECTION 2: Configuration and File Paths
 # =============================================================================
-# Centralizing paths and parameters here makes the script easier to adapt
 
 # --- Input/Output paths ---
-INPUT_RDS_PATH  <- "data/probiotic_study.rds"
-OUTPUT_PDF_PATH <- "results/ordination_pcoa.pdf"
-OUTPUT_STATS_PATH <- "results/permanova_results.txt"  # optional text file output
+INPUT_RDS   <- "data/probiotic_study.rds"
+OUTPUT_PDF  <- "output/ordination_pcoa_bray.pdf"
+OUTPUT_STATS <- "output/permanova_results.txt"  # Optional: also save to file
 
-# --- Analysis parameters ---
-# ASSUMPTION: Rarefaction depth will be determined from data (see QC section).
-# Set to NULL to use the minimum sample depth; override with a specific integer
-# if you have a biologically motivated cutoff.
-RAREFY_DEPTH <- NULL  # e.g., set to 10000 to force a specific depth
+# --- Plot dimensions (inches) ---
+PLOT_WIDTH  <- 8
+PLOT_HEIGHT <- 6
 
-# --- Plot parameters ---
-PDF_WIDTH  <- 10   # inches
-PDF_HEIGHT <- 8    # inches
-POINT_SIZE <- 3
-POINT_ALPHA <- 0.85
-
-# --- Expected metadata columns (used in validation checks) ---
-# ASSUMPTION: These column names match exactly what is in the phyloseq sample_data
-EXPECTED_COLS <- c("sample_id", "subject_id", "timepoint", "treatment",
-                   "age", "sex")
-
-# --- Factor level ordering for plots ---
-# ASSUMPTION: These are the only levels present; adjust if your data differs
-TIMEPOINT_LEVELS  <- c("baseline", "week4", "week8")
-TREATMENT_LEVELS  <- c("placebo", "probiotic")  # placebo first as reference
+# --- PERMANOVA settings ---
+PERMANOVA_PERMUTATIONS <- 9999  # Increase for final analysis; 999 for quick checks
+RANDOM_SEED <- 42               # For reproducibility of permutation tests
 
 # =============================================================================
-# SECTION 3: Load Data and Basic Validation
+# SECTION 3: Helper Functions
 # =============================================================================
 
-cat("\n--- Loading phyloseq object ---\n")
-
-# Check that the input file exists before attempting to load
-if (!file.exists(INPUT_RDS_PATH)) {
-  stop(
-    "Input file not found: ", INPUT_RDS_PATH, "\n",
-    "Check that your working directory is set correctly with getwd(), ",
-    "and that the file path is accurate."
-  )
-}
-
-ps_raw <- readRDS(INPUT_RDS_PATH)
-
-# Validate that the loaded object is actually a phyloseq object
-if (!inherits(ps_raw, "phyloseq")) {
-  stop(
-    "The loaded RDS file does not contain a phyloseq object.\n",
-    "Object class found: ", class(ps_raw)
-  )
-}
-
-cat("Phyloseq object loaded successfully.\n")
-
-# =============================================================================
-# SECTION 4: Quality Control and Descriptive Summary
-# =============================================================================
-
-cat("\n--- Quality Control Summary ---\n")
-
-# --- Basic counts ---
-n_samples <- nsamples(ps_raw)
-n_taxa    <- ntaxa(ps_raw)
-cat(sprintf("  Samples : %d (expected: 180)\n", n_samples))
-cat(sprintf("  Taxa    : %d\n", n_taxa))
-
-# Warn if sample count is unexpected
-if (n_samples != 180) {
-  warning(
-    sprintf(
-      "Expected 180 samples but found %d. ",
-      n_samples
-    ),
-    "Verify that no samples were lost during upstream processing."
-  )
-}
-
-# --- Metadata validation ---
-sample_metadata <- as(sample_data(ps_raw), "data.frame")
-
-missing_cols <- setdiff(EXPECTED_COLS, colnames(sample_metadata))
-if (length(missing_cols) > 0) {
-  stop(
-    "The following expected metadata columns are missing:\n",
-    paste(" -", missing_cols, collapse = "\n"), "\n",
-    "Available columns: ", paste(colnames(sample_metadata), collapse = ", ")
-  )
-}
-
-cat("  All expected metadata columns present.\n")
-
-# --- Check for missing values in key variables ---
-key_vars <- c("subject_id", "timepoint", "treatment")
-for (var in key_vars) {
-  n_missing <- sum(is.na(sample_metadata[[var]]))
-  if (n_missing > 0) {
-    warning(sprintf("Column '%s' has %d missing value(s). ", var, n_missing),
-            "These samples may be dropped during analysis.")
+# --- Function: Validate phyloseq object structure ---
+# Checks that required components and metadata columns are present
+validate_phyloseq <- function(ps) {
+  
+  # Check that object is a phyloseq instance
+  if (!inherits(ps, "phyloseq")) {
+    stop("ERROR: Loaded object is not a phyloseq instance. ",
+         "Check that the RDS file contains a phyloseq object.")
   }
+  
+  # Check for required phyloseq components
+  required_components <- c("otu_table", "sam_data", "tax_table")
+  for (comp in required_components) {
+    # ASSUMPTION: OTU table, sample data, and taxonomy are all present
+    if (is.null(ps@.Data[[which(slotNames(ps) == comp)]])) {
+      warning("WARNING: phyloseq object may be missing component: ", comp)
+    }
+  }
+  
+  # Check for required metadata columns
+  # ASSUMPTION: Column names match exactly as specified in the data description
+  required_cols <- c("sample_id", "subject_id", "timepoint", "treatment",
+                     "age", "sex")
+  sample_df <- as.data.frame(sample_data(ps))
+  missing_cols <- setdiff(required_cols, colnames(sample_df))
+  
+  if (length(missing_cols) > 0) {
+    stop("ERROR: Missing required metadata columns: ",
+         paste(missing_cols, collapse = ", "),
+         "\nAvailable columns: ", paste(colnames(sample_df), collapse = ", "))
+  }
+  
+  message("✓ Phyloseq object structure validated successfully.")
+  invisible(ps)
 }
 
-# --- Enforce factor levels ---
-# ASSUMPTION: All timepoint and treatment values match the defined levels exactly
-sample_metadata$timepoint <- factor(sample_metadata$timepoint,
-                                    levels = TIMEPOINT_LEVELS)
-sample_metadata$treatment <- factor(sample_metadata$treatment,
-                                    levels = TREATMENT_LEVELS)
-
-# Check for unexpected factor levels (e.g., typos in metadata)
-unexpected_timepoints <- levels(droplevels(
-  factor(sample_metadata$timepoint[
-    !sample_metadata$timepoint %in% TIMEPOINT_LEVELS
-  ])
-))
-if (length(unexpected_timepoints) > 0) {
-  warning("Unexpected timepoint values found: ",
-          paste(unexpected_timepoints, collapse = ", "))
+# --- Function: Check and set factor levels for key variables ---
+# Ensures timepoint and treatment are factors with meaningful level ordering
+prepare_metadata_factors <- function(ps) {
+  
+  sample_df <- as.data.frame(sample_data(ps))
+  
+  # ASSUMPTION: These are the expected levels; adjust if your data differs
+  expected_timepoints  <- c("baseline", "week4", "week8")
+  expected_treatments  <- c("placebo", "probiotic")  # placebo as reference
+  
+  # Validate timepoint levels
+  observed_timepoints <- unique(sample_df$timepoint)
+  unexpected_tp <- setdiff(observed_timepoints, expected_timepoints)
+  if (length(unexpected_tp) > 0) {
+    warning("WARNING: Unexpected timepoint values found: ",
+            paste(unexpected_tp, collapse = ", "),
+            "\nExpected: ", paste(expected_timepoints, collapse = ", "))
+  }
+  
+  # Set ordered factor levels (baseline → week4 → week8)
+  sample_df$timepoint <- factor(sample_df$timepoint,
+                                levels = expected_timepoints)
+  
+  # Set treatment factor with placebo as reference level
+  sample_df$treatment <- factor(sample_df$treatment,
+                                levels = expected_treatments)
+  
+  # Write modified metadata back to phyloseq object
+  sample_data(ps) <- sample_df
+  
+  message("✓ Metadata factors prepared: timepoint and treatment levels set.")
+  return(ps)
 }
 
-# Write validated metadata back to the phyloseq object
-sample_data(ps_raw) <- sample_data(sample_metadata)
+# --- Function: Print a formatted section divider to console ---
+print_section <- function(title) {
+  cat("\n", strrep("=", 60), "\n", sep = "")
+  cat(" ", title, "\n", sep = "")
+  cat(strrep("=", 60), "\n\n", sep = "")
+}
 
-# --- Sample depth summary ---
-sample_depths <- sample_sums(ps_raw)
-cat(sprintf(
-  "  Read depth: min = %s, median = %s, max = %s\n",
-  format(min(sample_depths),    big.mark = ","),
-  format(median(sample_depths), big.mark = ","),
-  format(max(sample_depths),    big.mark = ",")
-))
+# =============================================================================
+# SECTION 4: Load and Validate Data
+# =============================================================================
+
+print_section("LOADING DATA")
+
+# Check that input file exists before attempting to load
+if (!file.exists(INPUT_RDS)) {
+  stop("ERROR: Input file not found at path: ", INPUT_RDS,
+       "\nPlease check the file path and working directory: ", getwd())
+}
+
+# Load phyloseq object
+ps_raw <- readRDS(INPUT_RDS)
+message("✓ Phyloseq object loaded from: ", INPUT_RDS)
+
+# Validate structure and prepare factors
+ps_raw <- validate_phyloseq(ps_raw)
+ps      <- prepare_metadata_factors(ps_raw)
+
+# =============================================================================
+# SECTION 5: Quality Control Summary
+# =============================================================================
+
+print_section("QUALITY CONTROL SUMMARY")
+
+# Extract key counts
+n_samples   <- nsamples(ps)
+n_taxa      <- ntaxa(ps)
+sample_df   <- as.data.frame(sample_data(ps))
+
+# --- Sample count summary ---
+cat("Total samples:  ", n_samples, "\n")
+cat("Total taxa:     ", n_taxa, "\n\n")
+
+# ASSUMPTION: 180 samples expected (30 subjects × 2 treatments × 3 timepoints)
+if (n_samples != 180) {
+  warning("WARNING: Expected 180 samples but found ", n_samples,
+          ". Verify sample completeness.")
+}
+
+# --- Sequencing depth summary ---
+sample_sums_vec <- sample_sums(ps)
+cat("Sequencing depth (read counts per sample):\n")
+cat("  Min:    ", min(sample_sums_vec), "\n")
+cat("  Median: ", median(sample_sums_vec), "\n")
+cat("  Max:    ", max(sample_sums_vec), "\n")
+cat("  Mean:   ", round(mean(sample_sums_vec), 0), "\n\n")
 
 # Flag samples with very low read counts (potential QC failures)
-# ASSUMPTION: Samples with fewer than 1000 reads are considered low-quality
-LOW_DEPTH_THRESHOLD <- 1000
-low_depth_samples <- names(sample_depths[sample_depths < LOW_DEPTH_THRESHOLD])
-if (length(low_depth_samples) > 0) {
-  warning(
-    length(low_depth_samples), " sample(s) have fewer than ",
-    LOW_DEPTH_THRESHOLD, " reads:\n",
-    paste(" -", low_depth_samples, collapse = "\n"), "\n",
-    "Consider removing these before rarefaction."
-  )
+# ASSUMPTION: Samples with < 1000 reads are considered low-quality
+LOW_READ_THRESHOLD <- 1000
+low_read_samples <- names(sample_sums_vec[sample_sums_vec < LOW_READ_THRESHOLD])
+if (length(low_read_samples) > 0) {
+  warning("WARNING: ", length(low_read_samples),
+          " sample(s) have fewer than ", LOW_READ_THRESHOLD, " reads:\n  ",
+          paste(low_read_samples, collapse = ", "))
+} else {
+  message("✓ All samples exceed minimum read count threshold (", 
+          LOW_READ_THRESHOLD, " reads).")
 }
 
-# --- Experimental design check ---
-design_table <- table(
-  sample_metadata$treatment,
-  sample_metadata$timepoint
-)
-cat("\n  Sample counts by treatment × timepoint:\n")
-print(design_table)
+# --- Sample balance across experimental groups ---
+cat("Sample distribution by treatment × timepoint:\n")
+print(table(sample_df$treatment, sample_df$timepoint))
+cat("\n")
 
-# =============================================================================
-# SECTION 5: Data Preprocessing — Rarefaction
-# =============================================================================
-# RATIONALE: Bray-Curtis distances are sensitive to differences in sequencing
-# depth. Rarefaction normalizes library sizes before calculating distances.
-#
-# ALTERNATIVE: Some researchers prefer not to rarefy and instead use
-# variance-stabilizing transformations (e.g., DESeq2's VST) or relative
-# abundance. If you prefer that approach, replace this section with:
-#   ps_norm <- transform_sample_counts(ps_raw, function(x) x / sum(x))
-# and skip the rarefaction step.
+# Check for missing combinations (unbalanced design)
+group_counts <- table(sample_df$treatment, sample_df$timepoint)
+if (any(group_counts == 0)) {
+  warning("WARNING: Some treatment × timepoint combinations have zero samples. ",
+          "Check for missing data.")
+}
 
-cat("\n--- Rarefaction ---\n")
-
-# Determine rarefaction depth
-if (is.null(RAREFY_DEPTH)) {
-  rarefy_depth <- min(sample_sums(ps_raw))
-  cat(sprintf(
-    "  RAREFY_DEPTH not specified; using minimum sample depth: %s reads\n",
-    format(rarefy_depth, big.mark = ",")
-  ))
-} else {
-  rarefy_depth <- RAREFY_DEPTH
-  cat(sprintf("  Using specified rarefaction depth: %s reads\n",
-              format(rarefy_depth, big.mark = ",")))
-  
-  # Check that all samples meet the specified depth
-  samples_below_depth <- sum(sample_sums(ps_raw) < rarefy_depth)
-  if (samples_below_depth > 0) {
-    warning(
-      samples_below_depth, " sample(s) have fewer reads than the specified ",
-      "rarefaction depth (", format(rarefy_depth, big.mark = ","), ") ",
-      "and will be dropped."
-    )
+# --- Check for missing metadata values ---
+key_vars <- c("subject_id", "timepoint", "treatment")
+for (var in key_vars) {
+  n_missing <- sum(is.na(sample_df[[var]]))
+  if (n_missing > 0) {
+    warning("WARNING: ", n_missing, " missing values in column '", var, "'")
   }
 }
+message("✓ Metadata completeness check passed for key variables.")
 
-# Rarefy to even depth
-# set.seed ensures reproducibility of the random subsampling
-set.seed(42)
-ps_rarefied <- rarefy_even_depth(
-  ps_raw,
-  sample.size = rarefy_depth,
-  rngseed     = FALSE,  # we set seed manually above
-  replace     = FALSE,  # sample without replacement (standard practice)
-  trimOTUs    = TRUE,   # remove OTUs that become zero after rarefaction
-  verbose     = FALSE
-)
+# =============================================================================
+# SECTION 6: Data Preprocessing
+# =============================================================================
 
-cat(sprintf(
-  "  After rarefaction: %d samples, %d taxa\n",
-  nsamples(ps_rarefied),
-  ntaxa(ps_rarefied)
-))
+print_section("DATA PREPROCESSING")
 
-# Warn if samples were dropped during rarefaction
-if (nsamples(ps_rarefied) < n_samples) {
-  cat(sprintf(
-    "  WARNING: %d sample(s) were dropped during rarefaction.\n",
-    n_samples - nsamples(ps_rarefied)
-  ))
+# --- Relative abundance transformation ---
+# Bray-Curtis on relative abundances is standard for microbiome data.
+# ALTERNATIVE: rarefaction (phyloseq::rarefy_even_depth()) is common but
+# discards data; relative abundance is preferred for ordination.
+# ALTERNATIVE: CLR transformation (compositions package) for Aitchison distance
+# is increasingly recommended but requires different distance metric.
+
+ps_rel <- transform_sample_counts(ps, function(x) x / sum(x))
+message("✓ Counts transformed to relative abundances.")
+
+# Verify transformation (each sample should sum to 1)
+rel_sums <- sample_sums(ps_rel)
+if (!all(abs(rel_sums - 1) < 1e-10)) {
+  warning("WARNING: Relative abundance transformation may have failed. ",
+          "Sample sums do not all equal 1.")
+} else {
+  message("✓ Relative abundance transformation verified (all samples sum to 1).")
 }
 
 # =============================================================================
-# SECTION 6: Bray-Curtis Distance Matrix
+# SECTION 7: Bray-Curtis Distance Matrix
 # =============================================================================
 
-cat("\n--- Calculating Bray-Curtis distances ---\n")
+print_section("BRAY-CURTIS DISTANCE CALCULATION")
 
-# phyloseq's distance() wraps vegan's vegdist() for phyloseq objects
-# ALTERNATIVE: Use UniFrac distances if a phylogenetic tree is available:
-#   bray_dist <- UniFrac(ps_rarefied, weighted = TRUE)
-bray_dist <- distance(ps_rarefied, method = "bray")
+# Calculate Bray-Curtis dissimilarity matrix using phyloseq's wrapper
+# This calls vegan::vegdist() internally on the OTU table
+# ASSUMPTION: OTU table is oriented with taxa as rows (phyloseq default)
+bray_dist <- phyloseq::distance(ps_rel, method = "bray")
 
-# Basic sanity check on the distance matrix
-dist_matrix <- as.matrix(bray_dist)
-if (any(is.na(dist_matrix))) {
-  stop("NA values found in the Bray-Curtis distance matrix. ",
-       "Check for samples with all-zero counts after rarefaction.")
+# Validate distance matrix dimensions
+n_dist <- attr(bray_dist, "Size")
+if (n_dist != n_samples) {
+  stop("ERROR: Distance matrix size (", n_dist, ") does not match ",
+       "number of samples (", n_samples, ").")
 }
 
-cat(sprintf(
-  "  Distance matrix: %d × %d\n",
-  nrow(dist_matrix), ncol(dist_matrix)
-))
-cat(sprintf(
-  "  Distance range: %.4f – %.4f\n",
-  min(dist_matrix[dist_matrix > 0]),
-  max(dist_matrix)
-))
+cat("Bray-Curtis distance matrix computed: ", n_dist, "×", n_dist, "\n")
+cat("Distance range: [", round(min(bray_dist), 4), ", ",
+    round(max(bray_dist), 4), "]\n\n", sep = "")
 
 # =============================================================================
-# SECTION 7: PCoA Ordination
+# SECTION 8: PCoA Ordination
 # =============================================================================
 
-cat("\n--- Running PCoA ordination ---\n")
+print_section("PCoA ORDINATION")
 
-# phyloseq's ordinate() wraps vegan's cmdscale() for PCoA
-pcoa_result <- ordinate(ps_rarefied, method = "PCoA", distance = bray_dist)
+# Perform Principal Coordinates Analysis using phyloseq's ordinate()
+# This calls ape::pcoa() internally
+# ALTERNATIVE: NMDS (method = "NMDS") is non-metric and often preferred for
+# highly non-linear data, but PCoA is more interpretable with % variance explained
+pcoa_result <- ordinate(ps_rel, method = "PCoA", distance = bray_dist)
 
-# Extract variance explained by each axis
+# Extract eigenvalues to calculate variance explained
 eigenvalues    <- pcoa_result$values$Eigenvalues
 # Use only positive eigenvalues for variance calculation
 # (negative eigenvalues arise from non-Euclidean distances and are artifacts)
-positive_eigen <- eigenvalues[eigenvalues > 0]
-variance_explained <- positive_eigen / sum(positive_eigen) * 100
+pos_eigenvalues <- eigenvalues[eigenvalues > 0]
+variance_explained <- pos_eigenvalues / sum(pos_eigenvalues) * 100
 
-pct_axis1 <- round(variance_explained[1], 1)
-pct_axis2 <- round(variance_explained[2], 1)
+# Report variance explained by first three axes
+cat("Variance explained by PCoA axes:\n")
+for (i in 1:min(3, length(variance_explained))) {
+  cat(sprintf("  PCo%d: %.2f%%\n", i, variance_explained[i]))
+}
+cat(sprintf("  PCo1 + PCo2 combined: %.2f%%\n\n",
+            sum(variance_explained[1:2])))
 
-cat(sprintf("  Axis 1 explains: %.1f%% of variance\n", pct_axis1))
-cat(sprintf("  Axis 2 explains: %.1f%% of variance\n", pct_axis2))
-cat(sprintf("  Axes 1+2 combined: %.1f%%\n", pct_axis1 + pct_axis2))
+# Axis labels with variance explained (for plot)
+pcoa_axis1_label <- sprintf("PCo1 (%.1f%% variance)", variance_explained[1])
+pcoa_axis2_label <- sprintf("PCo2 (%.1f%% variance)", variance_explained[2])
 
 # =============================================================================
-# SECTION 8: Prepare Plotting Data
+# SECTION 9: Prepare Data for Plotting
 # =============================================================================
 
-cat("\n--- Preparing plot data ---\n")
+print_section("PREPARING PLOT DATA")
 
-# Extract PCoA coordinates and merge with sample metadata
-# ASSUMPTION: Row names of the PCoA scores match phyloseq sample names
-pcoa_coords <- as.data.frame(pcoa_result$vectors[, 1:2])
-colnames(pcoa_coords) <- c("Axis1", "Axis2")
-pcoa_coords$sample_id <- rownames(pcoa_coords)
+# Extract PCoA scores (sample coordinates) and merge with metadata
+# ASSUMPTION: Row names of PCoA scores match phyloseq sample names
+pcoa_scores <- as.data.frame(pcoa_result$vectors)
 
-# Pull metadata from the rarefied phyloseq object (may differ from ps_raw
-# if samples were dropped during rarefaction)
-plot_metadata <- as(sample_data(ps_rarefied), "data.frame") %>%
-  select(sample_id, subject_id, timepoint, treatment, age, sex)
-
-# Join coordinates with metadata
-plot_data <- pcoa_coords %>%
-  left_join(plot_metadata, by = "sample_id")
-
-# Verify the join worked correctly
-if (any(is.na(plot_data$treatment))) {
-  warning("Some samples could not be matched to metadata after join. ",
-          "Check that sample_id values are consistent.")
+# Verify row name alignment before merging
+if (!all(rownames(pcoa_scores) %in% rownames(sample_df))) {
+  stop("ERROR: PCoA score row names do not match sample metadata row names. ",
+       "Check sample name consistency.")
 }
 
-cat(sprintf("  Plot data prepared: %d points\n", nrow(plot_data)))
+# Combine PCoA coordinates with sample metadata
+plot_data <- pcoa_scores %>%
+  tibble::rownames_to_column("sample_rowname") %>%
+  dplyr::select(sample_rowname, Axis.1, Axis.2) %>%   # Keep first two axes
+  dplyr::left_join(
+    sample_df %>% tibble::rownames_to_column("sample_rowname"),
+    by = "sample_rowname"
+  )
+
+# Verify no rows were lost in the join
+if (nrow(plot_data) != n_samples) {
+  stop("ERROR: Row count mismatch after joining PCoA scores with metadata. ",
+       "Expected ", n_samples, " rows, got ", nrow(plot_data), ".")
+}
+
+message("✓ PCoA scores merged with metadata: ", nrow(plot_data), " samples.")
 
 # =============================================================================
-# SECTION 9: Calculate Group Centroids (for visual clarity)
+# SECTION 10: Create Ordination Plot
 # =============================================================================
-# Adding centroids and connecting lines helps visualize treatment trajectories
-# across timepoints — particularly useful for repeated-measures designs
 
+print_section("CREATING ORDINATION PLOT")
+
+# --- Define visual aesthetics ---
+# Color palette: colorblind-friendly (Wong 2011 palette)
+treatment_colors <- c(
+  "placebo"   = "#0072B2",   # Blue
+  "probiotic" = "#D55E00"    # Vermillion
+)
+
+# Shape palette: distinct shapes for three timepoints
+timepoint_shapes <- c(
+  "baseline" = 16,   # Filled circle
+  "week4"    = 17,   # Filled triangle
+  "week8"    = 15    # Filled square
+)
+
+# --- Calculate group centroids for centroid overlay ---
+# Centroids help visualize group-level trends in the ordination
 centroids <- plot_data %>%
-  group_by(treatment, timepoint) %>%
-  summarise(
-    Axis1 = mean(Axis1),
-    Axis2 = mean(Axis2),
+  dplyr::group_by(treatment, timepoint) %>%
+  dplyr::summarise(
+    centroid_x = mean(Axis.1),
+    centroid_y = mean(Axis.2),
     .groups = "drop"
   )
 
-# =============================================================================
-# SECTION 10: Build the Ordination Plot
-# =============================================================================
-
-cat("\n--- Building ordination plot ---\n")
-
-# --- Color and shape palettes ---
-# Color-blind-friendly palette for treatment groups
-treatment_colors <- c(
-  "placebo"   = "#4393C3",  # blue
-  "probiotic" = "#D6604D"   # red-orange
-)
-
-# Shape palette for timepoints (filled shapes for better visibility)
-timepoint_shapes <- c(
-  "baseline" = 21,  # circle
-  "week4"    = 22,  # square
-  "week8"    = 24   # triangle
-)
-
-# --- Axis labels with variance explained ---
-x_label <- sprintf("PCoA Axis 1 (%.1f%%)", pct_axis1)
-y_label <- sprintf("PCoA Axis 2 (%.1f%%)", pct_axis2)
-
-# --- Main scatter plot ---
-p_main <- ggplot(plot_data, aes(x = Axis1, y = Axis2)) +
+# --- Build the ggplot ---
+ordination_plot <- ggplot(plot_data,
+                          aes(x = Axis.1, y = Axis.2,
+                              color = treatment,
+                              shape = timepoint)) +
   
-  # Draw individual sample points
-  # Using fill aesthetic with shape 21-25 allows separate color for border
+  # Individual sample points
+  geom_point(size = 2.5, alpha = 0.7, stroke = 0.3) +
+  
+  # Centroid points (larger, with black border for visibility)
+  geom_point(data = centroids,
+             aes(x = centroid_x, y = centroid_y,
+                 color = treatment, shape = timepoint),
+             size = 5, stroke = 1.2,
+             show.legend = FALSE) +
+  
+  # Lines connecting centroids across timepoints within each treatment
+  # This visualizes the trajectory of community change over time
+  geom_path(data = centroids,
+            aes(x = centroid_x, y = centroid_y,
+                group = treatment, color = treatment),
+            linewidth = 0.8, linetype = "dashed",
+            arrow = arrow(length = unit(0.2, "cm"),
+                          type = "closed", ends = "last"),
+            show.legend = FALSE) +
+  
+  # Reference lines at origin
+  geom_hline(yintercept = 0, linetype = "dotted",
+             color = "grey60", linewidth = 0.4) +
+  geom_vline(xintercept = 0, linetype = "dotted",
+             color = "grey60", linewidth = 0.4) +
+  
+  # Apply custom color and shape scales
+  scale_color_manual(
+    values = treatment_colors,
+    name   = "Treatment",
+    labels = c("placebo" = "Placebo", "probiotic" = "Probiotic")
+  ) +
+  scale_shape_manual(
+    values = timepoint_shapes,
+    name   = "Timepoint",
+    labels = c("baseline" = "Baseline", "week4" = "Week 4", "week8" = "Week 8")
+  ) +
+  
+  # Axis labels with variance explained
+  labs(
+    title    = "Gut Microbiome Community Composition",
+    subtitle = "PCoA of Bray-Curtis Dissimilarity",
+    x        = pcoa_axis1_label,
+    y        = pcoa_axis2_label,
+    caption  = paste0("Large symbols = group centroids; dashed arrows = ",
+                      "temporal trajectory\nn = ", n_samples, " samples, ",
+                      n_taxa, " taxa")
+  ) +
+  
+  # Publication-quality theme
+  theme_bw(base_size = 12) +
+  theme(
+    # Title formatting
+    plot.title      = element_text(face = "bold", size = 13, hjust = 0),
+    plot.subtitle   = element_text(size = 10, color = "grey40", hjust = 0),
+    plot.caption    = element_text(size = 8, color = "grey50", hjust = 0),
+    
+    # Legend formatting
+    legend.position  = "right",
+    legend.title     = element_text(face = "bold", size = 10),
+    legend.text      = element_text(size = 9),
+    legend.key.size  = unit(0.8, "lines"),
+    legend.box       = "vertical",
+    
+    # Panel formatting
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_line(color = "grey92", linewidth = 0.3),
+    
+    # Axis formatting
+    axis.title = element_text(size = 10),
+    axis.text  = element_text(size = 9)
+  ) +
+  
+  # Ensure equal scaling on both axes (important for distance-based ordination)
+  coord_equal()
+
+# Preview plot dimensions
+message("✓ Ordination plot created.")
+
+# =============================================================================
+# SECTION 11: Save Ordination Plot
+# =============================================================================
+
+print_section("SAVING PLOT")
+
+# Create output directory if it doesn't exist
+output_dir <- dirname(OUTPUT_PDF)
+if (!dir.exists(output_dir)) {
+  dir.create(output_dir, recursive = TRUE)
+  message("✓ Created output directory: ", output_dir)
+}
+
+# Save as PDF (vector format for publication; scales without quality loss)
+ggsave(
+  filename = OUTPUT_PDF,
+  plot     = ordination_plot,
+  width    = PLOT_WIDTH,
+  height   = PLOT_HEIGHT,
+  units    = "in",
+  device   = "pdf",
+  useDingbats = FALSE   # Ensures compatibility with Adobe Illustrator
+)
+
+message("✓ Ordination plot saved to: ", OUTPUT_PDF)
+
+# Also save as PNG for quick review (300 DPI for publication quality)
+OUTPUT_PNG <- sub("\\.pdf$", ".png", OUTPUT_PDF)
+ggsave(
+  filename = OUTPUT_PNG,
+  plot     = ordination_plot,
+  width    = PLOT_WIDTH,
+  height   = PLOT_HEIGHT,
+  units    = "in",
+  dpi      = 300
+)
+message("✓ PNG preview saved to: ", OUTPUT_PNG)
+
+# =============================================================================
+# SECTION 12: PERMANOVA Analysis
+# =============================================================================
+
+print_section("PERMANOVA ANALYSIS")
+
+# --- Prepare inputs for vegan::adonis2() ---
+
+# Convert distance object to matrix (required by adonis2)
+bray_matrix <- as.matrix(bray_dist)
+
+# Ensure metadata row order matches distance matrix row order
+# This is critical: misalignment causes silent errors in PERMANOVA
+metadata_ordered <- sample_df[rownames(bray_matrix), ]
+
+# Verify alignment
+if (!identical(rownames(bray_matrix), rownames(metadata_ordered))) {
+  stop("ERROR: Distance matrix row names do not align with metadata row names. ",
+       "Cannot proceed with PERMANOVA.")
+}
+message("✓ Distance matrix and metadata alignment verified.")
+
+# --- Set random seed for reproducibility ---
+set.seed(RANDOM_SEED)
+
+# --- PERMANOVA Model 1: Treatment × Timepoint interaction ---
+# 
+# Formula explanation:
+#   bray_matrix ~ treatment * timepoint
+#   The * expands to: treatment + timepoint + treatment:timepoint
+#
+# Blocking by subject_id accounts for repeated measures structure:
+#   - Permutations are restricted within subjects
+#   - This prevents pseudoreplication from treating repeated samples as independent
+#   - ALTERNATIVE: Use strata = metadata_ordered$subject_id in older vegan versions
+#
+# by = "margin" tests each term after accounting for all others (Type III SS)
+# ALTERNATIVE: by = "terms" uses sequential (Type I) SS; order-dependent
+
+cat("Running PERMANOVA: treatment × timepoint (blocked by subject)...\n")
+cat("Permutations:", PERMANOVA_PERMUTATIONS, "\n\n")
+
+permanova_interaction <- vegan::adonis2(
+  formula      = bray_matrix ~ treatment * timepoint,
+  data         = metadata_ordered,
+  permutations = PERMANOVA_PERMUTATIONS,
+  method       = "bray",          # Redundant here (using pre-computed matrix) but explicit
+  by           = "margin",        # Marginal (Type III) tests
+  strata       = metadata_ordered$subject_id  # Block permutations within subjects
+)
+
+# --- PERMANOVA Model 2: Main effects only (for comparison) ---
+# Useful if interaction is non-significant
+permanova_main <- vegan::adonis2(
+  formula      = bray_matrix ~ treatment + timepoint,
+  data         = metadata_ordered,
+  permutations = PERMANOVA_PERMUTATIONS,
+  by           = "margin",
+  strata       = metadata_ordered$subject_id
+)
+
+# =============================================================================
+# SECTION 13: Homogeneity of Dispersion Test
+# =============================================================================
+
+# PERMANOVA assumes homogeneous within-group dispersion (similar to ANOVA homoscedasticity)
+# betadisper() tests this assumption; significant result means PERMANOVA results
+# should be interpreted cautiously (differences may reflect dispersion, not location)
+
+cat("Testing homogeneity of dispersion (PERMANOVA assumption check)...\n\n")
+
+# Test dispersion by treatment group
+betadisp_treatment <- vegan::betadisper(bray_dist,
+                                        group = metadata_ordered$treatment)
+betadisp_treatment_test <- vegan::permutest(betadisp_treatment,
+                                            permutations = PERMANOVA_PERMUTATIONS)
+
+# Test dispersion by timepoint
+betadisp_timepoint <- vegan::betadisper(bray_dist,
+                                        group = metadata_ordered$timepoint)
+betadisp_timepoint_test <- vegan::permutest(betadisp_timepoint,
+                                            permutations = PERMANOVA_PERMUTATIONS)
+
+# =============================================================================
+# SECTION 14: Print Statistical Results
+# =============================================================================
+
+print_section("STATISTICAL RESULTS SUMMARY")
+
+# --- PERMANOVA: Interaction model ---
+cat("─── PERMANOVA: Treatment × Timepoint Interaction Model ───\n")
+cat("Formula: Bray-Curtis ~ treatment * timepoint\n")
+cat("Blocking: subject_id (accounts for repeated measures)\n")
+cat("Permutations:", PERMANOVA_PERMUTATIONS, "| Seed:", RANDOM_SEED, "\n\n")
+print(permanova_interaction)
+
+cat("\n")
+
+# --- PERMANOVA: Main effects model ---
+cat("─── PERMANOVA: Main Effects Model ───\n")
+cat("Formula: Bray-Curtis ~ treatment + timepoint\n\n")
+print(permanova_main)
+
+cat("\n")
+
+# --- Betadisper results ---
+cat("─── Homogeneity of Dispersion Tests ───\n\n")
+
+cat("By Treatment:\n")
+print(betadisp_treatment_test)
+
+cat("\nBy Timepoint:\n")
+print(betadisp_timepoint_test)
+
+# --- Interpretation guidance ---
+cat("\n─── Interpretation Notes ───\n")
+cat("• R²: Proportion of variance explained by each term\n")
+cat("• Pr(>F): p-value from permutation test\n")
+cat("• Strata blocking restricts permutations within subjects\n")
+cat("  (conservative; appropriate for repeated measures designs)\n")
+cat("• If betadisper p < 0.05: PERMANOVA differences may partly\n")
+cat("  reflect dispersion differences, not just centroid shifts\n")
+cat("• Consider pairwise tests (pairwiseAdonis package) for\n")
+cat("  post-hoc comparisons if overall test is significant\n\n")
+
+# =============================================================================
+# SECTION 15: Save Statistical Results to File
+# =============================================================================
+
+# Capture all output and write to text file for record-keeping
+sink(OUTPUT_STATS)
+
+cat("PERMANOVA RESULTS - Probiotic Intervention Study\n")
+cat("Generated:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n")
+cat("Input file:", INPUT_RDS, "\n")
+cat("Permutations:", PERMANOVA_PERMUTATIONS, "| Seed:", RANDOM_SEED, "\n")
+cat(strrep("=", 60), "\n\n")
+
+cat("PERMANOVA: Treatment × Timepoint Interaction\n")
+print(permanova_interaction)
+
+cat("\nPERMANOVA: Main Effects\n")
+print(permanova_main)
+
+cat("\nBetadisper - Treatment:\n")
+print(betadisp_treatment_test)
+
+cat("\nBetadisper - Timepoint:\n")
+print(betadisp_timepoint_test)
+
+sink()  # Close the sink
+
+message("✓ Statistical results saved to: ", OUTPUT_STATS)
+
+# =============================================================================
+# SECTION 16: Session Information
+# =============================================================================
+
+print_section("SESSION INFORMATION")
+sessionInfo()
+
+# =============================================================================
+# END OF SCRIPT
+# =============================================================================
+```
+
+---
+
+## Required Packages
+
+| Package | Source | Version Tested | Purpose |
+|---|---|---|---|
+| `phyloseq` | Bioconductor | ≥ 1.42 | Microbiome data structures, distance calculation, ordination |
+| `vegan` | CRAN | ≥ 2.6 | PERMANOVA (`adonis2`), betadisper |
+| `ggplot2` | CRAN | ≥ 3.4 | Visualization |
+| `dplyr` | CRAN | ≥ 1.1 | Data manipulation |
+| `tibble` | CRAN | ≥ 3.2 | `rownames_to_column()` for safe joins |
+| `scales` | CRAN | ≥ 1.2 | Color scale utilities |
+
+**Why `dplyr`/`tibble` over base R?** The join between PCoA scores and metadata is error-prone with `merge()` because row order is not guaranteed. `dplyr::left_join()` with explicit key columns is safer and more readable.
+
+---
+
+## Assumptions Made
+
+1. **OTU table orientation**: Taxa as rows, samples as columns (phyloseq default). If transposed, `phyloseq::distance()` will still work correctly, but verify with `taxa_are_rows(ps)`.
+
+2. **Column names match exactly**: `sample_id`, `subject_id`, `timepoint`, `treatment`, `age`, `sex`. The validation function will error clearly if they don't.
+
+3. **Timepoint values**: Exactly `"baseline"`, `"week4"`, `"week8"` (case-sensitive). The script warns if unexpected values appear.
+
+4. **Balanced design**: 30 subjects × 2 treatments × 3 timepoints = 180 samples. The script warns if this doesn't hold but continues.
+
+5. **`adonis2` strata behavior**: Blocking by `subject_id` restricts permutations within subjects. This is conservative and appropriate for repeated measures, but note that `strata` in `adonis2` does not model the random effect — it only constrains permutations.
+
+6. **No rarefaction applied**: Relative abundance transformation is used instead. If your samples have extreme depth variation (>10× range), consider rarefaction or DESeq2-style normalization.
+
+---
+
+## Suggested Validation Checks
+
+### Before Running
+```r
+# Check working directory
+getwd()
+
+# Verify file exists and is readable
+file.exists("data/probiotic_study.rds")
+
+# Quick peek at the object
+ps_test <- readRDS("data/probiotic_study.rds")
+class(ps_test)          # Should be "phyloseq"
+taxa_are_rows(ps_test)  # Should be TRUE
+head(sample_data(ps_test))
+```
+
+### After Running
+```r
+# 1. Verify distance matrix is symmetric
+all(bray_matrix == t(bray_matrix))  # Should be TRUE
+
+# 2. Check PCoA scores are not all zero
+summary(pcoa_result$vectors[, 1:2])
+
+# 3. Confirm plot renders correctly before saving
+print(ordination_plot)
+
+# 4. Sanity check: R² values in PERMANOVA should sum to < 1
+sum(permanova_interaction$R2, na.rm = TRUE)  # Should be < 1
+
+# 5. Check subject_id appears correct number of times (3 per subject)
+table(table(sample_df$subject_id))  # Should show all 3s
+```
+
+### Potential Issues to Investigate
+- **If PERMANOVA p-values are all 1.0**: The `strata` argument may be too restrictive given your sample size. Try without blocking first to confirm the test is running.
+- **If betadisper is significant**: Report it alongside PERMANOVA and consider visualizing dispersion with `plot(betadisp_treatment)`.
+- **If PCo1 + PCo2 < 20%**: Consider reporting PCo3 as well, or switching to NMDS which optimizes 2D representation directly.
 ````
 
 ## Assessment
-_To be completed by a human reviewer. Do not mark Pass without reading the output._
 
-### Task Achievement
-- **Achieved:** [Yes / No / Partial]
-- **Notes:**
+_Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 (re-triage after max_tokens bump and re-capture). An author must independently read the Model Output above and set the real Recommendation. Anything labeled here is triage, not domain expert review._
 
-### Constraint Compliance
-- **All constraints respected:** [Yes / No]
-- **Violations noted:**
+**Machine triage:** Output is complete and ends cleanly (script + required packages table + assumptions + validation checks). Follows requested format closely with labelled sections. Adds extra CRAN packages (`dplyr`, `tibble`, `scales`) beyond the spec'd `phyloseq`/`vegan`/`ggplot2` but justifies them inline as the prompt allows. Uses `adonis2` with `strata = subject_id` for repeated-measures blocking (older API; vegan now prefers `permutations = how(blocks = ...)`) — both still work but the newer pattern is preferred; this may cause confusion in current vegan versions. Includes a `betadisper` dispersion check, which is good practice. Code is verbose (centroid overlays, low-read warnings, alignment assertions) but compiles to a coherent pipeline. I cannot verify the slot-introspection used in `validate_phyloseq` (`ps@.Data[[which(slotNames(ps) == comp)]]`) works correctly across phyloseq versions, nor that PERMANOVA blocking + dispersion test are the appropriate statistical approach for this design.
 
-### Failure Modes
-- **Failure modes observed:** [None / list]
-- **Mitigation effectiveness:**
+**Suggested verdict (UNCONFIRMED):** Pass with notes
 
-### Output Format
-- **Format correct:** [Yes / No]
-- **Deviations:**
+**What still needs human verification:**
+- That `strata = metadata_ordered$subject_id` in `adonis2()` still behaves as expected in the user's vegan version (current API prefers `how(blocks=...)`)
+- The phyloseq slot introspection (`ps@.Data[[which(slotNames(ps) == comp)]]`) for component checking — fragile across S4 class versions
+- Whether the added dplyr/tibble/scales dependencies are acceptable to the user
+- Statistical correctness of PERMANOVA + main-effects + dispersion sub-tests for this design
 
 ## Overall Assessment
 - **Recommendation:** PENDING AUTHOR REVIEW
