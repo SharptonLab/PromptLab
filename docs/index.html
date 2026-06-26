@@ -611,19 +611,31 @@ const SOURCE_SECTIONS = new Set([
 ]);
 
 function splitSections(text, whitelist) {
+  // Width-aware fence tracking: a fence of N backticks only "closes" when
+  // we hit another fence of N or more backticks with no info string. This
+  // lets us correctly treat an outer 4-tick fence as the boundary while
+  // inner 3-tick code blocks are content, not state-changing fences.
   const out = {};
   let lastKey = null;
   let buf = [];
-  let inFence = false;
+  let openFenceWidth = 0;  // 0 means we're outside any fence
   for (const line of text.split("\n")) {
     const stripped = line.replace(/^\s+/, "");
-    if (stripped.startsWith("```")) {
-      inFence = !inFence;
+    const fm = /^(`{3,})(.*)$/.exec(stripped);
+    if (fm) {
+      const ticks = fm[1].length;
+      const info = fm[2].trim();
+      if (openFenceWidth === 0) {
+        openFenceWidth = ticks;       // entering a fence
+      } else if (!info && ticks >= openFenceWidth) {
+        openFenceWidth = 0;           // matched close; leaving the fence
+      }
+      // (else: a smaller fence inside; stays open)
       if (lastKey !== null) buf.push(line);
       continue;
     }
     let m = null;
-    if (!inFence) m = /^##\s+(.+?)\s*$/.exec(line);
+    if (openFenceWidth === 0) m = /^##\s+(.+?)\s*$/.exec(line);
     if (m && whitelist.has(m[1].trim())) {
       if (lastKey !== null) out[lastKey] = buf.join("\n").trim();
       lastKey = m[1].trim();
@@ -637,9 +649,11 @@ function splitSections(text, whitelist) {
 }
 
 function stripOuterFence(body) {
+  // Handle variable-width fences: outer may be 3, 4, 5+ backticks (used to
+  // contain inner 3-tick code blocks without premature termination).
   if (!body) return "";
-  const m = /^```[^\n]*\n([\s\S]*)\n```\s*$/.exec(body);
-  return m ? m[1] : body;
+  const m = /^(`{3,})[^\n]*\n([\s\S]*?)\n\1\s*$/.exec(body);
+  return m ? m[2] : body;
 }
 
 let cellAbort = null;
