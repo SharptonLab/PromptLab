@@ -1,2062 +1,2225 @@
 {
   "canonical": {
     "code/code-explanation/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:10:43.898Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:06.367Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "code/code-explanation/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T01:58:22.998Z",
+          "ts": "2026-07-02T14:07:13.821Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "### Task Achievement\n- **Achieved:** [Yes]\n- **Notes:**\n\n### Constraint Compliance\n- **All constraints respected:** [Yes]\n- **Violations noted:**\n\n### Failure Modes\n- **Failure modes observed:** [None]\n- **Mitigation effectiveness:**\n\n### Output Format\n- **Format correct:** [Yes]\n- **Deviations:**",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T18:25:47.757Z",
           "verdict": "P"
         }
       ]
     },
-    "code/code-explanation/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "code/code-explanation/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T01:55:58.037Z",
+          "ts": "2026-07-02T14:07:20.578Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "\n### Task Achievement\n- **Achieved:** [Yes]\n- **Notes:**\n\n### Constraint Compliance\n- **All constraints respected:** [Yes]\n- **Violations noted:** Although maybe a bit too simplistic for a microbiome researcher but maybe depends on the person\n\n### Failure Modes\n- **Failure modes observed:** [No]\n- **Mitigation effectiveness:**\n\n### Output Format\n- **Format correct:** [Yes]\n- **Deviations:**",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T18:22:09.582Z",
           "verdict": "P"
         }
       ]
     },
-    "code/code-explanation/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "code/code-explanation/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T01:55:47.417Z",
+          "ts": "2026-07-02T14:10:27.332Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "code/code-explanation/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T01:56:44.733Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/code-explanation/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T01:56:31.948Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/code-explanation/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T01:56:56.408Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/code-explanation/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T01:57:49.486Z",
+          "notes": "### Task Achievement\n- **Achieved:** [Yes]\n- **Notes:**\n\n### Constraint Compliance\n- **All constraints respected:** [Yes]\n- **Violations noted:**\n\n### Failure Modes\n- **Failure modes observed:** [None]\n- **Mitigation effectiveness:**\n\n### Output Format\n- **Format correct:** [Yes]\n- **Deviations:**",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T18:42:07.571Z",
           "verdict": "P"
         }
       ]
     },
     "code/debugging/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
-      "verdict": "P",
+      "reason": "majority 2/2",
+      "verdict": "S",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:04:58.399Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/debugging/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+          "ts": "2026-07-02T14:11:36.933Z",
+          "verdict": "S"
+        },
         {
           "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:04:26.835Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/debugging/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T01:59:26.374Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/debugging/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:04:36.303Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/debugging/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:04:33.706Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/debugging/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:04:40.406Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/debugging/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:04:49.810Z",
-          "verdict": "P"
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:10.040Z",
+          "verdict": "S"
         }
       ]
     },
     "code/python-analysis/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
-      "verdict": "P",
+      "reason": "majority 2/2",
+      "verdict": "S",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:11:53.974Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/python-analysis/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+          "ts": "2026-07-02T14:13:02.893Z",
+          "verdict": "S"
+        },
         {
           "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:07:17.917Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/python-analysis/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:05:56.713Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/python-analysis/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:07:40.927Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/python-analysis/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:07:33.050Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/python-analysis/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:10:05.738Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/python-analysis/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:10:21.836Z",
-          "verdict": "P"
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:01.144Z",
+          "verdict": "S"
         }
       ]
     },
     "code/r-script-generation/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:13:24.851Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T23:01:00.936Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "code/r-script-generation/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:14:30.678Z",
+          "ts": "2026-07-02T14:13:05.823Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- That blocking permutations within subject for a between-subject treatment variable produces a valid test (the model itself notes this is a known caveat): yes\n- The `plot_ordination(..., justDF = TRUE)` data-frame extraction across phyloseq versions: yes\n- Statistical correctness for the user's specific scientific question: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:38:32.069Z",
           "verdict": "P"
         }
       ]
     },
-    "code/r-script-generation/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "code/r-script-generation/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:12:54.806Z",
+          "ts": "2026-07-02T14:13:04.679Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- That `strata = metadata_ordered$subject_id` in `adonis2()` still behaves as expected in the user's vegan version (current API prefers `how(blocks=...)`): should still work\n- The phyloseq slot introspection (`ps@.Data[[which(slotNames(ps) == comp)]]`) for component checking \u2014 fragile across S4 class versions: NA, haven't used before personally, but looking over how it's written, it should work fine\n- Whether the added dplyr/tibble/scales dependencies are acceptable to the user: yes\n- Statistical correctness of PERMANOVA + main-effects + dispersion sub-tests for this design: yes\n",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:35:47.597Z",
           "verdict": "P"
         }
       ]
     },
-    "code/r-script-generation/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "code/r-script-generation/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:12:06.621Z",
+          "ts": "2026-07-02T14:13:17.299Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The variance-explained calculation using raw `Eigenvalues / sum(Eigenvalues)` (rather than positive eigenvalues or `Relative_eig`) \u2014 may overstate variance explained: true; up to researcher to keep or change this\n- That a 999-permutation PERMANOVA is sufficient (other models default to 9999): yes\n- That commenting out the betadisper check rather than running it is acceptable: if permanova and pcoa show no differing dispersions but always good to check anyways\n",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:45:41.443Z",
           "verdict": "P"
         }
       ]
     },
-    "code/r-script-generation/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "code/r-script-generation/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:13:32.315Z",
+          "ts": "2026-07-02T14:13:07.463Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "code/r-script-generation/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:13:22.027Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/r-script-generation/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:13:58.163Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/r-script-generation/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:14:12.749Z",
+          "notes": "**What still needs human verification:**\n- Whether the suggested change-from-baseline distance approach is appropriate: yes; others have used it in other studies\n- That R\u00b2/p-value reporting is consistent with field convention: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:42:16.061Z",
           "verdict": "P"
         }
       ]
     },
     "code/testing-requirements/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
-      "verdict": "P",
+      "reason": "majority 2/2",
+      "verdict": "S",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:19:57.500Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/testing-requirements/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+          "ts": "2026-07-02T14:14:46.940Z",
+          "verdict": "S"
+        },
         {
           "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:15:40.461Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/testing-requirements/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:15:28.059Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/testing-requirements/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:17:08.219Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/testing-requirements/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:16:37.248Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/testing-requirements/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:18:42.372Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "code/testing-requirements/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:18:59.180Z",
-          "verdict": "P"
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T23:00:55.619Z",
+          "verdict": "S"
         }
       ]
     },
     "documentation/interaction-log-template/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
-      "verdict": "P",
+      "reason": "majority 2/2",
+      "verdict": "S",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:53.116Z",
-          "verdict": "P"
+          "ts": "2026-07-02T14:25:47.165Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:33.233Z",
+          "verdict": "S"
         }
       ]
     },
     "documentation/methods-disclosure-template/claude-opus-4-2026-02-04": {
       "reason": "majority 1/1",
-      "verdict": "P",
+      "verdict": "S",
       "votes": [
         {
           "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:55.699Z",
-          "verdict": "P"
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:34.515Z",
+          "verdict": "S"
         }
       ]
     },
     "documentation/verification-log/claude-opus-4-2026-02-04": {
       "reason": "majority 1/1",
-      "verdict": "P",
+      "verdict": "S",
       "votes": [
         {
           "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:57.645Z",
-          "verdict": "P"
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:35.771Z",
+          "verdict": "S"
         }
       ]
     },
     "fundamentals/chain-of-thought/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:15:14.260Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T03:59:50.348Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "fundamentals/chain-of-thought/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:35:00.508Z",
+          "ts": "2026-07-02T14:14:49.157Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- **Citation verification:** Nearing et al. 2022 and Yang & Chen 2022 \u2014 confirm these papers exist and say what is claimed: yes\n- Whether the recommended \"MaAsLin2 with cage as random effect\" actually handles the nested structure correctly given typical software constraints: yes\n- The specific power/effect-size guidance for n=20 cages is opinion; reviewer may want a different framing: considering pseudoreplication, I think this is a fair assessment",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T03:27:03.371Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/chain-of-thought/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/chain-of-thought/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:20:38.122Z",
+          "ts": "2026-07-02T14:14:48.279Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- **Citation verification:** Gloor et al. and Quinn et al. references for compositionality \u2014 confirm these papers exist and support the claim: Gloor does fit the statement but Quinn not so much\n- The assumption-comparison table \u2014 verify each cell (e.g., \"ANCOM-BC2 handles compositionality via core feature\") is technically accurate: yes\n- Whether the explicit \"reviewer pushback in 2024+\" framing for Bray-Curtis-only is appropriate guidance: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T03:22:45.341Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/chain-of-thought/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/chain-of-thought/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:20:24.792Z",
+          "ts": "2026-07-02T14:14:51.184Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The exact `adonis2(... permutations = how(within = list(type = \"free\"), plots = Plots(strata = mouse_id)))` syntax against current vegan documentation: yes\n- Whether Maaslin2 supports `random_effects = c(\"Mouse\", \"Cage\")` with two nested random effects in its current API: yes\n- That recommending Maaslin2 as \"top recommendation\" is appropriate given the user's actual scientific goal: not necessarily but also would be good to try more than one method\n- Statistical soundness of the overall two-pronged workflow for the described design: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T03:41:46.112Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/chain-of-thought/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "PN",
-      "votes": [
-        {
-          "notes": "response exceeds the api token budget limit.",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:23:33.101Z",
-          "verdict": "PN"
-        }
-      ]
-    },
-    "fundamentals/chain-of-thought/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/chain-of-thought/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:20:54.825Z",
+          "ts": "2026-07-02T14:14:50.166Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "\n**What still needs human verification:**\n- The verbosity (642 lines) \u2014 confirm this matches the reviewer's expectation for chain-of-thought depth: it's fine, but a bit long\n- That the sensitivity-analysis recommendations are appropriate for the small-cage-count constraint: yes\n- The framing that \"cage assigned by treatment\" reduces effective n to cage count: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T03:38:13.457Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/chain-of-thought/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "?",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:27:32.599Z",
-          "verdict": "?"
-        }
-      ]
-    },
-    "fundamentals/chain-of-thought/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/chain-of-thought/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:28:02.066Z",
+          "ts": "2026-07-02T14:14:52.247Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether ILR-LME-as-primary is appropriate vs. the panel-majority \"PERMANOVA + MaAsLin2/ANCOM-BC2\" recommendation: yes\n- That the suggested R packages would actually fit the recommended models cleanly on this design: yes\n- Whether emphasizing \"ILR\" over \"CLR\" is justified for the use case: I don't think one is recommended over the other here, they just repeat ILR as the placeholder for a transformation a lot",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T03:54:48.789Z",
+          "verdict": "P"
+        }
+      ]
+    },
+    "fundamentals/chain-of-thought/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
+      "verdict": "P",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:14:53.185Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the three-contingency cage framing is comprehensive or whether other design patterns should be considered: yes\n- The model formula `treatment * time + (1 | mouse) + (1 | cage)` \u2014 verify it's identifiable for the n=20 / few-cages scenario: would need power analysis but n=20 seems worth trying\n- Whether the sensitivity-analysis suggestions match reviewer expectations: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T03:59:48.913Z",
           "verdict": "P"
         }
       ]
     },
     "fundamentals/cross-model-validation/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:16:43.922Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:26:10.413Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "fundamentals/cross-model-validation/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:37:15.946Z",
+          "ts": "2026-07-02T14:15:18.072Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Spot-check the claim that QIIME 2 defaults to non-parametric tests for alpha diversity (this is verifiable in QIIME 2 docs): yes\n- That the \"bottom line\" recommendation is consistent with current field practice: yes although normality never holds",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:05:17.668Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/cross-model-validation/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/cross-model-validation/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:35:51.411Z",
+          "ts": "2026-07-02T14:15:17.035Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The framing \"A student following this advice uncritically could produce statistically invalid results\" \u2014 confirm this is acceptable tone for the use case: yes\n- Spot-check the field-practice claims (e.g., that the field \"generally favors non-parametric approaches\"): yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:03:44.975Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/cross-model-validation/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/cross-model-validation/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:35:26.785Z",
+          "ts": "2026-07-02T14:15:20.387Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The vague \"review of recent high-impact literature\" claim \u2014 softer than Step's fabricated specifics but still unverifiable; reviewer may want this hedged differently: it is accurate though and lots of citations available\n- Whether the suggested rewrite (\"A t-test *could* be used *if*...\") is the preferred framing: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:07:25.903Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/cross-model-validation/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/cross-model-validation/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:35:54.637Z",
+          "ts": "2026-07-02T14:15:19.275Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The verbosity (242 lines for a critique task) \u2014 confirm appropriate for use case: it's not too verbose\n- Spot-check the suggested \"better-calibrated answer\" rewrite against reviewer expectation: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:06:15.868Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/cross-model-validation/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/cross-model-validation/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:35:53.079Z",
+          "ts": "2026-07-02T14:15:21.785Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the Bayesian (brms/rstanarm) alternative is appropriate to recommend here: yes\n- That the \"0.2-unit Shannon change may be negligible\" claim is field-appropriate: yes\n",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:09:32.117Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/cross-model-validation/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/cross-model-validation/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "N",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:36:05.503Z",
+          "ts": "2026-07-02T14:16:41.000Z",
           "verdict": "N"
-        }
-      ]
-    },
-    "fundamentals/cross-model-validation/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "N",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:36:55.265Z",
+          "notes": "**What still needs human verification:**\n- **Critical:** verify whether the \"2021 review of 112 human microbiome studies\" and \"2023 survey of 150 published microbiome studies\" exist with the cited statistics \u2014 if these are fabricated, this is a clean example of the failure mode the cross-model-validation prompt is designed to catch: the first one exists but the cited stat isn't in there; the other citation I can't find\n- Spot-check whether QIIME 2 actually \"explicitly recommends\" non-parametric tests as Step claims: yes\n- Whether substantive non-citation content (the critique structure itself) is salvageable if specific statistics are removed: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:26:07.705Z",
           "verdict": "N"
         }
       ]
     },
     "fundamentals/few-shot-learning/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:17:01.808Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:38:11.296Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "fundamentals/few-shot-learning/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:14.655Z",
+          "ts": "2026-07-02T14:16:48.588Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the cross-model uniformity of output is a sign that the few-shot prompt is very well-specified, or whether independent verification of each field against the abstract is still warranted: prompt is well specified\n- Spot-check that \"MetaPhlAn3\" is the correct casing/format: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:30:58.739Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/few-shot-learning/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/few-shot-learning/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:37:30.159Z",
+          "ts": "2026-07-02T14:16:47.494Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Confirm Sonnet's \"91% cure rate vs. 62% for vancomycin\" framing is preferred over Opus's \"(91% vs 62%)\" parenthetical: either is fine\n- Spot-check each field against the source abstract for explicit support: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:29:20.814Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/few-shot-learning/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/few-shot-learning/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:37:28.810Z",
+          "ts": "2026-07-02T14:16:50.990Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the trailing period violates the few-shot pattern's implicit style or is acceptable: acceoptable\n- Spot-check each field against the source abstract: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:33:03.193Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/few-shot-learning/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/few-shot-learning/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:37:40.050Z",
+          "ts": "2026-07-02T14:16:49.703Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether omitting the specific 91%/62% cure rates in the Key finding (when peers included them and they were in the source) is acceptable for the use case: yes\n- Spot-check each field against the source abstract: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:31:51.089Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/few-shot-learning/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/few-shot-learning/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:37:32.148Z",
+          "ts": "2026-07-02T14:16:53.806Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "fundamentals/few-shot-learning/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:38:03.504Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "fundamentals/few-shot-learning/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:38:08.048Z",
+          "notes": "**What still needs human verification:**\n- Whether present-tense \"achieves\" violates the few-shot examples' past-tense convention: don't think it matters too much\n- Spot-check that \"8-week cure rate\" is correctly attributed to the source: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:38:10.209Z",
           "verdict": "P"
         }
       ]
     },
     "fundamentals/meta-prompting/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:17:40.226Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:52:36.685Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "fundamentals/meta-prompting/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:34.888Z",
+          "ts": "2026-07-02T14:17:04.657Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the explicit \"do not invent citations\" instruction in the rewrite is sufficient (this is a known hard-to-enforce constraint): I think it's fine, you'd need to verify citations anyways\n- That the \"MY HYPOTHESIS (for context, not to bias)\" framing is the preferred pattern: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:46:40.318Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/meta-prompting/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/meta-prompting/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:18.933Z",
+          "ts": "2026-07-02T14:17:03.773Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether decomposition into 5 subtasks vs. peers' single structured prompt is the preferred approach: yes\n- The framing \"single most dangerous failure mode in scientific AI assistance\" \u2014 verify reviewer comfort: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:43:49.413Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/meta-prompting/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/meta-prompting/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:17.845Z",
+          "ts": "2026-07-02T14:17:36.270Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the interactive \"please confirm before I send the data\" pattern is appropriate vs. the all-at-once style peers used: yes\n- The biological-interpretation request \"top 3 genes from each table\" \u2014 confirm this is the right depth: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:49:43.385Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/meta-prompting/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/meta-prompting/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:21.630Z",
+          "ts": "2026-07-02T14:17:34.963Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The 287-line length \u2014 confirm acceptable for a critique-and-rewrite task: yes\n- The 5-10 candidate gene list for qPCR follow-up \u2014 verify this is appropriate for the use case: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:48:13.860Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/meta-prompting/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/meta-prompting/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:20.313Z",
+          "ts": "2026-07-02T14:17:37.550Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the alternative-threshold guidance (FDR 0.1, log2FC 0.58) is appropriate: yes\n- That the critique-to-fix mapping table covers all the issues raised: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:50:53.806Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/meta-prompting/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/meta-prompting/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:23.324Z",
+          "ts": "2026-07-02T14:17:38.721Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "fundamentals/meta-prompting/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "N",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:26.273Z",
-          "verdict": "N"
+          "notes": "**What still needs human verification:**\n- Whether the fallback-to-defaults pattern (rather than requiring user input) is the preferred approach: yes\n- That the suggested output (HFD-up/down tables with gene-by-gene function summary and NAFLD prior-literature flag) is the right scope: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:52:35.568Z",
+          "verdict": "P"
         }
       ]
     },
     "fundamentals/structured-prompt-template/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:17:54.387Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:58:23.753Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "fundamentals/structured-prompt-template/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:42:05.445Z",
+          "ts": "2026-07-02T14:17:42.870Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Confirm reviewer's preferred extraction depth \u2014 Opus chose to include vendor / dose / read length whereas terser peers (Gemini) extracted only the field-level value: I think it's fine \n- That the field-by-field accuracy is acceptable for systematic-review use: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:55:42.930Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/structured-prompt-template/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/structured-prompt-template/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:43.281Z",
+          "ts": "2026-07-02T14:17:41.792Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the preamble sentence is acceptable or violates the \"structured output\" constraint: yes\n- Spot-check each field against the source: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:54:44.130Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/structured-prompt-template/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/structured-prompt-template/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:37.085Z",
+          "ts": "2026-07-02T14:17:45.021Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the missing bullet prefix is a format violation requiring revision: it's ok\n- Whether terseness (omitting dosage, duration, primer details that peers included) is acceptable for the use case: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:57:01.644Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/structured-prompt-template/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/structured-prompt-template/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:50.648Z",
+          "ts": "2026-07-02T14:17:43.902Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Spot-check each field against the source excerpt: correct\n- Confirm no detail (e.g., \"2\u00d7250 bp paired-end reads\") is added from training data rather than the source: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:56:25.898Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/structured-prompt-template/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/structured-prompt-template/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:47.605Z",
+          "ts": "2026-07-02T14:17:46.069Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "fundamentals/structured-prompt-template/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:52.243Z",
+          "notes": "\n**What still needs human verification:**\n- Whether \"DSS-induced colitis\" is an acceptable elaboration vs. the literal-only \"DSS\" choice peers made: yes\n- Spot-check each field against the source: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:57:20.060Z",
           "verdict": "P"
         }
       ]
     },
-    "fundamentals/structured-prompt-template/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
+    "fundamentals/structured-prompt-template/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "N",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:41:54.259Z",
+          "ts": "2026-07-02T14:17:51.535Z",
+          "verdict": "N"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Confirm the missed confound extraction (the source text is clearly available; this looks like a clear extraction failure): missed\n- Whether the terseness on other fields (no DSS dose/duration) constitutes additional under-extraction worth re-running: no, but above is bigger issue",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-30T04:58:22.903Z",
           "verdict": "N"
         }
       ]
     },
     "literature/gap-identification/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:18:07.292Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:16.925Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "literature/gap-identification/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:04.721Z",
+          "ts": "2026-07-02T14:17:59.294Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Confirm the 3 proposed projects' technical feasibility within the stated capability set: yes\n- That cited gaps actually appear in the source paper excerpts (not assumed): yes\n- Whether the priority ranking matches reviewer judgment: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:01:50.194Z",
           "verdict": "P"
         }
       ]
     },
-    "literature/gap-identification/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "literature/gap-identification/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:42:11.670Z",
+          "ts": "2026-07-02T14:17:58.159Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Confirm the priority-ranking table cells (Impact/Tractability assessments) match reviewer expectation: yeah\n- That suggested IL-10 KO mouse work is appropriate for the stated capabilities: yes\n- Spot-check each cited gap appears in source paper excerpts: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:00:36.095Z",
           "verdict": "P"
         }
       ]
     },
-    "literature/gap-identification/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "literature/gap-identification/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:42:10.296Z",
+          "ts": "2026-07-02T14:18:01.425Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the proposed Project 1/2/3 experiments are actually novel or already published elsewhere: Project 1 has already been done and some version of project 2.\n- That the inference about \"hit-and-run\" mechanism vs. engraftment requirement is fairly stated: yes\n- Whether labelling all three projects as \"high-impact, tractable\" is calibrated or over-enthusiastic: overly enthusiastic\n- That no implicit gap is actually addressed in the original papers' bodies (we only have abstracts): these aren't real papers so can't verify",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:07:55.940Z",
           "verdict": "P"
         }
       ]
     },
-    "literature/gap-identification/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "literature/gap-identification/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:42:35.282Z",
+          "ts": "2026-07-02T14:18:00.366Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The verbosity (358 lines) \u2014 verify suits use case: I think this is fine\n- That all cited gaps appear in source paper excerpts: yes\n- Whether the responder/non-responder profiling recommendation has realistic cohort size for the stated facility: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:04:10.178Z",
           "verdict": "P"
         }
       ]
     },
-    "literature/gap-identification/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "literature/gap-identification/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:42:33.716Z",
+          "ts": "2026-07-02T14:18:02.673Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Confirm that the proposed 3-strain comparison study is achievable within stated capabilities: yes but not sure it's super necessary or the best choice to fill gaps\n- That cited explicit gaps map correctly to source paper excerpts: yes\n- Whether \"heat-killed control\" is the appropriate negative comparator: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:10:40.682Z",
           "verdict": "P"
         }
       ]
     },
-    "literature/gap-identification/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
+    "literature/gap-identification/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:43:18.145Z",
+          "ts": "2026-07-02T14:18:05.742Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "literature/gap-identification/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:43:19.665Z",
+          "notes": "**What still needs human verification:**\n- Whether bacterial knockout generation is realistically within the stated capabilities or requires expertise not mentioned: might require more expertise but lab capabilities exist\n- That cited mechanistic gaps appear in source paper excerpts: yes\n- Spot-check the proposed IL-6/TNF-\u03b1/IL-10 marker panel is appropriate: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:12:19.592Z",
           "verdict": "P"
         }
       ]
     },
     "literature/paper-summary/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:20:41.414Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:17.741Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "literature/paper-summary/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:28.271Z",
+          "ts": "2026-07-02T14:18:08.577Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Spot-check each cited claim (acetate unaffected, F. prausnitzii/Roseburia depleted) against source: yes\n- That the cautionary footnote on missing citation metadata is the preferred pattern: yes\n- Whether numeric specifics match the source: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T21:30:06.282Z",
           "verdict": "P"
         }
       ]
     },
-    "literature/paper-summary/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "literature/paper-summary/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:13.869Z",
+          "ts": "2026-07-02T14:20:37.338Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the suggested \"deplete butyrate-producers to induce IBS-like phenotype\" experimental approach is feasible in stated mouse models: not sure, it could be possible but I don't personally know of a method\n- That the GC SCFA-measurement recommendation is appropriate: yes\n- Spot-check cited details against source: ",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T21:38:37.519Z",
           "verdict": "P"
         }
       ]
     },
-    "literature/paper-summary/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "literature/paper-summary/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:12.877Z",
+          "ts": "2026-07-02T14:20:35.763Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- That cited findings (butyrate/propionate down, acetate unchanged) match the source: yes\n- Whether the causal-care framing is the preferred reviewer pattern: yes\n- Spot-check each numeric claim against the source: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T21:36:47.746Z",
           "verdict": "P"
         }
       ]
     },
-    "literature/paper-summary/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "literature/paper-summary/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:20.877Z",
+          "ts": "2026-07-02T14:20:39.914Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "literature/paper-summary/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:15.028Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "literature/paper-summary/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:22.190Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "literature/paper-summary/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:23.442Z",
+          "notes": "**What still needs human verification:**\n- Whether the proposed multi-center validation is realistic guidance for a single lab: if the lab has existing network maybe\n- Spot-check cited claims and causal hedging match source: yes\n- That bacterial taxa references match the source excerpt: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T21:44:36.564Z",
           "verdict": "P"
         }
       ]
     },
     "literature/synthesis-across-papers/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
-      "verdict": "P",
+      "reason": "majority 2/2",
+      "verdict": "S",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:45:13.961Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "literature/synthesis-across-papers/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+          "ts": "2026-07-02T14:20:50.060Z",
+          "verdict": "S"
+        },
         {
           "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:31.223Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "literature/synthesis-across-papers/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:29.806Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "literature/synthesis-across-papers/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:33.908Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "literature/synthesis-across-papers/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:32.546Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "literature/synthesis-across-papers/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:35.156Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "literature/synthesis-across-papers/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:44:36.575Z",
-          "verdict": "P"
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:18.291Z",
+          "verdict": "S"
         }
       ]
     },
     "statistics/assumption-checking/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:21:12.615Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:18.773Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "statistics/assumption-checking/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:19.962Z",
+          "ts": "2026-07-02T14:20:54.065Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- **Citation verification:** confirm Anderson & Walsh 2013 (Ecological Monographs) is a real reference supporting \"balanced design \u2192 PERMANOVA robust\": yes\n- Whether the reporting-sentence templates are appropriate for the publication context: yes\n- That setBlocks() recommendation correctly handles the 2-time-point repeated measures design: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T19:33:53.686Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/assumption-checking/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/assumption-checking/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:46:06.838Z",
+          "ts": "2026-07-02T14:20:56.625Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- That omitting \"exchangeability\" as a separate ranked assumption (vs. folding it into \"independence\") is acceptable framing: yes\n- The mermaid flowchart's conclusion that with balanced design the test is \"robust\" even under significant dispersion violation (this is a defensible but contested point): I would say this is subjective. To me, dispersion can also be related to aspects of the community so it's informative if it comes up significantly different. The technique itself is robust though, given the data.\n- Whether the `strata = metadata$SubjectID` argument in `adonis2` (commented example) is still the recommended idiom or whether `permutations = how(blocks = ...)` is preferred: yes\n- Statistical correctness of the overall workflow: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T19:42:13.507Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/assumption-checking/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/assumption-checking/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:46:02.029Z",
+          "ts": "2026-07-02T14:21:11.508Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "statistics/assumption-checking/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:46:34.071Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "statistics/assumption-checking/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:46:07.994Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "statistics/assumption-checking/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:07.182Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "statistics/assumption-checking/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:11.505Z",
+          "notes": "**What still needs human verification:**\n- Whether the \"tight control group near other centroids \u2192 minimal bias\" claim is technically accurate: yes\n- That suggested transformations/robust alternatives are appropriate: yes\n- Spot-check the workflow ordering: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T19:45:39.151Z",
           "verdict": "P"
         }
       ]
     },
     "statistics/design-review/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:21:23.261Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:19.349Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "statistics/design-review/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:33.176Z",
+          "ts": "2026-07-02T14:21:16.291Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the cage-level pseudoreplication concern severity is correctly stated for the specific design: yes\n- That the diet-matching framing aligns with reviewer's EAE experience: yes\n- Spot-check the suggested SCFA / shotgun sequencing additions for feasibility: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:43:51.674Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/design-review/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/design-review/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:23.184Z",
+          "ts": "2026-07-02T14:21:14.912Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Specific quantitative claims: \"10-30%\" non-responder rate, \"1-2 weeks\" for microbiome shift, \"typical exclusion is \u22653 months\" for antibiotic washout in IBD studies: I was finding up to 10% but not so high as 30%. I think these are all extremely context dependent and shouldn't be quoted as specific numbers.\n- Whether the 2 cages/group \u00d7 6 mice critique reflects current best-practice thresholds for cage-effects analysis: not sure but the numbers do match a handful of other studies I know of\n- The recommendation to use \"mixed-effects ordinal regression model\" for EAE scores \u2014 confirm this is current standard practice in the EAE field: yes\n- That nothing in the design as described actually addresses the flagged \"fatal flaws\": yes\n- Whether the Tier 1/2/3 prioritization is calibrated to the user's resource constraints: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:41:16.955Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/design-review/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/design-review/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
+      "verdict": "N",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:21:19.615Z",
+          "verdict": "N"
+        },
+        {
+          "notes": "**What still needs human verification:**\nran out of space and cuts off\n- That the captured content (diet timing concern, mouse strain limit) is technically sound: yes\n- Whether the truncated material would change the overall design critique: I think it would need to be rerun, half the prompt isn't addressed.",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:49:19.380Z",
+          "verdict": "N"
+        }
+      ]
+    },
+    "statistics/design-review/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:21.860Z",
+          "ts": "2026-07-02T14:21:17.411Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The verbosity (955 lines) \u2014 verify suits use case for a design critique: shorter would be preferred but this is not in the prompt\n- Whether the sham-immunized control recommendation is the appropriate negative comparator: yes\n- That the ordinal longitudinal EAE-score analysis suggestions match field convention: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:45:13.257Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/design-review/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/design-review/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:25.685Z",
+          "ts": "2026-07-02T14:21:20.739Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the essential-vs-nice-to-have separation is correctly drawn: yes\n- That the checklist items (mock community for QC, blinding code-key) are field-standard: yes\n- Spot-check the recommendation flow is internally consistent: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:51:59.984Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/design-review/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/design-review/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:24.457Z",
+          "ts": "2026-07-02T14:21:21.909Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "statistics/design-review/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:27.058Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "statistics/design-review/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:28.932Z",
+          "notes": "**What still needs human verification:**\n- Whether the clarifying questions are the highest-leverage gaps to fill: yes\n- That the EAE/MS framing is field-appropriate: yes\n- Spot-check the recommended fiber-source / dose / timing checklist: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:55:14.868Z",
           "verdict": "P"
         }
       ]
     },
     "statistics/interpretation-brainstorming/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:21:36.716Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:19.933Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "statistics/interpretation-brainstorming/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:55.365Z",
+          "ts": "2026-07-02T14:21:25.987Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the \"any FMT effect\" interpretation is the most likely confound to discuss: yes\n- That the suggested framing aligns with field convention for FMT studies: yes\n- Spot-check the n=10 power discussion: good",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:18:46.622Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/interpretation-brainstorming/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/interpretation-brainstorming/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:35.805Z",
+          "ts": "2026-07-02T14:21:24.484Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether \"weight-glucose dissociation as finding\" framing aligns with reviewer expectation: I think so but also there are other research studies that have shown this result as well\n- That the recommended manuscript-level framing is appropriate: yes\n- Spot-check the analysis of FMT-obese non-significance: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:16:34.415Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/interpretation-brainstorming/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/interpretation-brainstorming/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:34.628Z",
+          "ts": "2026-07-02T14:21:27.264Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The verbosity (843 lines) \u2014 verify suits use case: more concise would be better but wasn't specified in the prompt\n- Whether the suggested manuscript framing is too cautious or appropriate: I think cautious end is best with n=10\n- That the \"live versus killed FMT controls\" recommendation is realistic for a follow-up: depends on timing and funding situation",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:20:52.100Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/interpretation-brainstorming/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/interpretation-brainstorming/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:39.119Z",
+          "ts": "2026-07-02T14:21:35.117Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "statistics/interpretation-brainstorming/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:37.265Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "statistics/interpretation-brainstorming/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:41.348Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "statistics/interpretation-brainstorming/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:42.726Z",
+          "notes": "**What still needs human verification:**\n- Whether the absolute \"cannot claim\" framing is preferred vs. softer hedging: 8 weeks seems long to me, it's not years but there are effects that are lost after 1 or 2 weeks. I think there is more nuance that \"cannot claim\" framing is aware of but I think generally those nuances should be expanded on.\n- That the \"diversity could be consequence rather than driver\" framing is technically correct: yes\n- Spot-check that no overreach is missed: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:33:12.699Z",
           "verdict": "P"
         }
       ]
     },
     "statistics/test-selection/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:21:45.267Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:21.800Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "statistics/test-selection/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:11.858Z",
+          "ts": "2026-07-02T14:21:39.288Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether MiRKAT recommendation is field-standard or niche guidance: kind of niche, but relevant since seems to be made for clinical data\n- That the suggested pre-specified candidate-taxa-list approach is appropriate: yes\n- Spot-check the covariate-budget guidance (2-3 vs 4 covariates for n=45): I'm not sure but a power analysis would help answer that",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T17:55:28.649Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/test-selection/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/test-selection/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:59.065Z",
+          "ts": "2026-07-02T14:21:37.994Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the conditions triggering \"consult a statistician\" cover the right scenarios: yes\n- That partial PERMANOVA recommendation handles the covariate adjustment appropriately: yes\n- Whether the unweighted UniFrac sensitivity check is standard practice: yes and I would include weighted in that statement",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T17:52:09.924Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/test-selection/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/test-selection/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:47:56.846Z",
+          "ts": "2026-07-02T14:21:41.539Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The claim that DESeq2 was \"designed for RNA-Seq but is widely and successfully used for microbiome data\" \u2014 current consensus may favor compositional methods: it is widely used but not as much since the Nearing paper and others that showed its limitations. Definitely would say ANCOM or other compositionality methods are more favored\n- The framing that LASSO logistic regression carries \"EXTREME risk of overfitting with N=45\" \u2014 true in general but should be confirmed against current ML literature for this domain: yes\n- Whether ANCOM-BC2's assumption that \"not all taxa are changing between groups\" actually holds for melanoma immunotherapy response; yes\n- That the recommended sequential workflow (PERMANOVA \u2192 differential abundance \u2192 LASSO) is appropriate: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:02:27.352Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/test-selection/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "N",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:03.639Z",
-          "verdict": "N"
-        }
-      ]
-    },
-    "statistics/test-selection/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/test-selection/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:00.450Z",
+          "ts": "2026-07-02T14:21:40.386Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the recommendation to predefine analytical choices upfront is appropriate guidance: yes\n- That the PERMDISP-as-confound framing is correctly conveyed: yes\n- Whether \"treat DAA results as candidate associations unless replicated\" is the right framing: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T17:57:47.073Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/test-selection/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/test-selection/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:05.566Z",
+          "ts": "2026-07-02T14:21:42.719Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether sparse PLS-DA (sPLS-DA) is appropriate for the n=45 / high-dimensional task: doable but it is a low sample size so could overfit\n- That dbRDA after PERMANOVA is the recommended sequence vs. alternatives: it does work\n- Spot-check the variance-partitioning interpretation: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:06:17.123Z",
           "verdict": "P"
         }
       ]
     },
-    "statistics/test-selection/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
+    "statistics/test-selection/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:06.948Z",
+          "ts": "2026-07-02T14:21:43.984Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the specific trigger thresholds (e.g., \">5-6 confounders\") are field-standard: yes although not sure that's a hard cutoff.\n- That the FWER-vs-FDR distinction for multi-analysis correction is correctly characterized: I'm not seeing anything about FWER here. FDR is appropriate.\n- Whether the multi-omics integration warning is the right scope: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T18:09:17.327Z",
           "verdict": "P"
         }
       ]
     },
     "validation/adversarial-critique/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:21:55.519Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:22.224Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "validation/adversarial-critique/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:31.170Z",
+          "ts": "2026-07-02T14:21:47.755Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The statement that Greengenes has not been \"meaningfully updated since 2013\" \u2014 verify against the Greengenes2 release timeline: there's been updates as recently as 2024, but it has been \"soft-deprecated\"\n- The claim about 515F/806R primer variants (Caporaso vs. Parada/Apprill) and their bias against Crenarchaeota and SAR11: yes\n- Whether the IBD-specific confounders listed (medications, activity, antibiotic exposure) are exhaustive for this comparison: sex/age? pregnancy?\n- The mock reviewer quote tone \u2014 is it appropriately calibrated for a real reviewer voice? Definitely sounds like a reviewer.",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T17:38:49.198Z",
           "verdict": "P"
         }
       ]
     },
-    "validation/adversarial-critique/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "validation/adversarial-critique/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:15.295Z",
+          "ts": "2026-07-02T14:21:46.594Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the severity ratings (Major/Critical/Minor) match reviewer judgment: potentially although maybe a bit more severe. Most are just requests for additional information that likely already exists somewhere, not an actual reproducibility failure in terms of the protocol itself. Many of the statements really are written that way in existing peer reviewed lit.\n- That the Greengenes-as-outdated claim is correct: Not as dire as it sounds...there was a version put out last in 2024 and what I found said it's been \"soft-deprecated\"...not ideal but it always takes a while for people to phase out commonly used software.\n- Whether the \"first draft placeholder\" framing is the right tone: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T16:32:48.732Z",
           "verdict": "P"
         }
       ]
     },
-    "validation/adversarial-critique/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "validation/adversarial-critique/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:13.780Z",
+          "ts": "2026-07-02T14:21:51.326Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The \"Greengenes not meaningfully updated since 2013\" claim (verify against Greengenes2 release): last released 2024, but is \"soft deprecated\"\n- The list of \"mandatory\" quality controls (negative extraction controls, mock communities) \u2014 verify whether these are field-standard expectations: I would say a negative extraction control is mandatory but not a mock community\n- Whether the recommended sub-section restructure (Sample Collection / DNA Extraction / Bioinformatic Processing / Statistical Analysis) matches the target journal's expectations: yes\n- The specific named alternatives (ANCOM, DESeq2, ALDEx2) are real and current: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T17:42:58.226Z",
           "verdict": "P"
         }
       ]
     },
-    "validation/adversarial-critique/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "validation/adversarial-critique/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:18.507Z",
+          "ts": "2026-07-02T14:21:49.223Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- The verbosity (781 lines) \u2014 verify suits use case for a critique: I would want something something shorter and more concise, but we didn't ask for short in the prompt/constraints section\n- Whether the IBD-specific confounder list (antibiotics, medications, disease subtype, etc.) is comprehensive: age/sex?\n- Spot-check the suggested revisions: seem good",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T17:38:47.348Z",
           "verdict": "P"
         }
       ]
     },
-    "validation/adversarial-critique/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "validation/adversarial-critique/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:16.831Z",
+          "ts": "2026-07-02T14:21:54.088Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "validation/adversarial-critique/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:20.366Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "validation/adversarial-critique/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:21.814Z",
+          "notes": "**What still needs human verification:**\n- Whether the \"minor positive for reproducibility\" preamble is appropriate framing for an adversarial critique: I don't mind it, it tells you what to keep in the next draft, but it's also not necessary especially given the prompt\n- That the FDR < 0.05 as primary threshold recommendation is appropriate: yes\n- Spot-check the suggested revision list: good",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T17:49:16.440Z",
           "verdict": "P"
         }
       ]
     },
     "validation/uncertainty-elicitation/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:22:05.722Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:22.656Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "validation/uncertainty-elicitation/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:00.730Z",
+          "ts": "2026-07-02T14:21:58.064Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the self-critique appropriately identifies the right uncertainty categories\n- Confirm cited works (Mandal 2015, Weiss 2017, Nearing 2022) actually exist: yes, all good\n- That the recommendation to verify before citing is the appropriate stance: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T15:50:24.302Z",
           "verdict": "P"
         }
       ]
     },
-    "validation/uncertainty-elicitation/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "validation/uncertainty-elicitation/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:34.274Z",
+          "ts": "2026-07-02T14:21:56.707Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Confirm the Nearing et al. 2022 Nature Communications reference exists: yes\n- Whether the self-critique level of meta-uncertainty is well-calibrated: yes\n- That the recommendation to trust technical descriptions more than specific citations is sound advice: I suppose so, the technical descriptions are things we can verify as experts",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T15:47:08.601Z",
           "verdict": "P"
         }
       ]
     },
-    "validation/uncertainty-elicitation/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "validation/uncertainty-elicitation/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:32.541Z",
+          "ts": "2026-07-02T14:22:01.361Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether Weiss et al. (2017) and Mandal et al. (2015) are real, citable papers with the attributed findings: yes\n- Whether McMurdie and Holmes (2014) actually does NOT recommend the \"use two methods\" approach (the self-critique claims this attribution is suspect \u2014 confirm): I couldn't find this claim in their results/discussion\n- The confidence calibration ratings are reasonable: yes\n- That the self-critique's claimed knowledge gaps (ANCOM-BC, ALDEx2, Maaslin2) actually represent omissions in the original: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T15:59:32.728Z",
           "verdict": "P"
         }
       ]
     },
-    "validation/uncertainty-elicitation/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "validation/uncertainty-elicitation/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:37.680Z",
+          "ts": "2026-07-02T14:22:00.187Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- That the broader method list (ALDEx2, LinDA) is current best practice: yes\n- Whether the bottom-line rewrite is sufficiently hedged vs. previous answer: yes\n- Confirm the cited methods actually exist and behave as described: yes; although the \"for studies with small sample size....\" statement is a little misrepresented. I think it comes from the LinDA paper specifically as opposed to being a general recommendation",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T15:54:43.968Z",
           "verdict": "P"
         }
       ]
     },
-    "validation/uncertainty-elicitation/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "validation/uncertainty-elicitation/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:36.029Z",
+          "ts": "2026-07-02T14:22:04.129Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "validation/uncertainty-elicitation/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:39.923Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "validation/uncertainty-elicitation/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:48:41.873Z",
+          "notes": "**What still needs human verification:**\n- Whether the confidence-level numeric scale (1-3) is meaningful or arbitrary: It's 1-5? But I think it's useful.\n- That the table cells (e.g., \"Mandal et al. 2015 showed ANCOM has better false positive control\" \u2192 confidence 3) match peer judgments: yes\n- Spot-check the \"n<20 Wilcoxon on CLR\" critique as the highest-risk claim: Kind of subjective, but I wouldn't consider it highest risk. I think (hope) most scientists would check a figure that specific anyways, and if it were arbitrary, they'd struggle to explain it in review. Whereas the McMurdie and Holmes claim isn't in their paper. It's not a bad recommendation to try multiple DA methods and compare, but if someone followed it without thinking it through more, they might end up doing more work/using more compute unnecessarily.",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T16:07:19.456Z",
           "verdict": "P"
         }
       ]
     },
     "writing/methods-drafting/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:22:14.355Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:23.099Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "writing/methods-drafting/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:18.713Z",
+          "ts": "2026-07-02T14:22:08.436Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "\n**What still needs human verification:**\n- Whether the list of `[MISSING: ...]` items is complete for the target clinical microbiology journal: yes; I would also add what the two academic institutions were\n- The prose-style choices (past tense, active/passive mix) match the target journal's house style: yes; probably depends on journal but it seems fine overall to me\n- That \"*Clostridioides difficile*\" species naming (vs. *C. difficile*) is the user's preferred convention: It's probably been said with its full name in the intro so it can be shortened here, but its not incorrect\n- The Statistical Analysis missing-fields list captures what the journal will expect: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-27T01:44:13.314Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/methods-drafting/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/methods-drafting/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:03.899Z",
+          "ts": "2026-07-02T14:22:07.183Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the prioritized \"resolve before submission\" list captures the right severity ordering: yes\n- That drafted prose accurately represents the source notes: yes\n- Spot-check no fabricated specifics: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-27T01:40:33.340Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/methods-drafting/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/methods-drafting/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:02.361Z",
+          "ts": "2026-07-02T14:22:09.935Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the level of [MISSING] detail (randomization method, block size, stratification) is appropriate: yes\n- That the drafted prose faithfully represents the source notes: yes\n- Spot-check no fabrications; yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-27T01:47:31.850Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/methods-drafting/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/methods-drafting/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:06.625Z",
+          "ts": "2026-07-02T14:22:12.214Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether brevity vs. peer verbosity is the preferred trade-off: brevity is ok but needs more specific missing data tags and detailed placeholders as requested in the prompt\n- That the drafted prose (FMT preparation steps, colonoscopy administration) is faithful to source notes: yes\n- Spot-check no fabricated specifics: good",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-27T01:53:37.609Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/methods-drafting/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/methods-drafting/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:05.265Z",
+          "ts": "2026-07-02T14:22:13.107Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "writing/methods-drafting/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:13.456Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "writing/methods-drafting/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:14.994Z",
+          "notes": "\n**What still needs human verification:**\n- **Typo:** \"(IBB)\" should be \"(IBD)\" \u2014 verify and correct: yeah this is a typo\n- Whether the comprehensive [MISSING] list at the end of statistical analysis captures all needed items: yes\n- Spot-check the drafted prose for fidelity to source notes: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-27T01:57:42.817Z",
           "verdict": "P"
         }
       ]
     },
     "writing/results-description/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:22:33.112Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:23.559Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "writing/results-description/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:51.337Z",
+          "ts": "2026-07-02T14:22:17.458Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "- Confirm all numeric values match the source notes: yes\n- Whether the \"approximately 4-fold\" and \"~50% reduction\" derived calculations are correctly drawn from the means: yes\n- That the framing for the borderline p=0.048 vs control is appropriate: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-27T01:13:30.702Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/results-description/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/results-description/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:31.219Z",
+          "ts": "2026-07-02T14:22:19.749Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Confirm all numbers match source: yes\n- Whether terseness is the preferred style for this manuscript context: it works, definitely keeps everything short and clear without repetition compared to the other model outputs.\n- That the \"more than four-fold\" framing aligns with the actual ratio: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-27T01:19:18.475Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/results-description/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/results-description/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:20.252Z",
+          "ts": "2026-07-02T14:22:18.569Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "writing/results-description/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:36.079Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "writing/results-description/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:34.529Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "writing/results-description/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "N",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:40.888Z",
-          "verdict": "N"
-        }
-      ]
-    },
-    "writing/results-description/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:42.938Z",
+          "notes": "- Confirm all numbers match source: yes\n- Whether the trailing methods-context sentence belongs in Results rather than Methods: If it's going to be in results to provide context, I think it would be before the numerical results are listed, otherwise removed.\n- That the \"(Figure 3)\" repetition is acceptable: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-27T01:16:48.590Z",
           "verdict": "P"
         }
       ]
     },
     "writing/reviewer-response/claude-opus-4-2026-02-04": {
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:23:29.791Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:23.982Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "writing/reviewer-response/claude-opus-4-7-2026-06-25": {
       "reason": "majority 1/1",
+      "verdict": "P",
+      "votes": [
+        {
+          "notes": "**What still needs human verification:**\n- Whether the suggested revised manuscript text aligns with the actual paper's voice: yes\n- That 847 = 77\u00d711 computation is correct: yes\n- Spot-check the page/line placeholders are clearly marked for the author to fill in: yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:31:31.868Z",
+          "verdict": "P"
+        }
+      ]
+    },
+    "writing/reviewer-response/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:05.896Z",
+          "ts": "2026-07-02T14:22:52.430Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the \"we believe analysis is sound but reporting fell short\" framing is the preferred response posture: yes\n- That all revisions are appropriately placed (Methods vs Discussion): yes\n- Spot-check 77\u00d711=847 computation: correct",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:29:29.357Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/reviewer-response/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/reviewer-response/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:54.310Z",
+          "ts": "2026-07-02T14:22:56.437Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether quoting the full reviewer comment at the top is the preferred format: yes\n- That the \"Newly Added Text:\" prefix convention matches publishing-house expectations: yes but not necessary\n- Spot-check 847 computation: correct",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:36:43.538Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/reviewer-response/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/reviewer-response/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:52.611Z",
+          "ts": "2026-07-02T14:22:54.925Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "\n**What still needs human verification:**\n- Whether the BH rank-based explanation adds appropriate technical nuance or overcomplicates: I think unnecessary to include\n- That the suggested revised text is appropriate for the manuscript context: yes\n- Spot-check 847 computation: correct",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:34:50.699Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/reviewer-response/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/reviewer-response/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:56.996Z",
+          "ts": "2026-07-02T14:23:17.528Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the \"Reviewer #2\" attribution is appropriate (the prompt doesn't specify reviewer number): would need to double check that's the correct reviewer number, it could be wrong\n- That the manuscript-file-name footnote is helpful or pedantic: might be useful if you've submitted several drafts in the same chat but otherwise probably unnecessary\n- Spot-check 847 computation: correct",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:38:41.173Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/reviewer-response/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/reviewer-response/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:55.798Z",
+          "ts": "2026-07-02T14:23:18.711Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "writing/reviewer-response/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:49:58.476Z",
+          "notes": "**What still needs human verification:**\n- Whether the \"<9% shared variance\" derivation (r\u00b2) is correctly conveyed: not sure where 9% came from? If that's measured elsewhere, it would have to be checked.\n- That the defense of retaining weak correlations matches reviewer expectation: yes\n- Spot-check 847 computation and revised text wording: good",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:44:00.630Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "writing/reviewer-response/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "N",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:00.576Z",
-          "verdict": "N"
         }
       ]
     },
     "writing/specific-aims/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+      "reason": "majority 2/2",
+      "verdict": "S",
+      "votes": [
+        {
+          "notes": "",
+          "reviewer": "TJS",
+          "ts": "2026-07-02T14:23:46.236Z",
+          "verdict": "S"
+        },
+        {
+          "notes": "",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-29T22:29:24.431Z",
+          "verdict": "S"
+        }
+      ]
+    },
+    "writing/specific-aims/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:32.103Z",
+          "ts": "2026-07-02T14:23:23.767Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the pilot-data framing (78% AUC, n=25/25) is accurately drawn from the original notes: yes\n- That the \"100 cases / 100 controls\" Aim 1 size is justifiable for an R21: yes\n- Whether the suggested 16S-vs-shotgun consideration is appropriate framing: I would guess there's no point in spending page space on a specific aims page explaining why 16S vs shotgun. 16S is cheaper and easier to use as a diagnostic, that's why it remains so often used.",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:11:41.611Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/specific-aims/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/specific-aims/gemini-2-5-pro-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:15.066Z",
+          "ts": "2026-07-02T14:23:32.864Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the \"proof-of-concept\" closing framing is appropriately scoped for an R21: \"the first\" I think comes off too strong since many other groups are also working on this\n- That the suggested next-step (R01 power calculation) is realistic: yes\n- Spot-check pilot data representation: good",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:20:58.462Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/specific-aims/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/specific-aims/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:07.643Z",
+          "ts": "2026-07-02T14:23:31.290Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the explicit hedging of the novelty claim is preferred over Opus/Sonnet's more confident framing: I like explicit gaps being transparently addressed personally, I think it tends to strengthen proposals and make the research team seem more trustworthy/less biased.\n- That the agency-mission relevance closing aligns with NIH expectations: yes\n- Spot-check pilot data: it is quoted correctly\nNote: this one doesn't provide any flags whereas the others did flag some parts that I think might still apply to this draft.",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:16:02.569Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/specific-aims/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/specific-aims/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:17.595Z",
+          "ts": "2026-07-02T14:23:42.775Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the dual-flag convention ([NEEDS PRELIM DATA] vs [CITE]) is the preferred pattern: it works\n- That all expected-performance claims are appropriately flagged: yes\n- Spot-check pilot data: good",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:22:33.962Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/specific-aims/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/specific-aims/step-3-7-flash-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:16.194Z",
+          "ts": "2026-07-02T14:23:44.226Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the specific title format is preferred over peer brevity: yes, but could be workshopped to be shorter maybe. Good starting point though and gets all the info across.\n- That the [NEEDS PRELIM DATA] policy guidance is appropriate: other models were a bit more critical and wanted more preliminary data in aim 2\n- Spot-check pilot data: good",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T23:25:01.227Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/specific-aims/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/style-matching/claude-opus-4-7-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:19.155Z",
+          "ts": "2026-07-02T14:23:49.113Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the limitations note (short reference sample) is appropriate to include in a style-revision deliverable: Yes\n- That the suggested alternative \"particularly clear effects\" phrasing is the right hedging level: could work, but \"particularly clear\" feels like a bit of an ambiguous phrase in my opinion. \"Notable\" at least suggests there is something interesting about the underlying biology of the results that I would then try to find in the paper or expect expansion on later in the manuscript.\n- Whether the revised text preserves all substantive claims from the original: Yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T22:07:33.989Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/specific-aims/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "N",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:21.488Z",
-          "verdict": "N"
-        }
-      ]
-    },
-    "writing/style-matching/claude-opus-4-2026-02-04": {
-      "reason": "majority 1/1",
+    "writing/style-matching/claude-sonnet-4-6-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:49.916Z",
+          "ts": "2026-07-02T14:23:47.702Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the \"epistemic honesty\" hedging addition is appropriate for the reference style: yes\n- That the [CONTENT NOTE] flag accurately identifies the statistical-vs-narrative semantic shift: yes\n- Spot-check that revised text preserves all substantive claims: I would still put \"tissue-resident immune cell populations\" because \"immune populations\" doesn't mean anything to me as a reader.",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T22:01:34.556Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/style-matching/claude-opus-4-7-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/style-matching/gpt-5-5-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:36.962Z",
+          "ts": "2026-07-02T14:23:50.636Z",
+          "verdict": "P"
+        },
+        {
+          "notes": "**What still needs human verification:**\n- Whether the content note about insufficient mechanistic evidence is welcome scope-creep or out of scope for a style task: Maybe a bit of scope creep but I would welcome it if it were me\n- That the revised text preserves the substantive claims: Yes\n- Spot-check style markers match: Yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T22:33:00.313Z",
           "verdict": "P"
         }
       ]
     },
-    "writing/style-matching/claude-sonnet-4-6-2026-06-23": {
-      "reason": "majority 1/1",
+    "writing/style-matching/nemotron-3-super-120b-2026-06-25": {
+      "reason": "majority 2/2",
       "verdict": "P",
       "votes": [
         {
           "notes": "",
           "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:35.812Z",
+          "ts": "2026-07-02T14:24:03.812Z",
           "verdict": "P"
-        }
-      ]
-    },
-    "writing/style-matching/gemini-2-5-pro-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
+        },
         {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:41.501Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "writing/style-matching/gpt-5-5-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:39.560Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "writing/style-matching/nemotron-3-super-120b-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:43.017Z",
-          "verdict": "P"
-        }
-      ]
-    },
-    "writing/style-matching/step-3-7-flash-2026-06-23": {
-      "reason": "majority 1/1",
-      "verdict": "P",
-      "votes": [
-        {
-          "notes": "",
-          "reviewer": "TJS",
-          "ts": "2026-06-25T02:50:44.501Z",
+          "notes": "**What still needs human verification:**\n- Whether the bulleted format vs. numbered list is the preferred convention: seems fine either way\n- That technical details (flow cytometry, scRNA-seq, regulatory T cells) are preserved verbatim: yes\n- Spot-check style inferences match the reference sample: Yes",
+          "reviewer": "Alex Alexiev",
+          "ts": "2026-06-26T22:28:35.326Z",
           "verdict": "P"
         }
       ]
     }
   },
-  "disagreements_count": 0,
+  "disagreements_count": 47,
   "lead": null,
   "policy": "majority",
   "reviewers": [
+    "Alex Alexiev",
     "TJS"
   ],
   "schema": "promptlab-t4-canonical/v1"
