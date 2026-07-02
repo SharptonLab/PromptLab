@@ -22,10 +22,9 @@
       "reviewer": "TJS"
     },
     "code/code-explanation/gemini-2-5-pro-2026-06-25": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-07-02T14:10:00.735Z",
-      "reviewer": "TJS"
+      "verdict": "P",
+      "notes": "Updated 2026-07-02 after truncation re-run produced complete output.",
+      "ts": "2026-07-02T08:13:49.362143Z"
     },
     "code/code-explanation/nemotron-3-super-120b-2026-06-25": {
       "verdict": "P",
@@ -94,10 +93,9 @@
       "reviewer": "TJS"
     },
     "code/python-analysis/claude-opus-4-7-2026-06-25": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-07-02T14:12:51.588Z",
-      "reviewer": "TJS"
+      "verdict": "P",
+      "notes": "Updated 2026-07-02 after truncation re-run produced complete output.",
+      "ts": "2026-07-02T08:13:49.362143Z"
     },
     "code/python-analysis/gpt-5-5-2026-06-25": {
       "verdict": "P",
@@ -472,10 +470,9 @@
       "reviewer": "TJS"
     },
     "literature/paper-summary/claude-opus-4-7-2026-06-25": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-07-02T14:20:33.925Z",
-      "reviewer": "TJS"
+      "verdict": "P",
+      "notes": "Updated 2026-07-02 after truncation re-run produced complete output.",
+      "ts": "2026-07-02T08:13:49.362143Z"
     },
     "literature/paper-summary/gpt-5-5-2026-06-25": {
       "verdict": "P",
@@ -610,10 +607,9 @@
       "reviewer": "TJS"
     },
     "statistics/design-review/gemini-2-5-pro-2026-06-25": {
-      "verdict": "N",
-      "notes": "",
-      "ts": "2026-07-02T14:21:19.615Z",
-      "reviewer": "TJS"
+      "verdict": "P",
+      "notes": "Updated 2026-07-02 after truncation re-run produced complete output.",
+      "ts": "2026-07-02T08:13:49.362143Z"
     },
     "statistics/design-review/nemotron-3-super-120b-2026-06-25": {
       "verdict": "P",
