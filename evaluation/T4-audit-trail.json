@@ -44,10 +44,10 @@
     ],
     "code/code-explanation/gemini-2-5-pro-2026-06-25": [
       {
-        "notes": "",
+        "notes": "Updated 2026-07-02 after truncation re-run produced complete output.",
         "reviewer": "TJS",
-        "ts": "2026-07-02T14:10:00.735Z",
-        "verdict": "N"
+        "ts": "2026-07-02T08:13:49.362143Z",
+        "verdict": "P"
       },
       {
         "notes": "",
@@ -212,10 +212,10 @@
     ],
     "code/python-analysis/claude-opus-4-7-2026-06-25": [
       {
-        "notes": "",
+        "notes": "Updated 2026-07-02 after truncation re-run produced complete output.",
         "reviewer": "TJS",
-        "ts": "2026-07-02T14:12:51.588Z",
-        "verdict": "N"
+        "ts": "2026-07-02T08:13:49.362143Z",
+        "verdict": "P"
       },
       {
         "notes": "",
@@ -1124,10 +1124,10 @@
     ],
     "literature/paper-summary/claude-opus-4-7-2026-06-25": [
       {
-        "notes": "",
+        "notes": "Updated 2026-07-02 after truncation re-run produced complete output.",
         "reviewer": "TJS",
-        "ts": "2026-07-02T14:20:33.925Z",
-        "verdict": "N"
+        "ts": "2026-07-02T08:13:49.362143Z",
+        "verdict": "P"
       },
       {
         "notes": "**What still needs human verification:**\n- Whether the truncated trailing sentence in Section 8 represents a meaningful loss of content or only a stylistic dangle: could be cut off\n- That the \"apparent but not discussed\" limitations in Section 6 are actually absent from the abstract (e.g., the IBS subtype point \u2014 the abstract does not mention subtypes, so flagging is fair):  yes\n- The implicit-hypothesis paraphrase in Section 3 (\"functional microbiome alterations ... contribute to IBS pathophysiology\") is consistent with what the authors actually claim: yes\n- Whether a re-run with even higher max_tokens is needed to capture a complete Section 8: could be cut off",
@@ -1446,10 +1446,10 @@
     ],
     "statistics/design-review/gemini-2-5-pro-2026-06-25": [
       {
-        "notes": "",
+        "notes": "Updated 2026-07-02 after truncation re-run produced complete output.",
         "reviewer": "TJS",
-        "ts": "2026-07-02T14:21:19.615Z",
-        "verdict": "N"
+        "ts": "2026-07-02T08:13:49.362143Z",
+        "verdict": "P"
       },
       {
         "notes": "**What still needs human verification:**\nran out of space and cuts off\n- That the captured content (diet timing concern, mouse strain limit) is technically sound: yes\n- Whether the truncated material would change the overall design critique: I think it would need to be rerun, half the prompt isn't addressed.",
