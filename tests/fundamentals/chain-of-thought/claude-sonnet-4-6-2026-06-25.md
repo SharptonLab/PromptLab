@@ -276,8 +276,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Whether the explicit "reviewer pushback in 2024+" framing for Bray-Curtis-only is appropriate guidance
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-30): **What still needs human verification:**
+- **Citation verification:** Gloor et al. and Quinn et al. references for compositionality — confirm these papers exist and support the claim: Gloor does fit the statement but Quinn not so much
+- The assumption-comparison table — verify each cell (e.g., "ANCOM-BC2 handles compositionality via core feature") is technically accurate: yes
+- Whether the explicit "reviewer pushback in 2024+" framing for Bray-Curtis-only is appropriate guidance: yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

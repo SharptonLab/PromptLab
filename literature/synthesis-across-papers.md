@@ -71,56 +71,13 @@ Output format: Use the numbered structure above. For Points of Agreement and Dis
 | **Attribution requirement** | "Be specific about which papers" creates verifiable claims |
 | **Output format** | Structured sections ensure comprehensive coverage and facilitate verification |
 
-## Example Input
-
-```
-Context: I am synthesizing literature on the gut-brain axis in depression for a grant background section. I have read the following papers and am providing their content below.
-
-Papers provided:
-[Full text of Paper 1: Valles-Colomer et al. (2019). The neuroactive potential of the human gut microbiota in quality of life and depression. Nature Microbiology.]
----
-[Full text of Paper 2: Zheng et al. (2016). Gut microbiome remodeling induces depressive-like behaviors through a pathway mediated by the host's metabolism. Molecular Psychiatry.]
----
-[Full text of Paper 3: Kelly et al. (2016). Transferring the blues: Depression-associated gut microbiota induces neurobehavioural changes in the rat. Journal of Psychiatric Research.]
-
-Synthesis focus: Evidence for causal relationships between gut microbiota and depressive symptoms.
-
-My specific research question: Whether microbiome-targeted interventions could have therapeutic potential for depression.
-```
-
 ## Example Output
 
-**1. Overview**
-These three papers collectively provide evidence that gut microbiota composition is associated with depression and may play a causal role in depressive symptoms. The evidence spans observational human studies and experimental animal models, with convergent findings suggesting that microbiota alterations can influence mood-related behaviors, though mechanistic understanding remains incomplete.
+For a representative model response to the Test Input, see:
 
-**2. Points of Agreement**
-- Microbiota composition differs between depressed and non-depressed individuals (Valles-Colomer et al.; Kelly et al. baseline comparisons)
-- Fecal microbiota transplant from depressed humans to rodents induces depressive-like behaviors (Zheng et al.; Kelly et al.)
-- Neuroactive compound production by gut bacteria is a plausible mechanism (Valles-Colomer et al. computational analysis; Zheng et al. metabolomic data)
-- The relationship involves the immune system and/or metabolic pathways (all three papers implicate inflammatory markers or metabolites)
+`tests/literature/synthesis-across-papers/claude-sonnet-4-6-2026-06-25.md`
 
-**3. Points of Disagreement or Tension**
-- Specific taxa implicated differ across studies: Valles-Colomer et al. highlight Coprococcus and Dialister depletion; Zheng et al. emphasize Bacteroidetes; Kelly et al. report broader community shifts without identifying specific driver taxa
-- Effect sizes and clinical significance: Valles-Colomer et al. report modest associations (explaining ~1-2% of variance in quality of life); animal studies show larger behavioral effects but translation to humans is uncertain
-- Directionality: While FMT experiments suggest microbiota can cause behavioral changes, observational studies cannot rule out reverse causation (depression affecting microbiota via diet, medication, activity)
-
-**4. Methodological Comparison**
-| Aspect | Valles-Colomer et al. | Zheng et al. | Kelly et al. |
-|--------|----------------------|--------------|--------------|
-| Study type | Observational cohort | FMT experiment | FMT experiment |
-| Subjects | ~1,000 humans | Mice receiving human FMT | Rats receiving human FMT |
-| Microbiome method | Shotgun metagenomics | 16S rRNA sequencing | 16S rRNA sequencing |
-| Depression measure | Quality of life scales | Behavioral tests (FST, SPT) | Behavioral tests (FST, OFT) |
-| Confound control | Statistical adjustment | Germ-free recipients | Antibiotic-depleted recipients |
-
-**5. Gaps and Limitations**
-- No interventional human studies (e.g., probiotics, FMT for depression treatment) in this set
-- Mechanistic pathways remain correlational even in animal studies
-- All human data cross-sectional; longitudinal studies tracking microbiome changes preceding depression onset are absent
-- Shared limitation: Depression heterogeneity not addressed (different depression subtypes may have different microbiome signatures)
-
-**6. Synthesis Statement**
-Evidence supports a bidirectional relationship between gut microbiota and depression, with animal FMT studies providing the strongest evidence for a causal microbiota→behavior pathway. However, whether microbiome-targeted interventions could have therapeutic potential in humans remains untested in this literature and represents a critical gap for future investigation.
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -239,12 +196,12 @@ Reduce to: Overview, Key Agreements, Key Differences, Implications for Your Work
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/literature/synthesis-across-papers/
 ```

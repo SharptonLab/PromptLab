@@ -67,124 +67,13 @@ Output format: Structured explanation with numbered sections and code snippets w
 | **What confuses you** | Focuses explanation on your actual gaps |
 | **Structured output** | Ensures comprehensive explanation |
 
-## Example Input
-
-````
-Context: I am a microbiome researcher trying to understand code from a published paper on 16S analysis. My programming background: comfortable with basic R, new to the tidyverse.
-
-The code I need explained:
-```r
-ps_rel <- transform_sample_counts(ps, function(x) x / sum(x))
-
-top_taxa <- names(sort(taxa_sums(ps_rel), decreasing = TRUE))[1:20]
-
-ps_top <- prune_taxa(top_taxa, ps_rel)
-
-plot_data <- psmelt(ps_top) %>%
-  group_by(Sample, Phylum) %>%
-  summarise(Abundance = sum(Abundance), .groups = "drop") %>%
-  mutate(Phylum = fct_reorder(Phylum, Abundance, .fun = sum, .desc = TRUE))
-
-ggplot(plot_data, aes(x = Sample, y = Abundance, fill = Phylum)) +
-  geom_bar(stat = "identity") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
-```
-
-What I already understand: I know phyloseq objects contain OTU tables and metadata. I know ggplot makes plots.
-
-What confuses me:
-- What does transform_sample_counts do exactly?
-- I don't understand the pipe (%>%) and what group_by/summarise do
-- What is fct_reorder doing?
-- Why is stat = "identity" needed?
-````
-
 ## Example Output
 
-### 1. Overview
+For a representative model response to the Test Input, see:
 
-This code creates a stacked bar chart showing the relative abundance of bacterial phyla across samples. It first converts counts to proportions, selects the 20 most abundant taxa, aggregates by phylum, and then plots the result. This is a standard visualization for exploring microbiome composition.
+`tests/code/code-explanation/claude-sonnet-4-6-2026-06-25.md`
 
-### 2. Step-by-Step Walkthrough
-
-#### Converting to relative abundance
-```r
-ps_rel <- transform_sample_counts(ps, function(x) x / sum(x))
-```
-**What it does**: Converts raw read counts to relative abundances (proportions). For each sample, every taxon's count is divided by the total counts in that sample.
-
-**Why**: Raw counts can't be compared across samples with different sequencing depths. If Sample A has 10,000 reads and Sample B has 50,000, raw counts are misleading. Proportions normalize this.
-
-**How it works**: `transform_sample_counts()` applies a function to each sample column. The function `function(x) x / sum(x)` takes a vector of counts and divides each by the total.
-
-#### Identifying top taxa
-```r
-top_taxa <- names(sort(taxa_sums(ps_rel), decreasing = TRUE))[1:20]
-```
-**What it does**: Finds the 20 taxa with highest total abundance across all samples.
-
-**Breaking it down**:
-- `taxa_sums(ps_rel)`: Sums each taxon across all samples, returning a named vector
-- `sort(..., decreasing = TRUE)`: Sorts from highest to lowest
-- `names(...)[1:20]`: Gets the taxon names (not values) for the top 20
-
-**Why**: Plots with hundreds of taxa are unreadable. Focusing on the top 20 captures the major players while keeping the visualization clear.
-
-#### Subsetting to top taxa
-```r
-ps_top <- prune_taxa(top_taxa, ps_rel)
-```
-**What it does**: Creates a new phyloseq object containing only the top 20 taxa.
-
-#### Preparing plot data (the tidyverse pipeline)
-```r
-plot_data <- psmelt(ps_top) %>%
-  group_by(Sample, Phylum) %>%
-  summarise(Abundance = sum(Abundance), .groups = "drop") %>%
-  mutate(Phylum = fct_reorder(Phylum, Abundance, .fun = sum, .desc = TRUE))
-```
-
-**The pipe (`%>%`)**: This operator passes the result of the left side as the first argument to the right side. It's read as "then." So this says: take the result of `psmelt`, THEN group it, THEN summarize it, THEN mutate it.
-
-**`psmelt(ps_top)`**: Converts the phyloseq object to a "long" data frame where each row is one taxon in one sample, with columns for Sample, OTU, Abundance, and all taxonomy levels (Kingdom, Phylum, etc.).
-
-**`group_by(Sample, Phylum)`**: Marks the data for grouped operations. Subsequent operations will be performed separately for each Sample-Phylum combination.
-
-**`summarise(Abundance = sum(Abundance), .groups = "drop")`**: For each group (each Sample-Phylum pair), calculates the sum of all abundances. This aggregates multiple species within the same phylum. `.groups = "drop"` removes the grouping structure afterward.
-
-**`mutate(Phylum = fct_reorder(...))`**: Reorders the Phylum factor levels based on total abundance (sum across all samples), in descending order. This ensures the legend and color assignment puts the most abundant phyla first.
-
-#### Creating the plot
-```r
-ggplot(plot_data, aes(x = Sample, y = Abundance, fill = Phylum)) +
-  geom_bar(stat = "identity") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
-```
-
-**`stat = "identity"`**: By default, `geom_bar()` counts rows (like a histogram). `stat = "identity"` tells it to use the actual y values you provide (the Abundance column) rather than counting. Without this, you'd get wrong results.
-
-**`theme(axis.text.x = ...)`**: Rotates x-axis labels 90 degrees so sample names don't overlap. `hjust = 1` right-aligns them.
-
-### 3. Key Concepts
-
-- **Pipe operator (`%>%`)**: From the magrittr package (loaded with tidyverse). Chains operations together. `x %>% f() %>% g()` is equivalent to `g(f(x))` but reads more naturally.
-
-- **Factors**: R's way of handling categorical data. Factor levels determine the order in plots and tables. `fct_reorder()` is from the forcats package and reorders levels based on another variable.
-
-- **Long vs. wide data**: phyloseq stores data in a specialized format. `psmelt()` converts it to "long" format where each observation is one row—the format ggplot expects.
-
-### 4. Inputs and Outputs
-
-**Input**: `ps` — a phyloseq object containing an OTU table with counts, taxonomy assignments, and sample metadata
-
-**Output**: A ggplot stacked bar chart object. If assigned to a variable, it can be modified further. If printed, it displays the plot.
-
-### 5. Potential Issues
-
-- **Rare taxa disappear**: By taking only top 20 taxa, rare but potentially important taxa are excluded
-- **Proportions don't sum to 1**: After filtering to top 20, the proportions no longer sum to 1.0 per sample (the excluded taxa's proportions are missing)
-- **Sample order**: Samples are plotted in alphabetical order by default. You might want to order them by treatment group or a metadata variable
-- **No statistical summary**: This is purely descriptive—no error bars or significance testing
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -300,12 +189,12 @@ Task: In addition to explaining what this code does, suggest how it could be wri
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/code/code-explanation/
 ```

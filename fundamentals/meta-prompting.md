@@ -74,123 +74,13 @@ Based on these examples, write a prompt that would reliably produce this type of
 | **Draft prompt** | Material for the model to critique | Include your best attempt |
 | **Example outputs** | Demonstrate what success looks like | Choose representative, well-formed examples |
 
-## Example Input
+## Example Output
 
-### Example 1: Interview Approach
+For a representative model response to the Test Input, see:
 
-A researcher wants to develop a prompt for summarizing microbiome papers but isn't sure how to specify the task.
+`tests/fundamentals/meta-prompting/claude-sonnet-4-6-2026-06-25.md`
 
-```
-I want your help with a task, but before I describe it, I want you to ask me clarifying questions to ensure you understand exactly what I need.
-
-The task involves: summarizing research papers about the gut microbiome for a literature review I'm writing.
-
-What questions do you have about the format, scope, audience, constraints, or purpose that would help you assist me effectively?
-```
-
-### Example Output 1: Interview Response
-
-```
-Before I can help effectively, I have several questions:
-
-**About the output format:**
-1. What length should each summary be? (A paragraph? A page? Bullet points?)
-2. Should summaries follow a consistent structure (e.g., objective/methods/findings/limitations)?
-3. Do you want summaries suitable for a specific citation format (e.g., narrative synthesis vs. tabular comparison)?
-
-**About the content focus:**
-4. What aspects of each paper matter most for your review? (Methods? Findings? Population studied?)
-5. Are you comparing papers on a specific question, or surveying a broad area?
-6. Should I include critical evaluation, or just descriptive summary?
-
-**About the audience:**
-7. Who is the literature review for? (Grant reviewers? Journal readers? Your own reference?)
-8. What's the expected level of technical detail?
-
-**About constraints:**
-9. Should I only use information in the papers, or can I note connections to other literature?
-10. How should I handle papers with conflicting findings?
-11. Are there specific things you do NOT want included (e.g., statistical details, funding sources)?
-
-**About the papers:**
-12. How will you provide the papers? (Full text? Abstracts only?)
-13. Approximately how many papers are we talking about?
-
-Answering these will help me suggest an effective prompt structure for your task.
-```
-
-### Example 2: Prompt Critique Approach
-
-```
-Here's a prompt I'm planning to use for extracting methodology from microbiome papers:
-
----
-Read this paper and extract the methodology information. Tell me what sequencing they used, what bioinformatics tools, and what statistics.
----
-
-Please critique this prompt:
-1. What's ambiguous or underspecified?
-2. What assumptions am I making that might not hold?
-3. What failure modes might this prompt produce?
-4. How would you improve it to make outputs more consistent and reliable?
-
-Provide a revised version of the prompt incorporating your suggestions.
-```
-
-### Example Output 2: Critique Response
-
-```
-**Critique:**
-
-1. **Ambiguities and underspecification:**
-   - "Sequencing" is vague: Do you want the platform (Illumina, PacBio)? The region (V4, full-length 16S)? The read depth?
-   - "Bioinformatics tools" could mean anything from quality control to differential abundance testing
-   - "Statistics" doesn't specify: Descriptive? Inferential? For which comparisons?
-   - No output format specified—you'll get inconsistent structures across papers
-   - No instruction on what to do if information isn't reported
-
-2. **Assumptions that might not hold:**
-   - Assumes the paper clearly reports all methodological details (many don't)
-   - Assumes single sequencing approach (some papers use multiple)
-   - Assumes "methodology" means the same thing to the model as to you
-
-3. **Likely failure modes:**
-   - Inconsistent output format across papers
-   - Model may infer or guess at unreported details rather than flagging gaps
-   - May miss important methodological elements you care about but didn't mention
-   - May include excessive detail on aspects you don't need
-
-**Revised prompt:**
-
----
-Extract methodology information from this microbiome research paper using the following format. Use only information explicitly stated in the paper.
-
-**Sequencing:**
-- Platform (e.g., Illumina MiSeq, NovaSeq, PacBio):
-- Target region (e.g., 16S V4, 16S V3-V4, shotgun, ITS):
-- Primers used (if reported):
-- Read depth or sequencing depth (if reported):
-
-**Bioinformatics:**
-- Pipeline or primary software (e.g., QIIME2, mothur, DADA2):
-- Taxonomy database (e.g., SILVA, Greengenes, RDP):
-- Key processing steps explicitly mentioned:
-
-**Statistical analysis:**
-- Alpha diversity metrics:
-- Beta diversity metrics and tests:
-- Differential abundance method:
-- Multiple testing correction:
-- Key statistical tests for primary hypothesis:
-
-**Instructions:**
-- If information is not explicitly stated, write "Not reported"
-- Do not infer or guess—only extract what is clearly stated
-- If multiple approaches were used, list all
----
-
-This revision specifies exact fields, defines output format, and prevents hallucination of unreported details.
-```
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -322,12 +212,12 @@ Suggest 2-3 targeted modifications that address this issue without breaking what
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Needs revision
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/fundamentals/meta-prompting/
 ```

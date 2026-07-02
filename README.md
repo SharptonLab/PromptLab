@@ -75,16 +75,16 @@ Each prompt includes:
 
 ## Testing
 
-The repository contains 24 runnable prompts plus reference guides and templates in `guides/`. Every runnable prompt has been tested on 2026-06-23 across a fixed 6-model panel — Claude Sonnet 4.6, Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, NVIDIA Nemotron 3 Super 120B, StepFun Step-3.7 Flash — with verdicts set by a human reviewer (lead author) against the rubric in [`guides/verification-checklist-extended.md`](guides/verification-checklist-extended.md). A single-model legacy column from 2026-02-04 (Claude Opus 4) is retained for shelf-life comparison.
+The repository contains 24 runnable prompts plus reference guides and templates in `guides/`. Every runnable prompt has been tested on 2026-06-25 across a fixed 6-model panel — Claude Sonnet 4.6, Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, NVIDIA Nemotron 3 Super 120B, StepFun Step-3.7 Flash — with verdicts set independently by two project reviewers against the rubric in [`guides/verification-checklist-extended.md`](guides/verification-checklist-extended.md). A single-model legacy column from 2026-02-04 (Claude Opus 4) is retained for shelf-life comparison but not counted in the panel aggregation.
 
-**Headline pattern across 168 panel cells:** the three frontier closed-weight models passed 100% of prompts in the suite; Gemini 2.5 Pro passed 22 of 24 (one notes-flagged token-budget truncation, one needs-revision); the two open-weight reasoning models had 8.3% and 20.8% failure rates respectively. Failure modes observed include citation fabrication, syntactically broken code, and substantive cross-model disagreement on technical claims.
+**Headline across the 144-cell panel:** 24 of 24 prompts pass the panel test (at least four of the six panel models produced a passing output). The three frontier closed-weight models (Claude Sonnet 4.6, Claude Opus 4.7, GPT-5.5) passed every prompt; Gemini 2.5 Pro passed 23 of 24; the two open-weight reasoning models (Nemotron 3 Super 120B and Step-3.7 Flash) each passed 22 of 24. Panel-wide pass rate is 96.5%. The five cells that received Needs-revision verdicts included two undisputed methodological failures (both Step-3.7 Flash, citation fabrication and missed extraction) and three that involved model-output truncation.
 
 Where to find the results, by depth:
 
 - **In each prompt file** — every prompt has an inline `## Model Notes` section listing the seven models and their per-prompt verdicts. Fastest path to "did this prompt work for the model I'm planning to use?".
 - **[`tests/SUMMARY.md`](tests/SUMMARY.md)** — cross-model coverage matrix (24 prompts × 7 models, per-cell verdicts P / PN / N / ? / S, plus per-model tally rows).
 - **`tests/<category>/<prompt>/`** — per-cell result files: raw verbatim model output and the reviewer's verdict, one file per (prompt × model) pair.
-- **[`evaluation/`](evaluation/)** — combined canonical verdicts, full audit trail (every reviewer vote with timestamp), and the agreement-report scaffold (pairwise Cohen's kappa for future multi-reviewer runs). Paper-cited evidence; not needed to use the prompts.
+- **[`evaluation/`](evaluation/)** — combined canonical verdicts, full audit trail (every reviewer vote with timestamp), and the inter-rater agreement report (binarized Cohen's kappa = 0.559 between the two reviewers on the 118 overlap cells). Paper-cited evidence; not needed to use the prompts.
 
 See [`docs/TESTING-GUIDE.md`](docs/TESTING-GUIDE.md) for the testing methodology and `evaluation/SECTION_7_DRAFT.md` for the longer write-up.
 

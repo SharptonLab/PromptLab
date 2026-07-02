@@ -113,8 +113,10 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Verify table formatting renders cleanly
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-30): **What still needs human verification:**
+- Whether the Bayesian (brms/rstanarm) alternative is appropriate to recommend here: yes
+- That the "0.2-unit Shannon change may be negligible" claim is field-appropriate: yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

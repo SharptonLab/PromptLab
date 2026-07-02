@@ -166,8 +166,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Whether emphasizing "ILR" over "CLR" is justified for the use case
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-30): **What still needs human verification:**
+- Whether ILR-LME-as-primary is appropriate vs. the panel-majority "PERMANOVA + MaAsLin2/ANCOM-BC2" recommendation: yes
+- That the suggested R packages would actually fit the recommended models cleanly on this design: yes
+- Whether emphasizing "ILR" over "CLR" is justified for the use case: I don't think one is recommended over the other here, they just repeat ILR as the placeholder for a transformation a lot
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

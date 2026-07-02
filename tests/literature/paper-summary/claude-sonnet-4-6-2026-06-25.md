@@ -170,8 +170,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Whether numeric specifics match the source
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- Spot-check each cited claim (acetate unaffected, F. prausnitzii/Roseburia depleted) against source: yes
+- That the cautionary footnote on missing citation metadata is the preferred pattern: yes
+- Whether numeric specifics match the source: yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

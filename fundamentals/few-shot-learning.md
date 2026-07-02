@@ -54,73 +54,13 @@ Output:
 | **Input/Output labels** | Create clear structure the model will replicate | Consistent labeling improves pattern matching |
 | **Actual input** | The material you want processed | Follows same format as example inputs |
 
-## Example Input
-
-A researcher needs to extract structured metadata from microbiome paper abstracts in a consistent format for a database.
-
-```
-I need to extract structured metadata from microbiome study abstracts. Extract only information explicitly stated in the abstract.
-
-Here are examples of the format I need:
-
-**Example 1:**
-Input: "The gut microbiome plays a crucial role in host metabolism. We performed 16S rRNA gene sequencing on fecal samples from 120 participants (60 with type 2 diabetes, 60 healthy controls) recruited from three clinical sites. Using QIIME2 and LEfSe analysis, we identified 23 differentially abundant taxa, with Akkermansia muciniphila significantly depleted in diabetic patients (p < 0.001). Our findings suggest potential therapeutic targets for metabolic disease."
-
-Output:
-- Study type: Case-control
-- Disease/condition: Type 2 diabetes
-- Sample type: Fecal
-- Sample size: 120 (60 cases, 60 controls)
-- Sequencing: 16S rRNA gene
-- Analysis tools: QIIME2, LEfSe
-- Key finding: Akkermansia muciniphila depleted in diabetic patients
-- Organism: Human
-
-**Example 2:**
-Input: "Early-life antibiotic exposure may have lasting effects on the developing microbiome. We followed 85 infants from birth to 24 months, collecting monthly stool samples. Shotgun metagenomic sequencing revealed that antibiotic-exposed infants (n=42) showed reduced bacterial diversity and delayed maturation of metabolic pathways compared to unexposed controls (n=43). Machine learning models predicted antibiotic exposure history with 89% accuracy based on 12-month microbiome profiles."
-
-Output:
-- Study type: Longitudinal cohort
-- Disease/condition: Antibiotic exposure (not disease)
-- Sample type: Stool
-- Sample size: 85 infants (42 exposed, 43 controls)
-- Sequencing: Shotgun metagenomics
-- Analysis tools: Machine learning (not specified further)
-- Key finding: Antibiotic exposure reduces diversity and delays metabolic pathway maturation
-- Organism: Human (infant)
-
-**Example 3:**
-Input: "Dietary fiber modulates gut microbial composition in murine models. C57BL/6 mice (n=40) were randomized to high-fiber or control diet for 8 weeks. 16S rRNA sequencing of cecal contents using Illumina MiSeq showed increased Bacteroidetes and decreased Firmicutes in the high-fiber group. Metabolomic analysis confirmed elevated short-chain fatty acid production."
-
-Output:
-- Study type: Randomized controlled (animal)
-- Disease/condition: Dietary intervention (not disease)
-- Sample type: Cecal contents
-- Sample size: 40 mice
-- Sequencing: 16S rRNA (Illumina MiSeq)
-- Analysis tools: Not specified
-- Key finding: High-fiber diet increases Bacteroidetes, decreases Firmicutes, elevates SCFAs
-- Organism: Mouse (C57BL/6)
-
-Now process the following using the same format:
-
-Input: "Inflammatory bowel disease is associated with gut dysbiosis, but causal relationships remain unclear. We analyzed 16S rRNA sequences from colonic biopsies of 200 Crohn's disease patients and 150 healthy volunteers using DADA2 and PICRUSt2. Patients showed reduced alpha diversity (Shannon index, p < 0.0001) and enrichment of adherent-invasive E. coli. Predicted metagenomes revealed depleted butyrate biosynthesis pathways in patient samples."
-
-Output:
-```
-
 ## Example Output
 
-```
-- Study type: Case-control
-- Disease/condition: Crohn's disease
-- Sample type: Colonic biopsies
-- Sample size: 350 (200 cases, 150 controls)
-- Sequencing: 16S rRNA
-- Analysis tools: DADA2, PICRUSt2
-- Key finding: Reduced alpha diversity, enriched adherent-invasive E. coli, depleted butyrate pathways in CD patients
-- Organism: Human
-```
+For a representative model response to the Test Input, see:
+
+`tests/fundamentals/few-shot-learning/claude-sonnet-4-6-2026-06-25.md`
+
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -285,12 +225,12 @@ Now process: [actual input]
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/fundamentals/few-shot-learning/
 ```

@@ -85,8 +85,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Spot-check that revised text preserves all substantive claims
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-26): **What still needs human verification:**
+- Whether the "epistemic honesty" hedging addition is appropriate for the reference style: yes
+- That the [CONTENT NOTE] flag accurately identifies the statistical-vs-narrative semantic shift: yes
+- Spot-check that revised text preserves all substantive claims: I would still put "tissue-resident immune cell populations" because "immune populations" doesn't mean anything to me as a reader.
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

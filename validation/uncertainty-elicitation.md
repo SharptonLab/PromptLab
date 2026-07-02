@@ -58,112 +58,13 @@ Constraints:
 | **Confidence calibration** | Helps prioritize verification effort |
 | **Verification suggestions** | Makes output actionable |
 
-## Example Input
-
-```
-Context: You previously provided the following output when I asked about appropriate sample sizes for microbiome studies:
-
-"For 16S rRNA studies comparing two groups, you typically need 20-30 samples per group to detect moderate effect sizes (Cohen's d = 0.5-0.8) with 80% power. This is based on simulation studies by Kelly et al. (2015) that specifically examined power in microbiome studies. For shotgun metagenomic studies, sample size requirements are similar, though some metrics like pathway abundance may require 40+ samples per group. The Human Microbiome Project used approximately 250 subjects, which provided excellent power but is beyond most lab budgets. For longitudinal studies, within-subject designs can reduce required n by approximately 30% due to reduced variance."
-
-Task: [Continue with the uncertainty elicitation prompt above]
-```
-
 ## Example Output
 
-### 1. Claims I'm Least Confident About
+For a representative model response to the Test Input, see:
 
-**"Kelly et al. (2015) that specifically examined power in microbiome studies"**
-> Quote: "based on simulation studies by Kelly et al. (2015)"
+`tests/validation/uncertainty-elicitation/claude-sonnet-4-6-2026-06-25.md`
 
-**Why I'm uncertain**: I cannot reliably verify this citation. This is exactly the type of specific reference that I might have fabricated or misattributed. There may or may not be a Kelly et al. 2015 paper on microbiome power analysis.
-
-**How to verify**: Search PubMed for "Kelly 2015 microbiome power" or similar. Check if this paper exists and whether it actually contains the claims I attributed to it.
-
-**Hallucination risk: HIGH**
-
----
-
-**"within-subject designs can reduce required n by approximately 30%"**
-> Quote: "reduce required n by approximately 30%"
-
-**Why I'm uncertain**: This specific percentage is suspiciously precise. Power reduction from within-subject designs varies dramatically depending on the correlation structure, effect type, and outcome. A single percentage is an oversimplification that may be fabricated or taken out of context.
-
-**How to verify**: This would require consultation with a statistician or reference to power analysis methodology literature. The 30% figure may not be wrong, but its generalizability is questionable.
-
-**Hallucination risk: MEDIUM-HIGH**
-
----
-
-### 2. Factual Claims Requiring Verification
-
-| Claim | Verification method |
-|-------|-------------------|
-| 20-30 samples per group for moderate effect size | Check power analysis literature; run actual power calculation |
-| Cohen's d = 0.5-0.8 is "moderate" | Confirm Cohen's benchmarks (this one is likely correct) |
-| Kelly et al. (2015) | Search PubMed for exact citation |
-| 40+ samples for pathway abundance | Check metagenomic power literature |
-| HMP used ~250 subjects | Verify against HMP publications (likely correct but confirm) |
-| 30% reduction for longitudinal designs | Verify against power methodology literature |
-
-### 3. Potential Hallucinations
-
-**Highest risk items (most likely fabricated):**
-
-1. **The Kelly et al. citation**: I may have confabulated this reference entirely or conflated multiple sources. This is my highest-confidence concern.
-
-2. **The "30%" figure**: Suspiciously specific numbers without clear sourcing are classic hallucination indicators.
-
-3. **"40+ samples for pathway abundance"**: This is plausible but I don't have a reliable source for this specific threshold.
-
-**Lower risk but still verify:**
-
-4. The HMP subject count is approximately correct but should be confirmed.
-5. The 20-30 sample range is in line with general guidance but power depends heavily on specific parameters.
-
-### 4. What I Might Not Know
-
-- **Recent methodological developments**: Power analysis approaches for microbiome data are an active research area. Methods published in 2023-2024 (near or after my training cutoff) may provide better guidance.
-
-- **Field-specific conventions**: Sample size expectations may differ between clinical microbiome studies, environmental microbiome studies, and animal model studies.
-
-- **Software updates**: Specific power calculation tools (micropower, powerSurvEpi, etc.) may have been updated with new recommendations.
-
-- **Study-specific variation**: Power requirements depend heavily on outcome metrics (alpha diversity, beta diversity, differential abundance), and I may have conflated guidance across different outcome types.
-
-### 5. Where I Made Assumptions
-
-- **Assumed you meant taxonomic 16S studies**: You might be asking about functional profiling, which has different considerations.
-
-- **Assumed "moderate effect size" is your target**: Your actual expected effect size might be smaller or larger.
-
-- **Assumed α = 0.05 and power = 0.80**: Standard defaults, but you might have different requirements.
-
-- **Assumed independent samples design**: You might be planning a more complex design (nested, clustered, matched).
-
-- **Assumed you want guidance, not exact calculations**: A power analysis requires specific parameters; I provided ranges.
-
-### 6. Confidence Calibration
-
-| Content | Confidence (1-5) | Notes |
-|---------|------------------|-------|
-| General principle that 20-30/group is reasonable for moderate effects | 4 | Well-established range, though context-dependent |
-| The Kelly et al. citation | 1 | May be fabricated—verify before using |
-| Cohen's d definitions | 5 | Standard, well-established |
-| 30% reduction claim | 2 | Suspiciously specific; likely oversimplified |
-| HMP sample size | 4 | Approximately correct; verify for precision |
-| Shotgun requiring 40+ samples | 3 | Plausible but unverified |
-
----
-
-### Summary: What You Must Verify
-
-**Before citing or relying on this response:**
-
-1. ❌ **Do not cite Kelly et al. (2015) without confirming it exists**
-2. ❌ **Do not quote the "30%" reduction figure** without better sourcing
-3. ✓ Run an actual power calculation with your specific parameters
-4. ✓ Consult your statistician for study-specific guidance
-5. ~ The general ranges (20-30 samples) are reasonable starting points but not authoritative
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -262,12 +163,12 @@ Stop. Before I act on this:
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/validation/uncertainty-elicitation/
 ```

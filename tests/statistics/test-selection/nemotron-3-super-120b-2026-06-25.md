@@ -154,8 +154,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Spot-check the variance-partitioning interpretation
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- Whether sparse PLS-DA (sPLS-DA) is appropriate for the n=45 / high-dimensional task: doable but it is a low sample size so could overfit
+- That dbRDA after PERMANOVA is the recommended sequence vs. alternatives: it does work
+- Spot-check the variance-partitioning interpretation: yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

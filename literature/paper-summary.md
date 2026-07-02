@@ -65,47 +65,13 @@ Output format: Use the numbered structure above with headers in bold.
 | **Constraints** | "Use only information present" prevents hallucination; "If not available, state so" prevents fabrication of missing details |
 | **Output Format** | Explicit structure produces consistent outputs suitable for a literature database |
 
-## Example Input
-
-```
-Context: I am a microbiome researcher reviewing literature on diet-microbiome interactions. I need a structured summary of the following paper for my literature notes.
-
-Paper text:
-[Full text of: David LA, et al. (2014). Diet rapidly and reproducibly alters the human gut microbiome. Nature.]
-
-Relevance aspect: how dietary interventions affect microbial community composition in my mouse studies
-```
-
 ## Example Output
 
-**1. Citation**: David LA, Maurice CF, Carmody RN, et al. (2014). Diet rapidly and reproducibly alters the human gut microbiome. Nature, 505(7484), 559-563.
+For a representative model response to the Test Input, see:
 
-**2. Central Finding**: Short-term consumption of diets composed entirely of animal or plant products alters microbial community structure and gene expression within days, with changes reversible upon diet cessation.
+`tests/literature/paper-summary/claude-sonnet-4-6-2026-06-25.md`
 
-**3. Research Question/Hypothesis**: Can short-term dietary changes reproducibly alter the human gut microbiome, and how quickly do these changes occur?
-
-**4. Methods Overview**:
-- Study system: Healthy human volunteers (n=10)
-- Key techniques: 16S rRNA sequencing, metatranscriptomics, short-chain fatty acid analysis
-- Design: Crossover study with 5-day dietary interventions (plant-based vs. animal-based)
-
-**5. Key Results**:
-- Microbial community composition changed within 1 day of dietary shift
-- Animal-based diet increased bile-tolerant organisms (Bilophila, Alistipes, Bacteroides)
-- Plant-based diet increased fiber-degrading taxa (Roseburia, Eubacterium rectale)
-- Changes were consistent across individuals and reversible within 2 days of returning to normal diet
-- Animal-based diet increased expression of genes for amino acid catabolism; plant-based increased carbohydrate fermentation genes
-
-**6. Limitations**:
-- Authors acknowledge: Short duration, small sample size, extreme diets not representative of typical eating patterns
-- Not discussed: Potential confounding from other lifestyle changes during intervention; limited generalizability beyond healthy adults
-
-**7. Open Questions**:
-- Do less extreme dietary changes produce similar effects?
-- What is the threshold of dietary change needed to shift microbiome composition?
-- Are changes in gene expression functionally significant for host health?
-
-**8. Relevance to My Work**: Demonstrates that dietary effects on microbiome are rapid and reversible in humans—important baseline for interpreting mouse dietary intervention studies where shorter timescales are often used. Suggests 1-day timepoints may be sufficient to detect initial changes.
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -206,12 +172,12 @@ Add a section: "Strengths and Weaknesses of Study Design" with explicit evaluati
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/literature/paper-summary/
 ```

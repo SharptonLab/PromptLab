@@ -64,36 +64,13 @@ Output format: Response suitable for inclusion in a point-by-point response docu
 | **Guidelines** | Produce responses following effective rebuttal conventions |
 | **Constraints** | Prevent defensiveness, fabrication, and empty promises |
 
-## Example Input
-
-```
-Context: I am preparing a response to reviewers for a manuscript on gut microbiome changes during antibiotic treatment in mice.
-
-Reviewer comment:
-"The authors use Shannon diversity as their sole measure of alpha diversity. However, Shannon diversity is sensitive to both richness and evenness, and it would strengthen the paper to also report observed ASVs or Chao1 richness estimates. Without these additional metrics, it is difficult to know whether the antibiotic treatment reduced the number of taxa or simply altered their relative abundances."
-
-My planned response/action:
-- Good point, we should have included this
-- Re-ran analysis with Observed ASVs and Chao1
-- Results show: Observed ASVs dropped from ~150 to ~45 with antibiotics; Chao1 showed similar pattern
-- This confirms it's a richness reduction, not just evenness change
-- Added new supplementary figure (Fig S3) and updated Results text
-- Added sentence to Methods about multiple diversity metrics
-```
-
 ## Example Output
 
-We thank the reviewer for this suggestion to strengthen our diversity analyses. The reviewer correctly notes that Shannon diversity conflates richness and evenness components, making it difficult to determine the nature of community changes.
+For a representative model response to the Test Input, see:
 
-We have now expanded our alpha diversity analysis to include Observed ASVs (a direct richness measure) and Chao1 richness estimates. These additional metrics confirm that antibiotic treatment substantially reduced taxonomic richness: Observed ASVs decreased from 152 ± 18 (mean ± SD) at baseline to 45 ± 12 following treatment, and Chao1 estimates showed a parallel decline (167 ± 22 to 52 ± 15). These reductions are consistent with the Shannon diversity patterns and indicate that the antibiotic-driven diversity loss reflects genuine loss of taxa rather than solely altered relative abundances.
+`tests/writing/reviewer-response/claude-sonnet-4-6-2026-06-25.md`
 
-We have made the following changes to the manuscript:
-
-**Methods (lines 145-147):** "Alpha diversity was assessed using the Shannon diversity index, Observed ASVs, and Chao1 richness estimator to distinguish effects on evenness versus richness."
-
-**Results (lines 198-202):** "Consistent with Shannon diversity reductions, antibiotic treatment markedly reduced taxonomic richness. Observed ASVs declined from 152 ± 18 to 45 ± 12 (Supplementary Figure 3A), and Chao1 estimates showed parallel reductions (Supplementary Figure 3B), indicating that diversity loss reflected reduced species number rather than altered evenness alone."
-
-**Supplementary Figure 3:** New figure showing Observed ASVs and Chao1 estimates across treatment groups and timepoints.
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -207,12 +184,12 @@ Additional context: This addresses a major concern. We conducted [NEW EXPERIMENT
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Needs revision
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/writing/reviewer-response/
 ```

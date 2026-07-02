@@ -154,8 +154,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - That the bottom-line vulnerability list covers the right claims
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- **Critical:** verify whether "Weiss et al. 2022 Nature Microbiology" with that title exists or is a fabricated/conflated reference: fabricated completely, the title doesn't even exist
+- Whether the meta-uncertainty framing is well-calibrated: yes
+- That the bottom-line vulnerability list covers the right claims: yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

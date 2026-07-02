@@ -67,142 +67,13 @@ Output format: Structured list of options with the information above for each.
 | **Specific considerations** | Flags issues that affect test choice |
 | **Multiple options requested** | Avoids false impression of one "correct" test |
 
-## Example Input
-
-```
-Context: I need help selecting an appropriate statistical approach for my research question.
-
-Research question: Does antibiotic treatment affect gut microbial diversity in mice, and does this effect differ by diet?
-
-Data description:
-- Sample size: 40 mice total (10 per group: control/standard diet, control/high-fat, antibiotic/standard, antibiotic/high-fat)
-- Study design: Factorial design (2 treatments × 2 diets), independent groups, samples at single timepoint
-- Outcome variable: Shannon diversity index (continuous, roughly normally distributed based on histogram)
-- Predictor variables: Treatment (antibiotic vs. control, 2 levels), Diet (standard vs. high-fat, 2 levels)
-- Potential confounders: Cage (mice housed 4-5 per cage, so 8-10 cages total)
-- Data structure: Mice within cages may be correlated
-
-Specific considerations:
-- Interested in both main effects and interaction
-- Concerned about cage effects since mice are housed together
-```
-
 ## Example Output
 
-### Option 1: Two-Way ANOVA
+For a representative model response to the Test Input, see:
 
-**Test name**: Two-way factorial ANOVA
+`tests/statistics/test-selection/claude-sonnet-4-6-2026-06-25.md`
 
-**When appropriate**:
-- Continuous outcome variable
-- Categorical predictors with 2+ levels each
-- Approximately normally distributed residuals
-- Independent observations
-
-**Key assumptions**:
-1. Normality of residuals (check with Q-Q plot, Shapiro-Wilk)
-2. Homogeneity of variance across groups (check with Levene's test)
-3. Independence of observations ← **This is a concern given your cage structure**
-
-**Advantages**:
-- Simple to implement and interpret
-- Directly tests main effects and interaction
-- Well-understood and widely accepted
-- Can include cage as a blocking factor
-
-**Limitations**:
-- Assumes independence, which is violated if cage effects exist
-- With only 10 mice per group, power may be limited for detecting interactions
-- Doesn't fully account for the hierarchical structure (mice within cages)
-
-**Implementation consideration**: You could add cage as a fixed effect (blocking factor), but with 8-10 cages across 4 treatment combinations, you may lose degrees of freedom.
-
----
-
-### Option 2: Linear Mixed Model (Recommended to Consider)
-
-**Test name**: Linear mixed effects model with random intercept for cage
-
-**When appropriate**:
-- Continuous outcome
-- Hierarchical/nested data structure
-- When observations within clusters may be correlated
-
-**Key assumptions**:
-1. Normality of residuals
-2. Random effects normally distributed
-3. Correct specification of random effects structure
-
-**Advantages**:
-- Properly accounts for non-independence within cages
-- More accurate standard errors and p-values
-- Handles unbalanced designs well
-- Can test main effects and interaction
-
-**Limitations**:
-- With only 8-10 cages, estimation of cage variance may be unstable
-- More complex to implement and interpret
-- Small number of clusters can bias variance estimates downward
-
-**Model specification**:
-```
-diversity ~ treatment * diet + (1|cage)
-```
-
-**Note**: With few cages, you might compare results with and without the random effect. If cage variance is negligible, simpler ANOVA may be adequate.
-
----
-
-### Option 3: ANOVA with Cage as Fixed Block
-
-**Test name**: Two-way ANOVA with blocking on cage
-
-**When appropriate**:
-- When you want to account for cage effects but have too few cages for reliable random effects estimation
-- When cage assignment is systematic (e.g., one cage per treatment-diet combination)
-
-**Key assumptions**:
-- Same as standard ANOVA, but cage effects absorbed as fixed effects
-- Requires enough residual degrees of freedom after accounting for blocks
-
-**Advantages**:
-- Controls for cage effects
-- Simpler than mixed models
-- No need to estimate random variance components
-
-**Limitations**:
-- Uses degrees of freedom for cage effects (may reduce power)
-- If cage is confounded with treatment (e.g., all antibiotics mice in same cages), you cannot separate effects
-- Not appropriate if you want to generalize beyond these specific cages
-
----
-
-### Summary and Recommendation
-
-| Approach | Best if... | Caution if... |
-|----------|-----------|---------------|
-| Two-way ANOVA (simple) | Cage effects are negligible | You have reason to expect cage correlations |
-| Linear mixed model | Cage effects may be present, you want proper accounting | Very few cages (<6-8) may make variance estimation unreliable |
-| ANOVA with cage block | Few cages but want to control for them | Cage is confounded with treatment |
-
-**What I'd suggest**:
-1. First, check if cage assignment is balanced across treatment × diet combinations
-2. Run a linear mixed model with cage as random effect
-3. Check if cage variance is substantial (if near zero, simpler ANOVA may suffice)
-4. Report whichever model you use with justification
-
-**Consult a statistician if**:
-- Cage assignment is confounded with treatment
-- You need formal power analysis
-- Results differ substantially between modeling approaches
-
----
-
-### Questions You Should Discuss with a Statistician
-
-1. How were mice assigned to cages? Is cage confounded with treatment?
-2. Is 10 per group adequate power for detecting your expected effect size?
-3. Given 8-10 total cages, is mixed-model estimation reliable here?
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -305,12 +176,12 @@ Additional consideration: If I use ANOVA, I'll need post-hoc comparisons. Sugges
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Needs revision
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/statistics/test-selection/
 ```

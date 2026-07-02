@@ -125,8 +125,10 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Spot-check the field-practice claims (e.g., that the field "generally favors non-parametric approaches")
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-30): **What still needs human verification:**
+- The framing "A student following this advice uncritically could produce statistically invalid results" — confirm this is acceptable tone for the use case: yes
+- Spot-check the field-practice claims (e.g., that the field "generally favors non-parametric approaches"): yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

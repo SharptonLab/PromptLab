@@ -154,8 +154,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Whether the "first draft placeholder" framing is the right tone
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- Whether the severity ratings (Major/Critical/Minor) match reviewer judgment: potentially although maybe a bit more severe. Most are just requests for additional information that likely already exists somewhere, not an actual reproducibility failure in terms of the protocol itself. Many of the statements really are written that way in existing peer reviewed lit.
+- That the Greengenes-as-outdated claim is correct: Not as dire as it sounds...there was a version put out last in 2024 and what I found said it's been "soft-deprecated"...not ideal but it always takes a while for people to phase out commonly used software.
+- Whether the "first draft placeholder" framing is the right tone: yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

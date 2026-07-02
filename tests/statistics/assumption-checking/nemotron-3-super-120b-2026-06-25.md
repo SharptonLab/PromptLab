@@ -261,8 +261,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - That the captured priority ordering (independence > dispersion) matches peer ordering
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Needs revision
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+cut off output
+- Whether the ASCII decision tree format would render cleanly: I think it would
+- That the captured priority ordering (independence > dispersion) matches peer ordering: yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

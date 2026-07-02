@@ -70,53 +70,13 @@ Output format: Formatted aims page with section headers. Flag gaps for my attent
 | **Structural template** | Conventional aims page structure that reviewers expect |
 | **Constraints** | Prevent fabrication; flag gaps rather than fill them with invention |
 
-## Example Input
-
-```
-Context: I am drafting a Specific Aims page for an NIH R01 on the gut-brain axis in depression. The funding agency emphasizes mechanistic understanding and translational potential.
-
-My research plan notes:
-
-Problem: Depression affects 280 million people globally. Current treatments fail ~30% of patients. Emerging evidence suggests gut microbiome plays a role, but we don't understand the causal mechanisms well enough to develop microbiome-based treatments.
-
-My approach: Use gnotobiotic mice to establish causality and identify mechanisms linking specific gut bacteria to depression-like behaviors. We have preliminary data showing FMT from depressed patients induces anhedonia in mice.
-
-Aim 1: Determine which bacterial species are sufficient to induce depression-like behaviors
-- Use gnotobiotic colonization with defined communities
-- Identify minimal community that reproduces the phenotype
-- Have pilot data showing 3 candidate species from preliminary FMT work
-
-Aim 2: Identify the molecular mechanisms linking candidate bacteria to brain function
-- Look at bacterial metabolites (we have metabolomics capability)
-- Examine gut-brain signaling pathways (vagus, immune, HPA)
-- Measure brain neurochemistry and inflammation
-
-Aim 3: Test if targeting the microbiome can reverse depression-like behaviors
-- Therapeutic intervention study—can we fix it once it's established?
-- Tests translational potential
-
-Long-term goal: Develop microbiome-based therapies for treatment-resistant depression
-
-My lab: expertise in gnotobiotics, microbiome analysis, mouse behavior (have established FST, SPT, and OFT protocols)
-
-Target length: 1 page
-```
-
 ## Example Output
 
-# Specific Aims
+For a representative model response to the Test Input, see:
 
-Major depressive disorder affects over 280 million people worldwide and remains inadequately treated: approximately 30% of patients fail to respond to existing therapies [CITE]. Emerging evidence implicates the gut microbiome in depression pathophysiology, with observational studies revealing altered microbial communities in depressed individuals and transplantation studies suggesting these alterations may contribute to behavioral symptoms [CITE]. However, the specific bacteria responsible and the mechanistic pathways linking gut microbes to brain function remain undefined. **This critical gap prevents the rational development of microbiome-based interventions for depression.**
+`tests/writing/specific-aims/claude-sonnet-4-6-2026-06-25.md`
 
-We address this gap using gnotobiotic mouse models that enable controlled manipulation of the gut microbiome. Our preliminary studies demonstrate that fecal microbiota transplantation from patients with major depression into germ-free mice induces anhedonia-like behavior (reduced sucrose preference), establishing a tractable model system [NEEDS PRELIM DATA: include effect size and n]. Building on this foundation, **our overall objective is to identify specific gut bacteria that induce depression-like behaviors and define the mechanisms by which they influence brain function.** Our long-term goal is to develop microbiome-based therapeutic strategies for treatment-resistant depression.
-
-**Aim 1: Identify bacterial species sufficient to induce depression-like behaviors in gnotobiotic mice.** We hypothesize that a defined subset of the depression-associated microbiome is sufficient to reproduce behavioral effects. Using gnotobiotic colonization with progressively simplified communities derived from our FMT model, we will identify the minimal bacterial consortium that induces anhedonia and behavioral despair. Preliminary data implicate three candidate species [NEEDS PRELIM DATA: name species]. This aim will pinpoint causal organisms for mechanistic investigation.
-
-**Aim 2: Define molecular mechanisms linking depression-associated bacteria to brain function.** We hypothesize that candidate bacteria influence the brain through metabolite production, immune activation, or vagal signaling. We will characterize the metabolomic output of causal bacteria, assess gut and systemic immune activation, and evaluate vagal involvement through selective denervation. Brain tissue will be analyzed for neurochemical and inflammatory changes. This aim will identify therapeutic targets at the microbiome-gut-brain interface.
-
-**Aim 3: Test whether microbiome-targeted interventions can reverse established depression-like behaviors.** We hypothesize that correcting the microbial imbalance will ameliorate behavioral symptoms even after they are established. Using our gnotobiotic model, we will test whether introduction of "protective" bacteria or removal of causal species reverses anhedonia. This aim directly tests translational potential.
-
-**Impact:** These aims are integrated and synergistic: Aim 1 identifies causal bacteria; Aim 2 defines mechanisms; Aim 3 tests therapeutic potential. Completion of this project will establish which specific microbes drive depression-like behaviors, how they influence the brain, and whether the microbiome is a viable therapeutic target—essential knowledge for developing microbiome-based treatments for the millions of patients who do not respond to existing antidepressants.
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -250,12 +210,12 @@ Clarify which PI leads each aim. Include integration plan describing how the tea
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Needs revision
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/writing/specific-aims/
 ```

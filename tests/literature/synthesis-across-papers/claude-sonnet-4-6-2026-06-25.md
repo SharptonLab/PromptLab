@@ -184,8 +184,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - That author/year citations are preserved exactly from source
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- Spot-check each cited fact against source paper excerpts: I'm not finding any of these papers?
+- Whether the hedged synthesis framing matches reviewer preference: yes
+- That author/year citations are preserved exactly from source: yes but I'm not finding the papers online
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

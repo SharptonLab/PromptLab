@@ -70,157 +70,13 @@ Constraints:
 | **Your initial interpretation** | Gives something to critique and build on |
 | **Critical stance requested** | Counters sycophancy |
 
-## Example Input
-
-```
-Context: I have completed an experiment and am interpreting the results. I want to think through possible interpretations thoroughly.
-
-Research question: Does probiotic treatment protect against antibiotic-induced gut dysbiosis in mice?
-
-Experimental design (brief):
-- 4 groups (n=10 each): Control, Antibiotic, Antibiotic+Probiotic, Probiotic-only
-- 7 days treatment, fecal samples at Day 0 and Day 7
-- Measured Shannon diversity and community composition (16S)
-
-Results summary:
-- Main finding: Antibiotic+Probiotic group had significantly higher Shannon diversity at Day 7 than Antibiotic-only group (p=0.003, Cohen's d=1.2)
-- Effect size: Mean Shannon 3.8 vs 2.2 (Antibiotic+Probiotic vs Antibiotic)
-- Control group: Shannon 4.1; Probiotic-only: Shannon 4.0
-- The probiotic Lactobacillus was detected at high abundance in both groups receiving it
-- Beta diversity: Antibiotic+Probiotic group clustered between Control and Antibiotic groups
-- Unexpected: Antibiotic+Probiotic group had slightly lower diversity than Control (not significant, p=0.09)
-
-My initial interpretation: The probiotic protects the native gut community from antibiotic-induced diversity loss, suggesting a protective mechanism that could be developed therapeutically.
-```
-
 ## Example Output
 
-### 1. Support for Initial Interpretation
+For a representative model response to the Test Input, see:
 
-**Evidence supporting your interpretation:**
-- Large effect size (d=1.2) is substantial and suggests a real biological effect
-- The Antibiotic+Probiotic group maintained diversity closer to controls than to Antibiotic-alone
-- Probiotic-only group shows no harm (similar to Control)
-- Result is consistent with the "colonization resistance" or "niche protection" literature
+`tests/statistics/interpretation-brainstorming/claude-sonnet-4-6-2026-06-25.md`
 
-**Strength of evidence:**
-- Moderate-to-strong for "probiotic is associated with maintained diversity"
-- Weaker for "probiotic protects native community"—you'd need compositional analysis to confirm the *native* taxa are preserved, not just that *some* bacteria are present
-
-**Key question**: Does the preserved diversity reflect protection of native taxa, or just the presence of the probiotic itself (plus whatever survives with it)?
-
----
-
-### 2. Alternative Interpretations
-
-#### Alternative A: "Additive diversity" (not protection)
-**Explanation**: The probiotic colonizes successfully and simply adds to whatever survives antibiotic treatment. You're not measuring protected diversity—you're measuring surviving diversity + probiotic.
-
-**What it predicts**:
-- Shannon diversity increase would be driven primarily by Lactobacillus presence
-- Native taxa would be depleted similarly in both antibiotic groups
-
-**How to distinguish**:
-- Calculate diversity after excluding Lactobacillus from both groups
-- Compare relative abundance of native taxa between Antibiotic and Antibiotic+Probiotic groups
-
-#### Alternative B: "Niche competition" (probiotic reduces antibiotic damage indirectly)
-**Explanation**: The probiotic competes with antibiotic-sensitive taxa, altering the community before antibiotic exposure in ways that happen to reduce overall disruption (not necessarily beneficial long-term).
-
-**What it predicts**:
-- Probiotic-only group would show subtle community shifts even without antibiotics
-- The "protection" might not persist after probiotic withdrawal
-
-**How to distinguish**:
-- Detailed analysis of Probiotic-only vs. Control community composition
-- Follow-up timepoints after probiotic/antibiotic cessation
-
-#### Alternative C: "Antibiotic sequestration"
-**Explanation**: The probiotic or its metabolites could bind or inactivate some antibiotic in the gut, reducing effective antibiotic exposure in that group.
-
-**What it predicts**:
-- Lower effective antibiotic concentration in gut contents of Antibiotic+Probiotic group
-- Systemic antibiotic levels might be similar (if sequestration is local)
-
-**How to distinguish**:
-- Measure antibiotic concentration in feces or gut contents
-- Check if this probiotic is known to produce β-lactamases or binding agents
-
-#### Alternative D: "Measurement artifact"
-**Explanation**: Shannon diversity is influenced by both richness and evenness. The probiotic could affect evenness without changing richness, or vice versa.
-
-**What it predicts**:
-- Differences in richness metrics (Observed ASVs) might tell a different story
-
-**How to distinguish**:
-- Report multiple diversity metrics (Observed ASVs, Chao1, Faith's PD)
-- This isn't really an alternative interpretation but a measurement consideration
-
----
-
-### 3. Potential Confounds
-
-| Confound | Concern | Evidence in your data? |
-|----------|---------|------------------------|
-| **Lactobacillus detection** | High abundance of probiotic in treated groups means it's directly contributing to diversity metrics | Yes—you noted high abundance |
-| **Cage effects** | If probiotic groups share cages distinct from antibiotic-only cages, could be cage, not treatment | Depends on your cage layout—check this |
-| **Gavage effects** | Daily gavage stress could affect gut physiology differently between groups | Depends on whether all groups got equivalent handling |
-| **Baseline differences** | Were groups equivalent at Day 0? | You have Day 0 data—analyze for baseline differences |
-| **Water consumption** | Ampicillin in water may reduce consumption; probiotic group also gets gavage fluid | Worth checking if you tracked consumption |
-
----
-
-### 4. Limitations to Acknowledge
-
-**For your Discussion/paper:**
-
-1. "We cannot distinguish whether the probiotic protects native community members or simply contributes its own diversity to the measured community."
-
-2. "Shannon diversity is a single metric that conflates richness and evenness; future work should examine specific taxa of interest."
-
-3. "We used a single antibiotic and single probiotic strain; generalizability to other antibiotics or probiotics is unknown."
-
-4. "The study endpoint was Day 7; durability of any protective effect after treatment cessation was not assessed."
-
-5. "Only male mice of one strain were used; sex and genetic background effects are possible."
-
----
-
-### 5. Questions for Follow-up
-
-**To strengthen your interpretation:**
-1. Recalculate Shannon diversity *excluding* Lactobacillus reads from all samples—does the protective effect persist?
-2. Identify which native taxa are preserved in the Antibiotic+Probiotic group—are they ecologically important?
-3. Add timepoints: Day 14, 21 after treatment cessation—does protection persist?
-4. Functional analysis: Are protective functions (e.g., short-chain fatty acid production) maintained?
-
-**To test alternative mechanisms:**
-5. Measure antibiotic levels in feces to rule out sequestration
-6. In vitro: Does this Lactobacillus produce β-lactamases or ampicillin-binding compounds?
-7. Does protection extend to a different class of antibiotics (ruling out ampicillin-specific effects)?
-
----
-
-### 6. What the Results Don't Show
-
-**Overreach to avoid:**
-
-- ❌ "The probiotic prevents antibiotic-induced dysbiosis" — You showed diversity maintenance, not full prevention
-- ❌ "This probiotic protects the native gut community" — You haven't demonstrated native taxa are protected vs. probiotic just being detected
-- ❌ "This has therapeutic potential for humans" — Mouse study, single antibiotic, no health outcomes measured
-- ❌ "The mechanism is colonization resistance" — You haven't tested mechanisms
-- ❌ "This probiotic is safe and beneficial" — Safety wasn't the study question; "beneficial" requires defining benefit
-
-**Appropriate claims:**
-- ✓ "Probiotic co-administration is associated with maintenance of higher fecal Shannon diversity during antibiotic treatment"
-- ✓ "This raises the hypothesis that probiotics may modulate antibiotic-microbiome interactions"
-- ✓ "Further work is needed to determine whether this reflects protection of native taxa or simply probiotic contribution"
-
----
-
-### Summary
-
-Your initial interpretation has support but is likely an over-interpretation of what the data actually show. The most important issue is distinguishing "probiotic protects native community" from "probiotic adds to diversity metrics." This is addressable with your existing data by re-analyzing without Lactobacillus reads.
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -325,12 +181,12 @@ Additional focus: What objections would you raise as a reviewer of this paper? H
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Needs revision
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/statistics/interpretation-brainstorming/
 ```

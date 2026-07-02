@@ -353,8 +353,13 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 (r
 - Whether the Tier 1/2/3 prioritization is calibrated to the user's resource constraints
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- Specific quantitative claims: "10-30%" non-responder rate, "1-2 weeks" for microbiome shift, "typical exclusion is ≥3 months" for antibiotic washout in IBD studies: I was finding up to 10% but not so high as 30%. I think these are all extremely context dependent and shouldn't be quoted as specific numbers.
+- Whether the 2 cages/group × 6 mice critique reflects current best-practice thresholds for cage-effects analysis: not sure but the numbers do match a handful of other studies I know of
+- The recommendation to use "mixed-effects ordinal regression model" for EAE scores — confirm this is current standard practice in the EAE field: yes
+- That nothing in the design as described actually addresses the flagged "fatal flaws": yes
+- Whether the Tier 1/2/3 prioritization is calibrated to the user's resource constraints: yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

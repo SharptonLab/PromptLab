@@ -73,121 +73,13 @@ Constraints:
 | **Environment details** | Many errors are version-specific |
 | **Structured response request** | Gets comprehensive explanation, not just a fix |
 
-## Example Input
-
-````
-Context: I am working on a microbiome analysis pipeline in R. I'm encountering an error I can't resolve.
-
-The error message:
-```
-Error in sample_data(ps) :
-  error in evaluating the argument 'object' in selecting a method for function 'sample_data': object 'ps' not found
-Traceback:
- 1: sample_data(ps)
-```
-
-The relevant code:
-```r
-library(phyloseq)
-
-# Load OTU table
-otu <- read.csv("data/otu_table.csv", row.names = 1)
-otu_mat <- as.matrix(otu)
-
-# Load metadata
-meta <- read.csv("data/metadata.csv", row.names = 1)
-
-# Create phyloseq object
-OTU <- otu_table(otu_mat, taxa_are_rows = TRUE)
-META <- sample_data(meta)
-ps <- phyloseq(OTU, META)
-
-# Later in the script, in a function:
-analyze_diversity <- function() {
-  sample_df <- sample_data(ps)
-  # ... more analysis
-}
-
-analyze_diversity()
-```
-
-What I was trying to do: Extract sample metadata from my phyloseq object inside a function.
-
-What I've already tried:
-- Verified ps exists after creation (it does)
-- Checked that phyloseq loaded correctly
-- Tried running sample_data(ps) outside the function (it works)
-
-Environment details:
-- R 4.3.1
-- phyloseq 1.44.0
-- Running in RStudio on Windows
-````
-
 ## Example Output
 
-### 1. Explain the Error
+For a representative model response to the Test Input, see:
 
-The error "object 'ps' not found" means that when R tries to execute `sample_data(ps)` inside your function, it cannot find a variable called `ps` in the environment where the function is running. This is a **scoping issue**—the variable exists in your global environment but is not accessible inside the function.
+`tests/code/debugging/claude-sonnet-4-6-2026-06-25.md`
 
-### 2. Identify the Cause
-
-The problem is that your function `analyze_diversity()` doesn't have access to `ps`. In R, functions have their own local scope and can only access:
-- Variables passed as arguments
-- Variables defined inside the function
-- Variables in the global environment (with some caveats)
-
-When you define a function without parameters and then call it, R looks for `ps` first in the function's local environment, then in the function's enclosing environment. If you defined this function in a script that runs in a fresh environment or within a package, `ps` from the global environment may not be visible.
-
-**Most likely cause**: You may have defined the function in a separate file/session, or there's an environment isolation issue (common in RStudio when using "Source" vs running line-by-line).
-
-### 3. Provide the Fix
-
-**Option A: Pass ps as an argument (recommended)**
-```r
-analyze_diversity <- function(ps) {
-  # ps is now explicitly passed to the function
-  sample_df <- sample_data(ps)
-  # ... more analysis
-  return(sample_df)
-}
-
-# Call with the phyloseq object
-result <- analyze_diversity(ps)
-```
-
-**Option B: Explicitly reference global environment (less recommended)**
-```r
-analyze_diversity <- function() {
-  # Explicitly get ps from global environment
-  ps <- get("ps", envir = globalenv())
-  sample_df <- sample_data(ps)
-  # ... more analysis
-}
-```
-
-### 4. Explain Why
-
-**Option A works** because you explicitly tell R which phyloseq object to use. The function no longer depends on finding `ps` in some external scope—it receives the object directly. This is more robust and makes the function's dependencies clear.
-
-**Option B works** but is fragile because:
-- It creates a hidden dependency on global state
-- The function will break if `ps` is renamed or doesn't exist
-- It makes code harder to test and reuse
-
-### 5. Prevention
-
-To avoid scoping issues in the future:
-
-1. **Make dependencies explicit**: Pass all needed objects as function arguments
-2. **Avoid relying on global variables inside functions**: If a function needs data, pass it in
-3. **Use consistent environments**: Be aware that "Source" in RStudio runs code in a fresh environment, while running line-by-line uses the console's global environment
-4. **Test functions in isolation**: Call your function in a fresh R session to catch scoping issues early
-
-**General rule**: If a function uses a variable, that variable should either be:
-- A parameter of the function
-- Created inside the function
-- A constant or configuration that's documented
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -329,12 +221,12 @@ Task: Help me identify what causes the inconsistent behavior.
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/code/debugging/
 ```

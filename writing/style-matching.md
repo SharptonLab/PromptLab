@@ -58,35 +58,13 @@ Output format: Revised text, followed by a brief note on the key stylistic chang
 | **Specific dimensions** | Breaks down "style" into concrete, matchable features |
 | **Constraints** | Ensures content integrity isn't sacrificed for style |
 
-## Example Input
-
-```
-Context: I am finalizing a manuscript on gut microbiome methods. I need to revise text to match my established writing style.
-
-Reference sample (my existing writing):
-"The gut microbiome varies substantially between individuals, and this variation complicates efforts to identify disease-associated microbial signatures. We addressed this challenge by collecting samples longitudinally from each participant, allowing us to distinguish within-individual fluctuations from between-individual differences. Samples were collected weekly for twelve weeks, yielding 480 samples from 40 participants. This design provides statistical power to detect temporal patterns while accounting for the baseline heterogeneity that confounds cross-sectional studies.
-
-We processed samples using established protocols with modifications for high-throughput analysis. DNA was extracted within 24 hours of collection to minimize degradation artifacts. Library preparation followed the Earth Microbiome Project protocol, which we selected for compatibility with existing datasets. Sequencing was performed on a NovaSeq 6000, generating approximately 50,000 reads per sample after quality filtering."
-
-Text to revise:
-"In this study, we utilized 16S rRNA gene sequencing methodologies to characterize the microbial communities present in fecal samples. The amplification of the V4 hypervariable region was accomplished through the employment of previously validated primer sequences. Subsequent to amplification, library construction was performed and samples were subjected to sequencing on an Illumina platform. The bioinformatic pipeline that was employed for data processing included quality filtering, chimera removal, and taxonomic classification utilizing the SILVA database."
-```
-
 ## Example Output
 
-**Revised text:**
+For a representative model response to the Test Input, see:
 
-We characterized microbial communities in fecal samples using 16S rRNA gene sequencing. We amplified the V4 region with validated primers and prepared libraries for Illumina sequencing. Our bioinformatic pipeline included quality filtering, chimera removal, and taxonomic classification against the SILVA database.
+`tests/writing/style-matching/claude-sonnet-4-6-2026-06-25.md`
 
-**Key stylistic changes:**
-
-1. **Sentence structure**: Shortened sentences to match the direct, declarative style of the reference (~15-20 words vs. original ~25-30)
-2. **Voice**: Changed passive constructions ("was accomplished," "was employed") to active voice ("We amplified," "We characterized")
-3. **Word choice**: Replaced formal/verbose phrases with simpler alternatives ("utilized" → used/implicit; "subsequent to" → removed; "subjected to sequencing" → "sequencing")
-4. **Hedging**: Removed unnecessary hedging ("methodologies" → "sequencing"; "that was employed" → eliminated)
-5. **Technical language**: Maintained technical precision while reducing wordiness, matching reference style
-
-[CONTENT NOTE: The original text lacks specific details present in the reference sample—e.g., no mention of sequencing platform model, read counts, or processing timeline. Consider adding these details if available.]
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -199,12 +177,12 @@ Task: Revise each section to match the reference style. Maintain consistent styl
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/writing/style-matching/
 ```

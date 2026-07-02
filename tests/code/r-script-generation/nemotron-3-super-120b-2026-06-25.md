@@ -307,8 +307,10 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 **Local code check:** Syntax PASS across 1 block(s) · no imports.
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- Confirm the validation table cells (e.g., "hist(as.matrix(bray_dist))" for distance inspection) are technically appropriate: yes, but not necessary
+- That the MRPP fallback for dispersion-test failures matches reviewer preference: MRPP is still sensitive to dispersion differences among groups? But I'm not seeing it in the output. I don't see any dispersion stuff in the whole thing actually (not that it was asked for though).
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

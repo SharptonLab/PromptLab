@@ -245,8 +245,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Whether the unweighted UniFrac sensitivity check is standard practice
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- Whether the conditions triggering "consult a statistician" cover the right scenarios: yes
+- That partial PERMANOVA recommendation handles the covariate adjustment appropriately: yes
+- Whether the unweighted UniFrac sensitivity check is standard practice: yes and I would include weighted in that statement
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

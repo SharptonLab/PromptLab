@@ -57,61 +57,13 @@ A general-purpose template for constructing well-formed prompts that include all
 | **Output format** | Structure and formatting requirements | When you need consistent, comparable outputs |
 | **Evaluation criteria** | How output will be judged; guides trade-offs | When multiple valid approaches exist |
 
-## Example Input
-
-A researcher needs to extract methodology information from a microbiology paper for a systematic review.
-
-```
-**Context:**
-I'm conducting a systematic review of gut microbiome studies in mouse models of inflammatory bowel disease. I need to extract standardized methodology information from each paper for comparison.
-
-**Your role:**
-You are a systematic review assistant extracting methodology details from primary research papers.
-
-**Task:**
-Extract the methodology information specified below from the provided paper. Use only information explicitly stated in the paper.
-
-**Input:**
-[Full text of research paper provided here]
-
-**Constraints:**
-- Use only information present in the paper—do not infer or add external knowledge
-- If information is not explicitly stated, write "Not reported"
-- Do not interpret or evaluate the methodology; only extract what is stated
-- Use exact terminology from the paper where possible
-
-**Output format:**
-Provide the following fields, one per line:
-
-- Mouse strain:
-- Sample size (n per group):
-- IBD model (DSS, TNBS, genetic, etc.):
-- Sequencing platform:
-- 16S region targeted:
-- Bioinformatics pipeline:
-- Alpha diversity metrics reported:
-- Beta diversity methods:
-- Statistical tests for differential abundance:
-- Key confounds acknowledged:
-
-**Evaluation criteria:**
-Accuracy and completeness are paramount. It is better to report "Not reported" than to guess.
-```
-
 ## Example Output
 
-```
-- Mouse strain: C57BL/6J (Jackson Laboratory)
-- Sample size (n per group): 10 mice per group (4 groups, 40 total)
-- IBD model (DSS, TNBS, genetic, etc.): DSS (2.5% w/v in drinking water, 7 days)
-- Sequencing platform: Illumina MiSeq
-- 16S region targeted: V4 region (515F/806R primers)
-- Bioinformatics pipeline: QIIME2 (version 2021.11) with DADA2 for denoising
-- Alpha diversity metrics reported: Shannon diversity, observed ASVs, Faith's PD
-- Beta diversity methods: Bray-Curtis dissimilarity, weighted UniFrac; PCoA visualization
-- Statistical tests for differential abundance: DESeq2 with Benjamini-Hochberg correction
-- Key confounds acknowledged: Cage effects (addressed by distributing treatments across cages), sex not controlled (all male mice used)
-```
+For a representative model response to the Test Input, see:
+
+`tests/fundamentals/structured-prompt-template/claude-sonnet-4-6-2026-06-25.md`
+
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -239,12 +191,12 @@ Add to constraints:
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Needs revision
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Needs revision
 
 Full per-model raw outputs and reviewer notes: tests/fundamentals/structured-prompt-template/
 ```

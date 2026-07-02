@@ -960,8 +960,13 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 (r
 **Local code check:** Syntax PASS across 2 block(s) · 5/11 imports available.
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- Statistical appropriateness of random intercept + random slope on age_days_c per subject for ~800 obs / 100 subjects
+- Whether the 0–365 day binning (final bin 330–365) is acceptable, given the prompt asked for "0-30, 31-60, etc."
+- Whether the t-distribution CI on per-bin means (rather than CI derived from the LMM) is what the user wants
+- That the random-slope fallback path actually runs cleanly in statsmodels with this data
+- That `seaborn` is a real (used) import — it is loaded but barely used in the figure beyond `set_theme`
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

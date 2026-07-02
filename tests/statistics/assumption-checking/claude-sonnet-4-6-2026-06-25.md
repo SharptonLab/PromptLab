@@ -682,8 +682,13 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 (r
 - Statistical correctness of the overall workflow for this design
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- The Anderson 2001/2006 and Oksanen et al. citations in the reporting template (author/year/journal accuracy): vegan paper came out 2007 but there was a version in 2022. Others are right.
+- That assuming the prompt's "Time (2 levels)" implies repeated measures within subject is correct for this study: likely yes, but I cannot evaluate
+- The claim that ANOSIM is "more sensitive to dispersion than PERMANOVA, not less" — check against current literature: yes
+- The recommendation to use `type = "centroid"` over `type = "median"` in betadisper: yes
+- Statistical correctness of the overall workflow for this design: yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

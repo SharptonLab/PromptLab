@@ -790,8 +790,12 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 (r
 **Local code check:** Syntax PASS across 3 block(s) · 6/6 imports available.
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- That `strata = metadata_ordered$subject_id` in `adonis2()` still behaves as expected in the user's vegan version (current API prefers `how(blocks=...)`): should still work
+- The phyloseq slot introspection (`ps@.Data[[which(slotNames(ps) == comp)]]`) for component checking — fragile across S4 class versions: NA, haven't used before personally, but looking over how it's written, it should work fine
+- Whether the added dplyr/tibble/scales dependencies are acceptable to the user: yes
+- Statistical correctness of PERMANOVA + main-effects + dispersion sub-tests for this design: yes
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

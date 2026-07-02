@@ -61,33 +61,13 @@ Output format: One to three paragraphs of results prose, with figure/table refer
 | **Guidelines** | Produce well-structured results prose following conventions |
 | **Constraints** | Prevent over-interpretation and fabrication; maintain Results vs. Discussion boundary |
 
-## Example Input
-
-```
-Context: I am writing the Results section for a manuscript on gut microbiome response to antibiotics. I need to describe the findings shown in Figure 2 (alpha diversity over time).
-
-My data summary:
-Shannon diversity (mean ± SD):
-- Control Day 0: 4.2 ± 0.3
-- Control Day 7: 4.1 ± 0.4
-- Antibiotic Day 0: 4.3 ± 0.3
-- Antibiotic Day 7: 2.1 ± 0.5
-
-Statistical test: Two-way repeated measures ANOVA
-- Time × Treatment interaction: F(1,18) = 45.2, p < 0.001
-- Post-hoc (Tukey): Antibiotic Day 7 vs all other groups, p < 0.001
-- No significant difference between Control Day 0 vs Day 7 (p = 0.82)
-
-n = 10 mice per group
-
-Research question: Does antibiotic treatment reduce gut microbial diversity?
-```
-
 ## Example Output
 
-Antibiotic treatment significantly reduced gut microbial alpha diversity. At baseline (Day 0), Shannon diversity indices were comparable between control (4.2 ± 0.3) and antibiotic-treated (4.3 ± 0.3) mice (Figure 2A). Following 7 days of ampicillin treatment, Shannon diversity in antibiotic-treated mice dropped to 2.1 ± 0.5, representing an approximately 50% reduction from baseline. In contrast, control mice maintained stable diversity throughout the experiment (Day 7: 4.1 ± 0.4; p = 0.82 vs. Day 0).
+For a representative model response to the Test Input, see:
 
-A two-way repeated measures ANOVA revealed a significant time × treatment interaction (F(1,18) = 45.2, p < 0.001), indicating that the trajectory of diversity differed between treatment groups. Post-hoc comparisons confirmed that Day 7 diversity in antibiotic-treated mice was significantly lower than all other group-timepoint combinations (Tukey HSD, p < 0.001 for all comparisons).
+`tests/writing/results-description/claude-sonnet-4-6-2026-06-25.md`
+
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -207,12 +187,12 @@ Describe clearly what was tested and that no significant effect was found. Inclu
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Needs revision
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/writing/results-description/
 ```

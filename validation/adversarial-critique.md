@@ -66,117 +66,13 @@ Output format: Structured critique with specific issues and recommended fixes wh
 | **Multiple dimensions** | Ensures comprehensive critique |
 | **Skeptical reviewer frame** | Evokes peer review standards |
 
-## Example Input
-
-```
-Context: I need critical feedback on a manuscript Discussion section paragraph about my gut microbiome findings.
-
-The text to critique:
-"Our findings definitively establish that antibiotic treatment disrupts the gut microbiome, with Shannon diversity decreasing by approximately 50% after 7 days of ampicillin exposure. This dramatic reduction demonstrates the profound impact of antibiotics on the gut ecosystem and underscores the urgent need for probiotic co-therapy whenever antibiotics are prescribed. The strong correlation (r = 0.85) between antibiotic exposure and diversity loss provides compelling evidence for a direct causal relationship. These results have immediate clinical implications, suggesting that physicians should routinely prescribe probiotics alongside any antibiotic course to prevent dysbiosis."
-
-Background: This is from a mouse study with n=10 per group.
-```
-
 ## Example Output
 
-## Adversarial Critique
+For a representative model response to the Test Input, see:
 
-### 1. Logical Weaknesses
+`tests/validation/adversarial-critique/claude-sonnet-4-6-2026-06-25.md`
 
-**"definitively establish"**
-> "Our findings definitively establish that antibiotic treatment disrupts the gut microbiome"
-
-**Problem**: A single mouse study cannot "definitively establish" anything. Scientific knowledge is built through replication, and this is one study in one strain with one antibiotic. This language will immediately draw reviewer criticism.
-
-**Recommended fix**: "Our findings demonstrate that antibiotic treatment significantly reduces gut microbial diversity in this model" or "consistent with prior work, we observed..."
-
----
-
-**Correlation ≠ causation conflation**
-> "The strong correlation (r = 0.85) between antibiotic exposure and diversity loss provides compelling evidence for a direct causal relationship"
-
-**Problem**: This is a textbook logical error. Correlation, even strong correlation, does not establish causation. Additionally, if "antibiotic exposure" is binary (treated vs. not), reporting a Pearson r is questionable—what was actually correlated with what?
-
-**Recommended fix**: Either justify causation through experimental design (randomization, controls) rather than correlation, or use appropriate causal language: "Randomized assignment to antibiotic treatment resulted in significantly lower diversity, consistent with a causal effect."
-
----
-
-### 2. Factual Concerns
-
-**Specific claims to verify**:
-
-- "Shannon diversity decreasing by approximately 50%": Is this the actual effect size from your data? Verify exact numbers.
-
-- "r = 0.85": What exactly was correlated? This needs clarification. If you measured a continuous antibiotic exposure variable, state it. If groups were simply treated vs. control, a correlation coefficient is the wrong summary measure.
-
-**Too clean**: A correlation of 0.85 in biological data is unusually high. Double-check this isn't an artifact of the analysis.
-
----
-
-### 3. Missing Considerations
-
-**Absent from this paragraph**:
-
-- **Limitations**: No mention of mouse-to-human translation issues, single antibiotic limitation, or sample size
-- **Mechanism**: The claim about "direct causal relationship" implies mechanism, but no mechanism is discussed
-- **Probiotic evidence**: The recommendation for probiotic co-therapy cites no evidence that probiotics actually help. Was this tested in your study?
-- **Baseline variation**: No acknowledgment of individual variation or baseline differences
-
----
-
-### 4. Overstated Claims
-
-**Clinical recommendations from mouse data**
-> "physicians should routinely prescribe probiotics alongside any antibiotic course"
-
-**Problem**: This is a dramatic overreach. You conducted a mouse study. Making clinical prescribing recommendations requires:
-- Human trials
-- Safety data
-- Efficacy data for specific probiotics
-- Consideration of antibiotic type, indication, patient population
-
-**This claim could genuinely harm your paper's credibility.** A reviewer will use this sentence to argue the authors lack scientific rigor.
-
-**Recommended fix**: "These results in a mouse model suggest that the impact of antibiotics on the gut microbiome warrants further investigation, including exploration of whether probiotic co-administration might mitigate these effects in clinical settings."
-
----
-
-**"urgent need"**
-> "underscores the urgent need for probiotic co-therapy"
-
-**Problem**: Advocacy language that undermines scientific objectivity. The data don't speak to urgency.
-
----
-
-### 5. Structural Issues
-
-- Paragraph moves too quickly from result to clinical recommendation without bridging evidence
-- No hedging language anywhere—every sentence is an assertion
-- Mixes specific results (Shannon diversity %) with broad claims (clinical implications) without transition
-
----
-
-### 6. What a Skeptical Reviewer Would Say
-
-1. "The authors overinterpret their findings from a small mouse study to make broad clinical recommendations. This is inappropriate and undermines confidence in the authors' scientific judgment."
-
-2. "The statement that correlation 'provides compelling evidence for a direct causal relationship' suggests a fundamental misunderstanding of the difference between correlation and causation."
-
-3. "No limitations are acknowledged. What about mouse-human differences? Antibiotic specificity? Sample size?"
-
-4. "Where is the evidence that probiotics would help? This appears to be speculation presented as if it follows from the data."
-
-5. "The effect size should be reported with confidence intervals, not just point estimates."
-
----
-
-### Priority Fixes
-
-1. **Critical**: Remove or heavily qualify clinical prescribing recommendation
-2. **Critical**: Fix correlation/causation language
-3. **High**: Add limitations paragraph
-4. **Medium**: Replace "definitively establish" with appropriate hedging
-5. **Medium**: Verify the r = 0.85 claim and clarify what was correlated
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -284,12 +180,12 @@ After identifying problems, provide a rewritten version that addresses the major
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/validation/adversarial-critique/
 ```

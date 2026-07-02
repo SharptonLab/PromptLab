@@ -90,8 +90,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - That the "approximately 51% reduction" calculation is correct
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-27): **What still needs human verification:**
+- Whether the [VERIFY] flagging pattern is the preferred reviewer-aid pattern: yes
+- Confirm all numbers match source: yes
+- That the "approximately 51% reduction" calculation is correct: more like 49%; using approximately with 51% is kinda weird.
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

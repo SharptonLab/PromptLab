@@ -77,7 +77,7 @@ We investigated how the gut microbiome shapes host immune responses. Using flow 
 ## Overall Assessment
 
 - **Recommendation:** Pass
-- **Notes:** The output demonstrates the prompt working effectively for style matching. Key observations:
+- **Notes:**
    - Sentence length reduced appropriately (~30 words to ~15-20 words)
    - Passive/formal constructions replaced with active voice
    - Verbose phrases simplified without losing precision

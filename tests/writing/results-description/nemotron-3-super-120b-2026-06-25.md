@@ -84,8 +84,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - That the "leaky gut" colloquial framing is appropriate
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-27): **What still needs human verification:**
+- Whether the in-text [VERIFY: borderline significance] flag belongs in a draft submitted for author review or should be a margin comment: yes
+- Confirm all numbers match source: yes but could be improved. DSS vs Control: p < 0.001 should be in the first sentence parentheses.
+- That the "leaky gut" colloquial framing is appropriate: it works but as a reader I would ask would the threshold is for "leaky gut." Just significantly higher than control, or is there a threshold value of some kind? Might be more discussion than results.
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

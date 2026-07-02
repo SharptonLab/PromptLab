@@ -68,169 +68,13 @@ Output format: Complete R script with section headers and comments. After the sc
 | **Code style requirements** | Produces readable, maintainable scripts |
 | **Constraints** | Keeps solutions practical and reproducible |
 
-## Example Input
-
-```
-Context: I am a microbiome researcher working on a diet intervention study in mice. I need an R script to analyze alpha diversity changes over time.
-
-Data description:
-- Input: CSV file with columns: sample_id, mouse_id, timepoint (days 0, 7, 14, 21), treatment (control, high_fat), shannon, observed_asvs, chao1
-- Sample size: ~160 samples (10 mice × 2 treatments × 4 timepoints, some missing)
-- Key variables: shannon (numeric), timepoint (integer), treatment (factor), mouse_id (factor for repeated measures)
-
-Task: Write an R script that:
-1. Loads and validates the data
-2. Creates a figure showing Shannon diversity over time by treatment group (mean ± SE, line plot)
-3. Runs a linear mixed model testing treatment × time interaction with mouse as random effect
-4. Outputs the figure and a summary of the statistical results
-
-Requirements:
-1. Packages: Use tidyverse for data manipulation, ggplot2 for plotting, lme4 for mixed models
-2. Code style: Well-commented with section headers
-3. Input file path: "data/alpha_diversity.csv"
-4. Output: Publication-quality figure as PDF, model summary printed to console
-```
-
 ## Example Output
 
-```r
-# =============================================================================
-# Alpha Diversity Analysis: Diet Intervention Study
-# Analyzes Shannon diversity changes over time by treatment group
-# =============================================================================
+For a representative model response to the Test Input, see:
 
-# -----------------------------------------------------------------------------
-# Setup: Load required packages
-# -----------------------------------------------------------------------------
-library(tidyverse)  # Data manipulation and ggplot2
-library(lme4)       # Linear mixed effects models
-library(lmerTest)   # p-values for lmer models
+`tests/code/r-script-generation/claude-sonnet-4-6-2026-06-25.md`
 
-# -----------------------------------------------------------------------------
-# Data Import and Validation
-# -----------------------------------------------------------------------------
-
-# Load data
-# ASSUMPTION: CSV has headers matching expected column names
-alpha_data <- read_csv("data/alpha_diversity.csv")
-
-# Validate expected columns exist
-required_cols <- c("sample_id", "mouse_id", "timepoint", "treatment", "shannon")
-missing_cols <- setdiff(required_cols, names(alpha_data))
-if (length(missing_cols) > 0) {
-  stop("Missing required columns: ", paste(missing_cols, collapse = ", "))
-}
-
-# Convert factors and check levels
-alpha_data <- alpha_data %>%
-  mutate(
-    treatment = factor(treatment, levels = c("control", "high_fat")),
-    mouse_id = factor(mouse_id),
-    timepoint = as.integer(timepoint)
-  )
-
-# Check for expected treatment levels
-if (!all(c("control", "high_fat") %in% levels(alpha_data$treatment))) {
-  warning("Unexpected treatment levels: ", paste(levels(alpha_data$treatment), collapse = ", "))
-}
-
-# Report missing data
-n_missing <- sum(is.na(alpha_data$shannon))
-if (n_missing > 0) {
-  message("Note: ", n_missing, " samples have missing Shannon values")
-}
-
-# Print data summary
-cat("\n=== Data Summary ===\n")
-cat("Total samples:", nrow(alpha_data), "\n")
-cat("Mice per group:\n")
-print(alpha_data %>% distinct(mouse_id, treatment) %>% count(treatment))
-
-# -----------------------------------------------------------------------------
-# Summary Statistics for Plotting
-# -----------------------------------------------------------------------------
-
-# Calculate mean ± SE by treatment and timepoint
-summary_stats <- alpha_data %>%
-  group_by(treatment, timepoint) %>%
-  summarise(
-    mean_shannon = mean(shannon, na.rm = TRUE),
-    se_shannon = sd(shannon, na.rm = TRUE) / sqrt(sum(!is.na(shannon))),
-    n = sum(!is.na(shannon)),
-    .groups = "drop"
-  )
-
-# -----------------------------------------------------------------------------
-# Visualization: Shannon Diversity Over Time
-# -----------------------------------------------------------------------------
-
-# Create publication-quality figure
-p <- ggplot(summary_stats, aes(x = timepoint, y = mean_shannon,
-                                color = treatment, group = treatment)) +
-  geom_line(linewidth = 1) +
-  geom_point(size = 3) +
-  geom_errorbar(aes(ymin = mean_shannon - se_shannon,
-                    ymax = mean_shannon + se_shannon),
-                width = 0.5, linewidth = 0.8) +
-  scale_color_manual(values = c("control" = "#2166AC", "high_fat" = "#B2182B"),
-                     labels = c("Control", "High Fat")) +
-  scale_x_continuous(breaks = c(0, 7, 14, 21)) +
-  labs(
-    x = "Day",
-    y = "Shannon Diversity Index",
-    color = "Treatment"
-  ) +
-  theme_bw(base_size = 12) +
-  theme(
-    panel.grid.minor = element_blank(),
-    legend.position = c(0.85, 0.85),
-    legend.background = element_rect(color = "gray80")
-  )
-
-# Save figure
-ggsave("figures/shannon_over_time.pdf", p, width = 6, height = 4, dpi = 300)
-cat("\nFigure saved to: figures/shannon_over_time.pdf\n")
-
-# -----------------------------------------------------------------------------
-# Statistical Analysis: Linear Mixed Model
-# -----------------------------------------------------------------------------
-
-# Fit mixed model with treatment × time interaction
-# Random intercept for mouse accounts for repeated measures
-# ASSUMPTION: Linear relationship between diversity and time is appropriate
-model <- lmer(shannon ~ treatment * timepoint + (1 | mouse_id),
-              data = alpha_data)
-
-# Model summary
-cat("\n=== Mixed Model Results ===\n")
-cat("Model: shannon ~ treatment * timepoint + (1 | mouse_id)\n\n")
-print(summary(model))
-
-# ANOVA-style table for fixed effects
-cat("\n=== Type III ANOVA Table ===\n")
-print(anova(model))
-
-# -----------------------------------------------------------------------------
-# End of Script
-# -----------------------------------------------------------------------------
-```
-
-**Required packages:**
-- tidyverse (includes ggplot2, dplyr, readr)
-- lme4
-- lmerTest
-
-**Assumptions made:**
-1. CSV file has headers matching expected column names
-2. Treatment levels are exactly "control" and "high_fat"
-3. Linear relationship between Shannon diversity and time is appropriate (consider adding polynomial terms if non-linear patterns expected)
-4. Random intercept model is sufficient (could consider random slopes if mouse-level trajectories vary)
-
-**Suggested validation checks:**
-1. Run `plot(model)` to check residual diagnostics
-2. Check for influential points with `influence(model)`
-3. Verify the figure matches your mental model of the data
-4. Test with a subset of known values to confirm calculations
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -347,12 +191,12 @@ Task: Generate a script that runs a complete analysis pipeline:
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/code/r-script-generation/
 ```

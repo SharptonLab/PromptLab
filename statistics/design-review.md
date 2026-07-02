@@ -77,133 +77,13 @@ Constraints:
 | **Planned analysis** | Identifies mismatches between design and analysis |
 | **Critical stance requested** | Overcomes LLM tendency toward sycophancy |
 
-## Example Input
-
-```
-Context: I am planning an experiment to test whether a specific probiotic (Lactobacillus strain X) prevents antibiotic-induced gut dysbiosis. I want critical feedback before I begin.
-
-Research question: Does oral administration of Lactobacillus X before and during antibiotic treatment prevent loss of gut microbial diversity?
-
-Experimental design:
-- Study system: C57BL/6J mice, 8 weeks old, male
-- Treatment groups:
-  1. Control (no antibiotic, no probiotic)
-  2. Antibiotic only (ampicillin 1g/L in water, 7 days)
-  3. Antibiotic + probiotic (ampicillin + daily oral gavage of Lactobacillus X)
-- Sample size: 10 mice per group, based on previous studies in our lab
-- Controls: Group 1 is untreated control; Group 2 is antibiotic-only control
-- Randomization: Mice randomly assigned to groups at study start
-- Blinding: Technician collecting samples doesn't know group assignments
-- Outcome measures: Shannon diversity at Day 7, relative abundance of Lactobacillus
-- Timepoints: Fecal samples at Day 0 (baseline) and Day 7
-
-Potential confounders I've considered:
-- Cage effects (housing 5/cage, 2 cages per group)
-- Individual baseline variation
-
-Planned analysis: One-way ANOVA comparing Shannon diversity at Day 7 across the three groups, with Tukey post-hoc tests.
-```
-
 ## Example Output
 
-## Experimental Design Review
+For a representative model response to the Test Input, see:
 
-### 1. Strengths
+`tests/statistics/design-review/claude-sonnet-4-6-2026-06-25.md`
 
-- Clear, testable hypothesis
-- Includes appropriate baseline measurement (Day 0)
-- Randomization and partial blinding (sample collection) are good
-- Antibiotic-only group provides essential comparison
-- Practical sample size for a pilot/initial study
-
-### 2. Missing Controls
-
-**Essential:**
-- **Probiotic-only group (no antibiotic)**: Without this, you cannot determine whether observed effects in Group 3 are due to probiotic protection or simply probiotic presence adding to diversity. If Lactobacillus X just colonizes and persists, it could increase Shannon diversity without actually protecting the resident community.
-
-**Strongly recommended:**
-- **Vehicle control for gavage**: Group 2 (antibiotic only) should receive daily gavage with vehicle (saline, buffer, or culture medium without bacteria). Daily gavage itself is a stressor that could affect microbiome. Without this, you're comparing antibiotic + gavage stress vs. antibiotic alone.
-
-**Consider:**
-- **Heat-killed probiotic control**: Distinguishes live organism effects from any effect of bacterial components.
-
-### 3. Potential Confounds
-
-| Confound | Concern | Mitigation |
-|----------|---------|------------|
-| **Gavage stress** | Daily handling/gavage affects Group 3 differently than Group 2 | Add vehicle-gavage control to Group 2 |
-| **Cage effects** | 2 cages per group means cage and treatment are nearly confounded | With only 2 cages per group, you effectively have n=2 independent units. Consider more cages with fewer mice each. |
-| **Lactobacillus detection** | If you measure Lactobacillus abundance as outcome, the probiotic group will obviously have higher levels—this doesn't prove protection | Focus on diversity and other taxa, not Lactobacillus abundance |
-| **Water consumption** | Ampicillin-treated mice may drink differently (taste aversion); probiotic group also has gavage | Monitor and report water consumption |
-| **Coprophagy** | Mice eat feces; within-cage microbial exchange | Inherent to mouse studies; affects generalizability |
-
-### 4. Threats to Validity
-
-**Internal validity issues:**
-
-1. **The cage problem is serious.** With 10 mice in 2 cages per group, your actual independent replication is n=2 cages, not n=10 mice. If the two "antibiotic only" cages differ from the two "antibiotic + probiotic" cages for any reason (cage location, slight environmental differences, social hierarchy), you may attribute cage differences to treatment.
-
-   *Recommendation*: Either (a) use more cages with fewer mice (e.g., pairs or trios), or (b) acknowledge this limits power and interpret cautiously, or (c) analyze with cage as a random effect but recognize you have very few cages.
-
-2. **Confounded comparison**: Without probiotic-only and vehicle controls, you have multiple explanations for any observed difference.
-
-3. **Single timepoint for main outcome**: If diversity is measured only at Day 7, you don't know the trajectory. Does protection occur immediately? Does it develop over time? Consider Day 3 or Day 5 samples.
-
-**External validity issues:**
-
-- Only male mice (sex differences in microbiome and immune response are documented)
-- Single mouse strain
-- Single antibiotic (ampicillin); generalization to other antibiotics uncertain
-- Single probiotic dose/timing
-
-### 5. Statistical Concerns
-
-**Sample size:**
-- 10 per group is reasonable for detecting large effects in microbiome studies
-- However, effective n for cage-clustered data may be closer to 2 per group
-- Without pilot data on effect size and variance, formal power is unknown
-
-**Design-analysis mismatch:**
-- One-way ANOVA ignores baseline (Day 0) measurements
-- Better: ANCOVA with Day 0 as covariate, or analyze change from baseline
-- With cage clustering, should consider mixed model with cage as random effect
-
-**Analysis complications:**
-- With 3 groups and post-hoc tests, you're making multiple comparisons
-- Shannon diversity can be insensitive to community changes (see beta diversity as complementary)
-
-### 6. Practical Issues
-
-- **Probiotic viability**: How will you confirm the Lactobacillus is alive and at expected CFU when gavaged? Consider plating each dose.
-- **Gavage stress**: Daily gavage for 7 days can be stressful; monitor animal welfare (weight, behavior).
-- **Antibiotic palatability**: Some mice reduce water intake with ampicillin; track water consumption.
-- **Sample handling**: 16S is sensitive to extraction method and storage; have a validated protocol.
-- **Baseline comparison**: What if groups differ at Day 0 by chance? Randomization helps, but check and adjust if needed.
-
-### 7. Recommendations (Prioritized)
-
-**Must fix before proceeding:**
-1. Add a probiotic-only group (Group 4: Lactobacillus X without antibiotic)
-2. Add vehicle gavage to antibiotic-only group (or all non-gavage groups)
-3. Either increase cage number or explicitly address cage confounding in analysis and interpretation
-
-**Strongly recommended:**
-4. Add an intermediate timepoint (Day 3 or Day 5)
-5. Change analysis to ANCOVA or mixed model with baseline and cage effects
-6. Measure beta diversity in addition to alpha diversity
-
-**If resources allow:**
-7. Include female mice or acknowledge sex as limitation
-8. Include heat-killed probiotic control
-9. Add functional outcome (e.g., colonization resistance challenge, metabolite levels)
-
----
-
-### Summary Assessment
-
-This design has a solid foundation but has a **critical flaw** in the missing controls and a **serious limitation** in the cage structure. The missing probiotic-only group means you cannot distinguish "probiotic protects against antibiotic damage" from "probiotic presence inflates diversity metrics." The cage structure means you have very low power to detect treatment effects with statistical confidence.
-
-I recommend revising the design before proceeding. A statistician consultation would help with the cage/power issue specifically.
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -317,12 +197,12 @@ Additional context: This is a pilot study with limited resources. Please disting
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Needs revision
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/statistics/design-review/
 ```

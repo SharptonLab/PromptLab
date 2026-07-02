@@ -155,8 +155,11 @@ _Machine-suggested (UNCONFIRMED) — drafted by Claude Opus 4.7 on 2026-06-26 to
 - Spot-check the PowerSoil claim ("designed for soil") for accuracy — the kit is widely used for stool DNA extraction with documented validation
 
 ## Overall Assessment
-- **Recommendation:** PENDING AUTHOR REVIEW
-- **Notes:**
+- **Recommendation:** Pass
+- **Notes:** Alex Alexiev (2026-06-29): **What still needs human verification:**
+- Whether the bundled "ready-to-paste reviewer report" prose is appropriate to include (could be misused): Since "ready to paste reviewer report" isn't the wording used in the output, I think this is fine. It's just an example reviewer report, which was asked for in the prompt.
+- That the specific recommendations (SILVA 138, 9999 permutations, GTDB) are field-standard current versions: mostly yes, although usually 999 permutations
+- Spot-check the PowerSoil claim ("designed for soil") for accuracy — the kit is widely used for stool DNA extraction with documented validation: yes designed for soil but is used by many in the field successfully for stool.
 
 ## Verification Steps Tested
 _Which verification requirements from the prompt were checked, and results._

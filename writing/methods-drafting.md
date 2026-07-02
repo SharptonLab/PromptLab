@@ -59,73 +59,13 @@ Output format: Structured prose with subsection headers. Flag any gaps or ambigu
 | **Constraints** | "ONLY from my notes" prevents hallucinated methods; [MISSING] flags prevent fabrication |
 | **Output format** | Prose with headers produces a usable first draft |
 
-## Example Input
-
-```
-Context: I am preparing a Methods section for a manuscript on gut microbiome changes in antibiotic-treated mice targeting a microbiology journal. Below are my detailed notes.
-
-My notes:
-
-Animals:
-- C57BL/6J mice, 8 weeks old, male, from Jackson Labs
-- Housed 4/cage, 12h light/dark, standard chow (LabDiet 5010)
-- n=10 per group (control, antibiotic)
-- 7-day acclimation before experiment
-
-Antibiotic treatment:
-- Ampicillin 1g/L in drinking water, 7 days
-- Control got regular water
-- Water changed every 2 days
-- Monitored water consumption daily
-
-Sample collection:
-- Fecal pellets collected day 0, 3, 7
-- Fresh pellets, 2 per mouse per timepoint
-- Snap frozen in liquid nitrogen, stored -80C
-
-DNA extraction:
-- Used QIAGEN DNeasy PowerSoil Pro kit
-- Followed manufacturer protocol
-- Quantified with Qubit dsDNA HS assay
-- Checked quality on Nanodrop (260/280 ratios)
-
-Sequencing:
-- 16S V4 region
-- Primers: 515F/806R (Caporaso et al.)
-- Illumina MiSeq, 2x250bp paired-end
-- Sequenced at OSU CGRB
-
-Subsections needed:
-1. Animals and Housing
-2. Antibiotic Treatment
-3. Sample Collection
-4. DNA Extraction and 16S rRNA Gene Sequencing
-```
-
 ## Example Output
 
-### Animals and Housing
+For a representative model response to the Test Input, see:
 
-Male C57BL/6J mice (8 weeks old) were obtained from Jackson Laboratories. Mice were housed four per cage under a 12-hour light/dark cycle with ad libitum access to standard chow (LabDiet 5010) and water. Animals were acclimated to the facility for 7 days before the start of the experiment. All experiments included n=10 mice per treatment group.
+`tests/writing/methods-drafting/claude-sonnet-4-6-2026-06-25.md`
 
-[MISSING: IACUC protocol number and institutional approval statement]
-
-### Antibiotic Treatment
-
-Mice in the antibiotic group received ampicillin (1 g/L) in drinking water for 7 days. Control mice received untreated drinking water. Water bottles were replaced every 2 days, and water consumption was monitored daily to ensure adequate antibiotic intake.
-
-### Sample Collection
-
-Fresh fecal pellets (2 pellets per mouse) were collected on days 0, 3, and 7 of treatment. Samples were snap-frozen in liquid nitrogen immediately upon collection and stored at -80°C until DNA extraction.
-
-### DNA Extraction and 16S rRNA Gene Sequencing
-
-DNA was extracted from fecal pellets using the DNeasy PowerSoil Pro kit (QIAGEN) according to the manufacturer's protocol. DNA concentration was measured using the Qubit dsDNA HS assay (Thermo Fisher Scientific), and purity was assessed by 260/280 absorbance ratio on a NanoDrop spectrophotometer.
-
-The V4 region of the 16S rRNA gene was amplified using the 515F/806R primer pair [MISSING: cite Caporaso et al. with year]. Amplicon libraries were sequenced on an Illumina MiSeq platform using 2×250 bp paired-end chemistry at the Oregon State University Center for Quantitative Life Sciences [MISSING: verify current name of sequencing core].
-
-[MISSING: Library preparation details—was there a specific kit? Index strategy?]
-[MISSING: Sequencing depth target or actual reads obtained]
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -244,12 +184,12 @@ For extended protocols: "Write in sufficient detail that another lab could repro
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/writing/methods-drafting/
 ```

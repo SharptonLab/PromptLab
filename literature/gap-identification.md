@@ -73,78 +73,13 @@ Output format: Use the numbered structure above. Use bullet points within each s
 | **Constraints** | "ONLY on papers provided" prevents fabricating gaps from training data; uncertainty notes prevent overconfidence |
 | **Prioritization request** | Produces actionable output tailored to your situation |
 
-## Example Input
-
-```
-Context: I am a microbiome researcher working on host-microbiome interactions in inflammatory bowel disease. I am trying to identify research gaps and opportunities based on the following papers I have read.
-
-Papers provided:
-[Full text of Paper 1: Lloyd-Price et al. (2019). Multi-omics of the gut microbial ecosystem in inflammatory bowel diseases. Nature.]
----
-[Full text of Paper 2: Schirmer et al. (2019). Compositional and temporal changes in the gut microbiome of pediatric ulcerative colitis patients. Cell Host & Microbe.]
----
-[Full text of Paper 3: Franzosa et al. (2019). Gut microbiome structure and metabolic activity in inflammatory bowel disease. Nature Microbiology.]
-
-My research capabilities: Mouse models of colitis, gnotobiotic facilities, 16S and shotgun metagenomics, targeted metabolomics, immune profiling (flow cytometry, cytokine panels).
-```
-
 ## Example Output
 
-**1. Explicit Gaps**
-Authors directly identify these as areas needing further investigation:
+For a representative model response to the Test Input, see:
 
-- Causal relationships remain unestablished: "whether the microbial changes we observe are causes or consequences of inflammation remains to be determined" (Lloyd-Price et al., Discussion)
-- Temporal dynamics in early disease: "the initiating events that precede clinical presentation are not captured by studies of established disease" (Schirmer et al., p. 12)
-- Functional significance of metabolic changes: "whether altered metabolite profiles directly contribute to disease pathology requires experimental validation" (Franzosa et al., Discussion)
-- Individual variability: "the high inter-individual variability in microbiome composition complicates identification of universal disease signatures" (Lloyd-Price et al.)
+`tests/literature/gap-identification/claude-sonnet-4-6-2026-06-25.md`
 
-**2. Implicit Gaps**
-
-*Untested assumptions:*
-- All studies assume fecal samples reflect mucosal community; none validate this in their IBD cohorts (Lloyd-Price et al., Franzosa et al. use fecal; Schirmer et al. uses rectal swabs but doesn't compare to fecal)
-- Antibiotic and medication effects on microbiome not fully deconvolved from disease effects
-
-*Missing comparisons:*
-- No direct comparison of adult vs. pediatric IBD microbiomes across these studies using matched methods
-- Limited comparison between Crohn's disease and ulcerative colitis at the functional/metabolic level
-
-*Unexplored mechanisms:*
-- Specific immune pathways activated by the altered metabolites identified by Franzosa et al. are not characterized
-- Whether bacterial strains within the same species differ in their pro- or anti-inflammatory properties
-
-*Populations not studied:*
-- Pre-clinical or at-risk populations (e.g., first-degree relatives)
-- Non-Western populations with different IBD incidence patterns
-
-**3. Contradictions Requiring Resolution**
-
-- Butyrate-producing bacteria: Lloyd-Price et al. report depletion correlates with inflammation; Franzosa et al. show reduced butyrate in feces. However, Schirmer et al. find recovery of butyrate producers doesn't consistently correlate with remission in pediatric UC. Resolution needed: Is butyrate restoration sufficient for benefit?
-- Proteobacteria expansion: Consistently observed during active disease, but whether this is pathogenic or opportunistic is unresolved across all three studies.
-
-**4. Methodological Opportunities**
-
-- Longitudinal sampling before and during flare onset (current studies sample during or after)
-- Integration of host transcriptomics/proteomics with microbial data (Lloyd-Price et al. do this partially; could be expanded)
-- Culture-based isolation of patient-derived strains for mechanistic studies (all studies are culture-independent)
-- Spatial organization studies: none examine where specific taxa reside relative to mucosa
-
-**5. Translation Gaps**
-
-- No studies test whether restoring "healthy" microbiome features ameliorates disease
-- Biomarker development: signatures identified but not validated prospectively
-- Personalized microbiome-based treatment strategies: individual variability noted but not leveraged for personalized approaches
-
-**6. Prioritized Opportunities**
-
-Based on your capabilities (mouse colitis models, gnotobiotics, metabolomics, immune profiling):
-
-1. **Test causality of specific metabolites**: Isolate metabolites identified by Franzosa et al. as depleted in IBD (bile acids, short-chain fatty acids); administer to colitis mice; profile immune response. This leverages your metabolomics and immune profiling capabilities and addresses the explicit causal gap.
-
-2. **Strain-level functional variation**: Culture Proteobacteria strains from healthy vs. IBD patients; colonize gnotobiotic mice; test whether patient-derived strains exacerbate colitis. Addresses the implicit gap about strain-level variation using your gnotobiotic facilities.
-
-3. **Pre-disease microbiome dynamics**: If you can access an at-risk cohort (e.g., first-degree relatives enrolled in a study), characterize microbiome longitudinally before disease onset. Addresses the explicit gap about initiating events, though requires clinical collaboration.
-
-*Note*: Gaps #1 and #2 are within your stated capabilities. Gap #3 would require clinical collaborators with access to pre-diagnosis samples.
+That cell was captured on 2026-06-25 and human-verified by both project reviewers as passing. Other panel models' responses (Claude Opus 4.7, GPT-5.5, Gemini 2.5 Pro, Nemotron 3 Super 120B, Step-3.7 Flash) are alongside it in the same directory.
 
 ## Test Input
 
@@ -261,12 +196,12 @@ Add: "Dissertation-scale opportunities"—flag which gaps could be addressed in 
 Tested across the panel; verdicts set by human review.
 
 - Claude Opus 4 (claude-opus-4-5-20251101) (2026-02-04): Pass
-- claude-opus-4.7 (2026-06-23): Pass
-- claude-sonnet-4.6 (2026-06-23): Pass
-- gemini-2.5-pro (2026-06-23): Pass
-- gpt-5.5 (2026-06-23): Pass
-- nemotron-3-super-120b (2026-06-23): Pass
-- step-3.7-flash (2026-06-23): Pass
+- claude-opus-4.7 (2026-06-25): Pass
+- claude-sonnet-4.6 (2026-06-25): Pass
+- gemini-2.5-pro (2026-06-25): Pass
+- gpt-5.5 (2026-06-25): Pass
+- nemotron-3-super-120b (2026-06-25): Pass
+- step-3.7-flash (2026-06-25): Pass
 
 Full per-model raw outputs and reviewer notes: tests/literature/gap-identification/
 ```
